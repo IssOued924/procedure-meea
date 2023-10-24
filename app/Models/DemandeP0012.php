@@ -12,49 +12,7 @@ class DemandeP0012 extends Demande
     protected $guarded = [];protected $primaryKey = 'uuid';
 
     protected $fillable=[
-//         'uuid',
-// 'libelle_court',
-// 'libelle_long',
-// 'etat',
-// 'date_demande',
-// 'identite',
-// 'beneficiaire',
-// 'beneficiaire_piece_jointe',
-// 'montant',
-// 'delai',
-// 'code',
-// 'email',
-// 'is_producteur',
-// 'is_distributeur',
-// 'is_importateur',
-// 'is_utilisateur',
-// 'pays_fournisseur',
-// 'id_produit',
-// 'appelation_commercial',
-// 'formule_chimique',
-// 'destination_pays',
-// 'utilisation_produit',
-// 'aspect_produit',
-// 'conditionnement_produit',
-// 'poids',
-// 'quantite',
-// 'is_corrosif',
-// 'is_iritant',
-// 'is_toxic',
-// 'is_inflammable',
-// 'is_danger_env',
-// 'type_local_stockage',
-// 'capacite_stockage',
-// 'is_regime_direct',
-// 'is_sous_trait',
-// 'is_agree',
-// 'is_non_agree',
-// 'user_id',
-// 'procedure_id',
-// 'type_demande_id',
-// 'commune_id',
-// 'confirmed',
-// 'date_certif',
+
     ];
     function genererRandomString($longueur = 10) {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -66,6 +24,25 @@ class DemandeP0012 extends Demande
         }
 
         return $randomString;
+    }
+
+    public function usager(){
+        return $this->belongsTo(Usager::class, 'usager_id', 'uuid');
+    }
+
+      //   Function recuperation des status demandes
+      public function statut()
+      {
+          return $this->belongsTo(StatutDemande::class, 'etat');
+      }
+
+        //recuperation de localite de demandeur
+    public function localite(){
+        return $this->belongsTo(Commune::class, 'commune_id');
+    }
+    public function demandePiece()
+    {
+        return $this->hasMany(DemandePieceP0012::class, 'demande_p0012_id');
     }
 
 

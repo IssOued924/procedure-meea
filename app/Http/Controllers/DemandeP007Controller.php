@@ -70,7 +70,7 @@ class DemandeP007Controller extends Controller
         $demandePieceP006Repository->setChemin($certificat_biodegradabilite, $demande->uuid, 'Certificat de biodegradabilite');
 
 
-        return redirect('/')->with('status', 'Votre Demande à bien été Soumise et  en cours de traitement !');
+        return redirect('/')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }
 
 }

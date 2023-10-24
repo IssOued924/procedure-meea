@@ -27,5 +27,24 @@ class DemandeP009 extends Demande
 
                 return $randomString;
             }
+            public function usager(){
+                return $this->belongsTo(Usager::class, 'usager_id', 'uuid');
+            }
+
+              //   Function recuperation des status demandes
+              public function statut()
+              {
+                  return $this->belongsTo(StatutDemande::class, 'etat');
+              }
+
+                //recuperation de localite de demandeur
+            public function localite()
+            {
+                return $this->belongsTo(Commune::class, 'commune_id');
+            }
+            public function demandePiece()
+            {
+                return $this->hasMany(DemandePieceP008::class, 'demande_p008_id');
+            }
 
 }

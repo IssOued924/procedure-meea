@@ -72,10 +72,11 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
+                                                <form method="POST" action="{{ route('agent-store') }}">
+                                                    @csrf
                                                 <div class="modal-body">
 
-                                                    <form method="POST" action="{{ route('agent-store') }}">
-                                                        @csrf
+
                                                         <div class="row">
                                                             <div class="col-6">
                                                                 <h5 class="card-title">Nom</h5>
@@ -173,21 +174,22 @@
 
                                                         </div>
 
-                                                        <input type="submit" value="Valider" class="btn btn-primary">
+                                                        {{-- <input type="submit" value="Valider" class="btn btn-primary"> --}}
 
-                                                    </form>
 
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger"
+                                                                data-bs-dismiss="modal">Fermer</button>
+                                                             <button type="submit" class="btn btn-primary">Valider</button>
+
+                                                        </div>
 
 
 
 
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger"
-                                                        data-bs-dismiss="modal">Fermer</button>
-                                                    {{-- <button type="button" class="btn btn-primary">Valider</button>
-                                                    --}}
-                                                </div>
+                                            </form>
+
                                             </div>
                                         </div>
                                     </div><!-- End Large Modal-->

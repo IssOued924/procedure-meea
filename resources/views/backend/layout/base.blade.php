@@ -185,37 +185,37 @@ rel="stylesheet"
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="{{ route('demandesp0012-list') }}">
                 <i class="bi bi-circle"></i><span>Procédure écotourisme </span>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="{{ route('demandesp008-list')}}">
                 <i class="bi bi-circle"></i><span>Procédure Déchets </span>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="{{ route('demandesp003-list')}}">
                 <i class="bi bi-circle"></i><span>Procédure Permis Chasse</span>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="{{ route('demandesp004-list')}}">
                 <i class="bi bi-circle"></i><span>Procédure Détention</span>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="{{ route('demandesp0011-list')}}">
                 <i class="bi bi-circle"></i><span>Procédure Permis Coupe</span>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="{{ route('demandesp006-list')}}">
                 <i class="bi bi-circle"></i><span>Procédure Certificats d'exemptions</span>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="{{ route('demandesp007-list')}}">
                 <i class="bi bi-circle"></i><span>Procédure Homologation</span>
               </a>
             </li>

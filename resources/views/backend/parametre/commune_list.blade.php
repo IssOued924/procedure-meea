@@ -145,8 +145,6 @@
                         <td> {{ $comm->region }}</td>
 
                         <td>
-
-
                             <button title="Editer" type="button" class="btn btn-info "
                                 data-bs-toggle=" "> <i class="bi bi-pencil-square"></i> </button>
 

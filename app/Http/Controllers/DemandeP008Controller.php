@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\DemandeP008;
+use App\Models\Procedure;
 use App\Repositories\UserRepository;
 use App\Repositories\UsagerRepository;
 use App\Repositories\DemandeP008Repository;
@@ -32,6 +33,11 @@ class DemandeP008Controller extends Controller
         $data =  $request->all();
         $dataFiles = $request->all();
 
+        $data['usager_id'] = Auth::user()->usager_id;
+        $data['etat'] = 'D'; //code de procedure demande deposee
+
+        $data['procedure_id'] = Procedure::where(['code' => 'P008'])->first('uuid')->uuid;
+
         /* DEBUT Mise-à-jour des infos pro de la société demandeuse */
         $user = $userRepository->getById(Auth::user()->uuid);
         $usager = $usagerRepository->getById($user->usager_id);
@@ -50,7 +56,7 @@ class DemandeP008Controller extends Controller
         $chemin_desc_technique =  $this->repository->uploadFile($dataFiles, 'doc_desc_technique');
         $chemin_registre_tracabilite =  $this->repository->uploadFile($dataFiles, 'doc_registre_tracabilite');
         /* FIN enregistrement des pièce-jointes avec récupération de leur urls */
-    
+
         /* Debut détatchement des variables n'apparaissant pas directement dans la table DemandeP008 */
         unset($data['activite']);
         unset($data['siege_social']);
@@ -65,15 +71,15 @@ class DemandeP008Controller extends Controller
         $demande = $this->repository->create($data);
         $demande->usager_id = $user->usager_id;
         $demande->save();
-        
+
         /* DEBUT Mise-à-jour des pièce-jointes de sorte à retrouver la demande associée */
-        $demandePieceP008Repository->setChemin ($chemin_rccm, $demande->uuid);
-        $demandePieceP008Repository->setChemin ($chemin_faisabilite, $demande->uuid);
-        $demandePieceP008Repository->setChemin ($chemin_avis_mairie, $demande->uuid);
-        $demandePieceP008Repository->setChemin ($chemin_desc_technique, $demande->uuid);
-        $demandePieceP008Repository->setChemin ($chemin_registre_tracabilite, $demande->uuid);
+        $demandePieceP008Repository->setChemin ($chemin_rccm, $demande->uuid, 'RCCM');
+        $demandePieceP008Repository->setChemin ($chemin_faisabilite, $demande->uuid, 'Arreter de faisabilité');
+        $demandePieceP008Repository->setChemin ($chemin_avis_mairie, $demande->uuid, 'Avis Mairie');
+        $demandePieceP008Repository->setChemin ($chemin_desc_technique, $demande->uuid,'Description Technique');
+        $demandePieceP008Repository->setChemin ($chemin_registre_tracabilite, $demande->uuid, 'Registre tracabilité');
         /* FIN Mise-à-jour des pièce-jointes de sorte à retrouver la demande associée */
 
-        return redirect('/')->with('status', 'Votre Demande à bien été Soumise !!');
+        return redirect('/')->with('success', 'Votre Demande à bien été Soumise !!');
     }
 }

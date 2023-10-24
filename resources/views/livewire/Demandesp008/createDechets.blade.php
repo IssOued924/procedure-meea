@@ -39,7 +39,13 @@
                                             <div class="col-6">
                                                 <label for="siege_social" class="siege_social">Siège social
                                                     <span style="color:red">*</span></label>
-                                                <input type="text"  class="border-success" name="siege_social" placeholder=" " required />
+                                                <select name="commune_id" id="" class="form-select boerder-success">
+                                                    <option value="">Veuillez choisir le siege</option>
+                                                    @foreach ($communes as $com)
+                                                    <option value="{{ $com->uuid }}">{{ $com->libelle }}</option>
+
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row">

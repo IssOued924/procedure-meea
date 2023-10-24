@@ -134,6 +134,13 @@ Route::middleware('auth')->group(function () {
 // Route partie administration
 Route::get('/administration', [BackendController::class, 'index'])->name('administration');
 Route::get('/administration/demandes-list', [BackendController::class, 'listDemande'])->name('demandes-list');
+Route::get('/administration/demandesp0012-list', [BackendController::class, 'listDemandep0012'])->name('demandesp0012-list');
+Route::get('/administration/demandesp008-list', [BackendController::class, 'listDemandep008'])->name('demandesp008-list');
+Route::get('/administration/demandesp003-list', [BackendController::class, 'listDemandep003'])->name('demandesp003-list');
+Route::get('/administration/demandesp004-list', [BackendController::class, 'listDemandep004'])->name('demandesp004-list');
+Route::get('/administration/demandesp0011-list', [BackendController::class, 'listDemandep0011'])->name('demandesp0011-list');
+Route::get('/administration/demandesp006-list', [BackendController::class, 'listDemandep006'])->name('demandesp006-list');
+Route::get('/administration/demandesp007-list', [BackendController::class, 'listDemandep007'])->name('demandesp007-list');
 Route::get('/administration/statusChange/{id}', [BackendController::class, 'statutChange'])->name('statusChange');
 
     // Route parametre

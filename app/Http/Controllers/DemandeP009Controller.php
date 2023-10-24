@@ -74,7 +74,7 @@ class DemandeP009Controller extends Controller
         $demandePieceP009Repository->setChemin($cnib_passport, $demande->uuid, 'CNIB/PASSEPORT');
         $demandePieceP009Repository->setChemin($document_arme, $demande->uuid, 'Document de l\'arme');
 
-        return redirect('/')->with('status', 'Votre Demande à bien été Soumise et  en cours de traitement !');
+        return redirect('/')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }
 
 

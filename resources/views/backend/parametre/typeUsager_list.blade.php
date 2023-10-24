@@ -18,10 +18,6 @@
         <!-- Left side columns -->
         <div class="col-lg-12">
           <div class="row">
-
-
-
-
             <!-- Recent Sales -->
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
