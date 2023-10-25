@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class DemandeP0011 extends DemandeP005
+class DemandeP0011 extends Demande
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
@@ -39,6 +39,6 @@ class DemandeP0011 extends DemandeP005
     }
     public function demandePiece()
     {
-        return $this->hasMany(DemandePieceP008::class, 'demande_p008_id');
+        return $this->hasMany(DemandePieceP0011::class, 'demande_p0011_id');
     }
 }

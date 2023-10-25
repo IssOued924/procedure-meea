@@ -129,7 +129,7 @@
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                                    <div class="modal-content">
+                                    <div class="modal-content" style="height: 300px;">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $procedure->libelle_long }}</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -137,7 +137,9 @@
                                         </div>
                                         @foreach ($procedure->baseJuridique as $pb)
 
-                                        <div class="modal-body">{{$pb->libelle_long }}</div>
+                                        <div class="modal-body">
+                                            <p>{{$pb->libelle_long }}</p>
+                                        </div>
                                         @endforeach
                                         <div class="modal-footer">
                                             <x-secondary-button aria-label="Close" class="ml-4">
@@ -163,7 +165,13 @@
                                         </div>
                                         @foreach ($procedure->pieceJointe as $ppj)
 
-                                        <div class="modal-body">{{$ppj->libelle }}</div>
+                                        <div class="modal-body">
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
+                                                    <i class="bi bi-file-earmark-pdf me-1 text-success"> </i>   {{$ppj->libelle }}
+                                            </li>
+                                        </ul>
+                                        </div>
                                         @endforeach
                                         <div class="modal-footer">
                                             <x-secondary-button aria-label="Close" class="ml-4">

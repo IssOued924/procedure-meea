@@ -11,4 +11,6 @@ class StatutDemande extends Model
     use \App\Http\Traits\UsesUuid;
     protected $primaryKey = 'uuid';
     protected $guarded = [];
+
+    
 }

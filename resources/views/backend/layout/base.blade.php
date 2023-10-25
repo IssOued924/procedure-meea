@@ -29,9 +29,14 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('backend/assets/css/style.css') }}" rel="stylesheet">
+  <script src="{{ asset('backend/assets/js/sweetalert2.all.min.js') }}"> </script
+  <link href="{{ asset('backend/assets/css/sweetalert2.min.css') }}" rel="stylesheet">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+
+
 
 
   <!-- Bootstrap4 Duallistbox -->
@@ -56,7 +61,6 @@ rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
 rel="stylesheet"
 />
-
 
 
 
@@ -181,42 +185,42 @@ rel="stylesheet"
         <ul id="demandes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
               <a href="{{ route('demandes-list') }}">
-                <i class="bi bi-circle"></i><span>Procédure Produit Chimique<span class="badge bg-warning text-white"> 1</span> </span>
+                <i class="bi bi-circle"></i><span>Procédure Produit Chimique<span id="prog_produit_chimique" class="badge bg-warning text-white"> </span> </span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp0012-list') }}">
-                <i class="bi bi-circle"></i><span>Procédure écotourisme </span>
+                <i class="bi bi-circle"></i><span>Procédure écotourisme <span id="prog_ecotourisme" class="badge bg-warning text-white"> </span> </span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp008-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Déchets </span>
+                <i class="bi bi-circle"></i><span>Procédure Déchets <span id="prog_dechet" class="badge bg-warning text-white"> </span> </span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp003-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Permis Chasse</span>
+                <i class="bi bi-circle"></i><span>Procédure Permis Chasse <span id="prog_chasse" class="badge bg-warning text-white"> </span></span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp004-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Détention</span>
+                <i class="bi bi-circle"></i><span>Procédure Détention <span id="prog_detention" class="badge bg-warning text-white"> </span></span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp0011-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Permis Coupe</span>
+                <i class="bi bi-circle"></i><span>Procédure Permis Coupe <span id="prog_coupe" class="badge bg-warning text-white"> </span></span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp006-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Certificats d'exemptions</span>
+                <i class="bi bi-circle"></i><span>Procédure Certificats d'exemptions <span id="prog_exemption" class="badge bg-warning text-white"> </span></span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp007-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Homologation</span>
+                <i class="bi bi-circle"></i><span>Procédure Homologation<span id="prog_homologation" class="badge bg-warning text-white"> </span></span>
               </a>
             </li>
             <li>
@@ -380,6 +384,39 @@ rel="stylesheet"
 
 
   <script>
+
+function getNombreDemandeByProcedure(){
+        $.ajax({
+        type: 'GET',
+        url: "/administration/statistique/nombreDemandeEncours",
+        dataType: 'json',
+        cache: false,
+        success: function (result) {
+                 switch ($.trim(result.status)) {
+                     case "success":
+                        $('#prog_produit_chimique').text(""+result.nbProchimique);
+                        $('#prog_ecotourisme').text(""+ result.nbEcotourisme);
+                        $('#prog_dechet').text(""+result.nbdechet);
+                        $('#prog_detention').text(""+result.nbdetention);
+                        $('#prog_coupe').text(""+result.nbcoupe);
+                        $('#prog_exemption').text(""+result.nbce);
+                        $('#prog_chasse').text(""+result.nbpchasse);
+                        $('#prog_homologation').text(""+result.nbhomologation);
+
+                         break;
+                     default :
+                          alert("Erreur");
+                         break;
+                 }
+             },
+            error: function () {
+                alert("Erreur de chargement des données");
+            }
+        });
+    }
+	$(document).ready(function () {
+        getNombreDemandeByProcedure();
+    });
 
 
 

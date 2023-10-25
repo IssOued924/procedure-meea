@@ -19,9 +19,12 @@ use App\Repositories\DemandeP0012Repository;
 use App\Repositories\DemandeP001Repository;
 use App\Repositories\DemandeP003Repository;
 use App\Repositories\DemandeP004Repository;
+use App\Repositories\DemandeP006Repository;
 use App\Repositories\DemandeP007Repository;
 use App\Repositories\DemandeP008Repository;
+use App\Repositories\DemandeP009Repository;
 use App\Repositories\DemandePieceP001Repository;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BackendController extends Controller
@@ -48,6 +51,7 @@ class BackendController extends Controller
 
                     // Recuperation de la list des demande concernant p001 Produi chimique
     public function listDemande( DemandeP001Repository $demandeP001Repository,  DemandeP001 $demandeTest){
+        // dd( StatutDemande::where('etat', '=', 'V')->first()->statut);
           $data = [
               "demandes" => $demandeP001Repository->all(),
               "statutDepose"=> StatutDemande::where('etat', '=', 'D')->first()->statut,
@@ -61,12 +65,15 @@ class BackendController extends Controller
               "demandeEnCours" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'en cours')),
               "demandeEtat" => $demandeTest->statut(),
           ];
+
         //   dd($data['demandes'][0]->demandePiece);
-        // dd($data['demandeEtat']);
+
 
           return view('backend.list_demande', $data);
 
       }
+
+    //   dd($data);
 
     //   liste des demandes de la procedure ecotourisme p0012
 
@@ -84,7 +91,7 @@ class BackendController extends Controller
             "statutSigne"=> StatutDemande::where('etat', '=', 'S')->first()->statut,
             "statutValide"=> StatutDemande::where('etat', '=', 'V')->first()->statut,
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
-            "demandeEnCours" => $demandeP0012Repository->nombre('demande_p001_s', array('etat' =>'en cours')),
+            "demandeEnCours" => $demandeP0012Repository->nombre('demande_p0012_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandep0012->statut(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
@@ -243,21 +250,60 @@ class BackendController extends Controller
 
       //Function de mise a jour de statut demande
 
-    public function statutChange($id)
-    {
-        $demandep001 = DemandeP001::find($id);
-        // dd($demandep001);
-        ($demandep001->etat == 'D') ? $demandep001->etat = 1 : $demandep001->etat = 0;
-        $demandep001->save();
+    public function statutChange($id, $currentStatus, $table )
 
-        if ($demandep001->etat) {
-            Alert::success('Demande Verifiee', 'la Demande  a été Verifié avec succès!');
-        } else {
-            Alert::success('Non  Verifiee', 'la Demande a été Remis a etat initial avec succès!');
+    {
+
+        $nextStatus = '';
+        switch ($currentStatus) {
+            case 'D':
+                $nextStatus = 'E';
+                break;
+                case 'E':
+                    $nextStatus = 'V';
+                    break;
+                    case 'V':
+                        $nextStatus = 'S';
+                        break;
+                        case 'S':
+                            $nextStatus = 'A';
+                            break;
+            default:
+            $nextStatus = 'A';
+                break;
         }
-        return redirect()->route('demandes-list');
+        DB::table($table)->where('uuid', $id)->update(['etat'=> $nextStatus]);
+
+
+        return redirect()->back();
     }
 
+
+
+
+    public function nombreDemandeByProcedure(DemandeP001Repository $demandeP001Repository,
+																	DemandeP004Repository $demandeP004Repository,
+																	DemandeP008Repository $demandeP008Repository,
+																	DemandeP0011Repository $demandeP0011Repository,
+																	DemandeP003Repository $demandeP003Repository,
+																	DemandeP0012Repository $demandeP0012Repository,
+																	DemandeP006Repository $demandeP006Repository,
+																	DemandeP007Repository $demandeP007Repository
+
+                                                                    ) {
+
+       print json_encode(array('status' => 'success',
+								"nbProchimique" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'D')),
+								"nbEcotourisme" => $demandeP0012Repository->nombre('demande_p0012_s', array('etat' =>'D')),
+								'nbdechet' => $demandeP008Repository->nombre('demande_p008_s', array('etat' =>'D')),
+								'nbpchasse' => $demandeP003Repository->nombre('demande_p003_s', array('etat' =>'D')),
+								'nbdetention' => $demandeP004Repository->nombre('demande_p004_s', array('etat' =>'D')),
+								'nbce' => $demandeP006Repository->nombre('demande_p006_s', array('etat' =>'D')),
+								'nbhomologation' => $demandeP007Repository->nombre('demande_p007_s', array('etat' =>'D')),
+								'nbcoupe' => $demandeP0011Repository->nombre('demande_p0011_s', array('etat' =>'D')),
+
+                        ));
+    }
 
 
 

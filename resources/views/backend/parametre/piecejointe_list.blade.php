@@ -74,11 +74,11 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
+                                                <form method="POST" action="{{ route('piecejointe-store') }}">
                                                 <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <form method="POST"
-                                                                action="{{ route('piecejointe-store') }}">
+                                                        <div class="row">
+                                                            <div class="col">
+
                                                                 @csrf
                                                                 <div class="row">
                                                                     <div class="col-6">
@@ -86,8 +86,7 @@
                                                                         <div class="input-group mb-3">
 
                                                                             {{-- <label for="libelle">Libelle</label> --}}
-                                                                            <span class="input-group-text"
-                                                                                id="basic-addon1">@</span>
+
                                                                             <input type="text" name="libelle"
                                                                                 class="form-control border-success"
                                                                                 placeholder="libelle" aria-label="Username"
@@ -99,12 +98,11 @@
                                                                         <div class="input-group mb-3">
 
                                                                             {{-- <label for="libelle">Libelle</label> --}}
-                                                                            <span class="input-group-text"
-                                                                                id="basic-addon1">@</span>
+
                                                                             <select name="procedure_id" id="" class="form-select">
                                                                                 <option value="">Veuillez Choisir la procédure</option>
                                                                                 @foreach ($procedures as $proc)
-                                                                                <option value="{{ $proc->uuid }}">{{ $proc->code }}</option>
+                                                                                <option value="{{ $proc->uuid }}">{{ $proc->libelle_long }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
@@ -120,8 +118,7 @@
 
                                                                             {{-- <label for="libelle">Libelle</label>
                                                                             --}}
-                                                                            <span class="input-group-text"
-                                                                                id="basic-addon1">@</span>
+
                                                                             <input type="text" name="montant"
                                                                                 class="form-control border-success"
                                                                                 placeholder="Montant"
@@ -135,22 +132,22 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <input type="submit" value="Valider"
-                                                                    class="btn btn-primary">
+                                                                {{-- <input type="submit" value="Valider"
+                                                                    class="btn btn-primary"> --}}
 
-                                                            </form>
 
+                                                            </div>
                                                         </div>
-                                                    </div>
 
 
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger"
                                                         data-bs-dismiss="modal">Fermer</button>
-                                                    {{-- <button type="button" class="btn btn-primary">Valider</button>
-                                                    --}}
+                                                    <button type="submit" class="btn btn-primary">Valider</button>
+
                                                 </div>
+                                            </form>
                                             </div>
                                         </div>
                                     </div><!-- End Large Modal-->
@@ -164,6 +161,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Libelle</th>
                                         <th scope="col">montant</th>
+
 
                                         {{-- <th scope="col">Commune</th> --}}
                                         <th scope="col">Action</th>
@@ -179,6 +177,7 @@
                                         <th scope="row">{{ $i++ }}</th>
                                         <td> {{ $piece->libelle }}</td>
                                         <td>{{ $piece->montant}}</td>
+
 
                                         <td>
                                             <button title="Voir detail" type="button" class="btn btn-primary "
@@ -206,10 +205,11 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
+                                                    <form method="POST"
+                                                    action="{{ route('piecejointe-update', $piece->uuid) }}">
+                                                    @csrf
                                                     <div class="modal-body">
-                                                        <form method="POST"
-                                                            action="{{ route('piecejointe-update', $piece->uuid) }}">
-                                                            @csrf
+
                                                             @method('PUT')
                                                             <div class="row">
                                                                 <div class="col-6">
@@ -217,8 +217,7 @@
                                                                     <div class="input-group mb-3">
 
                                                                         {{-- <label for="libelle">Libelle</label> --}}
-                                                                        <span class="input-group-text"
-                                                                            id="basic-addon1">@</span>
+
                                                                         <input type="text" name="libelle"
                                                                             class="form-control border-success"
                                                                             value="{{ $piece->libelle }}" placeholder="libelle"
@@ -233,8 +232,7 @@
                                                                     <h5 class="card-title">Procédure</h5>
                                                                     <div class="input-group mb-3">
                                                                         {{-- <label for="libelle">Libelle</label> --}}
-                                                                        <span class="input-group-text"
-                                                                            id="basic-addon1">@</span>
+
                                                                         <select name="procedure_id" id="" class="form-select">
                                                                             @foreach ($piece->procedure as $ppj)
                                                                             <option value="{{ $ppj->code }}">{{ $ppj->code }}</option>
@@ -246,16 +244,7 @@
 
                                                                 </div>
 
-                                                                <select class="select" multiple>
-                                                                    <option value="1">One</option>
-                                                                    <option value="2">Two</option>
-                                                                    <option value="3">Three</option>
-                                                                    <option value="4">Four</option>
-                                                                    <option value="5">Five</option>
-                                                                    <option value="6">Six</option>
-                                                                    <option value="7">Seven</option>
-                                                                    <option value="8">Eight</option>
-                                                                  </select>
+
 
 
                                                             </div>
@@ -264,8 +253,7 @@
 
                                                                 {{-- <label for="libelle">Libelle</label> --}}
 
-                                                                <span class="input-group-text"
-                                                                    id="basic-addon1">@</span>
+
                                                                 <input type="number" name="montant"
                                                                     class="form-control border-success"
                                                                     value="{{ $piece->montant }}" placeholder="libelle"
@@ -275,18 +263,17 @@
                                                             </div>
 
 
-                                                            <input type="submit" value="Modifier"
-                                                                class="btn btn-primary center">
 
-                                                        </form>
-
-                                                    </div>
-                                                    <div class="modal-footer">
+`                                                       <div class="modal-footer">
                                                         <button type="button" class="btn btn-danger"
                                                             data-bs-dismiss="modal">Fermer</button>
-                                                        {{-- <button type="button" class="btn btn-primary">Save
-                                                            changes</button> --}}
+                                                         <button type="submit" class="btn btn-primary">Modifier
+                                                             </button>
                                                     </div>
+
+                                                    </div>
+                                                </form>
+
                                                 </div>
                                             </div>
                                         </div><!-- End Basic Modal-->

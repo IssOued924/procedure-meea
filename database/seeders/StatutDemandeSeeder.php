@@ -14,12 +14,12 @@ class StatutDemandeSeeder extends Seeder
     public function run(): void
     {
         StatutDemande::create([
-            "etat" => "C",
+            "etat" => "D",
             "libelle" =>"Attente de vérification",
             "statut" => "Demande déposée"
         ]);
         StatutDemande::create([
-            "etat" => "E",
+            "etat" => "C",
             "libelle" =>"Attente de complément de dossier",
             "statut" => "Demande de complément de dossier"
         ]);
@@ -39,7 +39,7 @@ class StatutDemandeSeeder extends Seeder
             "statut" => "Demande validée"
         ]);
         StatutDemande::create([
-            "etat" => "T",
+            "etat" => "S",
             "libelle" =>"Actes signé",
             "statut" => "Demande signée"
         ]);

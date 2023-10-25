@@ -73,6 +73,7 @@
                                         class="btn btn-success float-right bi bi-plus"> --}}
                                     <button style="float: right" type="button" class="btn btn-success"><i
                                             class="bi bi-plus"></i></button>
+
                                 </div>
                             </div><br>
 
@@ -153,11 +154,12 @@
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
                                                     class="bi bi-eye"></i> </button>
-                                            <button type="button" title="Valider" class="btn btn-success"><i
-                                                    class="bi bi-check-circle"></i> </button>
+
+                                            <a onclick="valider()" href="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p001_s'] ) }}" type="button" title="Valider" class="btn btn-success"><i
+                                                    class="bi bi-check-circle"></i> </a>
                                             <button type="button" title="Assigner à un collaborateur"
                                                 class="btn btn-primary"><i class="bi bi-folder-symlink"></i></button>
-                                            <button type="button" title="Rejetter" class="btn btn-danger"><i
+                                            <button type="button"  onclick="rejetter()" title="Rejetter" class="btn btn-danger"><i
                                                     class="bi bi-x-circle"></i></button>
                                         </td>
 
@@ -241,6 +243,63 @@
 @endsection
 
 @section('script')
+
+<script>
+    function rejetter(){
+        const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title: 'Etes vous sur de vouloir Rejetter cette Demande?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Je Confirme!',
+  cancelButtonText: 'Annuler!',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+    swalWithBootstrapButtons.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    // swalWithBootstrapButtons.fire(
+    //   'Cancelled',
+    //   'Your imaginary file is safe :)',
+    //   'error'
+    // )
+  }
+})
+    }
+
+    //fonction valider statut
+    function valider(){
+        Swal.fire({
+  title: 'Do you want to save the changes?',
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: 'Save',
+  denyButtonText: `Don't save`,
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    Swal.fire('Saved!', '', 'success')
+  } else if (result.isDenied) {
+    Swal.fire('Changes are not saved', '', 'info')
+  }
+})
+    }
+</script>
 
 
 @endsection

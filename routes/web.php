@@ -141,7 +141,9 @@ Route::get('/administration/demandesp004-list', [BackendController::class, 'list
 Route::get('/administration/demandesp0011-list', [BackendController::class, 'listDemandep0011'])->name('demandesp0011-list');
 Route::get('/administration/demandesp006-list', [BackendController::class, 'listDemandep006'])->name('demandesp006-list');
 Route::get('/administration/demandesp007-list', [BackendController::class, 'listDemandep007'])->name('demandesp007-list');
-Route::get('/administration/statusChange/{id}', [BackendController::class, 'statutChange'])->name('statusChange');
+Route::get('/administration/statusChange/{id}/{currentStatus}/{table}', [BackendController::class, 'statutChange'])->name('statusChange');
+
+Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
 
     // Route parametre
 Route::get('/administration/parametre/commune', [CommuneController::class, 'index'])->name('commune-list');

@@ -64,7 +64,7 @@ class ProcedureSeeder extends Seeder
                 amateurs ou professionnels le paysage,
                 les animaux sauvages et autres curiosités touristiques dans ladite aire.",
             "img" => "img/3.png",
-            "code_color" => "#fbda37",
+            "code_color" => "#d3b521",
             "code" => "P0012"
         ]);
         Procedure::create([

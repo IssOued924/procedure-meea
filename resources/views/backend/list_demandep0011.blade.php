@@ -1,7 +1,7 @@
 @extends('backend.layout.base')
 @section('title')
 <div class="pagetitle">
-    <h1>Liste des Demandes de Peris de coupe de bois et charbon de bois</h1>
+    <h1>Liste des Demandes de Permis de coupe de bois et charbon de bois</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
@@ -155,8 +155,8 @@
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
                                                     class="bi bi-eye"></i> </button>
-                                            <button type="button" title="Valider" class="btn btn-success"><i
-                                                    class="bi bi-check-circle"></i> </button>
+                                                    <a href="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat,'table'=> 'demande_p0011_s' ] ) }}" type="button" title="Valider" class="btn btn-success"><i
+                                                        class="bi bi-check-circle"></i> </a>
                                             <button type="button" title="Assigner à un collaborateur"
                                                 class="btn btn-primary"><i class="bi bi-folder-symlink"></i></button>
                                             <button type="button" title="Rejetter" class="btn btn-danger"><i

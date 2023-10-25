@@ -76,12 +76,13 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
+                                                  <form method="POST"
+                                                 action="{{ route('basejuridique-store') }}">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <form method="POST"
-                                                                action="{{ route('basejuridique-store') }}">
+
                                                                 @csrf
-                                                                <h5 class="card-title">Libelle Court</h5>
+                                                                <h5 class="card-title">Titre</h5>
                                                                 <div class="row">
                                                                     <div class="col-6">
                                                                         <div class="input-group mb-3">
@@ -96,7 +97,6 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-6">
-
                                                                         <div class="input-group mb-3">
                                                                             {{-- <label for="libelle">Libelle</label> --}}
                                                                             <span class="input-group-text"
@@ -104,7 +104,7 @@
                                                                            <select name="procedure_id" id="" class="form-select">
                                                                             <option value="">Veuillez choisir la procedure concernee</option>
                                                                             @foreach ($procedures as $proc )
-                                                                            <option value="{{ $proc->uuid }}">{{ $proc->code }}</option>
+                                                                            <option value="{{ $proc->uuid }}">{{ $proc->libelle_long }}</option>
                                                                             @endforeach
                                                                            </select>
                                                                         </div>
@@ -113,7 +113,7 @@
 
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Libelle Long</h5>
+                                                                        <h5 class="card-title">Description</h5>
 
                                                                         <!-- Quill Editor Full -->
                                                                         <p>Entrez toutes la base juridique ici</p>
@@ -127,22 +127,22 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <input type="submit" value="Valider"
-                                                                    class="btn btn-primary">
 
-                                                            </form>
+
+
 
                                                         </div>
                                                     </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger"
+                                                            data-bs-dismiss="modal">Fermer</button>
+                                                         <button type="submit" class="btn btn-primary">Valider</button>
 
+                                                    </div>
+                                                </form>
 
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger"
-                                                        data-bs-dismiss="modal">Fermer</button>
-                                                    {{-- <button type="button" class="btn btn-primary">Valider</button>
-                                                    --}}
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div><!-- End Large Modal-->
