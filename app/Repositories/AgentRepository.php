@@ -20,13 +20,13 @@ class AgentRepository extends BaseRepository
         return Agent::class;
     }
 
-    public function all(array $columns = ['*'])
-    {
-        return DB::table('agents')
-                        ->join('services', 'services.uuid', '=', 'agents.service_id')
-                        ->select('agents.*', 'services.libelle_long as service')
-                        ->get();
-    }
+    // public function all(array $columns = ['*'])
+    // {
+    //     return DB::table('agents')
+    //                     ->join('services', 'services.uuid', '=', 'agents.service_id')
+    //                     ->select('agents.*', 'services.libelle_long as service')
+    //                     ->get();
+    // }
 
 
 

@@ -23,7 +23,7 @@ class DemandePieceP008Repository extends BaseRepository
         if ( isset($chemin) && is_string($chemin) && !empty($chemin) ){
             $piece = new DemandePieceP008();
             $piece->chemin = $chemin;
-            $piece->chemin = $libelle;
+            $piece->libelle = $libelle;
             $piece->demande_p008_id = $demandeId;
             $piece->save();
         }

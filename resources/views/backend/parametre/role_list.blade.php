@@ -39,11 +39,22 @@
                 </div>
 
                 <div class="card-body">
+
                     <div class="row">
                         <p> @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="alert-heading">{{session('success')}}</h4>
+
+                            </div>
+
+                            <script>
+                                setTimeout(function() {
+                                    document.querySelector('.alert.alert-success').style.display = 'none';
+                                }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                            </script>
                         @endif</p>
                         <div class="col">
                             <h5 class="card-title">Liste des <span>| Roles</span></h5>
@@ -63,42 +74,57 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
+                                        <form method="POST"
+                                                        action="{{ route('role-store') }}">
+                                                        @csrf
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col">
-                                                    <form method="POST"
-                                                        action="{{ route('role-store') }}">
-                                                        @csrf
-                                                        <h5 class="card-title">Libelle  </h5>
+
+                                                        <h5 class="card-title">nom  </h5>
                                                         <div class="input-group mb-3">
 
                                                             {{-- <label for="libelle">Libelle</label> --}}
-                                                            <span class="input-group-text"
-                                                                id="basic-addon1">@</span>
+
                                                             <input type="text" name="libelle"
                                                                 class="form-control border-success"
-                                                                placeholder="libelle" aria-label="Username"
+                                                                placeholder="nom" aria-label="Username"
                                                                 aria-describedby="basic-addon1" required>
 
                                                         </div>
 
+                                                        <h5 class="card-title">Code  </h5>
+                                                        <div class="input-group mb-3">
+
+                                                            {{-- <label for="libelle">Libelle</label> --}}
+
+                                                            <input type="text" name="code"
+                                                                class="form-control border-success"
+                                                                placeholder="code" aria-label="Username"
+                                                                aria-describedby="basic-addon1" required>
+
+                                                        </div>
 
                                                         <input type="submit" value="Valider"
-                                                            class="btn btn-primary">
+                                                        class="btn btn-primary">
 
-                                                    </form>
+
 
                                                 </div>
                                             </div>
 
 
+
                                         </div>
                                         <div class="modal-footer">
+
+
                                             <button type="button" class="btn btn-danger"
                                                 data-bs-dismiss="modal">Fermer</button>
                                             {{-- <button type="button" class="btn btn-primary">Valider</button>
                                             --}}
                                         </div>
+                                    </form>
                                     </div>
                                 </div>
                             </div><!-- End Large Modal-->

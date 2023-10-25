@@ -36,22 +36,23 @@
                         </div>
 
                         <div class="card-body">
-                            <p> @if(session('success'))
-                                <div class="alert alert-success alert-dismissible" role="alert">
-                                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <h4 class="alert-heading">{{session('success')}}</h4>
 
-                                </div>
-
-                                <script>
-                                    setTimeout(function() {
-                                        document.querySelector('.alert.alert-success').style.display = 'none';
-                                    }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
-                                </script>
-                            @endif</p>
                             <div class="row">
+                                <p> @if(session('success'))
+                                    <div class="alert alert-success alert-dismissible" role="alert">
+                                        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 class="alert-heading">{{session('success')}}</h4>
+
+                                    </div>
+
+                                    <script>
+                                        setTimeout(function() {
+                                            document.querySelector('.alert.alert-success').style.display = 'none';
+                                        }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                                    </script>
+                                @endif</p>
                                 <div class="col">
 
                                     <h5 class="card-title">Liste des <span>| Agents</span></h5>
@@ -83,8 +84,7 @@
                                                                 <div class="input-group mb-3">
 
                                                                     {{-- <label for="libelle">Libelle</label> --}}
-                                                                    <span class="input-group-text"
-                                                                        id="basic-addon1">@</span>
+
                                                                     <input type="text" name="nom"
                                                                         class="form-control border-success"
                                                                         placeholder="libelle" aria-label="Username"
@@ -98,8 +98,7 @@
                                                                 <div class="input-group mb-3">
 
                                                                     {{-- <label for="libelle">Libelle</label> --}}
-                                                                    <span class="input-group-text"
-                                                                        id="basic-addon1">@</span>
+
                                                                     <input type="text" name="prenom"
                                                                         class="form-control border-success"
                                                                         placeholder="libelle" aria-label="Username"
@@ -117,8 +116,7 @@
                                                                 <div class="input-group mb-3">
 
                                                                     {{-- <label for="libelle">Libelle</label> --}}
-                                                                    <span class="input-group-text"
-                                                                        id="basic-addon1">@</span>
+
                                                                     <input type="text" name="matricule"
                                                                         class="form-control border-success"
                                                                         placeholder="libelle" aria-label="Username"
@@ -132,8 +130,7 @@
                                                                 <div class="input-group mb-3">
 
                                                                     {{-- <label for="libelle">Libelle</label> --}}
-                                                                    <span class="input-group-text"
-                                                                        id="basic-addon1">@</span>
+
                                                                     <input type="text" name="fonction"
                                                                         class="form-control border-success"
                                                                         placeholder="libelle" aria-label="Username"
@@ -149,27 +146,42 @@
 
                                                             <div class="card">
                                                                 <div class="card-body">
-                                                                    <h5 class="card-title">Service</h5>
+                                                                    <div class="row">
 
-                                                                    <div class="input-group mb-3">
+                                                                        <div class="col">
+                                                                            <h5 class="card-title">Structure</h5>
+                                                                            <div class="input-group mb-3">
+                                                                                {{-- <label for="libelle">Libelle</label> --}}
+                                                                                <select name="service_id" id="selectMultiple"
+                                                                                    class="form-select border-success" id="">
+                                                                                    <option value="">Veuillez choisir Sa
+                                                                                        Direction
+                                                                                    </option>
+                                                                                    @foreach ( $services as $serv)
+                                                                                    <option value="{{ $serv->uuid }}">{{
+                                                                                        $serv->libelle_long }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
+                                                                            <!-- End Quill Editor Full -->
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <h5 class="card-title">Roles</h5>
+                                                                            <div class="input-group mb-3">
+                                                                                <select   class="form-select border-success" name="role_id" id="">
+                                                                                @foreach ($roles as $role)
+                                                                               <option value="{{ $role->uuid }}">{{ $role->libelle }}</option>
+                                                                                &nbsp;&nbsp;
+                                                                                @endforeach
+                                                                            </select>
 
-                                                                        {{-- <label for="libelle">Libelle</label> --}}
-                                                                        <span class="input-group-text"
-                                                                            id="basic-addon1">@</span>
-                                                                        <select name="service_id" id="selectMultiple"
-                                                                            class="form-select border-success" id="">
-                                                                            <option value="">Veuillez choisir son
-                                                                                Service
-                                                                            </option>
-                                                                            @foreach ( $services as $serv)
-                                                                            <option value="{{ $serv->uuid }}">{{
-                                                                                $serv->libelle_long }}</option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                    </div>
-                                                                    <!-- End Quill Editor Full -->
+                                                                            </div>
+
+                                                                        </div>
+
 
                                                                 </div>
+                                                            </div>
                                                             </div>
 
                                                         </div>
@@ -183,9 +195,6 @@
                                                              <button type="submit" class="btn btn-primary">Valider</button>
 
                                                         </div>
-
-
-
 
                                                 </div>
                                             </form>
@@ -206,9 +215,10 @@
                                         <th scope="col">Prenom</th>
                                         <th scope="col">Fonction</th>
                                         <th scope="col">Service</th>
-
+                                        <th scope="col">Role</th>
                                         {{-- <th scope="col">Commune</th> --}}
                                         <th scope="col">Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -223,7 +233,8 @@
                                         <td> {{ $agent->nom }}</td>
                                         <td> {{ $agent->prenom }}</td>
                                         <td> {{ $agent->fonction }}</td>
-                                        <td>{{ $agent->service}}</td>
+                                        <td>{{ $agent->service->libelle_court}}</td>
+                                        <td>{{ $agent->role}}</td>
 
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
@@ -259,8 +270,7 @@
                                                                     <div class="input-group mb-3">
 
                                                                         {{-- <label for="libelle">Libelle</label> --}}
-                                                                        <span class="input-group-text"
-                                                                            id="basic-addon1">@</span>
+
                                                                         <input type="text" name="nom"
                                                                             value="{{ $agent->nom }}"
                                                                             class="form-control border-success"
@@ -275,8 +285,7 @@
                                                                     <div class="input-group mb-3">
 
                                                                         {{-- <label for="libelle">Libelle</label> --}}
-                                                                        <span class="input-group-text"
-                                                                            id="basic-addon1">@</span>
+
                                                                         <input type="text" name="prenom"
                                                                             value="{{ $agent->prenom }}"
                                                                             class="form-control border-success"
@@ -295,8 +304,7 @@
                                                                     <div class="input-group mb-3">
 
                                                                         {{-- <label for="libelle">Libelle</label> --}}
-                                                                        <span class="input-group-text"
-                                                                            id="basic-addon1">@</span>
+
                                                                         <input type="text" name="matricule"
                                                                             value="{{ $agent->matricule }}"
                                                                             class="form-control border-success"
@@ -311,8 +319,7 @@
                                                                     <div class="input-group mb-3">
 
                                                                         {{-- <label for="libelle">Libelle</label> --}}
-                                                                        <span class="input-group-text"
-                                                                            id="basic-addon1">@</span>
+
                                                                         <input type="text" name="fonction"
                                                                             value="{{ $agent->fonction }}"
                                                                             class="form-control border-success"
@@ -335,8 +342,7 @@
 
                                                                             {{-- <label for="libelle">Libelle</label>
                                                                             --}}
-                                                                            <span class="input-group-text"
-                                                                                id="basic-addon1">@</span>
+
                                                                             <select name="service_id"
                                                                                 id="selectMultiple"
                                                                                 class="form-select border-success"
@@ -379,7 +385,6 @@
                                                 </div>
                                             </div>
                                         </div><!-- End Basic edit Modal-->
-
 
                                     </tr>
                                     @endforeach

@@ -47,12 +47,8 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nom</th>
-                    <th scope="col">Prenom</th>
-                    <th scope="col">Pays</th>
-                    <th scope="col">Profession</th>
-                    <th scope="col">domicile</th>
-                    <th scope="col">telephone</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Téléphone</th>
                     <th scope="col">nom_entreprise</th>
 
 
@@ -70,14 +66,18 @@
                         <th scope="row">{{ $i++ }}</th>
                         <td> {{ $usager->nom }}</td>
                         <td> {{ $usager->prenom }}</td>
-                        <td> {{ $usager->pays }}</td>
-                        <td> {{ $usager->profession }}</td>
-                        <td>{{ $usager->domicile}}</td>
                         <td>{{ $usager->telephone}}</td>
-                        <td>{{ $usager->email}}</td>
                         <td>{{ $usager->nom_entreprise}}</td>
 
-                        <td><button class="btn btn-primary "> <i class="btn  bi bi-eye"></i> </button></td>
+                      <td>
+
+
+                    <a  type="button" title="Valider" class="btn btn-success"><i
+                            class="bi bi-check-circle"></i> </a>
+
+                    <button type="button" title="Supprimer" class="btn btn-danger"><i
+                            class="bi bi-x-circle"></i></button>
+                      </td>
                       </tr>
                     @endforeach
 

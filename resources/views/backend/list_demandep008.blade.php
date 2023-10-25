@@ -77,7 +77,7 @@
                             </div><br>
 
                             <!-- Table with stripped rows -->
-                            <table class="table table-bordered table-striped">
+                            <table class="table datatable table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -152,7 +152,6 @@
 
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
 
-
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
@@ -177,23 +176,23 @@
                                                         <div class="row">
                                                             <div class="col-6">
                                                                 <b>Identite demandeur:</b>
-                                                                <span>{{ $demande->usager->nom.'
+                                                                <span class="text-success">{{ $demande->usager->nom.'
                                                                     '.$demande->usager->prenom}}</span>
 
                                                             </div>
                                                             <div class="col-6">
-                                                                <b>Telephone :</b>
-                                                                <span>{{ $demande->usager->telephone}}</span>
+                                                                <b>Téléphone :</b>
+                                                                <span class="text-success">{{ $demande->usager->telephone}}</span>
                                                             </div>
                                                         </div><br>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <b>Type de Permis:</b>
+                                                                <b>Entreprise:</b> <span class="text-success">{{ $demande->beneficiaire }}</span>
 
                                                             </div>
 
                                                         </div> <br>
-                                                        <h4>Liste des fichiers Soumis</h4>
+                                                        <h4>Liste des fichiers Soumis <i class="bi bi-folder text-success"></i></h4>
                                                         <div class="row">
                                                             <div class="col">
 
@@ -201,7 +200,7 @@
 
 
 
-                                                                <a href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
+                                                                <a class="text-success" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
                                                                 <br>
                                                                 @endforeach
                                                             </div>

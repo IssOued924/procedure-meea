@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
+use App\Models\Role;
 use App\Models\Service;
 use App\Models\Structure;
 use App\Repositories\AgentRepository;
@@ -19,9 +20,10 @@ class AgentController extends Controller
     public function index(){
 
         $data =  [
-            "agents" => $this->repository->all(),
+            "agents" => Agent::all(),//$this->repository->all(),
             "structures" => Structure::all(),
             "services" =>Service::all(),
+            "roles" => Role::all(),
 
         ];
         return view('backend.utilisateur.agent_list', $data);

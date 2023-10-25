@@ -66,7 +66,7 @@ class Usager extends Model
      *
      * @var array<string, string>
      */
-    
+
 
     public function communeResidence(){
         return $this->belongsTo(Commune::class, 'commune_residence', 'uuid');
@@ -88,6 +88,8 @@ class Usager extends Model
     {
         return $this->hasMany(DemandeP001::class, 'demande_p001_id');
     }
+
+
 
     // public function user()
     // {

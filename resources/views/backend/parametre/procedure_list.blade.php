@@ -19,9 +19,6 @@
         <div class="col-lg-12">
             <div class="row">
 
-
-
-
                 <!-- Recent Sales -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
@@ -40,7 +37,23 @@
                         </div>
 
                         <div class="card-body">
+
                             <div class="row">
+                                <p> @if(session('success'))
+                                    <div class="alert alert-success alert-dismissible" role="alert">
+                                        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 class="alert-heading">{{session('success')}}</h4>
+
+                                    </div>
+
+                                    <script>
+                                        setTimeout(function() {
+                                            document.querySelector('.alert.alert-success').style.display = 'none';
+                                        }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                                    </script>
+                                @endif</p>
                                 <div class="col">
 
                                     <h5 class="card-title">Liste des <span>| Procédures</span></h5>
@@ -82,7 +95,6 @@
                                         </div><!-- End Large Modal-->
 
                                 </div>
-
 
 
                             </div>
@@ -140,8 +152,7 @@
                                                             <div class="input-group mb-3">
 
                                                                 {{-- <label for="libelle">Libelle</label> --}}
-                                                                <span class="input-group-text"
-                                                                    id="basic-addon1">@</span>
+
                                                                 <input type="text" name="libelle_court"
                                                                     class="form-control border-success"
                                                                     value="{{ $proc->libelle_court }}"

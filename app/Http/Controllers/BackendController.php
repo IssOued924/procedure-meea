@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agent;
 use Illuminate\Http\Request;
 use App\Models\Demande;
 use App\Models\DemandeP001;
@@ -64,6 +65,7 @@ class BackendController extends Controller
             //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
               "demandeEnCours" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'en cours')),
               "demandeEtat" => $demandeTest->statut(),
+              "agents" => Agent::all(),
           ];
 
         //   dd($data['demandes'][0]->demandePiece);
@@ -222,6 +224,8 @@ class BackendController extends Controller
 
     }
 
+
+
       //   liste des demandes de permis de detention dun animal p004
 
       public function listDemandep007( DemandeP007Repository $demandeP007Repository,  DemandeP007 $demandeP007){
@@ -254,6 +258,7 @@ class BackendController extends Controller
 
     {
 
+
         $nextStatus = '';
         switch ($currentStatus) {
             case 'D':
@@ -275,7 +280,15 @@ class BackendController extends Controller
         DB::table($table)->where('uuid', $id)->update(['etat'=> $nextStatus]);
 
 
-        return redirect()->back();
+        return redirect()->back()->with('success', "La Demande a été Valider avec succès !");
+    }
+
+    public function rejetter($id, $table)
+    {
+        DB::table($table)->where('uuid', $id)->update(['etat'=> 'R']);
+
+        return redirect()->back()->with('success', "La Demande a été Rejetter avec succès !");
+
     }
 
 

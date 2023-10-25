@@ -14,10 +14,13 @@ class UsagerController extends Controller
         $this->repository = $repository;
     }
 
+
+
     public function index(){
 
         $data =  [
-            "usagers" => $this->repository->all(),
+            // "usagers" => $this->repository->all(),
+            "usagers" =>Usager::all(),
 
         ];
         return view('backend.utilisateur.usager_list', $data);

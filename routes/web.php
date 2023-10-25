@@ -142,6 +142,7 @@ Route::get('/administration/demandesp0011-list', [BackendController::class, 'lis
 Route::get('/administration/demandesp006-list', [BackendController::class, 'listDemandep006'])->name('demandesp006-list');
 Route::get('/administration/demandesp007-list', [BackendController::class, 'listDemandep007'])->name('demandesp007-list');
 Route::get('/administration/statusChange/{id}/{currentStatus}/{table}', [BackendController::class, 'statutChange'])->name('statusChange');
+Route::get('/administration/rejet/{id}/{table}', [BackendController::class, 'rejetter'])->name('rejetter');
 
 Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
 
@@ -183,7 +184,7 @@ Route::get('/administration/parametre/typeusager/{uuid}', [TypeUsagerController:
 Route::post('/administration/parametre/typeusager/', [TypeUsagerController::class, 'store'])->name('typeUsager-store');
 Route::put('/administration/parametre/typeusager/{uuid}', [TypeUsagerController::class, 'update'])->name('typeUsager-update');
 Route::get('/administration/parametre/role', [RoleController::class, 'index'])->name('role-list');
-Route::get('/administration/parametre/role/{uuid}', [RoleController::class, 'suprimer'])->name('suprimer-role');
+Route::get('/administration/parametre/role/{uuid}', [RoleController::class, 'supprimer'])->name('suprimer-role');
 Route::post('/administration/parametre/role', [RoleController::class, 'store'])->name('role-store');
 
 // Route Utilisateur
