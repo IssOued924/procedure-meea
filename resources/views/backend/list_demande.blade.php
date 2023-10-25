@@ -33,9 +33,9 @@
                                     <h6>Filter</h6>
                                 </li>
 
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                <li><a class="dropdown-item" href="#">Aujourd'huie</a></li>
+                                <li><a class="dropdown-item" href="#">Mois Courant</a></li>
+                                <li><a class="dropdown-item" href="#">Cette Année</a></li>
                             </ul>
                         </div>
 
@@ -84,10 +84,15 @@
                                 </div>
                                 <div class="col-3">
 
-                                    {{-- <input type="submit" value="Create new Porject"
-                                        class="btn btn-success float-right bi bi-plus"> --}}
-                                    <button style="float: right" type="button" class="btn btn-success"><i
-                                            class="bi bi-plus"></i></button>
+
+                                    <div style="float: right">
+
+                                    <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
+                                                class="bi bi-arrow-repeat"></i></button>
+                                                <button  title="Ajouter" type="button" class="btn btn-success"><i
+                                                    class="bi bi-plus"></i></button>
+                                    </div>
+
 
                                 </div>
                             </div><br>
@@ -155,7 +160,7 @@
                                     break;
                                     }
                                     @endphp
-                                    <tr class="table-bordered">
+                                    <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td> {{ $demande->denomination_sociale_demandeur }}</td>
                                         <td>{{ $demande->quantite }}</td>
@@ -467,6 +472,10 @@ swalWithBootstrapButtons.fire({
     Swal.fire('Changes are not saved', '', 'info')
   }
 })
+    }
+
+    function refresh() {
+        location.reload(true);
     }
 </script>
 

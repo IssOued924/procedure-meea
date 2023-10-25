@@ -40,6 +40,6 @@ class DemandeP007 extends Demande
     }
     public function demandePiece()
     {
-        return $this->hasMany(DemandePieceP008::class, 'demande_p008_id');
+        return $this->hasMany(DemandePieceP007::class, 'demande_p007_id');
     }
 }

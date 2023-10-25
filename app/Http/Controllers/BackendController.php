@@ -95,6 +95,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP0012Repository->nombre('demande_p0012_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandep0012->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -119,6 +120,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP008Repository->nombre('demande_p008_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandep008->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -143,6 +145,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP003Repository->nombre('demande_p003_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandep003->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -168,6 +171,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP004Repository->nombre('demande_p004_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandep004->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -192,6 +196,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP0011Repository->nombre('demande_p004_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandeP0011->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -202,7 +207,7 @@ class BackendController extends Controller
 
       //   liste des demandes de permis de detention dun animal p006
 
-      public function listDemandep006( DemandeP0011Repository $demandeP006Repository,  DemandeP006 $demandeP006){
+      public function listDemandep006( DemandeP006Repository $demandeP006Repository,  DemandeP006 $demandeP006){
 
         $data = [
             "demandes" => $demandeP006Repository->all(),
@@ -216,6 +221,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP006Repository->nombre('demande_p004_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandeP006->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -242,6 +248,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP007Repository->nombre('demande_p007_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandeP007->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
