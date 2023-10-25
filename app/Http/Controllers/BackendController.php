@@ -36,10 +36,10 @@ class BackendController extends Controller
     public function index( DemandeP001Repository $demandeP001Repository, DemandePieceP001 $demandePieceP001, DemandeP001 $demandep001){
         $data = [
              "demandes"=>$demandep001::with('demandePiece')->get(),
-            //  "demandes" => $demandeP001Repository->all(),
-            "demandeDeposee" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'en cours')),
-            "demandeTraite" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'traite')),
-            "demandeRejetter" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'rejetter')),
+              "demandes" => $demandeP001Repository->all(),
+            //"demandeDeposee" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'en cours')),
+            //"demandeTraite" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'traite')),
+           // "demandeRejetter" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'rejetter')),
             // "fichiers"=> DemandePieceP001::where
         ];
         return view('backend.home', $data);

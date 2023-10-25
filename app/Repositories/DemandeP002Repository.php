@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use App\Models\DemandeP002;
+use Illuminate\Support\Facades\DB;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
 
@@ -17,5 +18,12 @@ class DemandeP002Repository extends BaseRepository
     public function model()
     {
         return DemandeP002::class;
+    }
+    public function nombre($table, $champ=array())
+    {
+
+        return DB::table($table)->where($champ)->count();
+
+
     }
 }

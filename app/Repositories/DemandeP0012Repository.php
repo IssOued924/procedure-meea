@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Models\DemandeP0012;
 use Faker\Core\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
 
@@ -60,5 +61,11 @@ class DemandeP0012Repository extends BaseRepository
 
         return $path;
     }
+    public function nombre($table, $champ=array())
+    {
 
+        return DB::table($table)->where($champ)->count();
+
+
+    }
 }

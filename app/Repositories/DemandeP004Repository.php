@@ -3,6 +3,7 @@
 namespace App\Repositories;
 use App\Models\DemandeP004;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
 
@@ -39,5 +40,13 @@ class DemandeP004Repository extends BaseRepository
         $path = $data[$name]->storeAs('public/'.$libelle, $fileName);
 
         return $path;
+    }
+
+    public function nombre($table, $champ=array())
+    {
+
+        return DB::table($table)->where($champ)->count();
+
+
     }
 }

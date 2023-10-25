@@ -54,8 +54,8 @@
                       <i class="bi bi-check-circle"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>{{ $demandeTraite }}</h6>
-                      {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
+                 
+                      {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}-->
 
                     </div>
                   </div>
@@ -74,7 +74,7 @@
                         <i class="bi bi-check-circle"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>{{ $demandeTraite }}</h6>
+                      {{-- <h6>{{ $demandeTraite }}</h6>--}} 
                         {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
 
                       </div>
@@ -96,7 +96,7 @@
                       <i class="bi bi-trash"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>{{ $demandeRejetter }}</h6>
+                      {{--<h6>{{ $demandeRejetter }}</h6>--}}
                       {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
                     </div>
@@ -117,7 +117,7 @@
                         <i class="bi bi-folder-x"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>{{ $demandeRejetter }}</h6>
+                        {{--<h6>{{ $demandeRejetter }}</h6>--}}
                         {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
                       </div>
@@ -137,7 +137,7 @@
                         <i class="bi bi-folder2-open"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>{{ $demandeRejetter }}</h6>
+                        {{--<h6>{{ $demandeRejetter }}</h6>--}}
                         {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
                       </div>
@@ -159,7 +159,7 @@
                         <i class="bi bi-server"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>{{ $demandeRejetter }}</h6>
+                        {{--<h6>{{ $demandeRejetter }}</h6>--}}
                         {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
                       </div>

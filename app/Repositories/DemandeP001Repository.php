@@ -5,6 +5,7 @@ use App\Models\DemandeP001;
 use Faker\Core\File;
 use Illuminate\Support\Facades\Storage;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
+use Illuminate\Support\Facades\DB;
 //use Your Model
 
 /**
@@ -53,6 +54,13 @@ class DemandeP001Repository extends BaseRepository
         $path = $data[$name]->storeAs('public/'.$libelle, $fileName);
 
         return $path;
+    }
+    public function nombre($table, $champ=array())
+    {
+
+        return DB::table($table)->where($champ)->count();
+
+
     }
 
 }

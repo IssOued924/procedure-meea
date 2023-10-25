@@ -191,7 +191,7 @@ Route::post('/administration/parametre/role', [RoleController::class, 'store'])-
 
 Route::get('/administration/utilisateur/agent', [AgentController::class, 'index'])->name('agent-list');
 Route::post('/administration/utilisateur/agent/', [AgentController::class, 'store'])->name('agent-store');
-Route::get('/administration/utilisateur/agent/{uuid}', [AgentController::class, 'update'])->name('agent-update');
+Route::put('/administration/utilisateur/agent/{uuid}', [AgentController::class, 'update'])->name('agent-update');
 Route::get('/administration/utilisateur/usager', [UsagerController::class, 'index'])->name('usager-list');
 
 Route::get('/administration/utilisateur/profile', [ProfileController::class, 'index'])->name('profile-list');
