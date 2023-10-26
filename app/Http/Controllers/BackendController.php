@@ -24,6 +24,7 @@ use App\Models\DemandeP008;
 use App\Models\DemandePieceP001;
 use App\Models\Procedure;
 use App\Models\StatutDemande;
+use App\Repositories\BackendRepository;
 use App\Repositories\CommentaireP001Repository;
 use App\Repositories\DemandeP0011Repository;
 use App\Repositories\DemandeP0012Repository;
@@ -42,19 +43,59 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class BackendController extends Controller
 {
+    public $repository;
+    public function __construct(BackendRepository $repository)
+    {
+        $this->repository = $repository;
+    }
 
 
 
-    public function index( DemandeP001Repository $demandeP001Repository, DemandePieceP001 $demandePieceP001, DemandeP001 $demandep001){
+    public function index( BackendRepository $backendRepository){
+
+
         $data = [
-             "demandes"=>$demandep001::with('demandePiece')->get(),
-            //  "demandes" => $demandeP001Repository->all(),
-            "demandeDeposee" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'en cours')),
-            "demandeTraite" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'traite')),
-            "demandeRejetter" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'rejetter')),
-            // "fichiers"=> DemandePieceP001::where
+
+             "nombreEcotourisme"=>$backendRepository->nombreDemandeByProcedure('demande_p0012_s', ['etat' => 'D']),
+             "nombreProduitChimique"=>$backendRepository->nombreDemandeByProcedure('demande_p001_s',['etat' => 'D']),
+             "nombreDechet"=>$backendRepository->nombreDemandeByProcedure('demande_p008_s',['etat' => 'D']),
+             "nombreChasse"=>$backendRepository->nombreDemandeByProcedure('demande_p003_s',['etat' => 'D']),
+             "nombreDetention"=>$backendRepository->nombreDemandeByProcedure('demande_p004_s',['etat' => 'D']),
+             "nombreExemption"=>$backendRepository->nombreDemandeByProcedure('demande_p006_s',['etat' => 'D']),
+             "nombreCoupeBois"=>$backendRepository->nombreDemandeByProcedure('demande_p0011_s',['etat' => 'D']),
+             "nombreHomologation"=>$backendRepository->nombreDemandeByProcedure('demande_p007_s',['etat' => 'D']),
+             "nombreCirculationBois"=>$backendRepository->nombreDemandeByProcedure('demande_p005_s',['etat' => 'D']),
+             "nombreEau"=>$backendRepository->nombreDemandeByProcedure('demande_p002_s',['etat' => 'D']),
+
         ];
+
         return view('backend.home', $data);
+
+
+
+    }
+
+    public function procedureDashboard($procedure, $procedureName){
+
+
+        $data = [
+
+
+            //  "demandes" => $demandeP001Repository->all(),
+            "procedureName" => $procedureName,
+            "demandeDeposee" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'D']),
+            "demandeValider" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'V']),
+            "demandeSigne" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'S']),
+            "demandeRejeter" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'R']),
+            "demandeArchive" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'A']),
+            "demandeComplement" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'C']),
+            "demandeEtude" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'E']),
+
+
+
+        ];
+
+        return view('backend.home_detail', $data);
 
 
 
@@ -457,19 +498,19 @@ class BackendController extends Controller
 
 
 
-    public function listsDemande(DemandeP001Repository $demandeP001Repository, 
-                                        DemandeP002Repository $demandeP002Repository, 
+    public function listsDemande(DemandeP001Repository $demandeP001Repository,
+                                        DemandeP002Repository $demandeP002Repository,
                                         DemandeP003Repository $demandeP003Repository,
-                                        DemandeP004Repository $demandeP004Repository, 
-                                        DemandeP006Repository $demandeP006Repository, 
+                                        DemandeP004Repository $demandeP004Repository,
+                                        DemandeP006Repository $demandeP006Repository,
                                         DemandeP007Repository $demandeP007Repository,
-                                        DemandeP008Repository $demandeP008Repository, 
-                                        DemandeP0011Repository $demandeP0011Repository, 
+                                        DemandeP008Repository $demandeP008Repository,
+                                        DemandeP0011Repository $demandeP0011Repository,
                                         DemandeP0012Repository $demandeP0012Repository,
                                           DemandeP001 $demandeTest,Request $request){
 
-      
-     //dd($demandes);                                  
+
+     //dd($demandes);
       $demandes = null;
       $data = [];
       if(isset($request->procedure) && strlen($request->procedure)>0){
@@ -502,21 +543,22 @@ class BackendController extends Controller
             case 'CHESPB':
               $demandes = $demandeP007Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
             break;
-                                                      
+
             default:
               # code...
               break;
           }
-          
+
       }
       $data = [
         "demandes" => $demandes,
         "procedures" => Procedure::all(),
         "selectedProcedure" => $request->procedure,
-        
+
     ];
       return view('backend.lists_demandesAgents', $data);
 
   }
+
 }
 
