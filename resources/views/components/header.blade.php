@@ -20,6 +20,7 @@
                 <li><a href="#">Contact</a></li>
                 @else
                 <li><a class="active" href="/">Accueil</a></li>
+                <li><a href="{{ route('demandes-lists') }}">Mes demandes</a></li>
 
                 <li><a href="#">FAQ</a></li>
                 <li><a href="#">Contact</a></li>

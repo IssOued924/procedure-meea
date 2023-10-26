@@ -42,4 +42,14 @@ class DemandeP006Repository extends BaseRepository
 
         return $path;
     }
+    public function all($filtre = array())
+    {
+        $this->newQuery()->eagerLoad();
+
+        $models = $this->query->where($filtre)->get();
+
+        $this->unsetClauses();
+
+        return $models;
+    }
 }
