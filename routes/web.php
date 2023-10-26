@@ -196,4 +196,7 @@ Route::get('/administration/utilisateur/usager', [UsagerController::class, 'inde
 
 Route::get('/administration/utilisateur/profile', [ProfileController::class, 'index'])->name('profile-list');
 
+// Liste des demandes d'un agent
+
+Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name('demandes-lists');
 require __DIR__.'/auth.php';

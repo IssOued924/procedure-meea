@@ -14,6 +14,7 @@ use App\Models\DemandeP006;
 use App\Models\DemandeP007;
 use App\Models\DemandeP008;
 use App\Models\DemandePieceP001;
+use App\Models\Procedure;
 use App\Models\StatutDemande;
 use App\Repositories\DemandeP0011Repository;
 use App\Repositories\DemandeP0012Repository;
@@ -320,7 +321,29 @@ class BackendController extends Controller
 
 
 
+    public function listsDemande( DemandeP001Repository $demandeP001Repository,  DemandeP001 $demandeTest){
 
 
 
+      $data = [
+          "demandes" => $demandeP001Repository->all(),
+          "statutDepose"=> StatutDemande::where('etat', '=', 'D')->first()->statut,
+          "statutArchive"=> StatutDemande::where('etat', '=', 'A')->first()->statut,
+          "statutRejete"=> StatutDemande::where('etat', '=', 'R')->first()->statut,
+          "statutEtude"=> StatutDemande::where('etat', '=', 'E')->first()->statut,
+          "statutComplement"=> StatutDemande::where('etat', '=', 'C')->first()->statut,
+          "statutSigne"=> StatutDemande::where('etat', '=', 'S')->first()->statut,
+          "statutValide"=> StatutDemande::where('etat', '=', 'V')->first()->statut,
+        //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
+          "demandeEnCours" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'en cours')),
+          "demandeEtat" => $demandeTest->statut(),
+          "procedures" => Procedure::all(),
+      ];
+    //   dd($data['demandes'][0]->demandePiece);
+    // dd($data['demandeEtat']);
+
+      return view('backend.lists_demandesAgents', $data);
+
+  }
 }
+
