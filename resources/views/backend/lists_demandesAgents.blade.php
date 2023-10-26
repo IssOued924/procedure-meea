@@ -49,17 +49,18 @@
                                 </div>
                             </div>
                           <br>
-
-                            <!-- Table with stripped rows -->
+                            <div class="row">
+                                <div class="col-8 offset-md-2">
+                                     <!-- Table with stripped rows -->
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        
-                                        
+
+
                                         <th scope="col">Date Demande</th>
-                                        
-                                        <th scope="col">Etat Demande</th>
+
+                                        <th scope="col">Etat de mes Demandes</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -116,23 +117,23 @@
                                     @endphp
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
-                                      
-                                       
+
+
                                         <td>{{ $demande->created_at }}</td>
-                                        
+
 
                                         <td>
-                                       
-    
+
+
                                         <span class="badge {{ $statutColor }} ">{{$statut}}</span> </td>
 
-                                        
+
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
                                                     class="bi bi-eye"></i> </button>
-                                           
-                                         
+
+
                                             <button type="button" title="Annuler" class="btn btn-danger"><i
                                                     class="bi bi-x-circle"></i></button>
                                         </td>
@@ -196,11 +197,15 @@
 
                                     </tr>
                                     @endforeach
-                                    <?php } ?>                              
+                                    <?php } ?>
 
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
+
+
+                                </div>
+                            </div>
 
                         </div>
 
