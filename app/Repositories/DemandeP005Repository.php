@@ -18,4 +18,14 @@ class DemandeP005Repository extends BaseRepository
     {
         return DemandeP005::class;
     }
+    public function all($filtre = array())
+    {
+        $this->newQuery()->eagerLoad();
+
+        $models = $this->query->where($filtre)->get();
+
+        $this->unsetClauses();
+
+        return $models;
+    }
 }

@@ -19,6 +19,7 @@ use App\Models\StatutDemande;
 use App\Repositories\DemandeP0011Repository;
 use App\Repositories\DemandeP0012Repository;
 use App\Repositories\DemandeP001Repository;
+use App\Repositories\DemandeP002Repository;
 use App\Repositories\DemandeP003Repository;
 use App\Repositories\DemandeP004Repository;
 use App\Repositories\DemandeP006Repository;
@@ -26,6 +27,7 @@ use App\Repositories\DemandeP007Repository;
 use App\Repositories\DemandeP008Repository;
 use App\Repositories\DemandeP009Repository;
 use App\Repositories\DemandePieceP001Repository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -321,27 +323,64 @@ class BackendController extends Controller
 
 
 
-    public function listsDemande( DemandeP001Repository $demandeP001Repository,  DemandeP001 $demandeTest){
+    public function listsDemande(DemandeP001Repository $demandeP001Repository, 
+                                        DemandeP002Repository $demandeP002Repository, 
+                                        DemandeP003Repository $demandeP003Repository,
+                                        DemandeP004Repository $demandeP004Repository, 
+                                        DemandeP006Repository $demandeP006Repository, 
+                                        DemandeP007Repository $demandeP007Repository,
+                                        DemandeP008Repository $demandeP008Repository, 
+                                        DemandeP0011Repository $demandeP0011Repository, 
+                                        DemandeP0012Repository $demandeP0012Repository,
+                                          DemandeP001 $demandeTest,Request $request){
 
-
-
+      
+     //dd($demandes);                                  
+      $demandes = null;
+      $data = [];
+      if(isset($request->procedure) && strlen($request->procedure)>0){
+        $proc = $request->procedure;
+          switch ($proc) {
+            case 'PETE':
+              $demandes = $demandeP0012Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+              break;
+            case 'DATIPC':
+              $demandes = $demandeP001Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+              break;
+            case 'ADDMC':
+              $demandes = $demandeP003Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+                break;
+            case 'AGDS':
+                  $demandes = $demandeP008Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+                  break;
+            case 'CEESPNB':
+                  $demandes = $demandeP006Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+                  break;
+            case 'CDAS':
+              $demandes = $demandeP004Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+                break;
+            case 'PCBCB':
+              $demandes = $demandeP0011Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+                  break;
+            case 'OATEA':
+              $demandes = $demandeP002Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+              break;
+            case 'CHESPB':
+              $demandes = $demandeP007Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+            break;
+                                                      
+            default:
+              # code...
+              break;
+          }
+          
+      }
       $data = [
-          "demandes" => $demandeP001Repository->all(),
-          "statutDepose"=> StatutDemande::where('etat', '=', 'D')->first()->statut,
-          "statutArchive"=> StatutDemande::where('etat', '=', 'A')->first()->statut,
-          "statutRejete"=> StatutDemande::where('etat', '=', 'R')->first()->statut,
-          "statutEtude"=> StatutDemande::where('etat', '=', 'E')->first()->statut,
-          "statutComplement"=> StatutDemande::where('etat', '=', 'C')->first()->statut,
-          "statutSigne"=> StatutDemande::where('etat', '=', 'S')->first()->statut,
-          "statutValide"=> StatutDemande::where('etat', '=', 'V')->first()->statut,
-        //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
-          "demandeEnCours" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'en cours')),
-          "demandeEtat" => $demandeTest->statut(),
-          "procedures" => Procedure::all(),
-      ];
-    //   dd($data['demandes'][0]->demandePiece);
-    // dd($data['demandeEtat']);
-
+        "demandes" => $demandes,
+        "procedures" => Procedure::all(),
+        "selectedProcedure" => $request->procedure,
+        
+    ];
       return view('backend.lists_demandesAgents', $data);
 
   }

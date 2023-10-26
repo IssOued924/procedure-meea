@@ -33,18 +33,19 @@
                         </div>
 
 
-                        <h2 class="card-title text-center">Liste des Demandes Déposées <span>| Demandes</span></h2>
+                        <h2 class="card-title text-center">MES DEMANDES <span>| Demandes</span></h2>
 
 
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-4 offset-md-4">
                                     <label for="">Choisir sa procédure</label>
-                                <select name="" id="" class="form-select border-success">
-                            @foreach($procedures as $proc)
-                                <option class="mb-3" value="{{$proc->uuid}}">{{$proc->libelle_long}}</option>
-                            @endforeach
-                           </select>
+                                <select name="procedure" id="procedure" class="form-select border-success" onchange="loadDemandeListe()">
+                                <option class="mb-3" value=""></option>
+                                    @foreach($procedures as $proc)
+                                        <option class="mb-3" {{($selectedProcedure == $proc->libelle_court ? 'selected': '')}} value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
+                                    @endforeach
+                                </select>
                                 </div>
                             </div>
                           <br>
@@ -67,6 +68,7 @@
                                     @php
                                     $i = 1;
                                     @endphp
+                                    <?php if(!is_null($demandes)){ ?>
                                     @foreach ($demandes as $demande)
                                     @php
                                     $statut = "";
@@ -74,37 +76,37 @@
                                     switch ($demande->etat) {
                                         case 'D':
                                             # code...
-                                            $statut = $statutDepose;
+                                            $statut = "demande deposée";
                                             $statutColor ="bg-primary";
                                             break;
                                             case 'S':
                                             # code...
-                                            $statut = $statutSigne;
+                                            $statut ="demande signée";
                                             $statutColor ="bg-success";
                                             break;
                                             case 'A':
                                             # code...
-                                            $statut = $statutArchive;
+                                            $statut ="demande archivée" ;
                                             $statutColor ="bg-secondary";
                                             break;
                                             case 'V':
                                             # code...
-                                            $statut = $statutValide;
+                                            $statut = "demande validée";
                                             $statutColor ="bg-success";
                                             break;
                                             case 'C':
                                             # code...
-                                            $statut = $statutComplement;
+                                            $statut = "En attente pour complement de dossier";
                                             $statutColor ="bg-warning";
                                             break;
                                             case 'R':
                                             # code...
-                                            $statut = $statutRejete;
+                                            $statut = "demande rejetée";
                                             $statutColor ="bg-danger";
                                             break;
                                             case 'E':
                                             # code...
-                                            $statut = $statutEtude;
+                                            $statut = "demande en etude";
                                             $statutColor ="bg-info";
                                             break;
                                         default:
@@ -119,9 +121,12 @@
                                         <td>{{ $demande->created_at }}</td>
                                         
 
-                                        <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
+                                        <td>
+                                       
+    
+                                        <span class="badge {{ $statutColor }} ">{{$statut}}</span> </td>
 
-
+                                        
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
@@ -191,7 +196,7 @@
 
                                     </tr>
                                     @endforeach
-
+                                    <?php } ?>                              
 
                                 </tbody>
                             </table>
@@ -213,5 +218,10 @@
 
 @section('script')
 
-
+<script>
+    function loadDemandeListe(){
+        let url='/demandes-lists?procedure='+$('#procedure').val();
+        window.location=url;
+    }
+</script>
 @endsection
