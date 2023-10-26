@@ -75,7 +75,7 @@
                         <h5 class="single">
                             {{ $procedure->libelle_long }}
                         </h5>
-                        <p>{{ $procedure->description }}</p>
+                        <p style="text-align: justify;text-indent : 10%;">{{ $procedure->description }}</p>
                         <div style=" margin: 18px 0 33px;">
 
                             <i class="bi bi-clock"
@@ -107,7 +107,7 @@
                                 style="border: 1px solid #0063cf;
                         color: #0063cf;
                         padding: 0 0.5em;
-                        border-radius: 5px;">DGPE</span><br><br>
+                        border-radius: 5px;">{{ $procedure->service->libelle_court }}</span><br><br>
 
 
                         </div>

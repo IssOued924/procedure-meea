@@ -40,7 +40,7 @@
                         </div>
 
 
-                        <h5 class="card-title">Liste des Demandes Deposées <span>| Demandes</span></h5>
+                        <h5 class="card-title">Liste des Demandes   <span>| Demandes</span></h5>
 
                         <div class="card-body">
                             <div class="row">
@@ -175,7 +175,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content bgcustom-gradient-light">
                                                         <div class="modal-header">
-                                                            <img src="{{ asset('backend/assets/img/delete.svg') }}"
+                                                            <img src="{{ asset('backend/assets/img/assigner.jpg') }}"
                                                                 width="60" height="45" class="d-inline-block align-top"
                                                                 alt="">
                                                             <h5 class="modal-title m-auto"> Assigner a un Collaborateur
@@ -246,8 +246,8 @@
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Etes vous sûr de
-                                                                            vouloir Valider cette Demande ?</label>
+                                                                        <label class="col-form-label">Motif de la validation ?</label>
+                                                                        <input type="text" required name="libelle" class="form-control border-success">
 
                                                                     </div>
 
@@ -291,8 +291,8 @@
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Etes vous sûr de
-                                                                            vouloir Rejetter cette Demande ?</label>
+                                                                        <label class="col-form-label">Motif du rejet ?</label>
+                                                                        <input type="text" required name="libelle" class="form-control border-success">
 
                                                                     </div>
 

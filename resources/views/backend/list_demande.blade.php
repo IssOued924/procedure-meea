@@ -40,7 +40,7 @@
                         </div>
 
 
-                        <h5 class="card-title">Liste des Demandes Deposées <span>| Demandes</span></h5>
+                        <h5 class="card-title">Liste des Demandes   <span>| Demandes</span></h5>
 
                         <div class="card-body">
                             <p> @if(session('success'))
@@ -178,6 +178,9 @@
                                             <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
                                                 type="button" title="Valider" class="btn btn-success"><i
                                                     class="bi bi-check-circle"></i> </a>
+                                                    {{-- <a  href="javascript:; " onclick="valider(this)" data-url="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p001_s'] ) }}"
+                                                        type="button" title="Valider" class="btn btn-success"><i
+                                                            class="bi bi-check-circle"></i> </a> --}}
 
                                             <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur"
                                                 class="btn btn-primary"><i class="bi bi-folder-symlink"></i></button>
@@ -192,10 +195,10 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content bgcustom-gradient-light">
                                                         <div class="modal-header">
-                                                            <img src="{{ asset('backend/assets/img/delete.svg') }}"
+                                                            <img src="{{ asset('backend/assets/img/assigner.jpg') }}"
                                                                 width="60" height="45" class="d-inline-block align-top"
                                                                 alt="">
-                                                            <h5 class="modal-title m-auto"> Assigner a un Collaborateur
+                                                            <h5 class="modal-title m-auto"> Assigner à un Collaborateur
                                                             </h5>
                                                             <button type="button" class="btn-close" data-dismiss="modal"
                                                                 aria-label="btn-close">
@@ -216,7 +219,7 @@
                                                                             <select name="" id="" class="form-select border-success">
                                                                                 @foreach ($agents as $agent)
 
-                                                                                <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
+                                                                              <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
                                                                                 @endforeach
 
                                                                             </select>
@@ -244,7 +247,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content bgcustom-gradient-light">
                                                         <div class="modal-header">
-                                                            <img src="{{ asset('backend/assets/img/delete.svg') }}"
+                                                            <img src="{{ asset('backend/assets/img/valide.png') }}"
                                                                 width="60" height="45" class="d-inline-block align-top"
                                                                 alt="">
                                                             <h5 class="modal-title m-auto"> Confirmation de Validation
@@ -263,8 +266,9 @@
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Etes vous sûr de
-                                                                            vouloir Valider cette Demande ?</label>
+                                                                        <label class="col-form-label">Motif de la validation ?</label>
+                                                                            <input type="text" required name="libelle" class="form-control border-success">
+
 
                                                                     </div>
 
@@ -308,8 +312,9 @@
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Etes vous sûr de
-                                                                            vouloir Rejetter cette Demande ?</label>
+                                                                        <label class="col-form-label">Motif du rejet ?</label>
+                                                                            <input required type="text" name="libelle" class="form-control border-success">
+
 
                                                                     </div>
 
@@ -327,7 +332,7 @@
                                             </div>
                                             <!-- Fin Modal Rejet-->
                                         </td>
-
+                                            {{-- detail modal     --}}
                                         <div class="modal fade" id="largeModal{{ $demande->uuid }}" tabindex="-1">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content" style="height: 500px;">
@@ -457,7 +462,7 @@ swalWithBootstrapButtons.fire({
     }
 
     //fonction valider statut
-    function valider(){
+    function valider(me){
         Swal.fire({
   title: 'Do you want to save the changes?',
   showDenyButton: true,
@@ -467,6 +472,11 @@ swalWithBootstrapButtons.fire({
 }).then((result) => {
   /* Read more about isConfirmed, isDenied below */
   if (result.isConfirmed) {
+    let url= $(me).attr('data-url');
+    window.location=url;
+
+
+
     Swal.fire('Saved!', '', 'success')
   } else if (result.isDenied) {
     Swal.fire('Changes are not saved', '', 'info')

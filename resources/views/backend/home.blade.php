@@ -26,7 +26,7 @@
 
 
                 <div class="card-body">
-                  <h5 class="card-title">Demandes <span>| Attente de vérification</span></h5>
+                  <h5 class="card-title">Procédure <span>|écotourisme </span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -47,7 +47,7 @@
             <div class="col-xxl-3 col-md-6">
               <div class="card info-card revenue-card">
                 <div class="card-body">
-                  <h5 class="card-title">Demandes <span>| En attente de visa</span></h5>
+                  <h5 class="card-title">Procédure <span>| Produit Chimique</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -67,7 +67,7 @@
             <div class="col-xxl-3 col-md-6">
                 <div class="card info-card revenue-card">
                   <div class="card-body">
-                    <h5 class="card-title">Demandes <span>| signées</span></h5>
+                    <h5 class="card-title">Procédure <span>| Chasse</span></h5>
 
                     <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -89,7 +89,7 @@
 
               <div class="card info-card customers-card">
                 <div class="card-body">
-                  <h5 class="card-title">Demandes <span>| rejettées</span></h5>
+                  <h5 class="card-title">Procédure <span>| Dechets</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -110,7 +110,7 @@
 
                 <div class="card info-card customers-card">
                   <div class="card-body">
-                    <h5 class="card-title">Demandes <span>| Attente de Complement de Dossiers</span></h5>
+                    <h5 class="card-title">Procédure <span>| Exemption</span></h5>
 
                     <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -130,7 +130,7 @@
 
                 <div class="card info-card customers-card">
                   <div class="card-body">
-                    <h5 class="card-title">Demandes <span>| En Etude</span></h5>
+                    <h5 class="card-title">Procédure <span>| Coupe de Bois</span></h5>
 
                     <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -152,7 +152,67 @@
               <div class="col-xxl-3 col-xl-12">
                 <div class="card info-card customers-card">
                   <div class="card-body">
-                    <h5 class="card-title">Demandes <span>|  archivées</span></h5>
+                    <h5 class="card-title">Procédure <span>| Détention</span></h5>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-server"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>{{ $demandeRejetter }}</h6>
+                        {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div><!-- End Customers Card -->
+
+              <div class="col-xxl-3 col-xl-12">
+                <div class="card info-card customers-card">
+                  <div class="card-body">
+                    <h5 class="card-title">Procédure <span>| Homologation</span></h5>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-server"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>{{ $demandeRejetter }}</h6>
+                        {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div><!-- End Customers Card -->
+
+              <div class="col-xxl-3 col-xl-12">
+                <div class="card info-card customers-card">
+                  <div class="card-body">
+                    <h5 class="card-title">Procédure <span>| Circulation de bois</span></h5>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-server"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>{{ $demandeRejetter }}</h6>
+                        {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div><!-- End Customers Card -->
+
+              <div class="col-xxl-3 col-xl-12">
+                <div class="card info-card customers-card">
+                  <div class="card-body">
+                    <h5 class="card-title">Procédure <span>| Agrement en Eau</span></h5>
 
                     <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">

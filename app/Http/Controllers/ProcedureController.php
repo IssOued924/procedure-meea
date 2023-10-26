@@ -44,12 +44,14 @@ class ProcedureController extends Controller
     $request->validate([
         'libelle_court' => 'required',
         'libelle_long' => 'required',
+        'description' => 'required',
     ]);
 
     $type = Procedure::find($uuid);
     $type->update([
         'libelle_court' => $request->input('libelle_court'),
         'libelle_long' => $request->input('libelle_long'),
+        'description' => $request->input('description'),
     ]);
 
     return redirect()->route('procedure-list')->with('success', ' Procedure  mis à jour avec succès !');

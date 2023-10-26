@@ -3,6 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
+use App\Models\CommentaireP001;
+use App\Models\CommentaireP0011;
+use App\Models\CommentaireP0012;
+use App\Models\CommentaireP003;
+use App\Models\CommentaireP004;
+use App\Models\CommentaireP006;
+use App\Models\CommentaireP007;
+use App\Models\CommentaireP008;
 use Illuminate\Http\Request;
 use App\Models\Demande;
 use App\Models\DemandeP001;
@@ -15,6 +23,7 @@ use App\Models\DemandeP007;
 use App\Models\DemandeP008;
 use App\Models\DemandePieceP001;
 use App\Models\StatutDemande;
+use App\Repositories\CommentaireP001Repository;
 use App\Repositories\DemandeP0011Repository;
 use App\Repositories\DemandeP0012Repository;
 use App\Repositories\DemandeP001Repository;
@@ -261,9 +270,10 @@ class BackendController extends Controller
 
       //Function de mise a jour de statut demande
 
-    public function statutChange($id, $currentStatus, $table )
+    public function statutChange($id, $currentStatus, $table,Request $request )
 
     {
+
 
 
         $nextStatus = '';
@@ -286,13 +296,130 @@ class BackendController extends Controller
         }
         DB::table($table)->where('uuid', $id)->update(['etat'=> $nextStatus]);
 
+        if($table == 'demande_p001_s'){
+            $commentaire1 = new CommentaireP001();
+        $commentaire1->create([
+            'libelle' =>$request->libelle,
+            'demande_p001_id' =>$id
+        ]);
+        }
+        elseif($table == 'demande_p003_s'){
+            $commentaire3 = new CommentaireP003();
+            $commentaire3->create([
+               'libelle' =>$request->libelle,
+               'demande_p003_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p004_s'){
+            $commentaire4 = new CommentaireP004();
+            $commentaire4->create([
+               'libelle' =>$request->libelle,
+               'demande_p004_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p006_s'){
+            $commentaire6 = new CommentaireP006();
+            $commentaire6->create([
+               'libelle' =>$request->libelle,
+               'demande_p006_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p007_s'){
+            $commentaire7 = new CommentaireP007();
+            $commentaire7->create([
+               'libelle' =>$request->libelle,
+               'demande_p007_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p008_s'){
+            $commentaire8 = new CommentaireP008();
+            $commentaire8->create([
+               'libelle' =>$request->libelle,
+               'demande_p008_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p0011_s'){
+            $commentaire11 = new CommentaireP0011();
+            $commentaire11->create([
+               'libelle' =>$request->libelle,
+               'demande_p0011_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p0012_s'){
+            $commentaire12 = new CommentaireP0012();
+            $commentaire12->create([
+               'libelle' =>$request->libelle,
+               'demande_p0012_id' =>$id
+           ]);
+        }
+
+
+        // DB::table('commentaire_p001_s')->insert();
+
 
         return redirect()->back()->with('success', "La Demande a été Valider avec succès !");
     }
 
-    public function rejetter($id, $table)
+    public function rejetter($id, $table, Request $request)
     {
         DB::table($table)->where('uuid', $id)->update(['etat'=> 'R']);
+
+        if($table == 'demande_p001_s'){
+            $commentaire1 = new CommentaireP001();
+        $commentaire1->create([
+            'libelle' =>$request->libelle,
+            'demande_p001_id' =>$id
+        ]);
+        }
+        elseif($table == 'demande_p003_s'){
+            $commentaire3 = new CommentaireP003();
+            $commentaire3->create([
+               'libelle' =>$request->libelle,
+               'demande_p003_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p004_s'){
+            $commentaire4 = new CommentaireP004();
+            $commentaire4->create([
+               'libelle' =>$request->libelle,
+               'demande_p004_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p006_s'){
+            $commentaire6 = new CommentaireP006();
+            $commentaire6->create([
+               'libelle' =>$request->libelle,
+               'demande_p006_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p007_s'){
+            $commentaire7 = new CommentaireP007();
+            $commentaire7->create([
+               'libelle' =>$request->libelle,
+               'demande_p007_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p008_s'){
+            $commentaire8 = new CommentaireP008();
+            $commentaire8->create([
+               'libelle' =>$request->libelle,
+               'demande_p008_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p0011_s'){
+            $commentaire11 = new CommentaireP0011();
+            $commentaire11->create([
+               'libelle' =>$request->libelle,
+               'demande_p0011_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p0012_s'){
+            $commentaire12 = new CommentaireP0012();
+            $commentaire12->create([
+               'libelle' =>$request->libelle,
+               'demande_p0012_id' =>$id
+           ]);
+        }
 
         return redirect()->back()->with('success', "La Demande a été Rejetter avec succès !");
 

@@ -1,7 +1,7 @@
 @extends('backend.layout.base')
 @section('title')
 <div class="pagetitle">
-    <h1>Liste des Demandes de Certificat d'exemptions des emballages et sachets plastiques non biodegradables</h1>
+    <h1>Liste des Demandes de Certificat d'exemption des emballages et sachets plastiques non biodégradables</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
@@ -38,7 +38,7 @@
                         </div>
 
 
-                        <h5 class="card-title">Liste des Demandes Deposées <span>| Demandes</span></h5>
+                        <h5 class="card-title">Liste des Demandes   <span>| Demandes</span></h5>
 
                         <div class="card-body">
                             <p> @if(session('success'))
@@ -190,7 +190,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content bgcustom-gradient-light">
                                                         <div class="modal-header">
-                                                            <img src="{{ asset('backend/assets/img/delete.svg') }}"
+                                                            <img src="{{ asset('backend/assets/img/assigner.jpg') }}"
                                                                 width="60" height="45" class="d-inline-block align-top"
                                                                 alt="">
                                                             <h5 class="modal-title m-auto"> Assigner a un Collaborateur
@@ -242,7 +242,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content bgcustom-gradient-light">
                                                         <div class="modal-header">
-                                                            <img src="{{ asset('backend/assets/img/delete.svg') }}"
+                                                            <img src="{{ asset('backend/assets/img/valide.png') }}"
                                                                 width="60" height="45" class="d-inline-block align-top"
                                                                 alt="">
                                                             <h5 class="modal-title m-auto"> Confirmation de Validation
@@ -261,8 +261,8 @@
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Etes vous sûr de
-                                                                            vouloir Valider cette Demande ?</label>
+                                                                        <label class="col-form-label">Motif de la validation ?</label>
+                                                                        <input type="text" required name="libelle" class="form-control border-success">
 
                                                                     </div>
 
@@ -306,8 +306,8 @@
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Etes vous sûr de
-                                                                            vouloir Rejetter cette Demande ?</label>
+                                                                        <label class="col-form-label">Motif du Rejet ?</label>
+                                                                        <input type="text" required name="libelle" class="form-control border-success">
 
                                                                     </div>
 
@@ -351,7 +351,7 @@
                                                         </div><br>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <b>Type de Permis:</b>
+
 
                                                             </div>
 
