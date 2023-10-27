@@ -25,39 +25,47 @@
                                 <li class="dropdown-header text-start">
                                     <h6>Filter</h6>
                                 </li>
-
                                 <li><a class="dropdown-item" href="#">Today</a></li>
                                 <li><a class="dropdown-item" href="#">This Month</a></li>
                                 <li><a class="dropdown-item" href="#">This Year</a></li>
                             </ul>
                         </div>
 
-
-                        <h2 class="card-title text-center">MES DEMANDES <span>| Demandes</span></h2>
-
+                        <h2 class="card-title text-center">Liste de mes Démandes  </h2>
 
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-4 offset-md-4">
+
+                                <div class="col-4 offset-md-3">
                                     <label for="">Choisir sa procédure</label>
                                 <select name="procedure" id="procedure" class="form-select border-success" onchange="loadDemandeListe()">
                                 <option class="mb-3" value=""></option>
                                     @foreach($procedures as $proc)
                                         <option class="mb-3" {{($selectedProcedure == $proc->libelle_court ? 'selected': '')}} value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
                                     @endforeach
-                                </select>
+                                </select><br><br>
+                                {{-- <div class="form-inline">
+                                    <label for="">Rechercher par code : </label>
+                                    <input type="text" class="form-control border-success"style="width: 200px;"  placeholder="code">
+                                </div> --}}
+                                </div>
+                                <div class="col-3">
+                                    <div style="float: right">
+                                        {{-- <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
+                                                    class="bi bi-arrow-repeat"></i></button> --}}
+                                                    <button  title="Ajouter" type="button" class="btn btn-success"><i
+                                                        class="bi bi-printer"></i> Imprimer</button>
+                                        </div>
                                 </div>
                             </div>
                           <br>
                             <div class="row">
                                 <div class="col-8 offset-md-2">
                                      <!-- Table with stripped rows -->
-                            <table class="table table-bordered table-striped">
+                            <table class="table datatable table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-
-
                                         <th scope="col">Date Demande</th>
 
                                         <th scope="col">Etat de mes Demandes</th>
@@ -131,11 +139,21 @@
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
-                                                    class="bi bi-eye"></i> </button>
+                                                    class="bi bi-eye"></i> Voir </button>
+
+                                                    @if ($demande->etat =='R')
+                                                    <button title="Modifier" type="button" class="btn btn-info "
+                                                data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
+                                                    class="bi bi-pencil-square text-white">Modifier </i> </button>
+                                                    @endif
+                                                    @if ($demande->etat == 'S')
+                                                    <button title="Télécharger l'acte" type="button" class="btn btn-success "
+                                                    data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
+                                                        class="bi bi-cloud-download text-white">Télécharger </i> </button>
+
+                                                    @endif
 
 
-                                            <button type="button" title="Annuler" class="btn btn-danger"><i
-                                                    class="bi bi-x-circle"></i></button>
                                         </td>
 
                                         <div class="modal fade" id="largeModal{{ $demande->uuid }}" tabindex="-1">

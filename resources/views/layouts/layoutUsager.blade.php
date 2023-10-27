@@ -37,8 +37,8 @@
     <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    
-    
+
+
     <link href="css/style.css" rel="stylesheet">
 
     <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" /> -->
@@ -73,7 +73,7 @@
     <div class="content">
 
         <div>
-            @if ($message = Session::get('status'))
+            @if ($message = Session::get('success'))
             <div class="alert alert-success alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
@@ -82,17 +82,16 @@
 
         </div>
 
-        <div class="col-lg-6 offset-lg-5 animate__animated animate__fadeInUp">
+        {{-- <div class="col-lg-6 offset-lg-5 animate__animated animate__fadeInUp">
             <form class="form-inline">
-                {{-- <i id="filter" class="bi bi-search"></i> --}}
                 <input class="form-control rounded-pill  border-success" id="filter" type="search"
                     placeholder="Recherche ..." aria-label="Search" autocomplete="off">
 
             </form><br>
-        </div>
+        </div> --}}
 
         @yield('content')
-    
+
 
 
     </div>
