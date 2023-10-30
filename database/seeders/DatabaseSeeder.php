@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
 
 
              ProcedureSeeder::class,
-            // PaysSeeder::class,
-            // StatutDemandeSeeder::class,
-            // TypeUsagerSeeder::class
+             PaysSeeder::class,
+            StatutDemandeSeeder::class,
+            TypeUsagerSeeder::class
             //StructureSeeder::class
 
         ]);
