@@ -27,11 +27,11 @@ class ServiceController extends Controller
 
     public function store(Request $request, Service $service){
         $data = $request->all();
-
+        //dd($data);
         $service = $this->repository->create($data);
         $service->save();
 
-        Alert::success('Succès', ' Service   a été créee avec succès !');
+        Alert::success('Succès', ' Service   a été créée avec succès !');
         return redirect()->route('service-list')->with('success', ' Service à été Enregistrée avec succès !');
 
     }

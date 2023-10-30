@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             // PaysSeeder::class,
             // StatutDemandeSeeder::class,
             // TypeUsagerSeeder::class
+            StructureSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
 

@@ -9,7 +9,7 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 /**
  * Class DemandeP006Repository.
  */
-class DemandeP006Repository extends BaseRepository
+class DemandeP006Repository extends GenericRepository
 {
     /**
      * @return string

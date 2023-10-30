@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 /**
  * Class DemandeP008Repository.
  */
-class DemandeP008Repository extends BaseRepository
+class DemandeP008Repository extends GenericRepository
 {
     /**
      * @return string
