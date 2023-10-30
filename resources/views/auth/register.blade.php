@@ -56,11 +56,10 @@
     <div class="content">
         {{-- La partie de recherche --}}
         <div class="col-lg-6 offset-lg-3 animate__animated animate__fadeInUp">
-            <form class="form-inline">
-                {{-- <i id="filter" class="bi bi-search"></i> --}}
+            {{-- <form class="form-inline">
 
 
-            </form><br>
+            </form><br> --}}
         </div>
 
 
@@ -106,168 +105,176 @@
                     alt="" />
             </div> --}}
             <div class="cont_form_login">
-                <a href="#" onclick="hidden_login_and_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
-                <h5>Personne physique</h5>
+                <div class="row pt-2">  
+                    <a class="col-2 pl-8" onclick="hidden_login_and_sign_up()" style="color: black">
+                        <i class="material-icons">&#xE5C4;</i>
+                    </a>
+                    <h5 class="col-10">Personne physique</h5>
+                </div>
                 <x-guest-layout>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <!-- Name -->
-                        <div>
-                            <x-input-label for="name" :value="__('Nom')" />
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="name" :value="__('Nom')" />
+                            <x-text-input class="col-7" id="name"  type="text" name="name"
                                 :value="old('name')" required autofocus autocomplete="name" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                        </div>
+                        </div><br>
 
                         <!-- Name -->
-                        <div>
-                            <x-input-label for="prenom" :value="__('Prénom')" />
-                            <x-text-input id="lastname" class="block mt-1 w-full" type="text" name="prenom"
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="prenom" :value="__('Prénom')" />
+                            <x-text-input class="col-7" id="lastname"  type="text" name="prenom"
                                 :value="old('prenom')" required autofocus autocomplete="prenom" />
                             <x-input-error :messages="$errors->get('prenom')" class="mt-2" />
-                        </div>
+                        </div><br>
 
                         <!-- Email Address -->
-                        <div>
-                            <x-input-label for="email" :value="__('Email')" />
-                            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="email" :value="__('Email')" />
+                            <x-text-input class="col-7" id="email"  type="email" name="email"
                                 :value="old('email')" required autocomplete="username" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                        </div>
+                        </div><br>
 
                         <!-- Telephone number -->
-                        <div>
-                            <x-input-label for="telephone" :value="__('Telephone')" />
-                            <x-text-input id="telephone" class="block mt-1 w-full" type="number"
-                                name="telephone" :value="old('telephone')" required autocomplete="telephone" />
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="telephone" :value="__('Telephone')" />
+                            <x-text-input class="col-7" id="telephone"  type="number"
+                                name="telephone" required autocomplete="telephone" />
                             <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
-                        </div>
+                        </div><br>
 
                         <!-- Password -->
-                        <div>
-                            <x-input-label for="password" :value="__('Password')" />
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="password" :value="__('Password')" />
 
-                            <x-text-input id="password" class="block mt-1 w-full" type="password"
+                            <x-text-input class="col-7" id="password"  type="password"
                                 name="password" required autocomplete="new-password" />
 
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                        </div>
+                        </div><br>
 
                         <!-- Confirm Password -->
-                        <div>
-                            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="password_confirmation" :value="__('Confirm Password')" />
 
-                            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
+                            <x-text-input class="col-7" id="password_confirmation"  type="password"
                                 name="password_confirmation" required autocomplete="new-password" />
 
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                         </div>
 
-                        <div class="flex items-center justify-end mt-4">
-                            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                        <div class="flex items-center justify-end mt-2">
+                            <a class="underline text-sm col"
                                 href="{{ route('login') }}" style="color: black">
                                 {{ __('Déja inscrit?') }}
                             </a>
-                            <x-primary-button class="ml-4">
+                            <x-primary-button class="col">
                                 {{ __('Inscription') }}
                             </x-primary-button>
                         </div>
                     </form>
                 </x-guest-layout>
 
-                <button class="btn_login" onclick="change_to_sign_up()">Inscription</button>
+                {{-- <button class="btn_login" onclick="change_to_sign_up()">Inscription</button> --}}
             </div>
 
             <div class="cont_form_sign_up">
-                <a href="#" onclick="hidden_login_and_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
-                <h5>Personne morale</h5>
+                <div class="row pt-2">                    
+                    <a class="col-2 pl-8" onclick="hidden_login_and_sign_up()" style="color: black">
+                        <i class="material-icons">&#xE5C4;</i>
+                    </a>
+                    <h5 class="col-10">Personne morale</h5>
+                </div>
                 <x-guest-layout>
                     <form method="POST" action="{{ route('register-personne-morale') }}">
                         @csrf
 
                         <!-- Name -->
-                        <div>
-                            <x-input-label for="name" :value="__('Nom de la societé')" />
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="name" :value="__('Nom de la societé')" />
+                            <x-text-input class="col-7" id="name"  type="text" name="name"
                                 :value="old('name')" required autofocus autocomplete="name" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
                         <!-- IFU -->
-                        <div>
-                            <x-input-label for="ifu" :value="__('Numéro IFU')" />
-                            <x-text-input id="ifu" class="block mt-1 w-full" type="text" name="ifu"
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="ifu" :value="__('Numéro IFU')" />
+                            <x-text-input class="col-7" id="ifu"  type="text" name="ifu"
                                 :value="old('ifu')" required autofocus autocomplete="ifu" />
                             <x-input-error :messages="$errors->get('ifu')" class="mt-2" />
                         </div>
 
                         <!-- RCCM -->
-                        <div>
-                            <x-input-label for="rccm" :value="__('Numéro RCCM')" />
-                            <x-text-input id="rccm" class="block mt-1 w-full" type="text" name="rccm"
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="rccm" :value="__('Numéro RCCM')" />
+                            <x-text-input class="col-7" id="rccm"  type="text" name="rccm"
                                 :value="old('rccm')" required autofocus autocomplete="rccm" />
                             <x-input-error :messages="$errors->get('rccm')" class="mt-2" />
                         </div>
 
                         <!-- Email Address -->
-                        <div>
-                            <x-input-label for="email" :value="__('Email')" />
-                            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="email" :value="__('Email')" />
+                            <x-text-input class="col-7" id="email"  type="email" name="email"
                                 :value="old('email')" required autocomplete="username" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
 
                         <!-- Telephone number -->
-                        <div>
-                            <x-input-label for="telephone" :value="__('Telephone')" />
-                            <x-text-input id="telephone" class="block mt-1 w-full" type="number"
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="telephone" :value="__('Telephone')" />
+                            <x-text-input class="col-7" id="telephone"  type="number"
                                 name="telephone" :value="old('telephone')" required autocomplete="telephone" />
                             <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
                         </div>
 
                         <!-- Siège social -->
-                        <div>
-                            <x-input-label for="siege_social" :value="__('Siège social')" />
-                            <x-text-input id="siege_social" class="block mt-1 w-full" type="text" name="siege_social"
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="siege_social" :value="__('Siège social')" />
+                            <x-text-input class="col-7" id="siege_social"  type="text" name="siege_social"
                                 :value="old('siege_social')" required autofocus autocomplete="siege_social" />
                             <x-input-error :messages="$errors->get('siege_social')" class="mt-2" />
                         </div>
 
                         <!-- Boite postal -->
-                        <div>
-                            <x-input-label for="boite_postale" :value="__('Boîte postale')" />
-                            <x-text-input id="boite_postale" class="block mt-1 w-full" type="text" name="boite_postale"
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="boite_postale" :value="__('Boîte postale')" />
+                            <x-text-input class="col-7" id="boite_postale"  type="text" name="boite_postale"
                                 :value="old('boite_postale')" required autofocus autocomplete="boite_postale" />
                             <x-input-error :messages="$errors->get('boite_postale')" class="mt-2" />
                         </div>
 
                         <!-- Password -->
-                        <div>
-                            <x-input-label for="password" :value="__('Password')" />
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="password" :value="__('Password')" />
 
-                            <x-text-input id="password" class="block mt-1 w-full" type="password"
+                            <x-text-input class="col-7" id="password"  type="password"
                                 name="password" required autocomplete="new-password" />
 
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
 
                         <!-- Confirm Password -->
-                        <div>
-                            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                        <div class="row g-3 align-items-center">
+                            <x-input-label class="col-4" for="password_confirmation" :value="__('Confirm Password')" />
 
-                            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
+                            <x-text-input class="col-7" id="password_confirmation"  type="password"
                                 name="password_confirmation" required autocomplete="new-password" />
 
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                         </div>
 
-                        <div class="flex items-center justify-end mt-4">
-                            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                                href="{{ route('login') }}">
+                        <div class="flex items-center">
+                            <a class="underline text-sm col"
+                                href="{{ route('login') }}" style="color: black">
                                 {{ __('Déja inscrit?') }}
                             </a>
-                            <x-primary-button class="ml-4">
+                            <x-primary-button class="col">
                                 {{ __('Inscription') }}
                             </x-primary-button>
                         </div>
