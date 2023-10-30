@@ -1,7 +1,10 @@
+
+
+
 @extends('backend.layout.base')
 @section('title')
 <div class="pagetitle">
-    <h1>Liste des Demandes de Certificat d'Homologation des emballages et sachets plastiques biodégradables</h1>
+    <h1>Liste des Demandes d'avis Technique d'importation de produit Chimiques industriels </h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
@@ -18,6 +21,8 @@
         <!-- Left side columns -->
         <div class="col-lg-12">
             <div class="row">
+
+
 
 
                 <!-- Recent Sales -->
@@ -38,24 +43,24 @@
                         </div>
 
 
-                        <h5 class="card-title">Liste des Demandes  <span>| Demandes</span></h5>
-
+                        <h5 class="card-title">Liste des Demandes Deposées <span>| Demandes</span></h5>
+ 
                         <div class="card-body">
                             <p> @if(session('success'))
-                                <div class="alert alert-success alert-dismissible" role="alert">
-                                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <h4 class="alert-heading">{{session('success')}}</h4>
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="alert-heading">{{session('success')}}</h4>
 
-                                </div>
+                            </div>
 
-                                <script>
-                                    setTimeout(function() {
-                                            document.querySelector('.alert.alert-success').style.display = 'none';
-                                        }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
-                                </script>
-                                @endif</p>
+                            <script>
+                                setTimeout(function() {
+                                        document.querySelector('.alert.alert-success').style.display = 'none';
+                                    }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                            </script>
+                            @endif</p>
                             <div class="row">
                                 <div class="col-9">
                                     <div class="col-sm-12 col-md-6">
@@ -82,13 +87,11 @@
                                 </div>
                                 <div class="col-3">
 
-                                    <div style="float: right">
+                                    {{-- <input type="submit" value="Create new Porject"
+                                        class="btn btn-success float-right bi bi-plus"> --}}
+                                    <button style="float: right" type="button" class="btn btn-success"><i
+                                            class="bi bi-plus"></i></button>
 
-                                        <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
-                                                    class="bi bi-arrow-repeat"></i></button>
-                                                    <button  title="Ajouter" type="button" class="btn btn-success"><i
-                                                        class="bi bi-plus"></i></button>
-                                        </div>
                                 </div>
                             </div><br>
 
@@ -98,7 +101,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Demandeur</th>
-
+                                        <th scope="col">Quantite/Kg</th>
                                         <th scope="col">Date Demande</th>
                                         <th scope="col">Résidence</th>
                                         <th scope="col">Etat Demande</th>
@@ -115,59 +118,54 @@
                                     $statut = "";
                                     $statutColor = "";
                                     switch ($demande->etat) {
-                                        case 'D':
-                                            # code...
-                                            $statut = $statutDepose;
-                                            $statutColor ="bg-primary";
-                                            break;
-                                            case 'S':
-                                            # code...
-                                            $statut = $statutSigne;
-                                            $statutColor ="bg-success";
-                                            break;
-                                            case 'A':
-                                            # code...
-                                            $statut = $statutArchive;
-                                            $statutColor ="bg-secondary";
-                                            break;
-                                            case 'V':
-                                            # code...
-                                            $statut = $statutValide;
-                                            $statutColor ="bg-success";
-                                            break;
-                                            case 'C':
-                                            # code...
-                                            $statut = $statutComplement;
-                                            $statutColor ="bg-warning";
-                                            break;
-                                            case 'R':
-                                            # code...
-                                            $statut = $statutRejete;
-                                            $statutColor ="bg-danger";
-                                            break;
-                                            case 'E':
-                                            # code...
-                                            $statut = $statutEtude;
-                                            $statutColor ="bg-info";
-                                            break;
-                                        default:
-                                            # code...
-                                            break;
+                                    case 'D':
+                                    # code...
+                                    $statut = $statutDepose;
+                                    $statutColor ="bg-primary";
+                                    break;
+                                    case 'S':
+                                    # code...
+                                    $statut = $statutSigne;
+                                    $statutColor ="bg-success";
+                                    break;
+                                    case 'A':
+                                    # code...
+                                    $statut = $statutArchive;
+                                    $statutColor ="bg-secondary";
+                                    break;
+                                    case 'V':
+                                    # code...
+                                    $statut = $statutValide;
+                                    $statutColor ="bg-success";
+                                    break;
+                                    case 'C':
+                                    # code...
+                                    $statut = $statutComplement;
+                                    $statutColor ="bg-warning";
+                                    break;
+                                    case 'R':
+                                    # code...
+                                    $statut = $statutRejete;
+                                    $statutColor ="bg-danger";
+                                    break;
+                                    case 'E':
+                                    # code...
+                                    $statut = $statutEtude;
+                                    $statutColor ="bg-info";
+                                    break;
+                                    default:
+                                    # code...
+                                    break;
                                     }
                                     @endphp
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td> {{ $demande->usager->nom.' '.$demande->usager->prenom}}</td>
-
+                                        <td> {{ $demande->usager->nom }}</td>
+                                        <td>{{ $demande->quantite }}</td>
                                         <td>{{ $demande->created_at }}</td>
-                                        @if (isset($demande->localite))
-                                        <td>{{ $demande->localite->libelle}}</td>
-                                        @else
-                                        <td>-</td>
-                                        @endif
+                                        <td>{{ $demande->localite->libelle }}</td>
 
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
-
 
 
                                         <td>
@@ -192,7 +190,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content bgcustom-gradient-light">
                                                         <div class="modal-header">
-                                                            <img src="{{ asset('backend/assets/img/assigner.jpg') }}"
+                                                            <img src="{{ asset('backend/assets/img/delete.svg') }}"
                                                                 width="60" height="45" class="d-inline-block align-top"
                                                                 alt="">
                                                             <h5 class="modal-title m-auto"> Assigner a un Collaborateur
@@ -204,7 +202,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form method="put"
-                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p007_s'] ) }}">
+                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p001_s'] ) }}">
                                                                 @csrf
                                                                 @method('GET')
 
@@ -244,7 +242,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content bgcustom-gradient-light">
                                                         <div class="modal-header">
-                                                            <img src="{{ asset('backend/assets/img/valide.png') }}"
+                                                            <img src="{{ asset('backend/assets/img/delete.svg') }}"
                                                                 width="60" height="45" class="d-inline-block align-top"
                                                                 alt="">
                                                             <h5 class="modal-title m-auto"> Confirmation de Validation
@@ -256,16 +254,15 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form method="put"
-                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p007_s'] ) }}">
+                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p001_s'] ) }}">
                                                                 @csrf
                                                                 @method('GET')
 
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Motif de la validation ?</label>
-                                                                            <input type="text" required name="libelle" class="form-control border-success">
-
+                                                                        <label class="col-form-label">Etes vous sûr de
+                                                                            vouloir Valider cette Demande ?</label>
 
                                                                     </div>
 
@@ -301,7 +298,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form method="put"
-                                                                action="{{ route('rejetter', ['id' =>$demande->uuid, 'table' => 'demande_p007_s']) }}">
+                                                                action="{{ route('rejetter', ['id' =>$demande->uuid, 'table' => 'demande_p001_s']) }}">
                                                                 @csrf
                                                                 @method('PUT')
 
@@ -309,8 +306,8 @@
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Motif du Rejet ?</label>
-                                                                        <input type="text" required name="libelle" class="form-control border-success">
+                                                                        <label class="col-form-label">Etes vous sûr de
+                                                                            vouloir Rejetter cette Demande ?</label>
 
                                                                     </div>
 
@@ -329,9 +326,6 @@
                                             <!-- Fin Modal Rejet-->
                                         </td>
 
-
-
-                                        {{-- Voir detail Modal --}}
                                         <div class="modal fade" id="largeModal{{ $demande->uuid }}" tabindex="-1">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content" style="height: 500px;">
@@ -350,23 +344,33 @@
                                                             </div>
                                                             <div class="col-6">
                                                                 <b>Telephone :</b>
-                                                                <span class="text-success">{{ $demande->usager->telephone}}</span>
+                                                                <span class="text-success">{{
+                                                                    $demande->usager->telephone}}</span>
                                                             </div>
                                                         </div><br>
                                                         <div class="row">
-                                                            <div class="col">
-                                                                <b> Producteur :</b> <span class="text-success">{{ $demande->nom_producteur }}</span>
-
+                                                            <div class="col-6">
+                                                                <b>Identite Fournisseur:</b>
+                                                                <span
+                                                                    class="text-success">{{$demande->denomination_sociale_fournisseur}}</span>
                                                             </div>
-
+                                                            <div class="col-6">
+                                                                <b>Addresse:</b>
+                                                                <span
+                                                                    class="text-success">{{$demande->adresse_fournisseur}}</span>
+                                                            </div>
                                                         </div> <br>
-                                                        <h4>Liste des fichiers Soumis <i class="bi bi-folder text-success"></i></h4>
+                                                        <h4>Liste des fichiers Soumis <i
+                                                                class="bi bi-folder text-success"></i></h4>
                                                         <div class="row">
                                                             <div class="col">
 
                                                                 @foreach ( $demande->demandePiece as $chemin)
 
-                                                                <a class="text-success" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
+                                                                <a class=" text-success"
+                                                                    href="{{ Storage::url($chemin->chemin) }}"><b><i
+                                                                            class="bi bi-file-earmark-pdf"></i>
+                                                                        {{$chemin->libelle}}</b></a>
                                                                 <br>
                                                                 @endforeach
                                                             </div>
@@ -405,12 +409,69 @@
     </div>
 </section>
 @endsection
+
+@section('script')
+
 <script>
-    function refresh() {
-        location.reload(true);
+    function rejetter(){
+
+    var test = document.getElementById('test')
+    test.submit()
+    const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title: 'Etes vous sur de vouloir Rejetter cette Demande?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Je Confirme!',
+  cancelButtonText: 'Annuler!',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+
+    swalWithBootstrapButtons.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    // swalWithBootstrapButtons.fire(
+    //   'Cancelled',
+    //   'Your imaginary file is safe :)',
+    //   'error'
+    // )
+  }
+})
+    }
+
+    //fonction valider statut
+    function valider(){
+        Swal.fire({
+  title: 'Do you want to save the changes?',
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: 'Save',
+  denyButtonText: `Don't save`,
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    Swal.fire('Saved!', '', 'success')
+  } else if (result.isDenied) {
+    Swal.fire('Changes are not saved', '', 'info')
+  }
+})
     }
 </script>
-@section('script')
 
 
 @endsection

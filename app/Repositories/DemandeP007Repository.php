@@ -10,7 +10,7 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 /**
  * Class DemandeP007Repository.
  */
-class DemandeP007Repository extends BaseRepository
+class DemandeP007Repository extends GenericRepository
 {
     /**
      * @return string
@@ -45,11 +45,16 @@ class DemandeP007Repository extends BaseRepository
 
         return $path;
     }
-    public function nombre($table, $champ=array())
+
+    public function all($filtre = array())
     {
+        $this->newQuery()->eagerLoad();
 
-        return DB::table($table)->where($champ)->count();
+        $models = $this->query->where($filtre)->get();
 
+        $this->unsetClauses();
+
+        return $models;
 
     }
 }

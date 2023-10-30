@@ -334,36 +334,39 @@
 
                                                             <div class="row">
 
-
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h5 class="card-title">Service</h5>
-
-                                                                        <div class="input-group mb-3">
-
-                                                                            {{-- <label for="libelle">Libelle</label>
-                                                                            --}}
-
-                                                                            <select name="service_id"
-                                                                                id="selectMultiple"
-                                                                                class="form-select border-success"
-                                                                                id="">
-                                                                                <option value="">Veuillez choisir son
-                                                                                    Service
-                                                                                </option>
-                                                                                @foreach ( $services as $serv)
-                                                                                <option
-                                                                                    value="{{ $agent->service_id }}">{{
-                                                                                    $serv->libelle_long }}</option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                        <!-- End Quill Editor Full -->
+                                                                <div class="col">
+                                                                    <h5 class="card-title">Structure</h5>
+                                                                    <div class="input-group mb-3">
+                                                                        {{-- <label for="libelle">Libelle</label> --}}
+                                                                        <select name="service_id" id="selectMultiple"
+                                                                            class="form-select border-success" id="" required>
+                                                                            <option value="">Veuillez choisir Sa
+                                                                                Direction
+                                                                            </option>
+                                                                            @foreach ( $services as $serv)
+                                                                            <option value="{{ $agent->service_id }}">{{
+                                                                                $serv->libelle_long}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                    <!-- End Quill Editor Full -->
+                                                                </div>
+                                                                <div class="col">
+                                                                    <h5 class="card-title">Roles</h5>
+                                                                    <div class="input-group mb-3">
+                                                                        <select   class="form-select border-success" name="role_id" id="" required>
+                                                                        @foreach ($roles as $role)
+                                                                       <option value="{{ $role->uuid }}">{{ $role->libelle }}</option>
+                                                                        &nbsp;&nbsp;
+                                                                        @endforeach
+                                                                    </select>
 
                                                                     </div>
+
                                                                 </div>
 
-                                                            </div>
+
+                                                        </div>
 
                                                             {{-- <input type="submit" value="Modifier"
                                                                 class="btn btn-primary center"> --}}

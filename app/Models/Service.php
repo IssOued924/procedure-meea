@@ -16,4 +16,6 @@ class Service extends Model
         return $this->belongsTo(Structure::class, 'structure_id');
     }
 
+     
+
 }

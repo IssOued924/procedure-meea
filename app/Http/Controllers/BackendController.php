@@ -3,6 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
+use App\Models\CommentaireP001;
+use App\Models\CommentaireP0011;
+use App\Models\CommentaireP0012;
+use App\Models\CommentaireP003;
+use App\Models\CommentaireP004;
+use App\Models\CommentaireP006;
+use App\Models\CommentaireP007;
+use App\Models\CommentaireP008;
 use Illuminate\Http\Request;
 use App\Models\Demande;
 use App\Models\DemandeP001;
@@ -14,10 +22,14 @@ use App\Models\DemandeP006;
 use App\Models\DemandeP007;
 use App\Models\DemandeP008;
 use App\Models\DemandePieceP001;
+use App\Models\Procedure;
 use App\Models\StatutDemande;
+use App\Repositories\BackendRepository;
+use App\Repositories\CommentaireP001Repository;
 use App\Repositories\DemandeP0011Repository;
 use App\Repositories\DemandeP0012Repository;
 use App\Repositories\DemandeP001Repository;
+use App\Repositories\DemandeP002Repository;
 use App\Repositories\DemandeP003Repository;
 use App\Repositories\DemandeP004Repository;
 use App\Repositories\DemandeP006Repository;
@@ -25,24 +37,67 @@ use App\Repositories\DemandeP007Repository;
 use App\Repositories\DemandeP008Repository;
 use App\Repositories\DemandeP009Repository;
 use App\Repositories\DemandePieceP001Repository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BackendController extends Controller
 {
+    public $repository;
+    public function __construct(BackendRepository $repository)
+    {
+        $this->repository = $repository;
+    }
 
 
 
-    public function index( DemandeP001Repository $demandeP001Repository, DemandePieceP001 $demandePieceP001, DemandeP001 $demandep001){
+    public function index( BackendRepository $backendRepository){
+
+
         $data = [
-             "demandes"=>$demandep001::with('demandePiece')->get(),
-              "demandes" => $demandeP001Repository->all(),
-            //"demandeDeposee" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'en cours')),
-            //"demandeTraite" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'traite')),
-           // "demandeRejetter" => $demandeP001Repository->nombre('demande_p001_s', array('etat' =>'rejetter')),
-            // "fichiers"=> DemandePieceP001::where
+
+
+             "nombreEcotourisme"=>$backendRepository->nombreDemandeByProcedure('demande_p0012_s', ['etat' => 'D']),
+             "nombreProduitChimique"=>$backendRepository->nombreDemandeByProcedure('demande_p001_s',['etat' => 'D']),
+             "nombreDechet"=>$backendRepository->nombreDemandeByProcedure('demande_p008_s',['etat' => 'D']),
+             "nombreChasse"=>$backendRepository->nombreDemandeByProcedure('demande_p003_s',['etat' => 'D']),
+             "nombreDetention"=>$backendRepository->nombreDemandeByProcedure('demande_p004_s',['etat' => 'D']),
+             "nombreExemption"=>$backendRepository->nombreDemandeByProcedure('demande_p006_s',['etat' => 'D']),
+             "nombreCoupeBois"=>$backendRepository->nombreDemandeByProcedure('demande_p0011_s',['etat' => 'D']),
+             "nombreHomologation"=>$backendRepository->nombreDemandeByProcedure('demande_p007_s',['etat' => 'D']),
+             "nombreCirculationBois"=>$backendRepository->nombreDemandeByProcedure('demande_p005_s',['etat' => 'D']),
+             "nombreEau"=>$backendRepository->nombreDemandeByProcedure('demande_p002_s',['etat' => 'D']),
+
+
         ];
+
         return view('backend.home', $data);
+
+
+
+    }
+
+    public function procedureDashboard($procedure, $procedureName){
+
+
+        $data = [
+
+
+            //  "demandes" => $demandeP001Repository->all(),
+            "procedureName" => $procedureName,
+            "demandeDeposee" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'D']),
+            "demandeValider" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'V']),
+            "demandeSigne" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'S']),
+            "demandeRejeter" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'R']),
+            "demandeArchive" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'A']),
+            "demandeComplement" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'C']),
+            "demandeEtude" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'E']),
+
+
+
+        ];
+
+        return view('backend.home_detail', $data);
 
 
 
@@ -95,6 +150,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP0012Repository->nombre('demande_p0012_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandep0012->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -119,6 +175,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP008Repository->nombre('demande_p008_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandep008->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -143,6 +200,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP003Repository->nombre('demande_p003_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandep003->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -168,6 +226,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP004Repository->nombre('demande_p004_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandep004->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -192,6 +251,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP0011Repository->nombre('demande_p004_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandeP0011->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -202,7 +262,7 @@ class BackendController extends Controller
 
       //   liste des demandes de permis de detention dun animal p006
 
-      public function listDemandep006( DemandeP0011Repository $demandeP006Repository,  DemandeP006 $demandeP006){
+      public function listDemandep006( DemandeP006Repository $demandeP006Repository,  DemandeP006 $demandeP006){
 
         $data = [
             "demandes" => $demandeP006Repository->all(),
@@ -216,6 +276,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP006Repository->nombre('demande_p004_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandeP006->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -242,6 +303,7 @@ class BackendController extends Controller
           //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
             "demandeEnCours" => $demandeP007Repository->nombre('demande_p007_s', array('etat' =>'en cours')),
             "demandeEtat" => $demandeP007->statut(),
+            "agents" => Agent::all(),
         ];
       //   dd($data['demandes'][0]->demandePiece);
       // dd($data['demandeEtat']);
@@ -254,9 +316,10 @@ class BackendController extends Controller
 
       //Function de mise a jour de statut demande
 
-    public function statutChange($id, $currentStatus, $table )
+    public function statutChange($id, $currentStatus, $table,Request $request )
 
     {
+
 
 
         $nextStatus = '';
@@ -279,13 +342,130 @@ class BackendController extends Controller
         }
         DB::table($table)->where('uuid', $id)->update(['etat'=> $nextStatus]);
 
+        if($table == 'demande_p001_s'){
+            $commentaire1 = new CommentaireP001();
+        $commentaire1->create([
+            'libelle' =>$request->libelle,
+            'demande_p001_id' =>$id
+        ]);
+        }
+        elseif($table == 'demande_p003_s'){
+            $commentaire3 = new CommentaireP003();
+            $commentaire3->create([
+               'libelle' =>$request->libelle,
+               'demande_p003_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p004_s'){
+            $commentaire4 = new CommentaireP004();
+            $commentaire4->create([
+               'libelle' =>$request->libelle,
+               'demande_p004_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p006_s'){
+            $commentaire6 = new CommentaireP006();
+            $commentaire6->create([
+               'libelle' =>$request->libelle,
+               'demande_p006_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p007_s'){
+            $commentaire7 = new CommentaireP007();
+            $commentaire7->create([
+               'libelle' =>$request->libelle,
+               'demande_p007_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p008_s'){
+            $commentaire8 = new CommentaireP008();
+            $commentaire8->create([
+               'libelle' =>$request->libelle,
+               'demande_p008_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p0011_s'){
+            $commentaire11 = new CommentaireP0011();
+            $commentaire11->create([
+               'libelle' =>$request->libelle,
+               'demande_p0011_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p0012_s'){
+            $commentaire12 = new CommentaireP0012();
+            $commentaire12->create([
+               'libelle' =>$request->libelle,
+               'demande_p0012_id' =>$id
+           ]);
+        }
+
+
+        // DB::table('commentaire_p001_s')->insert();
+
 
         return redirect()->back()->with('success', "La Demande a été Valider avec succès !");
     }
 
-    public function rejetter($id, $table)
+    public function rejetter($id, $table, Request $request)
     {
         DB::table($table)->where('uuid', $id)->update(['etat'=> 'R']);
+
+        if($table == 'demande_p001_s'){
+            $commentaire1 = new CommentaireP001();
+        $commentaire1->create([
+            'libelle' =>$request->libelle,
+            'demande_p001_id' =>$id
+        ]);
+        }
+        elseif($table == 'demande_p003_s'){
+            $commentaire3 = new CommentaireP003();
+            $commentaire3->create([
+               'libelle' =>$request->libelle,
+               'demande_p003_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p004_s'){
+            $commentaire4 = new CommentaireP004();
+            $commentaire4->create([
+               'libelle' =>$request->libelle,
+               'demande_p004_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p006_s'){
+            $commentaire6 = new CommentaireP006();
+            $commentaire6->create([
+               'libelle' =>$request->libelle,
+               'demande_p006_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p007_s'){
+            $commentaire7 = new CommentaireP007();
+            $commentaire7->create([
+               'libelle' =>$request->libelle,
+               'demande_p007_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p008_s'){
+            $commentaire8 = new CommentaireP008();
+            $commentaire8->create([
+               'libelle' =>$request->libelle,
+               'demande_p008_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p0011_s'){
+            $commentaire11 = new CommentaireP0011();
+            $commentaire11->create([
+               'libelle' =>$request->libelle,
+               'demande_p0011_id' =>$id
+           ]);
+        }
+        elseif($table == 'demande_p0012_s'){
+            $commentaire12 = new CommentaireP0012();
+            $commentaire12->create([
+               'libelle' =>$request->libelle,
+               'demande_p0012_id' =>$id
+           ]);
+        }
 
         return redirect()->back()->with('success', "La Demande a été Rejetter avec succès !");
 
@@ -320,7 +500,67 @@ class BackendController extends Controller
 
 
 
+    public function listsDemande(DemandeP001Repository $demandeP001Repository,
+                                        DemandeP002Repository $demandeP002Repository,
+                                        DemandeP003Repository $demandeP003Repository,
+                                        DemandeP004Repository $demandeP004Repository,
+                                        DemandeP006Repository $demandeP006Repository,
+                                        DemandeP007Repository $demandeP007Repository,
+                                        DemandeP008Repository $demandeP008Repository,
+                                        DemandeP0011Repository $demandeP0011Repository,
+                                        DemandeP0012Repository $demandeP0012Repository,
+                                          DemandeP001 $demandeTest,Request $request){
 
 
+     //dd($demandes);
+      $demandes = null;
+      $data = [];
+      if(isset($request->procedure) && strlen($request->procedure)>0){
+        $proc = $request->procedure;
+          switch ($proc) {
+            case 'PETE':
+              $demandes = $demandeP0012Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+              break;
+            case 'DATIPC':
+              $demandes = $demandeP001Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+              break;
+            case 'ADDMC':
+              $demandes = $demandeP003Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+                break;
+            case 'AGDS':
+                  $demandes = $demandeP008Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+                  break;
+            case 'CEESPNB':
+                  $demandes = $demandeP006Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+                  break;
+            case 'CDAS':
+              $demandes = $demandeP004Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+                break;
+            case 'PCBCB':
+              $demandes = $demandeP0011Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+                  break;
+            case 'OATEA':
+              $demandes = $demandeP002Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+              break;
+            case 'CHESPB':
+              $demandes = $demandeP007Repository->all(['usager_id'=>Auth::user()->usager->uuid]);
+            break;
+
+            default:
+              # code...
+              break;
+          }
+
+      }
+      $data = [
+        "demandes" => $demandes,
+        "procedures" => Procedure::all(),
+        "selectedProcedure" => $request->procedure,
+
+    ];
+      return view('backend.lists_demandesAgents', $data);
+
+  }
 
 }
+

@@ -75,7 +75,7 @@
                         <h5 class="single">
                             {{ $procedure->libelle_long }}
                         </h5>
-                        <p>{{ $procedure->description }}</p>
+                        <p style="text-align: justify;text-indent : 10%;">{{ $procedure->description }}</p>
                         <div style=" margin: 18px 0 33px;">
 
                             <i class="bi bi-clock"
@@ -107,7 +107,7 @@
                                 style="border: 1px solid #0063cf;
                         color: #0063cf;
                         padding: 0 0.5em;
-                        border-radius: 5px;">DGPE</span><br><br>
+                        border-radius: 5px;">{{ $procedure->service->libelle_court }}</span><br><br>
 
 
                         </div>
@@ -208,7 +208,7 @@
                             <div class="mt-4">
                                 <x-input-label class="col-4" for="password" :value="__('Password')" />
 
-                                <x-text-input id="password" class="block mt-1 form-control" type="password"
+                                <x-text-input id="password" class="col-7 block mt-1 form-control" type="password"
                                     name="password" required autocomplete="current-password" />
 
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -258,7 +258,7 @@
                             <!-- Email Address -->
                             <div class="row g-3 align-items-center">
                                 <x-input-label class="col-4" for="email" :value="__('Email')" />
-                                <x-text-input class="col-7" id="email" class="col-7 " type="email"
+                                <x-text-input class="col-7" id="email" class="col-7 block mt-1 form-control " type="email"
                                     name="email" :value="old('email')" required autofocus autocomplete="username" />
                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>

@@ -83,30 +83,7 @@
                                              </div><br>
 
 
-                                        {{-- <div class="row">
-                                                <div class="col-3">
-                                                    <label class="nom_societe fw-bold">Producteur</label>
-                                                    <input type="checkbox" value="1" id="checkbox_producteur"
-                                                        class="checkbox  required" name="is_producteur" />
-                                                </div>
-                                                <div class="col-3">
-                                                    <label class="siege_social fw-bold ">Importateur</label>
-                                                    <input type="checkbox" value="1"
-                                                        class="checkbox  required" id="checkbox_importateur"
-                                                        name="is_importateur" />
-                                                </div>
-                                                <div class="col-3">
-                                                    <label class="siege_social fw-bold">Distributeur</label>
-                                                    <input type="checkbox" value="1" id="checkbox_distributeur"
-                                                        class="checkbox  required" name="is_distributeur" />
-                                                </div>
-                                                <div class="col-3">
-                                                    <label class="siege_social fw-bold">Utilisateur</label>
-                                                    <input type="checkbox" value="1" id="checkbox_utilisateur"
-                                                        class="checkbox  required" name="is_utilisateur" />
-                                                </div>
 
-                                        </div><br> --}}
                                         <div class="row">
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Dénomination
@@ -121,7 +98,7 @@
                                                         *</span></label>
 
                                                 <select name="commune_id" required id="selectMultiple"
-                                                    class="form-select ">
+                                                    class="form-select border-success">
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option class="border-success" value="">Veuillez choisir une ville
                                                     </option>
@@ -142,7 +119,7 @@
                                                     placeholder="Adresse ou numero de telephone" required />
                                             </div>
                                             <div class="col-6">
-                                                <label class="boite_postale fw-bold">Telephone<span style="color:red">
+                                                <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" class="border-success"
                                                     placeholder="Telephone" value="{{ $telephone}}" />
@@ -154,7 +131,7 @@
                                             <div class="col-6">
                                                 <label class="adresse fw-bold">Quantité totale à importer en KG</label>
                                                 <input type="text" class="border-success" name="quantite"
-                                                    placeholder="Adresse ou numero de telephone" />
+                                                    placeholder="Quantite de stockage" />
                                             </div>
                                             {{-- <div class="col-6">
                                                 <label class="boite_postale">Telephone<span style="color:red">
@@ -165,7 +142,7 @@
 
 
                                         <div class="wish_payment_typeD">
-                                            <label class="adresse fw-bold">Dangers de la substance<span
+                                            <label class="adresse fw-bold">Dangers liées à la substance<span
                                                 style="color: red">*</span></label>
                                             <div class="row">
                                                 <div class="col">
@@ -182,7 +159,7 @@
                                                         <input class="checkbox check_boxes2 required" id="wish_payment_type_20"  name="is_iritant" type="checkbox" value="1">Irritant
                                                     </label>
                                                     </span>
-                                                </div>z
+                                                </div>
                                                 <div class="col">
 
                                                     <span class="checkboxD payment-radio">
@@ -194,7 +171,6 @@
 
 
                                                 <div class="col">
-
                                                     <span class="checkboxD payment-radio">
                                                         <label for="wish_payment_type_40" class="fw-bold">
                                                           <input class="checkbox check_boxes2 required" id="wish_payment_type_40" name="is_inflammable" type="checkbox" value="1">Inflammable
@@ -216,35 +192,6 @@
                                      </div>
 
                                      <br>
-
-
-
-
-                                        {{-- <div class="row required">
-                                            <label class="adresse fw-bold">Dangers de la substance<span
-                                                    style="color: red">*</span></label>
-                                            <div class="col">
-                                                <label class="nom_societe fw-bold">Corrosif</label>
-                                                <input type="checkbox" class="border-success" value="1"
-                                                    name="is_corrosif" />
-                                            </div>
-                                            <div class="col">
-                                                <label class="siege_social fw-bold">Irritant</label>
-                                                <input type="checkbox" value="1" name="is_iritant" />
-                                            </div>
-                                            <div class="col">
-                                                <label class="siege_social fw-bold">Toxique</label>
-                                                <input type="checkbox" value="1" name="is_toxic" />
-                                            </div>
-                                            <div class="col">
-                                                <label class="siege_social fw-bold">Inflammable</label>
-                                                <input type="checkbox" value="1" name="is_inflammable" />
-                                            </div>
-                                            <div class="col">
-                                                <label class="siege_social fw-bold">Environnemental</label>
-                                                <input type="checkbox" value="1" name="is_danger_env" />
-                                            </div>
-                                        </div><br> --}}
 
                                         <div class="row">
                                             <div class="col-6">
@@ -324,13 +271,13 @@
                                                 <label class="nom_societe  fw-bold">Une copie de l’avis de faisabilité
                                                     <span style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success"
-                                                    name="avis_faisabilite" />
+                                                    name="avis_faisabilite" required />
                                             </div>
                                             <div class="col-6">
                                                 <label class="pays_residence fw-bold">Une copie de RCCM<span
                                                         style="color:red">
                                                         *</span></label>
-                                                <input type="file" name="rccm" class="form-control border-success" />
+                                                <input type="file" name="rccm" class="form-control border-success" required/>
                                             </div>
                                         </div><br>
 
@@ -340,14 +287,14 @@
                                                     de six (06) mois<span style="color:red">
                                                         *</span> </label>
                                                 <input type="file" class="border-success form-control"
-                                                    name="facture_pro_format" />
+                                                    name="facture_pro_format" required />
                                             </div>
                                             <div class="col-6">
                                                 <label class="pays_residence fw-bold">Une fiche de données de sécurité
                                                     ou fiche technique de chaque produit<span style="color:red">
                                                         *</span></label>
                                                 <input type="file" name="fiche_securite"
-                                                    class="border-success form-control" />
+                                                    class="border-success form-control" required />
                                             </div>
                                         </div><br>
 
@@ -357,14 +304,14 @@
                                                     produits ou substances chimiques <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="border-success form-control"
-                                                    name="registre_tracabilite" />
+                                                    name="registre_tracabilite" required />
                                             </div>
                                             <div class="col-6">
                                                 <label class="pays_residence fw-bold">Un registre des déchets issus de
                                                     leur utilisation <span style="color:red">
                                                         *</span></label>
                                                 <input type="file" name="registre_dechet"
-                                                    class="form-control border-success" />
+                                                    class="form-control border-success" required />
                                             </div>
                                         </div><br>
 
@@ -374,18 +321,16 @@
                                                     pour le cas spécifique du cyanure <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="border-success form-control"
-                                                    name="attestation_destination_finale" />
+                                                    name="attestation_destination_finale" required/>
                                             </div>
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold">Liste des produits <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="border-success form-control"
-                                                    name="list_produit" />
+                                                    name="list_produit" required/>
                                             </div>
 
                                         </div><br>
-
-
 
                                     </div>
                                     <input type="button" class="previous action-button-previous" value="Retour" />
@@ -491,8 +436,6 @@
                                             </div>
                                         </div>
 
-
-
                                     </div>
                                     <input type="button" class="previous action-button-previous" value="Retour" />
                                     <input type="button" class="next action-button" value="Suivant" />
@@ -545,7 +488,7 @@
 </section><!-- End About Section -->
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js" ;></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js" ;></script> --}}
 
 <script type="text/javascript">
     $('#selectMultiple').select2();

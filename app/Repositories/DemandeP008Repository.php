@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Class DemandeP008Repository.
  */
-class DemandeP008Repository extends BaseRepository
+class DemandeP008Repository extends GenericRepository
 {
     /**
      * @return string
@@ -47,11 +47,16 @@ class DemandeP008Repository extends BaseRepository
         }
         return '';
     }
-    public function nombre($table, $champ=array())
+
+    public function all($filtre = array())
     {
+        $this->newQuery()->eagerLoad();
 
-        return DB::table($table)->where($champ)->count();
+        $models = $this->query->where($filtre)->get();
 
+        $this->unsetClauses();
+
+        return $models;
 
     }
 }

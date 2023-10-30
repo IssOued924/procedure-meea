@@ -19,4 +19,11 @@ class Procedure extends Model
     public function pieceJointe(){
         return $this->belongsToMany(PieceJointe::class, 'procedure_piece_jointes','procedure_id', 'piece_jointe_id');
     }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
+
+
 }

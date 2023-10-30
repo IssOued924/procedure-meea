@@ -40,19 +40,19 @@
 
                             <div class="row">
                                 <p> @if(session('success'))
-                                    <div class="alert alert-success alert-dismissible" role="alert">
-                                        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <h4 class="alert-heading">{{session('success')}}</h4>
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="alert-heading">{{session('success')}}</h4>
 
-                                    </div>
+                                </div>
 
-                                    <script>
-                                        setTimeout(function() {
+                                <script>
+                                    setTimeout(function() {
                                             document.querySelector('.alert.alert-success').style.display = 'none';
                                         }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
-                                    </script>
+                                </script>
                                 @endif</p>
                                 <div class="col">
 
@@ -62,37 +62,37 @@
 
                                     {{-- <input type="submit" value="Create new Porject"
                                         class="btn btn-success float-right bi bi-plus"> --}}
-                                    <button style="float: right " data-bs-toggle="modal" data-bs-target="#createModal" type="button" class="btn btn-success mt-5"><i
-                                            class="bi bi-plus"></i></button>
+                                    <button style="float: right " data-bs-toggle="modal" data-bs-target="#createModal"
+                                        type="button" class="btn btn-success mt-5"><i class="bi bi-plus"></i></button>
 
-                                            {{-- Modal de creation --}}
-                                        <div class="modal fade" id="createModal" tabindex="-1">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content" style="height: 500px;">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Détail de la Procédure</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <label for="description">Description</label>
+                                    {{-- Modal de creation --}}
+                                    <div class="modal fade" id="createModal" tabindex="-1">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content" style="height: 500px;">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Détail de la Procédure</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="description">Description</label>
 
-                                                            </div>
                                                         </div>
+                                                    </div>
 
 
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger"
-                                                            data-bs-dismiss="modal">Fermer</button>
-                                                        {{-- <button type="button"
-                                                            class="btn btn-primary">Valider</button> --}}
-                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger"
+                                                        data-bs-dismiss="modal">Fermer</button>
+                                                    {{-- <button type="button" class="btn btn-primary">Valider</button>
+                                                    --}}
                                                 </div>
                                             </div>
-                                        </div><!-- End Large Modal-->
+                                        </div>
+                                    </div><!-- End Large Modal-->
 
                                 </div>
 
@@ -106,8 +106,8 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Libelle Court</th>
-                                        <th scope="col">Libelle Long</th>
+                                        <th scope="col">Nom Abrege</th>
+                                        <th scope="col">Titre</th>
 
                                         {{-- <th scope="col">Commune</th> --}}
                                         <th scope="col">Action</th>
@@ -130,48 +130,69 @@
                                                     class="bi bi-eye"></i> </button>
 
                                             <button title="Editer" type="button" class="btn btn-info "
-                                                data-bs-toggle="modal" data-bs-target="#basicModalEdit{{ $proc->uuid }}"> <i class="bi bi-pencil-square"></i> </button>
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#basicModalEdit{{ $proc->uuid }}"> <i
+                                                    class="bi bi-pencil-square"></i> </button>
 
                                         </td>
 
-                                          {{-- editer modal --}}
-                                          <div class="modal fade" id="basicModalEdit{{ $proc->uuid }}" tabindex="-1">
+                                        {{-- editer modal --}}
+                                        <div class="modal fade" id="basicModalEdit{{ $proc->uuid }}" tabindex="-1">
                                             <div class="modal-dialog">
                                                 <div class="modal-content" style="width: 800px">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Editer la Procédure  </h5>
+                                                        <h5 class="modal-title">Editer la Procédure </h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
+                                                    <form method="POST"
+                                                    action="{{ route('procedure-update', $proc->uuid) }}">
+                                                    @csrf
+                                                    @method('PUT')
                                                     <div class="modal-body">
-                                                        <form method="POST"
-                                                            action="{{ route('procedure-update', $proc->uuid) }}">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <h5 class="card-title">Libelle Court</h5>
+
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <h5 class="card-title">Nom Abrégé</h5>
+                                                                    <div class="input-group mb-3">
+
+                                                                        {{-- <label for="libelle">Libelle</label> --}}
+
+                                                                        <input type="text" name="libelle_court"
+                                                                            class="form-control border-success"
+                                                                            value="{{ $proc->libelle_court }}"
+                                                                            placeholder="libelle" aria-label="Username"
+                                                                            aria-describedby="basic-addon1" required>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <h5 class="card-title">Titre</h5>
                                                             <div class="input-group mb-3">
 
                                                                 {{-- <label for="libelle">Libelle</label> --}}
 
-                                                                <input type="text" name="libelle_court"
+                                                                <input type="text" name="libelle_long"
                                                                     class="form-control border-success"
-                                                                    value="{{ $proc->libelle_court }}"
+                                                                    value="{{ $proc->libelle_long }}"
                                                                     placeholder="libelle" aria-label="Username"
                                                                     aria-describedby="basic-addon1" required>
 
                                                             </div>
+                                                                </div>
+                                                            </div>
 
                                                             <div class="card">
                                                                 <div class="card-body">
-                                                                    <h5 class="card-title">Libelle Long</h5>
+                                                                    <h5 class="card-title">Description </h5>
 
                                                                     <!-- Quill Editor Full -->
-                                                                    <p>libelle long</p>
+                                                                    <p>Description longue</p>
 
-                                                                    <textarea name="libelle_long" id=""
+                                                                    <textarea name="description" id=""
                                                                         class="quill-editor-full border-success"
                                                                         style="width: 100%; height:150px;">
-                                                                           {{ $proc->libelle_long }}
+                                                                           {{ $proc->description }}
                                                                     </textarea>
 
                                                                     <!-- End Quill Editor Full -->
@@ -179,18 +200,19 @@
                                                                 </div>
                                                             </div>
 
-                                                            <input type="submit" value="Modifier"
-                                                                class="btn btn-primary center">
 
-                                                        </form>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-danger"
+                                                                        data-bs-dismiss="modal">Fermer</button>
+                                                                    <button type="submit" class="btn btn-primary">Modifier
+                                                                         </button>
+                                                                </div>
+
+
 
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger"
-                                                            data-bs-dismiss="modal">Fermer</button>
-                                                        {{-- <button type="button" class="btn btn-primary">Save
-                                                            changes</button> --}}
-                                                    </div>
+                                                </form>
+
                                                 </div>
                                             </div>
                                         </div><!-- End Basic Modal-->

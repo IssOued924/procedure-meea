@@ -112,7 +112,7 @@ rel="stylesheet"
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Issouf Ouedraogo</h6>
+              <h6>{{Auth::user()->usager->nom}}</h6>
               <span>Web Designer</span>
             </li>
             <li>
@@ -179,58 +179,58 @@ rel="stylesheet"
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#demandes-nav" data-bs-toggle="collapse"  href="{{ route('demandes-list') }}">
-          <i class="bi bi-menu-button-wide"></i><span>Démandes</span><i class="bi bi-folder bi-chevron-down ms-auto"></i>
+          <i class="bi bi-menu-button-wide"></i><span>Mes Demandes</span><i class="bi bi-folder bi-chevron-down ms-auto"></i>
         </a>
 
         <ul id="demandes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
               <a href="{{ route('demandes-list') }}">
-                <i class="bi bi-circle"></i><span>Procédure Produit Chimique &nbsp;<span id="prog_produit_chimique" class="badge bg-warning text-white"> </span> </span>
+                <i class="bi bi-circle"></i><span>Procédure Produit Chimique<span id="prog_produit_chimique" class="badge bg-warning text-white"> </span> </span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp0012-list') }}">
-                <i class="bi bi-circle"></i><span>Procédure écotourisme &nbsp;<span id="prog_ecotourisme" class="badge bg-warning text-white"> </span> </span>
+                <i class="bi bi-circle"></i><span>Procédure écotourisme <span id="prog_ecotourisme" class="badge bg-warning text-white"> </span> </span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp008-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Déchets Solide &nbsp;<span id="prog_dechet" class="badge bg-warning text-white"> </span> </span>
+                <i class="bi bi-circle"></i><span>Procédure Déchets <span id="prog_dechet" class="badge bg-warning text-white"> </span> </span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp003-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Permis Chasse  &nbsp;<span id="prog_chasse" class="badge bg-warning text-white"> </span></span>
+                <i class="bi bi-circle"></i><span>Procédure Permis Chasse <span id="prog_chasse" class="badge bg-warning text-white"> </span></span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp004-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Détention &nbsp; <span id="prog_detention" class="badge bg-warning text-white"> </span></span>
+                <i class="bi bi-circle"></i><span>Procédure Détention <span id="prog_detention" class="badge bg-warning text-white"> </span></span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp0011-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Permis Coupe &nbsp;<span id="prog_coupe" class="badge bg-warning text-white"> </span></span>
+                <i class="bi bi-circle"></i><span>Procédure Permis Coupe <span id="prog_coupe" class="badge bg-warning text-white"> </span></span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp006-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Certificats d'exemptions &nbsp; <span id="prog_exemption" class="badge bg-warning text-white"> </span></span>
+                <i class="bi bi-circle"></i><span>Procédure Certificats d'exemptions <span id="prog_exemption" class="badge bg-warning text-white"> </span></span>
               </a>
             </li>
             <li>
               <a href="{{ route('demandesp007-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Homologation &nbsp;<span id="prog_homologation" class="badge bg-warning text-white"> </span></span>
+                <i class="bi bi-circle"></i><span>Procédure Homologation<span id="prog_homologation" class="badge bg-warning text-white"> </span></span>
               </a>
             </li>
             <li>
               <a href="#">
-                <i class="bi bi-circle"></i><span>Procédure Agrement en Eau &nbsp;</span>
+                <i class="bi bi-circle"></i><span>Procedure Agrement en Eau</span>
               </a>
             </li>
             <li>
               <a href="#">
-                <i class="bi bi-circle"></i><span>Procédure Permis de circulation&nbsp;</span>
+                <i class="bi bi-circle"></i><span>Procedure Permis circulation</span>
               </a>
             </li>
 
@@ -249,17 +249,17 @@ rel="stylesheet"
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{ route('agent-list') }}">
-              <i class="bi bi-circle"></i><span>Agents</span>
+              <i class="bi bi-circle"></i><span>Agent</span>
             </a>
           </li>
           <li>
             <a href="{{ route('usager-list') }}">
-              <i class="bi bi-circle"></i><span>Usagers</span>
+              <i class="bi bi-circle"></i><span>Usager</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <i class="bi bi-circle"></i><span>Utilisateurs</span>
+              <i class="bi bi-circle"></i><span>Profile</span>
             </a>
           </li>
         </ul>
@@ -267,7 +267,7 @@ rel="stylesheet"
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gear"></i><span>Paramètre</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-gear"></i><span>Parametre</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>

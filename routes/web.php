@@ -143,6 +143,7 @@ Route::get('/administration/demandesp006-list', [BackendController::class, 'list
 Route::get('/administration/demandesp007-list', [BackendController::class, 'listDemandep007'])->name('demandesp007-list');
 Route::get('/administration/statusChange/{id}/{currentStatus}/{table}', [BackendController::class, 'statutChange'])->name('statusChange');
 Route::get('/administration/rejet/{id}/{table}', [BackendController::class, 'rejetter'])->name('rejetter');
+Route::get('/administration/procedure-dashboard/{procedure}/{procedureName}', [BackendController::class, 'procedureDashboard'])->name('procedure-dashboard');
 
 Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
 
@@ -196,4 +197,7 @@ Route::get('/administration/utilisateur/usager', [UsagerController::class, 'inde
 
 Route::get('/administration/utilisateur/profile', [ProfileController::class, 'index'])->name('profile-list');
 
+// Liste des demandes d'un agent
+
+Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name('demandes-lists');
 require __DIR__.'/auth.php';

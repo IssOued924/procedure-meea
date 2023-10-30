@@ -49,6 +49,22 @@
                                                 <input type="text" class="border-success form-control" value="{{ $telephone }}"    name="libelle_long"  placeholder="Prenom" disabled  /> <br /><br />
                                             </div>
 
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label class="nom_societe fw-bold" >Addresse Postal</label>
+                                                    <input type="text" class="form-control border-success" name="adresse_beneficiaire">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label class="nom_societe fw-bold" >Choisir Localite</label>
+                                                    <select name="commune_id" id="" class="form-select border-success" required>
+                                                        <option value="">Veuillez Choisir la localite</option>
+                                                        @foreach ($communes as  $com)
+                                                        <option value="{{ $com->uuid }}">{{ $com->libelle }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
                                             <h4 class="fs-title">Beneficiaire <span style="color:red">
                                                 *</span></h4>
                                             <div class="row">
