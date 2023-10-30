@@ -54,13 +54,10 @@
                       <i class="bi bi-folder"></i>
                     </div>
                     <div class="ps-3">
-<<<<<<< HEAD
-                 
-                      {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}-->
-=======
+
                       <h6>{{ $nombreProduitChimique }}</h6>
                       {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
->>>>>>> dev
+
 
                     </div>
                   </div>
@@ -79,11 +76,9 @@
                         <i class="bi bi-folder"></i>
                       </div>
                       <div class="ps-3">
-<<<<<<< HEAD
-                      {{-- <h6>{{ $demandeTraite }}</h6>--}} 
-=======
+
                         <h6>{{ $nombreChasse }}</h6>
->>>>>>> dev
+
                         {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
 
                       </div>
@@ -105,11 +100,9 @@
                       <i class="bi bi-folder"></i>
                     </div>
                     <div class="ps-3">
-<<<<<<< HEAD
-                      {{--<h6>{{ $demandeRejetter }}</h6>--}}
-=======
+
                       <h6>{{ $nombreDechet }}</h6>
->>>>>>> dev
+
                       {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
                     </div>
@@ -130,11 +123,9 @@
                         <i class="bi bi-folder"></i>
                       </div>
                       <div class="ps-3">
-<<<<<<< HEAD
-                        {{--<h6>{{ $demandeRejetter }}</h6>--}}
-=======
+
                         <h6>{{ $nombreExemption }}</h6>
->>>>>>> dev
+
                         {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
                       </div>
@@ -154,11 +145,9 @@
                         <i class="bi bi-folder"></i>
                       </div>
                       <div class="ps-3">
-<<<<<<< HEAD
-                        {{--<h6>{{ $demandeRejetter }}</h6>--}}
-=======
+
                         <h6>{{ $nombreCoupeBois }}</h6>
->>>>>>> dev
+
                         {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
                       </div>
@@ -180,9 +169,7 @@
                         <i class="bi bi-folder"></i>
                       </div>
                       <div class="ps-3">
-<<<<<<< HEAD
-                        {{--<h6>{{ $demandeRejetter }}</h6>--}}
-=======
+
                         <h6>{{ $nombreDetention }}</h6>
                         {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
@@ -244,7 +231,7 @@
                       </div>
                       <div class="ps-3">
                         <h6>{{ $nombreEau }}</h6>
->>>>>>> dev
+
                         {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
                       </div>
