@@ -45,5 +45,10 @@ class DemandeP0012 extends Demande
         return $this->hasMany(DemandePieceP0012::class, 'demande_p0012_id');
     }
 
+    public function demandeCommentaire()
+    {
+        return $this->hasMany(CommentaireP0012::class, 'demande_p0012_id');
+    }
+
 
 }

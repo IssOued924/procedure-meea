@@ -12,9 +12,6 @@
         <div class="col-lg-12">
             <div class="row">
 
-
-
-
                 <!-- Recent Sales -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
@@ -66,6 +63,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+
                                         <th scope="col">Date Demande</th>
                                         <th scope="col">Réference</th>
                                         <th scope="col">Etat de mes Demandes</th>
@@ -133,28 +131,16 @@
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
-                                                    class="bi bi-eye"></i> Voir </button>
-
-                                                    @if ($demande->etat =='R')
-                                                    <button title="Modifier" type="button" class="btn btn-info "
-                                                data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
-                                                    class="bi bi-pencil-square text-white">Modifier </i> </button>
-                                                    @endif
-
-                                                    @if ($demande->etat == 'S' &&  !is_null($demande->output_file))
-
-                                                    <a class="btn btn-success text-white"
-                                                                    href="{{ Storage::url($demande->output_file) }}" target="_blank"><b><i
-                                                                            class=" bi bi-download"></i>
-                                                                         Télécharger</b></a>
-                                                    @endif
+                                                    class="bi bi-eye"></i> </button>
 
 
+                                            {{-- <button type="button" title="Annuler" class="btn btn-danger"><i
+                                                    class="bi bi-x-circle"></i></button> --}}
                                         </td>
 
-                                        <div class="modal fade" id="largeModal{{ $demande->uuid }}" tabindex="-1">
+                                        <div class="modal" id="largeModal{{ $demande->uuid }}">
                                             <div class="modal-dialog modal-lg">
-                                                <div class="modal-content" style="height: 500px;">
+                                                <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title">Détail de la Demande</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -189,14 +175,27 @@
 
                                                                 @foreach ( $demande->demandePiece as $chemin)
 
-
-
                                                                 <a href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
                                                                 <br>
                                                                 @endforeach
                                                             </div>
                                                         </div>
+                                                        <br>
+                                                        <h4>Etat de la demande</h4>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#"><b><i class="bi bi-check-circle"></i>  {{$statut}}</b></a>
+                                                                <h5>Motif</h5>
+                                                                {{-- <span>  {{dd($demande->demandeCommentaire)}}</span> --}}
+                                                                @if(!$demande->demandeCommentaire->isEmpty())
+                                                                    @php
+                                                                    $commentaire = $demande->demandeCommentaire->sortBy('created_at')->toArray();
+                                                                    @endphp
+                                                                    <span>  {{$commentaire[0]['libelle']}}</span>
+                                                                @endif
 
+                                                            </div>
+                                                        </div>
 
                                                     </div>
                                                     <div class="modal-footer">
@@ -207,7 +206,6 @@
                                                 </div>
                                             </div>
                                         </div><!-- End Large Modal-->
-
 
                                     </tr>
                                     @endforeach
