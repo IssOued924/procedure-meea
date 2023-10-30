@@ -94,6 +94,13 @@
         </div> --}}
 
         @yield('content')
+<<<<<<< HEAD
+
+
+
+=======
+
+>>>>>>> 7f1ad8af2d588247ae8ab2b76d80b1ed2f08afda
     </div>
     <!-- ======= Footer ======= -->
     <x-footer />

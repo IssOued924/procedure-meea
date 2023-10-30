@@ -131,7 +131,21 @@
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
-                                                    class="bi bi-eye"></i> </button>
+                                                    class="bi bi-eye"></i> Voir </button>
+
+                                                    @if ($demande->etat =='R')
+                                                    <button title="Modifier" type="button" class="btn btn-info "
+                                                data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
+                                                    class="bi bi-pencil-square text-white">Modifier </i> </button>
+                                                    @endif
+
+                                                    @if ($demande->etat == 'S' &&  !is_null($demande->output_file))
+
+                                                    <a class="btn btn-success text-white"
+                                                                    href="{{ Storage::url($demande->output_file) }}" target="_blank"><b><i
+                                                                            class=" bi bi-download"></i>
+                                                                         Télécharger</b></a>
+                                                    @endif
 
 
                                             {{-- <button type="button" title="Annuler" class="btn btn-danger"><i
