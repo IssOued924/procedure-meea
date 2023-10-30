@@ -19,51 +19,30 @@
         <div class="col-lg-12">
           <div class="row">
 
-            <!-- Sales Card -->
+            @if (Auth::user()->agent->service->libelle_court =='DGEF' || Auth::user()->role->libelle == "Administration")
+                 <!-- Sales Card -->
             <div class="col-xxl-3 col-md-6">
-              <div class="card info-card sales-card">
+                <div class="card info-card sales-card">
+                      {{-- //ecotourisme --}}
+                  <div class="card-body">
+                    <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p0012_s', 'procedureName' => 'Ecotourisme']) }}">Procédure</a><span>| <b>écotourisme</b> </span></h5>
 
+                    <div class="d-flex align-items-center revenue-card">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-folder"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>{{$nombreEcotourisme}}</h6>
+                        {{-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
 
-
-                <div class="card-body">
-                  <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p0012_s', 'procedureName' => 'Ecotourisme']) }}">Procédure</a><span>| <b>écotourisme</b> </span></h5>
-
-                  <div class="d-flex align-items-center revenue-card">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-folder"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{$nombreEcotourisme}}</h6>
-                      {{-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
-
+                      </div>
                     </div>
                   </div>
+
                 </div>
+              </div><!-- End Sales Card -->
 
-              </div>
-            </div><!-- End Sales Card -->
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-3 col-md-6">
-              <div class="card info-card revenue-card">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p001_s','procedureName' => 'Produit Chimique']) }}">Procédure</a> <span>| <b>Produit Chimique</b></span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-folder"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $nombreProduitChimique }}</h6>
-                      {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Revenue Card -->
-
+                     {{-- permis de chasse --}}
             <div class="col-xxl-3 col-md-6">
                 <div class="card info-card revenue-card">
                   <div class="card-body">
@@ -84,49 +63,10 @@
                 </div>
               </div><!-- End Revenue Card -->
 
-            <!-- Customers Card -->
-            <div class="col-xxl-3 col-xl-12">
+            <!-- Customers Card dechets solides -->
 
-              <div class="card info-card revenue-card">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p008_s', 'procedureName' => 'Gestion de Dechets']) }}">Procédure</a> <span>| <b>Déchets Solides</b></span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-folder"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $nombreDechet }}</h6>
-                      {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div><!-- End Customers Card -->
-
-            <div class="col-xxl-3 col-xl-12">
-
-                <div class="card info-card revenue-card">
-                  <div class="card-body">
-                    <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p006_s', 'procedureName' => 'Exemption']) }}">Procédure</a> <span>| <b>Exemption</b></span></h5>
-
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-folder"></i>
-                      </div>
-                      <div class="ps-3">
-                        <h6>{{ $nombreExemption }}</h6>
-                        {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
-
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div><!-- End Customers Card -->
-              <div class="col-xxl-3 col-xl-12">
+             {{-- //coupe de bois --}}
+             <div class="col-xxl-3 col-xl-12">
 
                 <div class="card info-card revenue-card">
                   <div class="card-body">
@@ -148,47 +88,28 @@
               </div>
 
 
+                {{-- detention animal sauvage --}}
+                <div class="col-xxl-3 col-xl-12">
+                    <div class="card info-card revenue-card">
+                      <div class="card-body">
+                        <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p004_s', 'procedureName' => 'Detention animal sauvage']) }}">Procédure</a> <span>| <b>Détention Animal sauvage</b></span></h5>
 
-              <div class="col-xxl-3 col-xl-12">
-                <div class="card info-card revenue-card">
-                  <div class="card-body">
-                    <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p004_s', 'procedureName' => 'Detention animal sauvage']) }}">Procédure</a> <span>| <b>Détention Animal sauvage</b></span></h5>
+                        <div class="d-flex align-items-center">
+                          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-folder"></i>
+                          </div>
+                          <div class="ps-3">
+                            <h6>{{ $nombreDetention }}</h6>
+                            {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-folder"></i>
-                      </div>
-                      <div class="ps-3">
-                        <h6>{{ $nombreDetention }}</h6>
-                        {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
-
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div><!-- End Customers Card -->
-
-              <div class="col-xxl-3 col-xl-12">
-                <div class="card info-card revenue-card">
-                  <div class="card-body">
-                    <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p007_s', 'procedureName' => 'Homologation sachet plastique']) }}">Procédure</a> <span>| <b>Homologation</b></span></h5>
-
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-folder"></i>
-                      </div>
-                      <div class="ps-3">
-                        <h6>{{ $nombreHomologation }}</h6>
-                        {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
+                          </div>
+                        </div>
 
                       </div>
                     </div>
+                  </div><!-- End Customers Card -->
 
-                  </div>
-                </div>
-              </div><!-- End Customers Card -->
-
+                   {{-- //circulation --}}
               <div class="col-xxl-3 col-xl-12">
                 <div class="card info-card revenue-card">
                   <div class="card-body">
@@ -208,7 +129,108 @@
                   </div>
                 </div>
               </div><!-- End Customers Card -->
+                @endif
 
+                @if (Auth::user()->agent->service->libelle_court =='DGPE' || Auth::user()->role->libelle == "Administration")
+
+
+            <!-- Revenue Card produit chimique -->
+            <div class="col-xxl-3 col-md-6">
+                <div class="card info-card revenue-card">
+                  <div class="card-body">
+                    <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p001_s','procedureName' => 'Produit Chimique']) }}">Procédure</a> <span>| <b>Produit Chimique</b></span></h5>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-folder"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>{{ $nombreProduitChimique }}</h6>
+                        {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div><!-- End Revenue Card -->
+
+
+              <div class="col-xxl-3 col-xl-12">
+
+                <div class="card info-card revenue-card">
+                  <div class="card-body">
+                    <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p008_s', 'procedureName' => 'Gestion de Dechets']) }}">Procédure</a> <span>| <b>Déchets Solides</b></span></h5>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-folder"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>{{ $nombreDechet }}</h6>
+                        {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div><!-- End Customers Card -->
+
+
+              <div class="col-xxl-3 col-xl-12">
+                      {{-- exemption --}}
+                  <div class="card info-card revenue-card">
+                    <div class="card-body">
+                      <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p006_s', 'procedureName' => 'Exemption']) }}">Procédure</a> <span>| <b>Exemption</b></span></h5>
+
+                      <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i class="bi bi-folder"></i>
+                        </div>
+                        <div class="ps-3">
+                          <h6>{{ $nombreExemption }}</h6>
+                          {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div><!-- End Customers Card -->
+
+
+
+
+
+
+                  {{-- homologation --}}
+                <div class="col-xxl-3 col-xl-12">
+                  <div class="card info-card revenue-card">
+                    <div class="card-body">
+                      <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p007_s', 'procedureName' => 'Homologation sachet plastique']) }}">Procédure</a> <span>| <b>Homologation</b></span></h5>
+
+                      <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i class="bi bi-folder"></i>
+                        </div>
+                        <div class="ps-3">
+                          <h6>{{ $nombreHomologation }}</h6>
+                          {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div><!-- End Customers Card -->
+                @endif
+
+
+
+                @if (Auth::user()->agent->service->libelle_court =='DGRE' || Auth::user()->role->libelle == "Administration")
+
+                 {{-- agrement eau --}}
               <div class="col-xxl-3 col-xl-12">
                 <div class="card info-card revenue-card">
                   <div class="card-body">
@@ -228,6 +250,10 @@
                   </div>
                 </div>
               </div><!-- End Customers Card -->
+                @endif
+
+
+
 
 
 

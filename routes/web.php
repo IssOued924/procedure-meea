@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\DemandeCompP002;
 use App\Livewire\DemandeP007Comp;
@@ -129,7 +130,11 @@ Route::middleware('auth')->group(function () {
 
 
 
-});
+
+
+
+    //administration
+
 
 // Route partie administration
 Route::get('/administration', [BackendController::class, 'index'])->name('administration');
@@ -142,10 +147,10 @@ Route::get('/administration/demandesp0011-list', [BackendController::class, 'lis
 Route::get('/administration/demandesp006-list', [BackendController::class, 'listDemandep006'])->name('demandesp006-list');
 Route::get('/administration/demandesp007-list', [BackendController::class, 'listDemandep007'])->name('demandesp007-list');
 Route::get('/administration/statusChange/{id}/{currentStatus}/{table}', [BackendController::class, 'statutChange'])->name('statusChange');
+Route::post('/administration/uploadActe/{id}/{currentStatus}/{table}', [BackendController::class, 'uploadActe'])->name('uploadActe');
 Route::get('/administration/rejet/{id}/{table}', [BackendController::class, 'rejetter'])->name('rejetter');
 Route::get('/administration/procedure-dashboard/{procedure}/{procedureName}', [BackendController::class, 'procedureDashboard'])->name('procedure-dashboard');
 
-Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
 
     // Route parametre
 Route::get('/administration/parametre/commune', [CommuneController::class, 'index'])->name('commune-list');
@@ -189,15 +194,24 @@ Route::get('/administration/parametre/role/{uuid}', [RoleController::class, 'sup
 Route::post('/administration/parametre/role', [RoleController::class, 'store'])->name('role-store');
 
 // Route Utilisateur
-
+Route::get('/administration/utilisateur/user', [RegisteredUserController::class, 'listUsers'])->name('user-list');
 Route::get('/administration/utilisateur/agent', [AgentController::class, 'index'])->name('agent-list');
 Route::post('/administration/utilisateur/agent/', [AgentController::class, 'store'])->name('agent-store');
 Route::get('/administration/utilisateur/agent/{uuid}', [AgentController::class, 'update'])->name('agent-update');
 Route::get('/administration/utilisateur/usager', [UsagerController::class, 'index'])->name('usager-list');
 
 Route::get('/administration/utilisateur/profile', [ProfileController::class, 'index'])->name('profile-list');
+Route::post('/administration/utilisateur/user-store', [RegisteredUserController::class, 'userStore'])->name('user-store');
 
 // Liste des demandes d'un agent
 
 Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name('demandes-lists');
+
+
+
+});
+
+Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
+
+
 require __DIR__.'/auth.php';

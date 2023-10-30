@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 use App\Models\DemandeP0010;
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
+// use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
 
 /**
  * Class DemandeP0010Repository.
  */
-class DemandeP0010Repository extends GenericRepository
+class DemandeP0010Repository extends AppRepository
 {
     /**
      * @return string

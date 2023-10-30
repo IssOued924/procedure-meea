@@ -45,6 +45,8 @@ class DemandeP001Controller extends Controller
         unset($data['telephone']);
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
+        // generation de code reference pour chaque demande
+        $data['reference'] = $this->repository->generateReference('P001');
 
         $data['procedure_id'] = Procedure::where(['code' => 'P001'])->first('uuid')->uuid;
         //$data['usager_id']= Auth::user()->uuid;

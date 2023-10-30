@@ -43,6 +43,8 @@ class DemandeP004Controller extends Controller
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
 
+        $data['reference'] = $this->repository->generateReference('P004');
+
         $data['procedure_id'] = Procedure::where(['code' => 'P004'])->first('uuid')->uuid;
 
         $certificat_origine =  $this->repository->uploadFile($dataFiles, 'certificat_origine');

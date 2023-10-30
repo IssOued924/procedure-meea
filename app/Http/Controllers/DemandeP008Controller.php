@@ -35,6 +35,7 @@ class DemandeP008Controller extends Controller
 
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
+        $data['reference'] = $this->repository->generateReference('P001');
 
         $data['procedure_id'] = Procedure::where(['code' => 'P008'])->first('uuid')->uuid;
 
