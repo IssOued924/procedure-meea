@@ -9,7 +9,7 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 /**
  * Class BaseJuridiqueRepository.
  */
-class BackendRepository extends BaseRepository
+class BackendRepository extends AppRepository
 {
     /**
      * @return string
@@ -32,5 +32,7 @@ class BackendRepository extends BaseRepository
 
 
     }
+
+    
 
 }

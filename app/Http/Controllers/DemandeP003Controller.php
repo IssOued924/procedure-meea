@@ -44,6 +44,8 @@ class DemandeP003Controller extends Controller
         $data['etat'] = 'D'; //code de procedure demande deposee
         $data['procedure_id'] = Procedure::where(['code' => 'P003'])->first('uuid')->uuid;
 
+        $data['reference'] = $this->repository->generateReference('P003');
+
         // $user = $userRepository->getById(Auth::user()->uuid);
         // $user->telephone = $request->telephone;
         // //$user->identite = $request->identite;

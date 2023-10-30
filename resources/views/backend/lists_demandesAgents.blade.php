@@ -67,7 +67,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Date Demande</th>
-
+                                        <th scope="col">Réference</th>
                                         <th scope="col">Etat de mes Demandes</th>
 
                                         <th scope="col">Action</th>
@@ -125,16 +125,10 @@
                                     @endphp
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
-
-
                                         <td>{{ $demande->created_at }}</td>
-
-
+                                        <td>{{ $demande->reference }}</td>
                                         <td>
-
-
                                         <span class="badge {{ $statutColor }} ">{{$statut}}</span> </td>
-
 
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
@@ -146,11 +140,13 @@
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
                                                     class="bi bi-pencil-square text-white">Modifier </i> </button>
                                                     @endif
-                                                    @if ($demande->etat == 'S')
-                                                    <button title="Télécharger l'acte" type="button" class="btn btn-success "
-                                                    data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
-                                                        class="bi bi-cloud-download text-white">Télécharger </i> </button>
 
+                                                    @if ($demande->etat == 'S' &&  !is_null($demande->output_file))
+
+                                                    <a class="btn btn-success text-white"
+                                                                    href="{{ Storage::url($demande->output_file) }}" target="_blank"><b><i
+                                                                            class=" bi bi-download"></i>
+                                                                         Télécharger</b></a>
                                                     @endif
 
 

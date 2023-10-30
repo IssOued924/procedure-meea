@@ -9,7 +9,7 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 /**
  * Class DemandeP0011Repository.
  */
-class DemandeP0011Repository extends BaseRepository
+class DemandeP0011Repository extends AppRepository
 {
     /**
      * @return string
@@ -27,7 +27,7 @@ class DemandeP0011Repository extends BaseRepository
 
         $this->unsetClauses();
 
-     
+
     $de = new DemandeP0011();
     $tt = $de->genererRandomString(4);
 
