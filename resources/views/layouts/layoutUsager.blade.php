@@ -21,14 +21,16 @@
 
 
     <!-- Vendor CSS Files -->
-  <link href="{{ asset('backend/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  {{-- <link href="{{ asset('backend/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> 
   <link href="{{ asset('backend/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
   <link href="{{ asset('backend/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('backend/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('backend/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+  <link href="{{ asset('backend/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet"> --}}
+
+  {{-- <link href="{{ asset('backend/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
   <link href="{{ asset('backend/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
   <link href="{{ asset('backend/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-  <link href="{{ asset('backend/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('backend/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet"> --}}
+  
     <link href="vendor/animate.css/animate.min.css" rel="stylesheet">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -40,6 +42,7 @@
     
     
     <link href="css/style.css" rel="stylesheet">
+    {{-- <link href="{{ asset('backend/assets/css/style.css') }}" rel="stylesheet"> --}}
 
     <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" /> -->
     <link href="css/google-font1" rel="stylesheet" />
@@ -93,13 +96,11 @@
 
         @yield('content')
     
-
-
     </div>
     <!-- ======= Footer ======= -->
     <x-footer />
     <!-- End Footer -->
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
     <script>
@@ -122,13 +123,13 @@
     <!-- Template Main JS File -->
     <script src="js/main.js"></script>
     <script src="{{ asset('backend/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
-  <script src="{{ asset('backend/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  {{-- <script src="{{ asset('backend/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
   <script src="{{ asset('backend/assets/vendor/chart.js/chart.umd.js') }}"></script>
   <script src="{{ asset('backend/assets/vendor/echarts/echarts.min.js') }}"></script>
   <script src="{{ asset('backend/assets/vendor/quill/quill.min.js') }}"></script>
   <script src="{{ asset('backend/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
   <script src="{{ asset('backend/assets/vendor/tinymce/tinymce.min.js') }}"></script>
-  <script src="{{ asset('backend/assets/vendor/php-email-form/validate.js') }}"></script>
+  {{-- <script src="{{ asset('backend/assets/vendor/php-email-form/validate.js') }}"></script> --}}
 
   <!-- Template Main JS File -->
   <script src="{{ asset('backend/assets/js/main.js') }}"></script>

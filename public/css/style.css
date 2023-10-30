@@ -15,7 +15,7 @@ body {
 }
 
 a {
-  color: #fff;
+  color: #4154f1;
   text-decoration: none;
   font-size: 13px;
 }
@@ -2562,7 +2562,7 @@ select.list-dt:focus {
 }
 
 /*The background card*/
-.card {
+.cardd {
     z-index: 0;
     border: none;
     border-radius: 0.5rem;
