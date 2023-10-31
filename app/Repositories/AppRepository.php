@@ -99,7 +99,15 @@ class AppRepository extends BaseRepository
 
         $path = $data[$name]->storeAs('public/'.$libelle, $fileName);
         DB::table($table)->where('uuid', $id)->update(['output_file' => $path]);
-         
+
+    }
+
+    public function nombre($table, $champ=array())
+    {
+
+        return DB::table($table)->where($champ)->count();
+
+
     }
 
 
