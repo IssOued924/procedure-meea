@@ -243,7 +243,7 @@ class RegisteredUserController extends Controller
 
                               "services" => Service::all(),
                               "agents" => Agent::all(),
-                              "roles" =>Role::all()
+                              "roles" =>Role::all(),
                           ];
 
                         //   dd($data['demandes'][0]->demandePiece);
@@ -251,5 +251,24 @@ class RegisteredUserController extends Controller
 
                           return view('backend.utilisateur.user_list', $data);
 
+                      }
+
+
+          public function update(Request $request, $uuid)
+                      {
+                          $request->validate([
+                              'name' => 'required',
+                              'role_id' => 'required',
+
+                          ]);
+
+                          $agent = User::find($uuid);
+                          $agent->update([
+                              'name' => $request->input('name'),
+                              'role_id' => $request->input('role_id'),
+
+                          ]);
+
+                          return redirect()->route('user-list')->with('success', 'Utilisateur  mis à jour avec succès !');
                       }
 }

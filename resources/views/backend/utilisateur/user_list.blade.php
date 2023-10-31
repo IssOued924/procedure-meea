@@ -19,8 +19,6 @@
         <div class="col-lg-12">
           <div class="row">
 
-
-
             <!-- Recent Sales -->
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
@@ -147,6 +145,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Profil</th>
 
 
 
@@ -164,14 +163,97 @@
                         <th scope="row">{{ $i++ }}</th>
                         <td> {{ $user->name }}</td>
                         <td> {{ $user->email }}</td>
-
+                        @if (isset($user->role_id))
+                        <td> {{ $user->role->libelle}}</td>
+                        @else
+                        <td>-</td>
+                        @endif
 
                       <td>
 
+                        <button type="button" title="Desactiver Utilisateur" class="btn btn-warning"><i
+                                class="bi bi-x-circle"></i></button>
 
-                    <button type="button" title="Desactiver Utilisateur" class="btn btn-warning"><i
-                            class="bi bi-x-circle"></i></button>
-                      </td>
+                        <button title="Editer" type="button" class="btn btn-info "
+                                data-bs-toggle="modal"
+                                data-bs-target="#basicModalEdit{{ $user->uuid }}"> <i
+                                class="bi bi-pencil-square"></i> </button>
+
+                    </td>
+
+                    {{-- editer modal --}}
+                    <div class="modal fade" id="basicModalEdit{{ $user->uuid }}" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <form method="GET"
+                                        action="{{ route('user-update', $user->uuid) }}">
+                                        @csrf
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Editer l'utilisateur </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h5 class="card-title">utilisateur</h5>
+                                                <div class="input-group mb-3">
+
+                                                    {{-- <label for="libelle">Libelle</label> --}}
+
+                                                    <input type="text" name="name"
+                                                        value="{{ $user->name }}"
+                                                        class="form-control border-success"
+                                                        placeholder="libelle" aria-label="Username"
+                                                        aria-describedby="basic-addon1" required>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <h5 class="card-title">role</h5>
+                                                <div class="input-group mb-3">
+
+                                                    {{-- <label for="libelle">Libelle</label> --}}
+
+                                                    <select name="role_id" id="" class="form-select border-success">
+                                                        @foreach ($roles as $role)
+
+                                                        <option value="{{ $role->uuid }}">{{ $role->libelle }}</option>
+
+                                                        @endforeach
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        {{-- <input type="submit" value="Modifier"
+                                            class="btn btn-primary center"> --}}
+
+
+                                </div>
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-danger"
+                                        data-bs-dismiss="modal">Fermer</button>
+                                     <button type="submit" class="btn btn-primary">Modifier
+                                         </button>
+                                        {{-- <input type="submit" value="Modifier"
+                                        class="btn btn-primary center"> --}}
+                                </div>
+                            </form>
+
+                            </div>
+                        </div>
+                    </div><!-- End Basic edit Modal-->
+
+
                       </tr>
                     @endforeach
 
