@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
      <!-- Favicons -->
-    <link href="{{  asset('img/logo_meea.jpg')  }}" rel="icon">
+    <link href="{{ asset('img/logo_meea.jpg')  }}" rel="icon">
     <link href="{{ asset('backend/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
     <link href="img/armoirie.png" rel="icon">
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -28,8 +28,8 @@
 
   {{-- <link href="{{ asset('backend/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
   <link href="{{ asset('backend/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
-  <link href="{{ asset('backend/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-  <link href="{{ asset('backend/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet"> --}}
+  <link href="{{ asset('backend/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet"> --}}
+  <link href="{{ asset('backend/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
     <link href="vendor/animate.css/animate.min.css" rel="stylesheet">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -60,7 +60,7 @@
 
     @livewireStyles
     @yield('css')
-   @include('sweetalert::alert')
+
 </head>
 
 <body class="background">
@@ -94,13 +94,9 @@
         </div> --}}
 
         @yield('content')
-<<<<<<< HEAD
 
 
 
-=======
-
->>>>>>> 7f1ad8af2d588247ae8ab2b76d80b1ed2f08afda
     </div>
     <!-- ======= Footer ======= -->
     <x-footer />
