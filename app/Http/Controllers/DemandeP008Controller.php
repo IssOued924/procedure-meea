@@ -81,6 +81,6 @@ class DemandeP008Controller extends Controller
         $demandePieceP008Repository->setChemin ($chemin_registre_tracabilite, $demande->uuid, 'Registre tracabilité');
         /* FIN Mise-à-jour des pièce-jointes de sorte à retrouver la demande associée */
 
-        return redirect('/')->with('success', 'Votre Demande à bien été Soumise !!');
+        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise !!');
     }
 }
