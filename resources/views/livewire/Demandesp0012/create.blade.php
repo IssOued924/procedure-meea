@@ -12,13 +12,13 @@
         <div class="row justify-content-center mt-0">
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
                 <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
-                    <h5><strong>Demande de permis d'écotourisme ou tourisme écologique</strong></h5>
+                    <h5><strong>Démande de permis d'écotourisme ou tourisme écologique</strong></h5>
                    <p> @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
                 @endif</p>
-                    <p>Les champs suivis d'etoile rouge sont obligatoires</p>
+                    <p>Les champs suivis d'étoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">
                             <form id="msform"  method="POST" action="{{route('demandesp0012-store')}}" enctype="multipart/form-data">
@@ -59,13 +59,13 @@
                                                 <label class="nom_societe fw-bold"> <strong>identité</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text" value="{{ $name }}"
-                                                    placeholder="Nom et prenom" />
+                                                    placeholder="Nom et prenom" disabled/>
                                             </div>
                                             <div class="col-6">
                                                 <label class="siege_social fw-bold">Lieu de résidence/siège<span style="color:red">
                                                         *</span></label>
 
-                                                <select name="commune_id" id="selectMultiple" class="form-select" required>
+                                                <select name="commune_id" id="selectMultiple" class="form-select border-success" required>
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option value="">Veuillez choisir une ville</option>
                                                     @foreach ( $communes as  $com)
@@ -81,12 +81,12 @@
                                             <div class="col-6">
                                                 <label class="adresse fw-bold">Adresse Postale<span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="beneficiaire"
-                                                    placeholder="Adresse ou numero de telephone" />
+                                                    placeholder="Adresse postal" required />
                                             </div>
                                             <div class="col-6">
-                                                <label class="boite_postale fw-bold">Telephone<span style="color:red">
+                                                <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" name="telephone"   placeholder="Telephone" value="{{ $telephone}}" />
+                                                <input type="text" name="telephone"   placeholder="Telephone" value="{{ $telephone}}" disabled/>
                                             </div>
                                         </div>
                                         {{-- <div class="row">
@@ -115,7 +115,7 @@
                                                 <input type="file" name="cnib" class="form-control border-success" required>
                                             </div>
                                             <div class="col-6">
-                                                <label for="demande timbre" class="fw-bold">Photo d'identite</label>
+                                                <label for="demande timbre" class="fw-bold">Photo d'identité</label>
                                                 <input type="file" name="photo" class="form-control border-success" required>
                                             </div>
                                         </div><br>
