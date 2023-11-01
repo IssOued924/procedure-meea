@@ -111,18 +111,21 @@
                                         <div class="row">
 
                                             <div class="col-6">
-                                                <label for="demande timbre" class="fw-bold">CNIB ou Passport</label>
+                                                <label for="demande timbre" class="fw-bold">CNIB ou Passport<span style="color:red">
+                                                    *</span></label>
                                                 <input type="file" name="cnib" class="form-control border-success" required>
                                             </div>
                                             <div class="col-6">
-                                                <label for="demande timbre" class="fw-bold">Photo d'identité</label>
+                                                <label for="demande timbre" class="fw-bold">Photo d'identité<span style="color:red">
+                                                    *</span></label>
                                                 <input type="file" name="photo" class="form-control border-success" required>
                                             </div>
                                         </div><br>
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <label for="demande timbre" class="fw-bold">Liste des personnes concernées</label>
+                                                <label for="demande timbre" class="fw-bold">Liste des personnes concernées<span style="color:red">
+                                                    *</span></label>
                                                 <input type="file" name="list_personne" class="form-control border-success" required>
                                             </div>
                                         </div>

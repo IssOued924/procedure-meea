@@ -104,7 +104,7 @@ class BackendController extends Controller
     {
         // dd( StatutDemande::where('etat', '=', 'V')->first()->statut);
         $data = [
-            "demandes" => $demandeP001Repository->all(),
+            "demandes" => $demandeP001Repository->all()->sortByDesc('uuid'),
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -130,7 +130,7 @@ class BackendController extends Controller
     {
 
         $data = [
-            "demandes" => $demandeP0012Repository->all(),
+            "demandes" => $demandeP0012Repository->all()->sortByDesc('uuid'),
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -155,7 +155,7 @@ class BackendController extends Controller
     {
 
         $data = [
-            "demandes" => $demandeP008Repository->all(),
+            "demandes" => $demandeP008Repository->all()->sortByDesc('uuid'),
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -180,7 +180,7 @@ class BackendController extends Controller
     {
 
         $data = [
-            "demandes" => $demandeP003Repository->all(),
+            "demandes" => $demandeP003Repository->all()->sortByDesc('uuid'),
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -206,7 +206,7 @@ class BackendController extends Controller
     {
 
         $data = [
-            "demandes" => $demandeP004Repository->all(),
+            "demandes" => $demandeP004Repository->all()->sortByDesc('uuid'),
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -231,7 +231,7 @@ class BackendController extends Controller
     {
 
         $data = [
-            "demandes" => $demandeP0011Repository->all(),
+            "demandes" => $demandeP0011Repository->all()->sortByDesc('uuid'),
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -256,7 +256,7 @@ class BackendController extends Controller
     {
 
         $data = [
-            "demandes" => $demandeP006Repository->all(),
+            "demandes" => $demandeP006Repository->all()->sortByDesc('uuid'),
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -283,7 +283,7 @@ class BackendController extends Controller
     {
 
         $data = [
-            "demandes" => $demandeP007Repository->all(),
+            "demandes" => $demandeP007Repository->all()->sortByDesc('uuid'),
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -512,31 +512,31 @@ class BackendController extends Controller
             $proc = $request->procedure;
             switch ($proc) {
                 case 'PETE':
-                    $demandes = $demandeP0012Repository->all(['usager_id' => Auth::user()->usager->uuid]);
+                    $demandes = $demandeP0012Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('uuid');
                     break;
                 case 'DATIPC':
-                    $demandes = $demandeP001Repository->all(['usager_id' => Auth::user()->usager->uuid]);
+                    $demandes = $demandeP001Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('uuid');
                     break;
                 case 'ADDMC':
-                    $demandes = $demandeP003Repository->all(['usager_id' => Auth::user()->usager->uuid]);
+                    $demandes = $demandeP003Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('uuid');
                     break;
                 case 'AGDS':
-                    $demandes = $demandeP008Repository->all(['usager_id' => Auth::user()->usager->uuid]);
+                    $demandes = $demandeP008Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('uuid');
                     break;
                 case 'CEESPNB':
-                    $demandes = $demandeP006Repository->all(['usager_id' => Auth::user()->usager->uuid]);
+                    $demandes = $demandeP006Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('uuid');
                     break;
                 case 'CDAS':
-                    $demandes = $demandeP004Repository->all(['usager_id' => Auth::user()->usager->uuid]);
+                    $demandes = $demandeP004Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('uuid');
                     break;
                 case 'PCBCB':
-                    $demandes = $demandeP0011Repository->all(['usager_id' => Auth::user()->usager->uuid]);
+                    $demandes = $demandeP0011Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('uuid');
                     break;
                 case 'OATEA':
-                    $demandes = $demandeP002Repository->all(['usager_id' => Auth::user()->usager->uuid]);
+                    $demandes = $demandeP002Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('uuid');
                     break;
                 case 'CHESPB':
-                    $demandes = $demandeP007Repository->all(['usager_id' => Auth::user()->usager->uuid]);
+                    $demandes = $demandeP007Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('uuid');
                     break;
 
                 default:

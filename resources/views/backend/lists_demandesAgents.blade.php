@@ -11,7 +11,7 @@
         <!-- Left side columns -->
         <div class="col-lg-12">
             <div class="row">
-                
+
 
                 <!-- Recent Sales -->
                 <div class="col-12">
@@ -32,6 +32,7 @@
                         <h2 class="card-title text-center">Liste de mes Démandes  </h2>
 
                         <div class="card-body">
+
                             <div class="row">
 
                                 <div class="col-4 offset-md-3">
@@ -65,9 +66,9 @@
                                     <tr>
                                         <th scope="col">#</th>
 
-                                        <th scope="col">Date Demande</th>
+                                        <th scope="col">Date Démande</th>
                                         <th scope="col">Réference</th>
-                                        <th scope="col">Etat de mes Demandes</th>
+                                        <th scope="col">etat de mes Démandes</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -174,7 +175,7 @@
                                                                 <span>{{ $demande->usager->telephone}}</span>
                                                             </div>
                                                         </div><br>
-                                                        <div class="row">
+                                                        {{-- <div class="row">
                                                             <div class="col-6">
                                                                 <b>Identite Fournisseur:</b>
                                                                 <span>{{$demande->denomination_sociale_fournisseur}}</span>
@@ -183,14 +184,14 @@
                                                                 <b>Addresse:</b>
                                                                 <span>{{$demande->adresse_fournisseur}}</span>
                                                             </div>
-                                                        </div> <br>
+                                                        </div> <br> --}}
                                                         <h4>Liste des fichiers Soumis</h4>
                                                         <div class="row">
                                                             <div class="col">
 
                                                                 @foreach ( $demande->demandePiece as $chemin)
 
-                                                                <a href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
+                                                                <a  class="text-success" target="_blank" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
                                                                 <br>
                                                                 @endforeach
                                                             </div>
@@ -199,7 +200,7 @@
                                                         <h4>Etat de la demande</h4>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <a href="#"><b><i class="bi bi-check-circle"></i>  {{$statut}}</b></a>
+                                                                <a class="text-success"   href="#"><b><i class="bi bi-check-circle"></i>  {{$statut}}</b></a>
                                                                 <h5>Motif</h5>
                                                                 {{-- <span>  {{dd($demande->demandeCommentaire)}}</span> --}}
                                                                 @if(!$demande->demandeCommentaire->isEmpty())

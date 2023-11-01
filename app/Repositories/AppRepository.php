@@ -36,7 +36,7 @@ class AppRepository extends BaseRepository
 
     public function generateReference($codeProcedure)
     {
-        return 'D'.$codeProcedure.'-'.Carbon::parse(Carbon::now())->format('YmdHis');
+        return 'DOC'.$codeProcedure.Carbon::parse(Carbon::now())->format('YmdHis');
     }
 
     //fonction de chargement
