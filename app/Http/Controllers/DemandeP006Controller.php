@@ -76,7 +76,7 @@ class DemandeP006Controller extends Controller
         $demandePieceP006Repository->setChemin($document_technique_utilisation, $demande->uuid, 'Document de Technique justifiant utilisation');
         $demandePieceP006Repository->setChemin($registre_tracabilite, $demande->uuid, 'Registre de tracabilite');
 
-        return redirect('/')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
+        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }
 
 

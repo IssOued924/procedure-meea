@@ -94,6 +94,6 @@ class DemandeP001Controller extends Controller
         $demandePieceP001Repository->setChemin($attestation_destination_finale, $demande->uuid, 'Attestation destination Finale');
         $demandePieceP001Repository->setChemin($list_produit, $demande->uuid, 'Liste des poduits');
 
-        return redirect('/')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
     }
 }
