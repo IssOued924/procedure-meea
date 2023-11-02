@@ -5,7 +5,7 @@
     </div>
     @endif
 
-    
+
 
     <div class="container-fluid" id="grad1">
         <div class="row justify-content-center mt-0">
@@ -121,7 +121,7 @@
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" class="border-success"
-                                                    placeholder="Telephone" value="{{ $telephone}}" />
+                                                    placeholder="Telephone" value="{{ $telephone}}"  disabled/>
                                             </div>
                                         </div>
 
@@ -130,7 +130,7 @@
                                             <div class="col-6">
                                                 <label class="adresse fw-bold">Quantité totale à importer en KG</label>
                                                 <input type="text" class="border-success" name="quantite"
-                                                    placeholder="Quantite de stockage" />
+                                                    placeholder="Quantite à importer" />
                                             </div>
                                             {{-- <div class="col-6">
                                                 <label class="boite_postale">Telephone<span style="color:red">
@@ -374,7 +374,7 @@
                                                 <label class="adresse fw-bold">Capacité Totale des locaux de stockage
                                                     <span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="capacite_stockage"
-                                                    placeholder="Capacité Totale des locaux de stockage" />
+                                                    placeholder="Capacité Totale des locaux de stockage" required />
                                             </div>
 
                                         </div><br>

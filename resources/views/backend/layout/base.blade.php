@@ -92,16 +92,6 @@ rel="stylesheet"
           </a>
         </li><!-- End Search Icon-->
 
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-danger badge-number" title="Nombres de Nouvelles Demandes"> </span>
-          </a><!-- End Notification Icon -->
-
-
-        </li><!-- End Notification Nav -->
-
 
         <li class="nav-item dropdown pe-3">
 

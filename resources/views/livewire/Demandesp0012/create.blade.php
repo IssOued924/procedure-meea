@@ -1,9 +1,4 @@
-<section id="about" class="about">
-    @if (session()->has('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
-    </div>
-    @endif
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -13,11 +8,19 @@
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
                 <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
                     <h5><strong>Démande de permis d'écotourisme ou tourisme écologique</strong></h5>
-                   <p> @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif</p>
+                    <div class="col-6 offset-3"> @if(session('success'))
+                        <div class="alert alert-success alert-dismissible" role="alert">
+
+                            <h5 class="alert-heading">{{session('success')}}</h5>
+
+                        </div>
+
+                        <script>
+                            setTimeout(function() {
+                                document.querySelector('.alert.alert-success').style.display = 'none';
+                            }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                        </script>
+                    @endif</div>
                     <p>Les champs suivis d'étoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">
@@ -51,14 +54,14 @@
                                             </div>
 
                                         </div><br>
-                                        <h4 class="fs-title">Identité du demandeur <span style="color:red">
-                                            *</span></h4>
+                                        {{-- <h4 class="fs-title">Identité du demandeur <span style="color:red">
+                                            *</span></h4> --}}
 
                                         <div class="row">
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>identité</strong> <span
                                                         style="color: red">*</span></label>
-                                                <input type="text" value="{{ $name }}"
+                                                <input type="text" class="border-success" value="{{ $name }}"
                                                     placeholder="Nom et prenom" disabled/>
                                             </div>
                                             <div class="col-6">
@@ -86,7 +89,7 @@
                                             <div class="col-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" name="telephone"   placeholder="Telephone" value="{{ $telephone}}" disabled/>
+                                                <input type="text" name="telephone" class="border-success"   placeholder="Telephone" value="{{ $telephone}}" disabled/>
                                             </div>
                                         </div>
                                         {{-- <div class="row">
@@ -171,7 +174,7 @@
                                         <br><br>
                                         <div class="row justify-content-center">
                                             <div class="col-7 text-center">
-                                                <h5>Votre demnde est enregistré avec succès et en cour de traitement!
+                                                <h5>Votre demnde est enregistrée avec succès et en cour de traitement!
                                                 </h5>
                                             </div>
                                         </div>

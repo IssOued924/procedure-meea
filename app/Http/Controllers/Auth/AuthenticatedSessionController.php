@@ -30,12 +30,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        // $request->authenticate();
+         $request->authenticate();
 
-        // $request->session()->regenerate();
+         $request->session()->regenerate();
 
 
-        // return redirect()->intended(RouteServiceProvider::HOME)->with('success', ' ');
+        //  return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Bienvenue sur le formulaire de la demande ');
 
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -48,7 +48,8 @@ class AuthenticatedSessionController extends Controller
             {
                 return redirect('/administration');
             }else{
-                return  redirect('/');
+         return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Bienvenue sur le formulaire de la demande ');
+        //  return  redirect('/');
              }
         }
         return back()->withErrors([

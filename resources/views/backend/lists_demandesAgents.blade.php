@@ -125,7 +125,7 @@
                                     @endphp
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $demande->created_at }}</td>
+                                        <td>{{ $demande->created_at->format('d/m/Y H:i:s') }}</td>
                                         <td>{{ $demande->reference }}</td>
                                         <td>
                                         <span class="badge {{ $statutColor }} ">{{$statut}}</span> </td>
@@ -217,7 +217,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-danger"
                                                             data-bs-dismiss="modal">Fermer</button>
-                                                        <button type="button" class="btn btn-primary">Valider</button>
+                                                        {{-- <button type="button" class="btn btn-primary">Valider</button> --}}
                                                     </div>
                                                 </div>
                                             </div>
