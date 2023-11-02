@@ -89,7 +89,7 @@
                                                                 <select name="agent_id" id="" class="border-success form-select">
                                                                     <option value="">Veuillez choisir l'agent</option>
                                                                     @foreach ($agents as $agent)
-                                                                    <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
+                                                                    <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }} <b>{{ $agent->service->libelle_court }}</b></option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -108,7 +108,7 @@
                                                                 <h5 class="card-title">Profil</h5>
                                                                 <div class="input-group mb-3">
                                                                    <select name="role_id" id="" class="form-select border-success">
-                                                                    <option value="">Veuillez son profile</option>
+                                                                    <option value="">Veuillez choisir son profile</option>
                                                                     @foreach ($roles as $role )
                                                                     <option value="{{ $role->uuid }}">{{ $role->libelle }}</option>
                                                                     @endforeach

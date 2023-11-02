@@ -183,7 +183,7 @@
                                                         class="btn btn-danger"><i class="bi bi-x-circle"></i></a>
                                                 @endif
                                                 @if ($demande->etat == 'S')
-                                                <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}"
+                                                    <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}"
                                                     type="button" title="Joindre Acte Signé" class="btn btn-success"><i
                                                         class="bi bi-upload"></i> </a>
                                                 @endif
