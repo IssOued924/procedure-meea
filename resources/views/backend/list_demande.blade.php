@@ -1,7 +1,7 @@
 @extends('backend.layout.base')
 @section('title')
 <div class="pagetitle">
-    <h1>Liste des Demandes d'avis Technique d'importation de produit Chimiques industriels </h1>
+    <h1>Liste des Démandes d'avis Technique d'importation de produit Chimiques industriels </h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
@@ -19,9 +19,6 @@
         <div class="col-lg-12">
             <div class="row">
 
-
-
-
                 <!-- Recent Sales -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
@@ -33,7 +30,7 @@
                                     <h6>Filter</h6>
                                 </li>
 
-                                <li><a class="dropdown-item" href="#">Aujourd'huie</a></li>
+                                <li><a class="dropdown-item" href="#">Aujourd'hui</a></li>
                                 <li><a class="dropdown-item" href="#">Mois Courant</a></li>
                                 <li><a class="dropdown-item" href="#">Cette Année</a></li>
                             </ul>
@@ -62,8 +59,7 @@
                                 <div class="col-9">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="dt-buttons btn-group flex-wrap">
-                                            <button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0"
-                                                aria-controls="example1" type="button"><span>Copy</span></button>
+
                                             <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0"
                                                 aria-controls="example1" type="button"><span>CSV</span></button>
                                             <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0"
@@ -71,7 +67,7 @@
                                             <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0"
                                                 aria-controls="example1" type="button"><span>PDF</span></button>
                                             <button class="btn btn-secondary buttons-print" tabindex="0"
-                                                aria-controls="example1" type="button"><span>Print</span></button>
+                                                aria-controls="example1" type="button"><span>Imprimer</span></button>
                                             {{-- <div class="btn-group">
                                                 <button
                                                     class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis"
@@ -88,9 +84,9 @@
                                     <div style="float: right">
 
                                     <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
-                                                class="bi bi-arrow-repeat"></i></button>
-                                                <button  title="Ajouter" type="button" class="btn btn-success"><i
-                                                    class="bi bi-plus"></i></button>
+                                        class="bi bi-arrow-repeat"></i></button>
+                                        <button  title="Ajouter" type="button" class="btn btn-success"><i
+                                            class="bi bi-plus"></i></button>
                                     </div>
 
 
@@ -102,11 +98,11 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Date Demande</th>
                                         <th scope="col">Demandeur</th>
                                         <th scope="col">Quantite/Kg</th>
-                                        <th scope="col">Date Demande</th>
                                         <th scope="col">Résidence</th>
-                                        <th scope="col">Etat Demande</th>
+                                        <th scope="col">etat Demande</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -162,9 +158,9 @@
                                     @endphp
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
+                                        <td>{{ $demande->created_at->format('d/m/Y H:i:s') }}</td>
                                         <td> {{ $demande->denomination_sociale_demandeur }}</td>
                                         <td>{{ $demande->quantite }}</td>
-                                        <td>{{ $demande->created_at }}</td>
                                         <td>{{ $demande->localite->libelle }}</td>
 
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
@@ -410,6 +406,16 @@
                                                                     class="text-success">{{$demande->adresse_fournisseur}}</span>
                                                             </div>
                                                         </div> <br>
+
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <b>Système de transport :</b>
+                                                                <span
+                                                                    class="text-success">{{$demande->systeme_transport}}  |  {{$demande->agrement_transport}}</span>
+                                                            </div>
+
+                                                        </div>
+
                                                         <h4>Liste des fichiers Soumis <i
                                                                 class="bi bi-folder text-success"></i></h4>
                                                         <div class="row">

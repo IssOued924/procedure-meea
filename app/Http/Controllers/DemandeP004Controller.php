@@ -62,6 +62,6 @@ class DemandeP004Controller extends Controller
         $demandePieceP004Repository->setChemin($certificat_sanitaire, $demande->uuid, 'Certificat Sanitaire');
 
 
-        return redirect('/')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
     }
 }

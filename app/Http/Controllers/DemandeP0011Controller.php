@@ -78,6 +78,6 @@ class DemandeP0011Controller extends Controller
         $demandePieceP0011Repository->setChemin($agrement, $demande->uuid, 'Agrement');
         $demandePieceP0011Repository->setChemin($quitance, $demande->uuid, 'Quittance');
 
-        return redirect('/')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
     }
 }

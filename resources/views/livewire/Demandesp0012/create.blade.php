@@ -1,9 +1,4 @@
-<section id="about" class="about">
-    @if (session()->has('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
-    </div>
-    @endif
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -12,13 +7,21 @@
         <div class="row justify-content-center mt-0">
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
                 <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
-                    <h5><strong>Demande de permis d'écotourisme ou tourisme écologique</strong></h5>
-                   <p> @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif</p>
-                    <p>Les champs suivis d'etoile rouge sont obligatoires</p>
+                    <h5><strong>Démande de permis d'écotourisme ou tourisme écologique</strong></h5>
+                    <div class="col-6 offset-3"> @if(session('success'))
+                        <div class="alert alert-success alert-dismissible" role="alert">
+
+                            <h5 class="alert-heading">{{session('success')}}</h5>
+
+                        </div>
+
+                        <script>
+                            setTimeout(function() {
+                                document.querySelector('.alert.alert-success').style.display = 'none';
+                            }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                        </script>
+                    @endif</div>
+                    <p>Les champs suivis d'étoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">
                             <form id="msform"  method="POST" action="{{route('demandesp0012-store')}}" enctype="multipart/form-data">
@@ -51,21 +54,21 @@
                                             </div>
 
                                         </div><br>
-                                        <h4 class="fs-title">Identité du demandeur <span style="color:red">
-                                            *</span></h4>
+                                        {{-- <h4 class="fs-title">Identité du demandeur <span style="color:red">
+                                            *</span></h4> --}}
 
                                         <div class="row">
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>identité</strong> <span
                                                         style="color: red">*</span></label>
-                                                <input type="text" value="{{ $name }}"
-                                                    placeholder="Nom et prenom" />
+                                                <input type="text" class="border-success" value="{{ $name }}"
+                                                    placeholder="Nom et prenom" disabled/>
                                             </div>
                                             <div class="col-6">
                                                 <label class="siege_social fw-bold">Lieu de résidence/siège<span style="color:red">
                                                         *</span></label>
 
-                                                <select name="commune_id" id="selectMultiple" class="form-select" required>
+                                                <select name="commune_id" id="selectMultiple" class="form-select border-success" required>
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option value="">Veuillez choisir une ville</option>
                                                     @foreach ( $communes as  $com)
@@ -81,12 +84,12 @@
                                             <div class="col-6">
                                                 <label class="adresse fw-bold">Adresse Postale<span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="beneficiaire"
-                                                    placeholder="Adresse ou numero de telephone" />
+                                                    placeholder="Adresse postal" required />
                                             </div>
                                             <div class="col-6">
-                                                <label class="boite_postale fw-bold">Telephone<span style="color:red">
+                                                <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" name="telephone"   placeholder="Telephone" value="{{ $telephone}}" />
+                                                <input type="text" name="telephone" class="border-success"   placeholder="Telephone" value="{{ $telephone}}" disabled/>
                                             </div>
                                         </div>
                                         {{-- <div class="row">
@@ -111,18 +114,21 @@
                                         <div class="row">
 
                                             <div class="col-6">
-                                                <label for="demande timbre" class="fw-bold">CNIB ou Passport</label>
+                                                <label for="demande timbre" class="fw-bold">CNIB ou Passport<span style="color:red">
+                                                    *</span></label>
                                                 <input type="file" name="cnib" class="form-control border-success" required>
                                             </div>
                                             <div class="col-6">
-                                                <label for="demande timbre" class="fw-bold">Photo d'identite</label>
+                                                <label for="demande timbre" class="fw-bold">Photo d'identité<span style="color:red">
+                                                    *</span></label>
                                                 <input type="file" name="photo" class="form-control border-success" required>
                                             </div>
                                         </div><br>
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <label for="demande timbre" class="fw-bold">Liste des personnes concernées</label>
+                                                <label for="demande timbre" class="fw-bold">Liste des personnes concernées<span style="color:red">
+                                                    *</span></label>
                                                 <input type="file" name="list_personne" class="form-control border-success" required>
                                             </div>
                                         </div>
@@ -168,7 +174,7 @@
                                         <br><br>
                                         <div class="row justify-content-center">
                                             <div class="col-7 text-center">
-                                                <h5>Votre demnde est enregistré avec succès et en cour de traitement!
+                                                <h5>Votre demnde est enregistrée avec succès et en cour de traitement!
                                                 </h5>
                                             </div>
                                         </div>

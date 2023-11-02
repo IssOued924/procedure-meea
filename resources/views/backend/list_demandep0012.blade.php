@@ -43,12 +43,26 @@
                         <h5 class="card-title">Liste des Demandes   <span>| Demandes</span></h5>
 
                         <div class="card-body">
+                            <p> @if(session('success'))
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="alert-heading">{{session('success')}}</h4>
+
+                                </div>
+
+                                <script>
+                                    setTimeout(function() {
+                                        document.querySelector('.alert.alert-success').style.display = 'none';
+                                    }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                                </script>
+                            @endif</p>
                             <div class="row">
                                 <div class="col-9">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="dt-buttons btn-group flex-wrap">
-                                            <button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0"
-                                                aria-controls="example1" type="button"><span>Copy</span></button>
+
                                             <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0"
                                                 aria-controls="example1" type="button"><span>CSV</span></button>
                                             <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0"
@@ -56,7 +70,7 @@
                                             <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0"
                                                 aria-controls="example1" type="button"><span>PDF</span></button>
                                             <button class="btn btn-secondary buttons-print" tabindex="0"
-                                                aria-controls="example1" type="button"><span>Print</span></button>
+                                                aria-controls="example1" type="button"><span>Imprimer</span></button>
                                             {{-- <div class="btn-group">
                                                 <button
                                                     class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis"
@@ -84,9 +98,9 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Date Demande</th>
                                         <th scope="col">Demandeur</th>
 
-                                        <th scope="col">Date Demande</th>
                                         <th scope="col">Résidence</th>
                                         <th scope="col">Etat Demande</th>
 
@@ -144,9 +158,9 @@
                                     @endphp
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
+                                        <td>{{ $demande->created_at->format('d/m/Y H:i:s') }}</td>
                                         <td> {{ $demande->usager->nom.' '.$demande->usager->prenom }}</td>
 
-                                        <td>{{ $demande->created_at }}</td>
                                         <td>{{ $demande->localite->libelle }}</td>
 
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
@@ -406,7 +420,7 @@
 
 
 
-                                                                <a class="text-success" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
+                                                                <a class="text-success" target="_blank" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
                                                                 <br>
                                                                 @endforeach
                                                             </div>
