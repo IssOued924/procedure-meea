@@ -61,7 +61,7 @@
                         {{-- <input type="submit" value="Create new Porject"
                             class="btn btn-success float-right bi bi-plus"> --}}
                         <button style="float: right " data-bs-toggle="modal" data-bs-target="#createModal"
-                            type="button" class="btn btn-success mt-5"><i class="bi bi-plus"></i></button>
+                            type="button" title="Ajouter un utilisateur" class="btn btn-success mt-5"><i class="bi bi-plus"></i></button>
 
                         {{-- Modal de creation --}}
                         <div class="modal fade" id="createModal" tabindex="-1">
