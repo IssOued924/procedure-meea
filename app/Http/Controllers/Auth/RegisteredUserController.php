@@ -76,7 +76,7 @@ class RegisteredUserController extends Controller
 
         // session()->flash('success', 'Registration successful!');
 
-        return redirect(RouteServiceProvider::HOME)->with('success', 'Bienvenue au Formulaire de demandes d\'avis technique d\'importation de produits chimique !');;
+        return redirect(RouteServiceProvider::HOME)->with('success', 'Bienvenue !');;
     }
 
     /**

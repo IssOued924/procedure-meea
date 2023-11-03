@@ -240,9 +240,7 @@ rel="stylesheet"
       </li><!-- End Components Nav -->
 
 
-
-
-
+      @if ( Auth::user()->role->libelle == "Administration")
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-person"></i><span>Utilisateur</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -341,6 +339,10 @@ rel="stylesheet"
 
         </ul>
       </li><!-- End Icons Nav -->
+
+      @endif
+
+
 
     </ul>
 

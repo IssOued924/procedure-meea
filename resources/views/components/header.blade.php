@@ -34,16 +34,14 @@
                         <li><x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-dropdown-link></li>
-                            <li><x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Tableau de bord') }}
-                            </x-dropdown-link></li>
+
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
                                 <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    {{ __('Se Deconnecter') }}
+                                    {{ __('Se Déconnecter') }}
                                 </x-dropdown-link>
                             </form>
                         </li>
