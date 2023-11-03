@@ -142,9 +142,9 @@
                                                     <option value="Eau">Eau</option>
                                                     <option value="Assainissement">Assainissement</option>
                                                     <option value="Barrage">Barrage</option>
-                                                   
+
                                                 </select>
-                                                
+
                                             </div>
                                             <div class="col-4">
                                                <label for="categorie" class="siege_social">Catégorie
@@ -162,7 +162,7 @@
                                                     placeholder=" " required id="" id="" />
                                             </div>
                                         </div>
-                                        
+
                                          <hr>
                                         <h2 class="fs-title">Autres documents</h2>
                                         <div class="row">
@@ -359,7 +359,7 @@ $(".submit").click(function(){
     myLink.addEventListener('click', function(e) {
       e.preventDefault();
   });
-  
+
     function addRowAutreDocument() {
         $("#dt_autre_documents").append([
             '<tr class="">',
@@ -370,11 +370,9 @@ $(".submit").click(function(){
                 ].join()
                 );
     }
-    
+
     function deleteRowAutreDocument(me) {
-        $(me).closest('tr').remove();
-        var nb_ligne = $("#dt_autre_documents").find('tbody tr').each(function (index) {
-            $(this).find('td:first-child').text(index + 1);
-        });
+         $(me).closest('tr').remove();
+
     }
 </script>

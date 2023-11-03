@@ -32,6 +32,11 @@
                 </header>
             @endif
 
+            {{-- <x-topbar /> --}}
+
+    <!-- ======= Header ======= -->
+    {{-- <x-header /> --}}
+
             <!-- Page Content -->
             <main>
                 {{ $slot }}
