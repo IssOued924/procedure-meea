@@ -15,6 +15,7 @@ use App\Http\Controllers\BackendController;
 use App\Http\Controllers\BaseJuridiquesController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommuneController;
+use App\Http\Controllers\ContactUsFormController;
 use App\Http\Controllers\DemandeP0011Controller;
 use App\Http\Controllers\DemandeP0012Controller;
 use App\Http\Controllers\DemandeP003Controller;
@@ -74,6 +75,8 @@ Route::get('/testpj', [DemandeController::class, 'testpj']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/contact', [ContactUsFormController::class, 'createForm']);
+Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -89,6 +89,8 @@
 
     @yield('contenuWelcome')
     @yield('contenuLogin')
+    @yield('contact')
+    
 
 
     </div>
