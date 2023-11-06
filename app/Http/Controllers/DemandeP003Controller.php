@@ -79,6 +79,8 @@ class DemandeP003Controller extends Controller
         return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }
 
-
+    public function updateDemande(Request $request, DemandePieceP003Repository $demandePieceP003Repository, DemandeP003 $demande){
+        
+    }
 
 }

@@ -112,6 +112,8 @@
                     <h5 class="col-10">Personne physique</h5>
                 </div>
                 <x-guest-layout>
+                <i style="color: red;">Veuillez remplir bien les champs</i>
+                <br/><br/>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -190,6 +192,8 @@
                     <h5 class="col-10">Personne morale</h5>
                 </div>
                 <x-guest-layout>
+                <i style="color: red;">Veuillez remplir bien les champs</i>
+                <br/><br/>
                     <form method="POST" action="{{ route('register-personne-morale') }}">
                         @csrf
 
