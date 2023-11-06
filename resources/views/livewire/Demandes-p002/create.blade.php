@@ -171,7 +171,7 @@
                                                     <thead class="dst-form-thead">
                                                         <tr>
                                                             <th>Nom du document <span style="color:red">*</span></th>
-                                                            <th>Fcihier <span style="color:red">*</span></th>
+                                                            <th>Fichier <span style="color:red">*</span></th>
                                                             <th></th>
                                                         </tr>
                                                     </thead>

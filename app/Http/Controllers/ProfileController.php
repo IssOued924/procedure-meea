@@ -63,7 +63,7 @@ class ProfileController extends Controller
         }
 
       $userData = ['name' => $request->name, 'email' => $request->email];
-      $usagerData = ['nom' => $request->nom,
+      $usagerData = ['nom' => $request->name,
                     'prenom' => $request->prenom,
                     'date_naissance' => $request->date_naissance,
                     'lieu_naisssance' => $request->lieu_naisssance,
