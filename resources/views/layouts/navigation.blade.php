@@ -27,7 +27,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="dropdown-toggle inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="dropdown">{{ Auth::user()->usager->prenom.' '.Auth::user()->usager->nom}}
+                           <i class="bi bi-person-fill"></i> <div class="dropdown">{{ Auth::user()->usager->prenom.' '.Auth::user()->usager->nom}}
 
                          </div>
                             {{-- <div class="ml-1">
