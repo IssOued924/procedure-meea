@@ -21,7 +21,7 @@
                     <p>Les champs suivis d'etoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">
-                                    <form id="msform" method="POST" action="{{route("demandesp001-store")}}" enctype="multipart/form-data" >
+                                    <form id="msform" method="POST" action="{{route("demandesp002-store")}}" enctype="multipart/form-data" >
                                         @csrf
                                   <!-- progressbar -->
                                 <ul id="progressbar">
@@ -41,13 +41,24 @@
                                                 <div class="col-6">
                                                     <label class="nom_societe fw-bold">Identité <span
                                                             style="color: red">*</span></label>
-                                                    <input type="text" class="border-success" name="libelle_court"
-                                                        placeholder="identité" /><br /><br />
+                                                    <input type="text" class="border-success" name="identite" required placeholder="identité" value="{{ $identite }}" /><br /><br />
+                                                    @if($errors->has('identite'))
+                                                        <p class="alert alert-danger">{{ $errors->first('identite') }}</p>
+                                                    @endif
+                                                    
                                                 </div>
                                                 <div class="col-6">
                                                     <label class="pays_residence fw-bold">Pays de résidence<span style="color:red">
                                                             *</span></label>
-                                                    <input type="text" name="libelle_long" placeholder="Pays de résidence" /><br /><br />
+                                                    <select name="pays" id="pays" class="form-select boerder-success">
+                                                    <option value="">Veuillez choisir pays</option>
+                                                    @foreach($pays as $pay)
+                                                        <option {{ ($pay->libelle == $default_pays ? 'selected' : '' )}} value="{{$pay->libelle}}">{{$pay->libelle}}</option>
+                                                    @endforeach
+                                                    </select> <br /><br />
+                                                    @if($errors->has('pays'))
+                                                        <p class="alert alert-danger">{{ $errors->first('pays') }}</p>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -56,12 +67,15 @@
                                             <div class="row">
                                                 <div class="col-3">
                                                     <label class="nom_societe fw-bold" >Moi Meme</label>
-                                                    <input type="radio" value="1" class="checkbox"  name="beneficiaire" />
+                                                    <input type="radio" value="Moi même" class="checkbox"  name="beneficiaire" />
                                                 </div>
                                                 <div class="col-3">
                                                     <label class="siege_social fw-bold ">Autre Personne</label>
-                                                    <input type="radio" value="1"  name="beneficiaire"/>
+                                                    <input type="radio" value="Autre personne" name="beneficiaire"/>
                                                 </div>
+                                                  @if($errors->has('beneficiaire'))
+                                                      <p class="alert alert-danger">{{ $errors->first('beneficiaire') }}</p>
+                                                  @endif
                                             </div>
 
                                     </div>
@@ -79,47 +93,34 @@
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold">Reçu d’achat du dossier de demande <span
                                                         style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control" name="denomination_sociale_fournisseur"
-                                                    placeholder="Dénomination Sociale" />
+                                                <input type="file" class="border-success form-control" required name="recu_achat_dossier" />
                                             </div>
                                             <div class="col-6">
-                                                <label class="pays_residence fw-bold ">Demande Timbré<span style="color:red">
-                                                        *</span></label>
-                                                <input type="file" name="pays_fournisseur" class="form-control"  />
+                                                <label class="adresse fw-bold">Certificat IFU<span style="color: red">*</span></label>
+                                                <input type="file" class="border-success form-control" required name="ifu" />
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
-                                                <label class="adresse fw-bold">Certificat IFU<span style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control" name="adresse_fournisseur"
-                                                    placeholder="Adresse ou numero de telephone" />
-                                            </div>
                                              <div class="col-6">
                                                 <label class="boite_postale">Attestation RCCM<span style="color:red">
                                                         *</span></label>
-                                                <input type="file" name="rccm"  class="form-control" />
+                                                <input type="file" name="rccm"  class="form-control" required />
                                             </div>
-                                        </div>
-
-
-                                        <div class="row">
                                             <div class="col-6">
                                                 <label class="adresse fw-bold">Attestation employeur CNSS<span style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control" name="adresse_fournisseur"
-                                                    placeholder="Adresse ou numero de telephone" />
+                                                <input type="file" class="border-success form-control" required name="cnss"/>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                              <div class="col-6">
                                                 <label class="boite_postale">Fiche Renseignement<span style="color:red">
                                                         *</span></label>
-                                                <input type="file" name="renseignement"  class="form-control" />
+                                                <input type="file" name="fiche_renseignement" required class="form-control" />
                                             </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-6">
                                                 <label class="adresse fw-bold">Déclaration sur l’honneur de l’exactitude des informationsr<span style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control" name="adresse_fournisseur"
+                                                <input type="file" class="border-success form-control" required name="declaration_honneur"
                                                       />
                                             </div>
                                         </div>
@@ -139,11 +140,13 @@
                                                     <span style="color:red">*</span></label>
                                                 <select name="domaine" id="domaine" class="form-select boerder-success">
                                                     <option value="">Veuillez choisir le domaine</option>
-                                                    <option value="Eau">Eau</option>
+                                                    <option value="Eau potable">Eau Potable</option>
                                                     <option value="Assainissement">Assainissement</option>
                                                     <option value="Barrage">Barrage</option>
-
                                                 </select>
+                                                 @if($errors->has('domaine'))
+                                                        <p class="alert alert-danger">{{ $errors->first('domaine') }}</p>
+                                                 @endif
 
                                             </div>
                                             <div class="col-4">
@@ -151,15 +154,20 @@
                                                     <span style="color:red">*</span></label>
                                                 <select name="categorie" id="categorie" class="form-select boerder-success">
                                                     <option value="">Veuillez choisir la catégorie</option>
-                                                    <option value="Etud">Etude et contrôle</option>
-                                                    <option value="Traveax">Travaux</option>
+                                                    <option value="Etude et contrôle">Etude et contrôle</option>
+                                                    <option value="Travaux">Travaux</option>
                                                 </select>
+                                                 @if($errors->has('categorie'))
+                                                        <p class="alert alert-danger">{{ $errors->first('categorie') }}</p>
+                                                 @endif
                                             </div>
                                             <div class="col-4">
                                                <label for="sousdomaine" class="nom_societe">Sous domaine
                                                     <span style="color: red">*</span></label>
-                                                <input type="text" class="border-success" name="sous_domaine" id="sousdomaine"
-                                                    placeholder=" " required id="" id="" />
+                                                <input type="text" class="border-success" name="sous_domaine" id="sousdomaine" required />
+                                                 @if($errors->has('sous_domaine'))
+                                                        <p class="alert alert-danger">{{ $errors->first('sous_domaine') }}</p>
+                                                    @endif
                                             </div>
                                         </div>
 
@@ -206,10 +214,12 @@
                                         <div class="row">
                                             <input type="checkbox" id="confirmationBox" name="confirmed"
                                                 class="required-checkbox   checkbox" value="confirmed">
+                                            @if($errors->has('confirmed'))
+                                                        <p class="alert alert-danger">{{ $errors->first('confirmed') }}</p>
+                                                    @endif
                                             <label for="confirmationBox" class="checkbox-label ">
-                                                Je soussigné ...…certifie être l’importateur-distributeur / importateur-utilisateur du/des produit(s) chimique(s) ci-dessus mentionné(s). Je certifie exactes et complètes les informations consignées dans le présent formulaire.
-Je m’engage à importer et à distribuer /utiliser les produits chimiques ci-dessus mentionnés conformément aux exigences législatives et règlementaires en vigueur au Burkina Faso.
-
+                                                En cochant cette case, je certifie sur mon honneur que les informations
+                                                renseignées sont correctes.
                                             </label>
                                         </div>
 
@@ -217,8 +227,8 @@ Je m’engage à importer et à distribuer /utiliser les produits chimiques ci-d
 
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Retour" />
-                                    <input type="submit" name="make_payment" class="next action-button"
-                                        value="Confirmation" />
+                                   
+                                     <button type="submit" class="next action-button">Confirmation</button>
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
@@ -363,8 +373,8 @@ $(".submit").click(function(){
     function addRowAutreDocument() {
         $("#dt_autre_documents").append([
             '<tr class="">',
-            '<td class="rs"><input type="text" class="border-success form-control requis" name="libelle_document[]"></td>',
-            '<td class="rs"><input type="file" class="border-success form-control requis" name="fichier_document"> </td>',
+            '<td class="rs"><input type="text" class="border-success form-control requis" required name="libelle_document[]"></td>',
+            '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document[]"> </td>',
             '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowAutreDocument(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
             '</tr>',
                 ].join()
