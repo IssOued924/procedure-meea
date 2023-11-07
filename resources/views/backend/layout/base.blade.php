@@ -229,8 +229,8 @@ rel="stylesheet"
             @if (Auth::user()->agent->service->libelle_court =='DGRE' || Auth::user()->role->libelle == "Administration")
 
             <li>
-                <a href="#">
-                  <i class="bi bi-circle"></i><span>Procédure Agrement en Eau &nbsp;</span>
+                <a href="{{ route('demandesp002-list')}}">
+                  <i class="bi bi-circle"></i><span>Procédure Agrement en Eau &nbsp;<span id="prog_agrement_technique" class="badge bg-warning text-white"> </span></span>
                 </a>
               </li>
             @endif
@@ -405,6 +405,7 @@ function getNombreDemandeByProcedure(){
                         $('#prog_exemption').text(""+result.nbce);
                         $('#prog_chasse').text(""+result.nbpchasse);
                         $('#prog_homologation').text(""+result.nbhomologation);
+                        $('#prog_agrement_technique').text(""+result.nbAgrementTechique);
 
                          break;
                      default :

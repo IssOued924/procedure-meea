@@ -27,7 +27,6 @@ class DemandeP002Controller extends Controller {
     public function store(StoreDemandeP002Request $request,
             DemandePieceP002Repository $demandePieceP002Repository,
             DemandeP002 $demande) {
-
         $dataDemande = ['etat' => 'D',
             'date_demande' => Carbon::parse(Carbon::now())->format('Ymd'),
             'identite' => $request->identite,
@@ -44,36 +43,38 @@ class DemandeP002Controller extends Controller {
             'domaine' => $request->domaine,
             'categorie' => $request->categorie,
             'sous_domaine' => $request->sous_domaine];
+
         // Sauvegarde de la demande
+
         $demande = $this->repository->create($dataDemande);
         $demande->save();
-        
         //Recuperation du chemin des fichiers joint
-        $cheminRecuAchat = $this->repository->uploadFile($request->file('recu_achat_dossier'));
-        $cheminifu = $this->repository->uploadFile($request->file('ifu'));
-        $cheminRccm = $this->repository->uploadFile($request->file('rccm'));
-        $cheminCnss = $this->repository->uploadFile($request->file('cnss'));
-        $cheminFicheRenseignement = $this->repository->uploadFile($request->file('fiche_renseignement'));
-        $cheminDeclarationHonneur = $this->repository->uploadFile($request->file('declaration_honneur'));
-        
-        //Enregistement des fchiers joints
-        $demandePieceP002Repository->setChemin($cheminRecuAchat, $demande->uuid, 'Récu achat dossier');
-        $demandePieceP002Repository->setChemin($cheminifu, $demande->uuid, 'Certificat Ifu');
-        $demandePieceP002Repository->setChemin($cheminRccm, $demande->uuid, 'Rccm');
-        $demandePieceP002Repository->setChemin($cheminCnss, $demande->uuid, 'Attestation employeur CNSS');
-        $demandePieceP002Repository->setChemin($cheminFicheRenseignement, $demande->uuid, 'Fiche Renseignement');
-        $demandePieceP002Repository->setChemin($cheminDeclarationHonneur, $demande->uuid, 'Déclaration sur l’honneur de l’exactitude des informations');
-        
-        //Enregistrement des autres documents
-         if ($request->libelle_document && sizeof($request->libelle_document)>0) {
-              $n = sizeof($request->libelle_document);
+            $cheminRecuAchat = $this->repository->uploadFile($request->file('recu_achat_dossier'));
+            $cheminifu = $this->repository->uploadFile($request->file('ifu'));
+            $cheminRccm = $this->repository->uploadFile($request->file('rccm'));
+            $cheminCnss = $this->repository->uploadFile($request->file('cnss'));
+            $cheminFicheRenseignement = $this->repository->uploadFile($request->file('fiche_renseignement'));
+            $cheminDeclarationHonneur = $this->repository->uploadFile($request->file('declaration_honneur'));
+           
+            //Enregistement des fchiers joints
+            $demandePieceP002Repository->setChemin($cheminRecuAchat, $demande->uuid, 'Récu achat dossier');
+            $demandePieceP002Repository->setChemin($cheminifu, $demande->uuid, 'Certificat Ifu');
+            $demandePieceP002Repository->setChemin($cheminRccm, $demande->uuid, 'Rccm');
+            $demandePieceP002Repository->setChemin($cheminCnss, $demande->uuid, 'Attestation employeur CNSS');
+            $demandePieceP002Repository->setChemin($cheminFicheRenseignement, $demande->uuid, 'Fiche Renseignement');
+            $demandePieceP002Repository->setChemin($cheminDeclarationHonneur, $demande->uuid, 'Déclaration sur l’honneur de l’exactitude des informations');
+           
+            //Enregistrement des autres documents
+            if ($request->libelle_document && sizeof($request->libelle_document) > 0) {
+                $n = sizeof($request->libelle_document);
                 for ($i = 0; $i < $n; $i++) {
-                     $chemin = $this->repository->uploadFile($request->file('fichier_document')[$i]);
-                     $demandePieceP002Repository->setChemin($chemin, $demande->uuid, $request->libelle_document[$i]);
+                    $chemin = $this->repository->uploadFile($request->file('fichier_document')[$i]);
+                    $demandePieceP002Repository->setChemin($chemin, $demande->uuid, $request->libelle_document[$i]);
                 }
-         }
-        
+            }
+          // return json_encode(array('status' => 'success'));
         return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+        //return json_encode(array('status' => 'fail'));
     }
 
 }

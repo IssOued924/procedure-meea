@@ -40,6 +40,8 @@ use App\Repositories\DemandePieceP001Repository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\DemandeP002;
+use App\Models\CommentaireP002;
 
 class BackendController extends Controller
 {
@@ -335,7 +337,13 @@ class BackendController extends Controller
                 'libelle' => $request->libelle,
                 'demande_p001_id' => $id
             ]);
-        } elseif ($table == 'demande_p003_s') {
+        } elseif ($table == 'demande_p002_s') {
+            $commentaire2 = new CommentaireP002();
+            $commentaire2->create([
+                'libelle' => $request->libelle,
+                'demande_p002_id' => $id
+            ]);
+        }elseif ($table == 'demande_p003_s') {
             $commentaire3 = new CommentaireP003();
             $commentaire3->create([
                 'libelle' => $request->libelle,
@@ -410,6 +418,12 @@ class BackendController extends Controller
                 'libelle' => $request->libelle,
                 'demande_p001_id' => $id
             ]);
+        }elseif ($table == 'demande_p002_s') {
+            $commentaire2 = new CommentaireP002();
+            $commentaire2->create([
+                'libelle' => $request->libelle,
+                'demande_p002_id' => $id
+            ]);
         } elseif ($table == 'demande_p003_s') {
             $commentaire3 = new CommentaireP003();
             $commentaire3->create([
@@ -468,7 +482,8 @@ class BackendController extends Controller
         DemandeP003Repository $demandeP003Repository,
         DemandeP0012Repository $demandeP0012Repository,
         DemandeP006Repository $demandeP006Repository,
-        DemandeP007Repository $demandeP007Repository
+        DemandeP007Repository $demandeP007Repository,
+        DemandeP002Repository $demandeP002Repository
 
     ) {
 
@@ -482,7 +497,7 @@ class BackendController extends Controller
             'nbce' => $demandeP006Repository->nombre('demande_p006_s', array('etat' => 'D')),
             'nbhomologation' => $demandeP007Repository->nombre('demande_p007_s', array('etat' => 'D')),
             'nbcoupe' => $demandeP0011Repository->nombre('demande_p0011_s', array('etat' => 'D')),
-
+            "nbAgrementTechique" => $demandeP002Repository->nombre('demande_p002_s', array('etat' => 'D')),
         ));
     }
 
@@ -550,4 +565,26 @@ class BackendController extends Controller
         ];
         return view('backend.lists_demandesAgents', $data);
     }
+    
+    public function listDemandep002(DemandeP002Repository $demandeP002Repository, DemandeP002 $demandeP002)
+    {
+
+        $data = [
+            "demandes" => $demandeP002Repository->all()->sortByDesc('created_at'),
+            "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
+            "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
+            "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
+            "statutEtude" => StatutDemande::where('etat', '=', 'E')->first()->statut,
+            "statutComplement" => StatutDemande::where('etat', '=', 'C')->first()->statut,
+            "statutSigne" => StatutDemande::where('etat', '=', 'S')->first()->statut,
+            "statutValide" => StatutDemande::where('etat', '=', 'V')->first()->statut,
+            "demandeEtat" => $demandeP002->statut(),
+            "agents" => Agent::all(),
+        ];
+        //   dd($data['demandes'][0]->demandePiece);
+        // dd($data['demandeEtat']);
+
+        return view('backend.list_demandep002', $data);
+    }
+
 }

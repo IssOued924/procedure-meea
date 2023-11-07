@@ -43,6 +43,7 @@ class DemandeP002  extends Demande
         return $this->belongsTo(StatutDemande::class, 'etat');
     }
         //recuperation de localite de demandeur
+        //recuperation de localite de demandeur
     public function localite(){
         return $this->belongsTo(Commune::class, 'commune_id');
     }

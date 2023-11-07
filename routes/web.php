@@ -150,7 +150,7 @@ Route::get('/administration/statusChange/{id}/{currentStatus}/{table}', [Backend
 Route::post('/administration/uploadActe/{id}/{currentStatus}/{table}', [BackendController::class, 'uploadActe'])->name('uploadActe');
 Route::get('/administration/rejet/{id}/{table}', [BackendController::class, 'rejetter'])->name('rejetter');
 Route::get('/administration/procedure-dashboard/{procedure}/{procedureName}', [BackendController::class, 'procedureDashboard'])->name('procedure-dashboard');
-
+Route::get('/administration/demandesp002-list', [BackendController::class, 'listDemandep002'])->name('demandesp002-list');
 
     // Route parametre
 Route::get('/administration/parametre/commune', [CommuneController::class, 'index'])->name('commune-list');
