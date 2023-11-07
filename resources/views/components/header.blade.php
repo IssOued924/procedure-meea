@@ -27,7 +27,7 @@
 
                 <li class="dropdown">
                     <a><span>
-                            <div>{{ Auth::user()->usager->prenom.' '.Auth::user()->usager->nom }}</div>
+                            <div>{{ Auth::user()->usager->prenom.'  '.Auth::user()->usager->nom }}</div>
                         </span> <i class="bi bi-chevron-down"></i>
                     </a>
                     <ul>

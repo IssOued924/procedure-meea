@@ -48,7 +48,7 @@ class AuthenticatedSessionController extends Controller
             {
                 return redirect('/administration');
             }else{
-         return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Bienvenue sur le formulaire de la demande ');
+         return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Bienvenue ');
         //  return  redirect('/');
              }
         }
