@@ -2636,6 +2636,11 @@ select.list-dt:focus {
     content: "\f0ae";
   }
 
+  #progressbar #paiement:before {
+    font-family: FontAwesome;
+    content:"\f09d";
+  }
+
   #progressbar #stockage:before {
     font-family: FontAwesome;
     content: "\f1c0";

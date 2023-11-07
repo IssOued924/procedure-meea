@@ -120,6 +120,7 @@ Route::middleware('auth')->group(function () {
             // eco tourisme
     Route::get("/P0012", DemandeCompP0012::class)->name("demandesp0012");
     Route::post("/demandesp0012-store", [DemandeP0012Controller::class, 'store'])->name("demandesp0012-store");
+    Route::post("/demandesp0012-payment", [DemandeP0012Controller::class, 'payment'])->name("demandesp0012-payment");
 
 
 
