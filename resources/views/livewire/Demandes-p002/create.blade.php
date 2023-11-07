@@ -11,7 +11,7 @@
     <div class="container-fluid" id="grad1">
         <div class="row justify-content-center mt-0">
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
-                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
                     <h5><strong>Octroie d'agrement techniques en Eau et Assainissement</strong></h5>
                    <p> @if(session('success'))
                     <div class="alert alert-success">
@@ -23,12 +23,11 @@
                         <div class="col-md-12 mx-0">
                                     <form id="msform" method="POST" action="{{route("demandesp001-store")}}" enctype="multipart/form-data" >
                                         @csrf
-
-                                <!-- progressbar -->
+                                  <!-- progressbar -->
                                 <ul id="progressbar">
                                     <li class="active" id="personal"><strong>Identité du demandeur</strong></li>
                                     <li id="folder"><strong>Pieces Administratives</strong></li>
-                                    <li id="personal"><strong>Justificatifs des équipements et du personnel</strong></li>
+                                    <li id="personal"><strong>Domaine et catégorie</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
                                     <li id="confirm"><strong>Validation</strong></li>
                                 </ul>
@@ -133,38 +132,65 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
-                                        <h2 class="fs-title">Justificatifs des équipements et du personnel</h2>
-
+                                        <h2 class="fs-title">Domaine et Catégorie</h2>
                                         <div class="row">
-                                            <div class="col-6">
-                                                <label class="nom_societe  fw-bold">Diplomes du Personnel<span
-                                                        style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control"
-                                                      />
+                                            <div class="col-4">
+                                                <label for="domaine" class="siege_social">Domaine
+                                                    <span style="color:red">*</span></label>
+                                                <select name="domaine" id="domaine" class="form-select boerder-success">
+                                                    <option value="">Veuillez choisir le domaine</option>
+                                                    <option value="Eau">Eau</option>
+                                                    <option value="Assainissement">Assainissement</option>
+                                                    <option value="Barrage">Barrage</option>
+
+                                                </select>
+
                                             </div>
-                                            <div class="col-6">
-                                                <label class="pays_residence fw-bold">CV du Personnel<span style="color:red">
-                                                        *</span></label>
-                                                <input type="file" name="cv" class="form-control" />
+                                            <div class="col-4">
+                                               <label for="categorie" class="siege_social">Catégorie
+                                                    <span style="color:red">*</span></label>
+                                                <select name="categorie" id="categorie" class="form-select boerder-success">
+                                                    <option value="">Veuillez choisir la catégorie</option>
+                                                    <option value="Etud">Etude et contrôle</option>
+                                                    <option value="Traveax">Travaux</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-4">
+                                               <label for="sousdomaine" class="nom_societe">Sous domaine
+                                                    <span style="color: red">*</span></label>
+                                                <input type="text" class="border-success" name="sous_domaine" id="sousdomaine"
+                                                    placeholder=" " required id="" id="" />
                                             </div>
                                         </div>
 
+                                         <hr>
+                                        <h2 class="fs-title">Autres documents</h2>
                                         <div class="row">
-                                            <div class="col-6">
-                                                <label class="nom_societe fw-bold">Cartes grises des véhicules et engins</label>
-                                                <input type="file" class="border-success form-control" name="formule_chimique"
-                                                     />
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="pays_residence fw-bold">Reçus d’achat du matériel techniques<span style="color:red">
-                                                        *</span></label>
-                                                <input type="file" name="destination_pays" class="form-control"   />
+                                            <div class="col-12">
+                                                <table class="table datatable table-bordered table-striped datatable-table" id="dt_autre_documents">
+                                                    <thead class="dst-form-thead">
+                                                        <tr>
+                                                            <th>Nom du document <span style="color:red">*</span></th>
+                                                            <th>Fcihier <span style="color:red">*</span></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="3" style="text-align: right;">
+                                                                <a class="btn btn-default" onclick="addRowAutreDocument()">
+                                                                    <i class="fa fa-plus-circle text-success"></i>
+                                                                    <span>Ajouter un document </span>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+
                                             </div>
                                         </div>
-
-
-
-
                                     </div>
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Retour" />
@@ -226,7 +252,12 @@ Je m’engage à importer et à distribuer /utiliser les produits chimiques ci-d
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js" ;></script>
 
 <script type="text/javascript">
-    $('#selectMultiple').select2();
+    //intitialisation du tableau des autres documents
+    $(function () {
+        for (var i = 0; i < 3; i++) {
+            addRowAutreDocument();
+        }
+     })
 </script>
 
 <script type='text/javascript'>
@@ -329,4 +360,19 @@ $(".submit").click(function(){
       e.preventDefault();
   });
 
+    function addRowAutreDocument() {
+        $("#dt_autre_documents").append([
+            '<tr class="">',
+            '<td class="rs"><input type="text" class="border-success form-control requis" name="libelle_document[]"></td>',
+            '<td class="rs"><input type="file" class="border-success form-control requis" name="fichier_document"> </td>',
+            '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowAutreDocument(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
+            '</tr>',
+                ].join()
+                );
+    }
+
+    function deleteRowAutreDocument(me) {
+         $(me).closest('tr').remove();
+
+    }
 </script>

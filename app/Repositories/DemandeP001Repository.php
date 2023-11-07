@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Class DemandeP002Repository.
  */
-class DemandeP001Repository extends GenericRepository
+class DemandeP001Repository extends AppRepository
 {
     /**
      * @return string

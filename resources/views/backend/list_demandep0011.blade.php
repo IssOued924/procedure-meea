@@ -60,8 +60,7 @@
                                 <div class="col-9">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="dt-buttons btn-group flex-wrap">
-                                            <button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0"
-                                                aria-controls="example1" type="button"><span>Copy</span></button>
+
                                             <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0"
                                                 aria-controls="example1" type="button"><span>CSV</span></button>
                                             <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0"
@@ -69,7 +68,7 @@
                                             <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0"
                                                 aria-controls="example1" type="button"><span>PDF</span></button>
                                             <button class="btn btn-secondary buttons-print" tabindex="0"
-                                                aria-controls="example1" type="button"><span>Print</span></button>
+                                                aria-controls="example1" type="button"><span>Imprimer</span></button>
                                             {{-- <div class="btn-group">
                                                 <button
                                                     class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis"
@@ -97,9 +96,9 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Date Demande</th>
                                         <th scope="col">Demandeur</th>
 
-                                        <th scope="col">Date Demande</th>
                                         <th scope="col">Résidence</th>
                                         <th scope="col">Etat Demande</th>
 
@@ -157,9 +156,9 @@
                                     @endphp
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
+                                        <td>{{ $demande->created_at->format('d/m/Y H:i:s') }}</td>
                                         <td> {{ $demande->usager->nom.' '.$demande->usager->prenom}}</td>
 
-                                        <td>{{ $demande->created_at }}</td>
                                         @if (isset($demande->localite))
                                         <td>{{ $demande->localite->libelle}}</td>
                                         @else
@@ -174,15 +173,65 @@
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}">
                                                 <i class="bi bi-eye"></i> </button>
 
-                                            <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
-                                                type="button" title="Valider" class="btn btn-success"><i
-                                                    class="bi bi-check-circle"></i> </a>
+                                                @if ($demande->etat != 'A' && $demande->etat != 'S' )
+                                                    <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
+                                                        type="button" title="Valider" class="btn btn-success"><i
+                                                            class="bi bi-check-circle"></i> </a>
 
-                                            <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur"
-                                                class="btn btn-primary"><i class="bi bi-folder-symlink"></i></button>
+                                                    <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur"
+                                                        class="btn btn-primary"><i class="bi bi-folder-symlink"></i></button>
 
-                                            <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejetter"
-                                                class="btn btn-danger"><i class="bi bi-x-circle"></i></a>
+                                                    <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejetter"
+                                                        class="btn btn-danger"><i class="bi bi-x-circle"></i></a>
+                                                @endif
+                                                @if ($demande->etat == 'S')
+                                                <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}"
+                                                    type="button" title="Joindre Acte Signé" class="btn btn-success"><i
+                                                        class="bi bi-upload"></i> </a>
+                                                @endif
+
+
+
+                                            {{-- Model de Joindre acte signé --}}
+                                            <div class="modal fade" id="signer{{ $demande->uuid }}"
+                                                data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content bgcustom-gradient-light">
+                                                        <div class="modal-header">
+                                                            <img src="{{ asset('backend/assets/img/valide.png') }}"
+                                                                width="60" height="45" class="d-inline-block align-top"
+                                                                alt="">
+                                                            <h5 class="modal-title m-auto"> Joindre l'acte Signé
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-dismiss="modal"
+                                                                aria-label="btn-close">
+
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="post" enctype="multipart/form-data"
+                                                                action="{{ route('uploadActe', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p0011_s'] ) }}">
+                                                                @csrf
+
+                                                                <div class="form-group">
+                                                                    <div class="text-center">
+                                                                        <label class="col-form-label">Charger le fichier scanné</label>
+                                                                            <input type="file" required name="output_file" class="form-control border-success">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-warning"
+                                                                        data-dismiss="modal">Non, Annuler</button>
+                                                                    <button type="submit" class="btn btn-success">Oui,
+                                                                        Joindre</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Fin Modal Signer-->
 
 
                                             {{-- Model de confirmation de Assigner a un collabrateur --}}
@@ -366,7 +415,7 @@
 
 
 
-                                                                <a  class="text-success" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
+                                                                <a  class="text-success"  target="_blank" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
                                                                 <br>
                                                                 @endforeach
                                                             </div>

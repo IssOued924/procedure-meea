@@ -44,6 +44,8 @@ class DemandeP007Controller extends Controller
         unset($data['telephone']);
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
+
+        $data['reference'] = $this->repository->generateReference('P007');
         $data['procedure_id'] = Procedure::where(['code' => 'P007'])->first('uuid')->uuid;
 
         // $user = $userRepository->getById(Auth::user()->uuid);
@@ -63,6 +65,11 @@ class DemandeP007Controller extends Controller
         unset($data['certificat_biodegradabilite']);
 
 
+        unset($data['moyen']);
+        unset($data["numero"]);
+        unset($data["otp"]);
+
+
         $demande = $this->repository->create($data);
         $demande->save();
 
@@ -70,7 +77,7 @@ class DemandeP007Controller extends Controller
         $demandePieceP006Repository->setChemin($certificat_biodegradabilite, $demande->uuid, 'Certificat de biodegradabilite');
 
 
-        return redirect('/')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
+        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }
 
 }

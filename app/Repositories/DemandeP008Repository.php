@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Class DemandeP008Repository.
  */
-class DemandeP008Repository extends GenericRepository
+class DemandeP008Repository extends AppRepository
 {
     /**
      * @return string
@@ -23,9 +23,9 @@ class DemandeP008Repository extends GenericRepository
     }
 
     public function uploadFile(array $data, string $name){
-        
+
         $this->unsetClauses();
-        
+
         if ( isset($data[$name]) ){
             $demande = new DemandeP008();
 

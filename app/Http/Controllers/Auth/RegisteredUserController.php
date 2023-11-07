@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Agent;
+use App\Models\Role;
+use App\Models\Service;
 use App\Models\User;
 use App\Models\Usager;
 use App\Models\TypeUsager;
 use App\Providers\RouteServiceProvider;
+use App\Repositories\UserRepository;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -72,7 +76,7 @@ class RegisteredUserController extends Controller
 
         // session()->flash('success', 'Registration successful!');
 
-        return redirect(RouteServiceProvider::HOME)->with('success', 'Bienvenue au Formulaire de demandes d\'avis technique d\'importation de produits chimique !');;
+        return redirect(RouteServiceProvider::HOME)->with('success', 'Bienvenue !');;
     }
 
     /**
@@ -192,4 +196,79 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME)->with('success', 'Bienvenue au Formulaire de demandes d\'avis technique d\'importation de produits chimique !');;
     }
+
+
+
+
+    //enregistrement des users metiers
+    public  function userStore(Request $request)
+    {
+
+        $agent = Agent::where(['uuid' => $request->agent_id])->first();
+        // dd($agent);
+
+        $request->validate([
+            // 'id' => ['required'],
+            'agent_id' => ['required', 'string', 'max:255'],
+            'role_id' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+        ]);
+        // dd($request);
+
+        $user = User::create([
+            'name' => $agent->nom.' '.$agent->prenom,
+            'agent_id' => $request->agent_id,
+            'role_id' => $request->role_id,
+            'email' => $request->email,
+            'password' => Hash::make('12345678'),
+        ]);
+
+        $user->save();
+
+       return redirect()->back()->with('success', 'Utilisateur créé avec succès !!');
+
+
+    }
+
+
+
+
+
+    // Liste des utilisateur
+                      // Recuperation de la list des demande concernant p001 Produi chimique
+                      public function listUsers( UserRepository $userRepository,  User $user){
+                        // dd( StatutDemande::where('etat', '=', 'V')->first()->statut);
+                          $data = [
+                              "users" => $userRepository->all(),
+
+                              "services" => Service::all(),
+                              "agents" => Agent::all(),
+                              "roles" =>Role::all(),
+                          ];
+
+                        //   dd($data['demandes'][0]->demandePiece);
+
+
+                          return view('backend.utilisateur.user_list', $data);
+
+                      }
+
+
+          public function update(Request $request, $uuid)
+                      {
+                          $request->validate([
+                              'name' => 'required',
+                              'role_id' => 'required',
+
+                          ]);
+
+                          $agent = User::find($uuid);
+                          $agent->update([
+                              'name' => $request->input('name'),
+                              'role_id' => $request->input('role_id'),
+
+                          ]);
+
+                          return redirect()->route('user-list')->with('success', 'Utilisateur  mis à jour avec succès !');
+                      }
 }

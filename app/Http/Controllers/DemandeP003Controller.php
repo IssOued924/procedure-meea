@@ -44,6 +44,8 @@ class DemandeP003Controller extends Controller
         $data['etat'] = 'D'; //code de procedure demande deposee
         $data['procedure_id'] = Procedure::where(['code' => 'P003'])->first('uuid')->uuid;
 
+        $data['reference'] = $this->repository->generateReference('P003');
+
         // $user = $userRepository->getById(Auth::user()->uuid);
         // $user->telephone = $request->telephone;
         // //$user->identite = $request->identite;
@@ -74,7 +76,7 @@ class DemandeP003Controller extends Controller
         $demandePieceP003Repository->setChemin($cnib_passport, $demande->uuid, 'CNIB/PASSEPORT');
         $demandePieceP003Repository->setChemin($document_arme, $demande->uuid, 'Document de l\'arme');
 
-        return redirect('/')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
+        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }
 
 

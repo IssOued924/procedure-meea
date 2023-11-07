@@ -45,6 +45,8 @@ class DemandeP001Controller extends Controller
         unset($data['telephone']);
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
+        // generation de code reference pour chaque demande
+        $data['reference'] = $this->repository->generateReference('P001');
 
         $data['procedure_id'] = Procedure::where(['code' => 'P001'])->first('uuid')->uuid;
         //$data['usager_id']= Auth::user()->uuid;
@@ -92,6 +94,6 @@ class DemandeP001Controller extends Controller
         $demandePieceP001Repository->setChemin($attestation_destination_finale, $demande->uuid, 'Attestation destination Finale');
         $demandePieceP001Repository->setChemin($list_produit, $demande->uuid, 'Liste des poduits');
 
-        return redirect('/')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
     }
 }

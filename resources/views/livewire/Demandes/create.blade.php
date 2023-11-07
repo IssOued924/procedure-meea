@@ -5,13 +5,12 @@
     </div>
     @endif
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
     <div class="container-fluid" id="grad1">
         <div class="row justify-content-center mt-0">
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
-                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
                     <h5><strong>Délivrance d'avis technique d'importation de produits chimiques insdustriels </strong></h5>
                    <p> @if(session('success'))
                     <div class="alert alert-success">
@@ -122,7 +121,7 @@
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" class="border-success"
-                                                    placeholder="Telephone" value="{{ $telephone}}" />
+                                                    placeholder="Telephone" value="{{ $telephone}}"  disabled/>
                                             </div>
                                         </div>
 
@@ -131,7 +130,7 @@
                                             <div class="col-6">
                                                 <label class="adresse fw-bold">Quantité totale à importer en KG</label>
                                                 <input type="text" class="border-success" name="quantite"
-                                                    placeholder="Quantite de stockage" />
+                                                    placeholder="Quantite à importer" />
                                             </div>
                                             {{-- <div class="col-6">
                                                 <label class="boite_postale">Telephone<span style="color:red">
@@ -235,12 +234,9 @@
                                                     <option class="border-success" value="">Veuillez choisir un Pays
                                                     </option>
                                                     @foreach ( $pays as $pay)
-                                                    <option value="{{ $pay->uuid }}">{{htmlspecialchars($pay->libelle, ENT_NOQUOTES, "UTF-8")  }}</option>
+                                                    <option value="{{ $pay->uuid }}">{{utf8_decode($pay->libelle) }}</option>
                                                     @endforeach
-
-
                                                 </select>
-
                                             </div>
                                         </div>
 
@@ -378,7 +374,7 @@
                                                 <label class="adresse fw-bold">Capacité Totale des locaux de stockage
                                                     <span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="capacite_stockage"
-                                                    placeholder="Capacité Totale des locaux de stockage" />
+                                                    placeholder="Capacité Totale des locaux de stockage" required />
                                             </div>
 
                                         </div><br>

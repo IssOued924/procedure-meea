@@ -185,7 +185,12 @@
 
                         <td>{{ $serv->libelle_court}}</td>
                         <td>{{ $serv->libelle_long}}</td>
+                        @if (isset($serv->structure))
+
                         <td>{{ $serv->structure->libelle_long}}</td>
+                        @else
+                        <td>-</td>
+                        @endif
 
 
                         <td>

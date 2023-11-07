@@ -11,7 +11,7 @@
     <div class="container-fluid" id="grad1">
         <div class="row justify-content-center mt-0">
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
-                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
                     <h5><strong>Délivrance d'avis technique d'importation de produits chimiques </strong></h5>
                    <p> @if(session('success'))
                     <div class="alert alert-success">
@@ -31,6 +31,7 @@
                                     <li id="caracteristik"><strong>Identification/Caractéristiques produit</strong></li>
                                     <li id="stockage"><strong>Information relative au stockage</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
+                                    <li id="paiement"><strong>Paiement </strong></li>
                                     <li id="confirm"><strong>Validation</strong></li>
                                 </ul>
                                 <!-- fieldsets -->
@@ -370,6 +371,57 @@ Je m’engage à importer et à distribuer /utiliser les produits chimiques ci-d
                                     <input type="submit" name="make_payment" class="next action-button"
                                         value="Confirmation" />
                                 </fieldset>
+
+
+                                <fieldset>
+                                    <form action="">
+                                    <div class="form-card">
+                                        <h4 class="fs-title">Paiement <span style="color:red">
+                                            *</span></h4>
+                                            <label for="demande timbre" class="fw-bold">Moyens de Paiement<span style="color:red">
+                                                    *</span></label>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label class="nom_societe fw-bold" >ORANGE</label>
+                                                <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="siege_social fw-bold ">MOOV</label>
+                                                <input id="radio2" type="radio" value="0"  name="moyen"/>
+                                            </div>
+                                           
+
+                                        </div>
+                                        <br>
+                                       
+                                       
+                                        <div class="row">
+                                         
+                                            <label id="moyenP1">  Le somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
+                                            <label id="moyenP2">  Le somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
+                                        <div class="col-6">
+                                                <label class="boite_postale fw-bold">Téléphone<span style="color:red">
+                                                        *</span></label>
+                                                <input type="number" name="numero" class="border-success"   placeholder="Telephone" required />
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="boite_postale fw-bold">OTP<span style="color:red">
+                                                        *</span></label>
+                                                <input type="number" name="otp" class="border-success"   placeholder="otp" required />
+                                            </div>
+                                        </div>
+                                       
+                                       
+                                      
+                                    </div>
+                                    <input type="button"  class="previous action-button-previous"
+                                        value="Retour" />
+                                    <input type="submit"   class="next action-button"
+                                        value="Valider" />
+                                    <!-- Ajoutez ceci dans la première étape du formulaire -->
+                                    <div class="error-message" style="color: red;"></div>
+                                    </form>
+                                </fieldset>
                                 <fieldset>
                                     <div class="form-card">
                                         <h2 class="fs-title text-center">Validation !</h2>
@@ -504,5 +556,43 @@ $(".submit").click(function(){
     myLink.addEventListener('click', function(e) {
       e.preventDefault();
   });
+
+</script>
+<script type='text/javascript'>
+    var myLink = document.querySelector('a[href="#"]');
+    myLink.addEventListener('click', function(e) {
+      e.preventDefault();
+  });
+
+
+
+
+        // Sélection des boutons radio
+        const radio1 = document.getElementById("radio1");
+        const radio2 = document.getElementById("radio2");
+
+        // Sélection des champs à afficher/masquer
+        const moyenP1 = document.getElementById("moyenP1");
+        const moyenP2 = document.getElementById("moyenP2");
+        moyenP1.style.display="none"
+        moyenP2.style.display="none"
+
+        // Ajout d'un gestionnaire d'événement pour les boutons radio
+        radio1.addEventListener("change", function() {
+            if (radio1.checked) {
+                moyenP1.style.display = "block";
+                moyenP2.style.display = "none";
+                
+            }
+        });
+
+        radio2.addEventListener("change", function() {
+            if (radio2.checked) {
+                moyenP1.style.display = "none";
+                moyenP2.style.display = "block";
+               
+            }
+        });
+
 
 </script>

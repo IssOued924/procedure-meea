@@ -11,7 +11,7 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 /**
  * Class DemandeP0022Repository.
  */
-class DemandeP0012Repository extends GenericRepository
+class DemandeP0012Repository extends AppRepository
 {
     /**
      * @return string
