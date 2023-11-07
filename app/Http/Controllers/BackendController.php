@@ -308,7 +308,6 @@ class BackendController extends Controller
 
     {
 
-
         $nextStatus = '';
         switch ($currentStatus) {
             case 'D':
@@ -329,12 +328,20 @@ class BackendController extends Controller
         }
         DB::table($table)->where('uuid', $id)->update(['etat' => $nextStatus]);
 
+
+
         if ($table == 'demande_p001_s') {
+
+            $dataFiles = $request->all();
+        $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+
             $commentaire1 = new CommentaireP001();
             $commentaire1->create([
                 'libelle' => $request->libelle,
                 'demande_p001_id' => $id
             ]);
+            return redirect()->back()->with('success', "La note d'étude a été Joint avec succès !");
+
         } elseif ($table == 'demande_p003_s') {
             $commentaire3 = new CommentaireP003();
             $commentaire3->create([
@@ -399,6 +406,20 @@ class BackendController extends Controller
         else
         return redirect()->back()->with('success', "Operation echouée !");
     }
+
+    //joindre une note d'etude
+    // public function uploadNoteEtude($id, $currentStatus, $table, Request $request)
+    // {
+    //     $dataFiles = $request->all();
+    //     if ($currentStatus == 'S') {
+
+    //         $acteSigne =  $this->repository->uploadActe($table, $dataFiles, 'output_file', $id);
+    //         return redirect()->back()->with('success', "La note d'étude a été Joint avec succès !");
+    //     }
+    //     else
+    //     return redirect()->back()->with('success', "Operation echouée !");
+    // }
+
 
     public function rejetter($id, $table, Request $request)
     {

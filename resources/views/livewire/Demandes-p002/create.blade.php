@@ -45,7 +45,7 @@
                                                     @if($errors->has('identite'))
                                                         <p class="alert alert-danger">{{ $errors->first('identite') }}</p>
                                                     @endif
-                                                    
+
                                                 </div>
                                                 <div class="col-6">
                                                     <label class="pays_residence fw-bold">Pays de résidence<span style="color:red">
@@ -213,7 +213,7 @@
 
                                         <div class="row">
                                             <input type="checkbox" id="confirmationBox" name="confirmed"
-                                                class="required-checkbox   checkbox" value="confirmed">
+                                                class="required-checkbox   checkbox" value="Valider">
                                             @if($errors->has('confirmed'))
                                                         <p class="alert alert-danger">{{ $errors->first('confirmed') }}</p>
                                                     @endif
@@ -227,7 +227,7 @@
 
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Retour" />
-                                   
+
                                      <button type="submit" class="next action-button">Confirmation</button>
                                 </fieldset>
                                 <fieldset>
