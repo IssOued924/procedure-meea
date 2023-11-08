@@ -121,7 +121,7 @@
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" class="border-success"
-                                                    placeholder="Telephone" value="{{ $telephone}}"  disabled/>
+                                                    placeholder="Telephone" value="{{ $telephone}}"  />
                                             </div>
                                         </div>
 

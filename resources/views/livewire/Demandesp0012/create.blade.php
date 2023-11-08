@@ -63,7 +63,7 @@
                                                 <label class="nom_societe fw-bold"> <strong>identité</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success" value="{{ $name }}"
-                                                    placeholder="Nom et prenom" disabled/>
+                                                    placeholder="Nom et prenom" />
                                             </div>
                                             <div class="col-6">
                                                 <label class="siege_social fw-bold">Lieu de résidence/siège<span style="color:red">

@@ -43,13 +43,13 @@
                                                 <label class="nom_societe fw-bold"> <strong>Nom & Prenom</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text"   name="nom"
-                                                    placeholder="Votre nom" class="border-success form-control" value="{{ $name}}" disabled/>
+                                                    placeholder="Votre nom" class="border-success form-control" value="{{ $name}}" />
                                             </div>
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Téléphone</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text"   name="telephone"
-                                                    placeholder="telephone" class="border-success form-control" value="{{ $telephone}}" disabled />
+                                                    placeholder="telephone" class="border-success form-control" value="{{ $telephone}}" />
                                             </div>
                                         </div>
 
