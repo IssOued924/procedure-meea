@@ -5,6 +5,7 @@ use App\Models\DemandeP001;
 use Faker\Core\File;
 use Illuminate\Support\Facades\Storage;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
+use Illuminate\Support\Facades\DB;
 //use Your Model
 
 /**
@@ -54,6 +55,10 @@ class DemandeP001Repository extends AppRepository
 
         return $path;
     }
+
+
+
+
     public function all($filtre = array())
     {
         $this->newQuery()->eagerLoad();
@@ -63,6 +68,7 @@ class DemandeP001Repository extends AppRepository
         $this->unsetClauses();
 
         return $models;
+
     }
 
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('demande_p0011_s', function (Blueprint $table) {
             $table->string('statut');
             $table->string('superficie')->nullable();
-            $table->string('depot');
+            $table->string('depot')->nullable();
             $table->string('quantite');
         });
     }

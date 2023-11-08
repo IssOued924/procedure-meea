@@ -2080,9 +2080,6 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
- /* position: absolute;*/
-  bottom: 0;
-  width: 100%;
   background: #316399;
   padding: 0 0 30px 0;
   color: #fff;
@@ -2435,13 +2432,13 @@ html {
 }
 
 /*form styles*/
-#msform {
+#msformp002 {
     text-align: center;
     position: relative;
     margin-top: 20px;
 }
 
-#msform fieldset .form-card {
+#msformp002 fieldset .form-card {
     background: white;
     border: 0 none;
     border-radius: 0px;
@@ -2455,7 +2452,7 @@ html {
     position: relative;
 }
 
-#msform fieldset {
+#msformp002 fieldset {
     background: white;
     border: 0 none;
     border-radius: 0.5rem;
@@ -2469,11 +2466,11 @@ html {
 }
 
 /*Hide all except first fieldset*/
-#msform fieldset:not(:first-of-type) {
+#msformp002 fieldset:not(:first-of-type) {
     display: none;
 }
 
-#msform fieldset .form-card {
+#msformp002 fieldset .form-card {
     text-align: left;
     color: #9E9E9E;
 }
@@ -2485,8 +2482,8 @@ margin-bottom: 25px;
 font-weight: bold;
 }
 
-#msform input[type="text"],
-#msform textarea {
+#msformp002 input[type="text"],
+#msformp002 textarea {
     padding: 0px 8px 4px 8px;
     border: none;
     border-bottom: 2px solid #ccc;
@@ -2503,8 +2500,8 @@ font-weight: bold;
 
 }
 
-#msform input:focus,
-#msform textarea:focus {
+#msformp002 input:focus,
+#msformp002 textarea:focus {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
@@ -2515,7 +2512,7 @@ font-weight: bold;
 }
 
 /*Blue Buttons*/
-#msform .action-button {
+#msformp002 .action-button {
     width: 100px;
     background: #059b44;
     font-weight: bold;
@@ -2527,13 +2524,13 @@ font-weight: bold;
     margin: 10px 5px;
 }
 
-#msform .action-button:hover,
-#msform .action-button:focus {
+#msformp002 .action-button:hover,
+#msformp002 .action-button:focus {
     box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue;
 }
 
 /*Previous Buttons*/
-#msform .action-button-previous {
+#msformp002 .action-button-previous {
     width: 100px;
     background: #ec8787;
 
@@ -2546,8 +2543,8 @@ font-weight: bold;
     margin: 10px 5px;
 }
 
-#msform .action-button-previous:hover,
-#msform .action-button-previous:focus {
+#msformp002 .action-button-previous:hover,
+#msformp002 .action-button-previous:focus {
     box-shadow: 0 0 0 2px white, 0 0 0 3px #616161;
 }
 
@@ -2637,11 +2634,6 @@ select.list-dt:focus {
   #progressbar #caracteristik:before {
     font-family: FontAwesome;
     content: "\f0ae";
-  }
-
-  #progressbar #paiement:before {
-    font-family: FontAwesome;
-    content:"\f09d";
   }
 
   #progressbar #stockage:before {
@@ -2770,22 +2762,3 @@ select.list-dt:focus {
   .recapInputBorder{
     border-bottom: 1px solid;
   }
-
-  .form-control:focus {
-    border-color: #000;
-    box-shadow: none;
-}
-label {
-    font-weight: 600;
-}
-.error {
-    color: red;
-    font-weight: 400;
-    display: block;
-    padding: 6px 0;
-    font-size: 14px;
-}
-.form-control.error {
-    border-color: red;
-    padding: .375rem .75rem;
-}

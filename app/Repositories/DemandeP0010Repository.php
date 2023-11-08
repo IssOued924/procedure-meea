@@ -18,6 +18,7 @@ class DemandeP0010Repository extends AppRepository
     {
         return DemandeP0010::class;
     }
+
     public function all($filtre = array())
     {
         $this->newQuery()->eagerLoad();
@@ -27,5 +28,6 @@ class DemandeP0010Repository extends AppRepository
         $this->unsetClauses();
 
         return $models;
+
     }
 }

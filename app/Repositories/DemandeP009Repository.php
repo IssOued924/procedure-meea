@@ -3,6 +3,7 @@
 namespace App\Repositories;
 use App\Models\DemandeP009;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
 
@@ -45,6 +46,7 @@ class DemandeP009Repository extends GenericRepository
         return $path;
     }
 
+
     public function all($filtre = array())
     {
         $this->newQuery()->eagerLoad();
@@ -54,6 +56,7 @@ class DemandeP009Repository extends GenericRepository
         $this->unsetClauses();
 
         return $models;
+
     }
 
 }

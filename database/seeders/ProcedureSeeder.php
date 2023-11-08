@@ -8,7 +8,7 @@ use App\Models\Procedure;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class StructureSeeder extends Seeder
+class ProcedureSeeder extends Seeder
 {
     /**
      * Run the database seeds.

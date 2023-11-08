@@ -1,3 +1,15 @@
+ <style>
+	 h1, p{
+	   text-align:center;
+	   margin-top: 20px;
+	  }
+	  .box{
+	   text-align:center;
+	   margin: 20px;
+
+	   }
+
+	 </style>
 <section id="about" class="about">
     @if (session()->has('message'))
     <div class="alert alert-success">
@@ -21,7 +33,7 @@
                     <p>Les champs suivis d'etoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">
-                                    <form id="msform" method="POST" action="{{route("demandesp002-store")}}" enctype="multipart/form-data" >
+                                    <form id="msform" role="form" method="POST" action="{{route("demandesp002-store")}}"  enctype="multipart/form-data" >
                                         @csrf
                                   <!-- progressbar -->
                                 <ul id="progressbar">
@@ -51,7 +63,7 @@
                                                     <label class="pays_residence fw-bold">Pays de résidence<span style="color:red">
                                                             *</span></label>
                                                     <select name="pays" id="pays" class="form-select boerder-success">
-                                                    <option value="">Veuillez choisir pays</option>
+                                                    <option >Veuillez choisir pays</option>
                                                     @foreach($pays as $pay)
                                                         <option {{ ($pay->libelle == $default_pays ? 'selected' : '' )}} value="{{$pay->libelle}}">{{$pay->libelle}}</option>
                                                     @endforeach
@@ -79,8 +91,8 @@
                                             </div>
 
                                     </div>
-                                    <input type="button" name="next" class="next action-button btn btn-success"
-                                        value="Suivant" />
+                                    <button type="button" name="next" class="next action-button btn btn-success"
+                                         id="next_idetnite" >Suivant</button>
                                     <!-- Ajoutez ceci dans la première étape du formulaire -->
                                     <div class="error-message" style="color: red;"></div>
 
@@ -126,10 +138,10 @@
                                         </div>
 
                                     </div>
-                                    <input type="button" name="previous" class="previous action-button-previous"
-                                        value="Retour" />
-                                    <input type="button"   name="make_payment" class="next action-button"
-                                        value="Suivant" />
+                                    <button type="button" name="previous" class="previous action-button-previous"
+                                        >Retour</button>
+                                    <button type="button"   name="make_payment" id="next_piece" class="next action-button"
+                                        >Suivant</button>
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
@@ -200,10 +212,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="button" name="previous" class="previous action-button-previous"
-                                        value="Retour" />
-                                    <input type="button" name="make_payment" class="next action-button"
-                                        value="Suivant" />
+                                    <button type="button" name="previous" class="previous action-button-previous">Retour</button>
+                                    <Button type="button" name="make_payment" id="next_domaine" class="next action-button"
+                                        >Suivant</button>
                                 </fieldset>
 
                                 <fieldset>
@@ -228,26 +239,7 @@
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Retour" />
 
-                                     <button type="submit" class="next action-button">Confirmation</button>
-                                </fieldset>
-                                <fieldset>
-                                    <div class="form-card">
-                                        <h2 class="fs-title text-center">Validation !</h2>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-3">
-                                                <img src="https://img.icons8.com/color/96/000000/ok--v2.png"
-                                                    class="fit-image">
-                                            </div>
-                                        </div>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-7 text-center">
-                                                <h5>Votre demnde est enregistré avec succès et en cour de traitement!
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
+                                     <button type="submit" class="action-button" id="btn_send">Confirmation</button>
                                 </fieldset>
                             </form>
                         </div>
@@ -260,14 +252,22 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js" ;></script>
-
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+  <!--<script src="{{ asset('js/jToast.min.js') }}"></script>-->
+<script src="{{asset('js/sweetalert2.js') }}"></script>
 <script type="text/javascript">
     //intitialisation du tableau des autres documents
     $(function () {
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 2; i++) {
             addRowAutreDocument();
         }
      })
+   /*  $(function () {
+        $('#msform').submit(function (e) {
+            e.preventDefault();
+        });
+     })*/
+
 </script>
 
 <script type='text/javascript'>
@@ -383,6 +383,145 @@ $(".submit").click(function(){
 
     function deleteRowAutreDocument(me) {
          $(me).closest('tr').remove();
+    }
+/*
+$("#msform").validate({
+        rules: {
+            identite: "required",
+            beneficiaire: "required",
+            pays: "required",
+            domaine: "required",
+            categorie: "required",
+            sous_domaine: "required",
+            confirmed: "required",
+        },
+        messages: {
+            identite: "Identité : est obligatoire.",
+            beneficiaire: "Bénéficiaire : est obligatoire",
+            pays: "Pays : est obligatoire.",
+            domaine: "Domaine : est obligatoireeeee",
+            categorie:"Catégorie : est obligatoireeee.",
+            sous_domaine: "Sous domaine : est obligatoire",
+            confirmed: "Votre confirmation : est requise.",
 
+        },
+        submitHandler: function( event, validator ) {
+            var btn_id = validator.originalEvent.submitter.id
+                save(btn_id)
+        }
+    });*/
+   function save(btn_id) {
+        var myform = $("#msform");
+
+       // window.location=url;
+        var id = $('#id').val() * 1;
+                    if (id > 0) {
+                $.ajax({
+                    url: '/demandesp002-storen/'+id,
+                    type: "post",
+                    async: false,
+                    data: new FormData(myform[0]),
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            (async () => {
+                                alert("reclamation_modifiee_avec_succes", 'success');
+                                fetch(window.location = '/demandes-lists');
+                            })();
+
+                        } else {
+                            alert("La modification de la réclamation a échoué. Réessayer", 'warning');
+                        }
+                    },
+                    error: function (data) {
+                    }
+                });
+            } else {
+               // let url='/demandes-lists?procedure='+$('#procedure').val();
+                $.ajax({
+                    url: '/demandesp002-store',
+                    type: "post",
+                    async: false,
+                    data: new FormData(myform[0]),
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            alert("cest ok")
+                            console.log(data.status);
+                            (async () => {
+                                await toast("Votre Demande à bien été Soumise et en cours de traitement !", 'success');
+                                await sleep(1000);
+                               //  window.location.replace("/demandes-lists");
+                                fetch(window.location = '/demandes-lists');
+                            })();
+                           // window.location = '/demandes-lists';
+                        }else {
+                            toast("L'envoie de votre demande a échoué. Veuillez réessayer", type = 'warning')
+                        }
+                    },
+                    error: function (data) {
+                        showErrors(data);
+                    }
+
+                });
+            }
+    }
+
+    function showErrors(data) {
+        if (data && data.responseJSON && data.responseJSON.errors) {
+            let errors = data.responseJSON.errors;
+            for (let key in errors) {
+                if (errors[key] && Array.isArray(errors[key])) {
+                    let error = errors[key][0];
+                    toast(error, 'error');
+                    return;
+                }
+            }
+        }
+        else if(data && data.responseJSON && data.responseJSON.message){
+            if(data.responseJSON.message =="Unauthenticated."){
+			toast(__("votre_session_est_expiree_veuillez_vous_reconnecter"), 'error');
+				return;
+            }
+            toast(data.responseJSON.message, 'error');
+        }
+        else if(data && data.errors){
+            let errors = data.errors;
+            for (let key in errors) {
+                if (errors[key] && Array.isArray(errors[key])) {
+                    let error = errors[key][0];
+                    toast(error, 'error');
+                    return;
+                }
+            }
+
+        }
+    }
+
+    function toast(message, type = 'info') {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 15000,
+            timerProgressBar: true,
+            onOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        return Toast.fire({
+            icon: type,
+            title: message
+        });
+    }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 </script>

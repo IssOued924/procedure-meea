@@ -20,6 +20,7 @@ class DemandeP002Repository extends AppRepository
     {
         return DemandeP002::class;
     }
+
     public function all($filtre = array())
     {
         $this->newQuery()->eagerLoad();
@@ -42,6 +43,6 @@ class DemandeP002Repository extends AppRepository
         $path = $file->storeAs('public/' . $libelle, $fileName);
         return $path;
     }
-    
+
 
 }

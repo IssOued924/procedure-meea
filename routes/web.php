@@ -15,6 +15,7 @@ use App\Http\Controllers\BackendController;
 use App\Http\Controllers\BaseJuridiquesController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommuneController;
+use App\Http\Controllers\ContactUsFormController;
 use App\Http\Controllers\DemandeP0011Controller;
 use App\Http\Controllers\DemandeP0012Controller;
 use App\Http\Controllers\DemandeP003Controller;
@@ -74,6 +75,8 @@ Route::get('/testpj', [DemandeController::class, 'testpj']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/contact', [ContactUsFormController::class, 'createForm']);
+Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -120,6 +123,7 @@ Route::middleware('auth')->group(function () {
             // eco tourisme
     Route::get("/P0012", DemandeCompP0012::class)->name("demandesp0012");
     Route::post("/demandesp0012-store", [DemandeP0012Controller::class, 'store'])->name("demandesp0012-store");
+    Route::post("/demandesp0012-payment", [DemandeP0012Controller::class, 'payment'])->name("demandesp0012-payment");
 
 
 
@@ -150,7 +154,7 @@ Route::post('/administration/statusChange/{id}/{currentStatus}/{table}', [Backen
 Route::post('/administration/uploadActe/{id}/{currentStatus}/{table}', [BackendController::class, 'uploadActe'])->name('uploadActe');
 Route::get('/administration/rejet/{id}/{table}', [BackendController::class, 'rejetter'])->name('rejetter');
 Route::get('/administration/procedure-dashboard/{procedure}/{procedureName}', [BackendController::class, 'procedureDashboard'])->name('procedure-dashboard');
-
+Route::get('/administration/demandesp002-list', [BackendController::class, 'listDemandep002'])->name('demandesp002-list');
 
     // Route parametre
 Route::get('/administration/parametre/commune', [CommuneController::class, 'index'])->name('commune-list');
@@ -197,7 +201,7 @@ Route::post('/administration/parametre/role', [RoleController::class, 'store'])-
 Route::get('/administration/utilisateur/user', [RegisteredUserController::class, 'listUsers'])->name('user-list');
 Route::get('/administration/utilisateur/agent', [AgentController::class, 'index'])->name('agent-list');
 Route::post('/administration/utilisateur/agent/', [AgentController::class, 'store'])->name('agent-store');
-Route::get('/administration/utilisateur/agent/{uuid}', [AgentController::class, 'update'])->name('agent-update');
+Route::put('/administration/utilisateur/agent/{uuid}', [AgentController::class, 'update'])->name('agent-update');
 Route::get('/administration/utilisateur/usager', [UsagerController::class, 'index'])->name('usager-list');
 
 Route::get('/administration/utilisateur/profile', [ProfileController::class, 'index'])->name('profile-list');

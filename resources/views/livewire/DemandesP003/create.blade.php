@@ -44,7 +44,7 @@
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success form-control"
                                                     value="{{ $name }}" name="identite" placeholder="Nom et prenom"
-                                                    required  disabled/>
+                                                    required  />
                                             </div>
                                             <div class="col-6">
                                                 <label class="siege_social fw-bold">Lieu de résidence/siège<span

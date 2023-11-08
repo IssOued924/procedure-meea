@@ -41,7 +41,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Identité</strong> <span style="color: red">*</span></label> <br />
-                                                <input type="text" class="border-success form-control" value="{{ $name }}"   name="libelle_court"  placeholder="nom prenom" disabled /> <br /><br />
+                                                <input type="text" class="border-success form-control" value="{{ $name }}"   name="libelle_court"  placeholder="nom prenom"  /> <br /><br />
                                             </div>
 
                                             <div class="col-6">

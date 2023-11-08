@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\DemandeP008;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 //use Your Model
 
 /**
@@ -46,6 +47,7 @@ class DemandeP008Repository extends AppRepository
         }
         return '';
     }
+
     public function all($filtre = array())
     {
         $this->newQuery()->eagerLoad();
@@ -55,5 +57,6 @@ class DemandeP008Repository extends AppRepository
         $this->unsetClauses();
 
         return $models;
+
     }
 }

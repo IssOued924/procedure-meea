@@ -40,6 +40,8 @@ use App\Repositories\DemandePieceP001Repository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\DemandeP002;
+use App\Models\CommentaireP002;
 
 class BackendController extends Controller
 {
@@ -67,6 +69,7 @@ class BackendController extends Controller
             "nombreHomologation" => $backendRepository->nombreDemandeByProcedure('demande_p007_s', ['etat' => 'D']),
             "nombreCirculationBois" => $backendRepository->nombreDemandeByProcedure('demande_p005_s', ['etat' => 'D']),
             "nombreEau" => $backendRepository->nombreDemandeByProcedure('demande_p002_s', ['etat' => 'D']),
+
 
         ];
 
@@ -343,6 +346,13 @@ class BackendController extends Controller
             return redirect()->back()->with('success', "La note d'étude a été Joint avec succès !");
 
         } elseif ($table == 'demande_p003_s') {
+        } elseif ($table == 'demande_p002_s') {
+            $commentaire2 = new CommentaireP002();
+            $commentaire2->create([
+                'libelle' => $request->libelle,
+                'demande_p002_id' => $id
+            ]);
+        }elseif ($table == 'demande_p003_s') {
             $commentaire3 = new CommentaireP003();
             $commentaire3->create([
                 'libelle' => $request->libelle,
@@ -431,6 +441,12 @@ class BackendController extends Controller
                 'libelle' => $request->libelle,
                 'demande_p001_id' => $id
             ]);
+        }elseif ($table == 'demande_p002_s') {
+            $commentaire2 = new CommentaireP002();
+            $commentaire2->create([
+                'libelle' => $request->libelle,
+                'demande_p002_id' => $id
+            ]);
         } elseif ($table == 'demande_p003_s') {
             $commentaire3 = new CommentaireP003();
             $commentaire3->create([
@@ -489,7 +505,8 @@ class BackendController extends Controller
         DemandeP003Repository $demandeP003Repository,
         DemandeP0012Repository $demandeP0012Repository,
         DemandeP006Repository $demandeP006Repository,
-        DemandeP007Repository $demandeP007Repository
+        DemandeP007Repository $demandeP007Repository,
+        DemandeP002Repository $demandeP002Repository
 
     ) {
 
@@ -503,7 +520,7 @@ class BackendController extends Controller
             'nbce' => $demandeP006Repository->nombre('demande_p006_s', array('etat' => 'D')),
             'nbhomologation' => $demandeP007Repository->nombre('demande_p007_s', array('etat' => 'D')),
             'nbcoupe' => $demandeP0011Repository->nombre('demande_p0011_s', array('etat' => 'D')),
-
+            "nbAgrementTechique" => $demandeP002Repository->nombre('demande_p002_s', array('etat' => 'D')),
         ));
     }
 
