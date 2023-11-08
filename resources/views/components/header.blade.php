@@ -15,15 +15,16 @@
             <ul>
                 @guest
                 <li><a class="active" href="/">Accueil</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="{{ route('login') }}">Compte</a></li>
                 <li><a href="contact">Contact</a></li>
+                <li><a href="faq">FAQ</a></li>
+                <li><a href="{{ route('login') }}">Compte</a></li>
+
                 @else
                 <li><a class="active" href="/">Accueil</a></li>
                 <li><a href="{{ route('demandes-lists') }}">Mes demandes</a></li>
 
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Contact</a></li>
+                {{-- <li><a href="#">FAQ</a></li>
+                <li><a href="#">Contact</a></li> --}}
 
                 <li class="dropdown">
                     <a><span>

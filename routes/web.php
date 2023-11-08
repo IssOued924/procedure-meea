@@ -71,10 +71,14 @@ Route::post('/test-store', [DemandeController::class, 'store'])->name('test-rout
 
 Route::get('/testpj', [DemandeController::class, 'testpj']);
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');
+
 Route::get('/contact', [ContactUsFormController::class, 'createForm']);
 Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
