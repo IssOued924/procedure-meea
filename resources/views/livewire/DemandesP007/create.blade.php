@@ -31,6 +31,7 @@
                                     <li class="bio" id="caracteristik"><strong>Caractéristiques emballage/sachet</strong></li>
                                     {{-- <li id="stockage"><strong>Information relative au stockage</strong></li> --}}
                                     <li class="bio" id="engagement"><strong>Engagement </strong></li>
+                                    <li id="paiement"><strong>Paiement </strong></li>
                                     <li class="bio" id="confirm"><strong>Validation</strong></li>
                                 </ul>
                                 <!-- fieldsets -->
@@ -308,25 +309,57 @@
                                     <input type="submit"   class="next action-button"
                                         value="Valider" />
                                 </fieldset>
+
                                 <fieldset>
-                                    <div class="form-card">
-                                        <h2 class="fs-title text-center">Validation !</h2>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-3">
-                                                <img src="https://img.icons8.com/color/96/000000/ok--v2.png"
-                                                    class="fit-image">
-                                            </div>
-                                        </div>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-7 text-center">
-                                                <h5>Votre demnde est enregistré avec succes et en cour de traitement!
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
+    <form action="">
+    <div class="form-card">
+        <h4 class="fs-title">Paiement <span style="color:red">
+            *</span></h4>
+            <label for="demande timbre" class="fw-bold">Moyens de Paiement<span style="color:red">
+                    *</span></label>
+        <div class="row">
+            <div class="col-3">
+                <label class="nom_societe fw-bold" >ORANGE</label>
+                <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
+            </div>
+            <div class="col-3">
+                <label class="siege_social fw-bold ">MOOV</label>
+                <input id="radio2" type="radio" value="0"  name="moyen"/>
+            </div>
+           
+
+        </div>
+        <br>
+       
+       
+        <div class="row">
+         
+            <label id="moyenP1">  Le somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
+            <label id="moyenP2">  Le somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
+        <div class="col-6">
+                <label class="boite_postale fw-bold">Téléphone<span style="color:red">
+                        *</span></label>
+                <input type="number" name="numero" class="border-success"   placeholder="Telephone" required />
+            </div>
+            <div class="col-6">
+                <label class="boite_postale fw-bold">OTP<span style="color:red">
+                        *</span></label>
+                <input type="number" name="otp" class="border-success"   placeholder="otp" required />
+            </div>
+        </div>
+       
+       
+      
+    </div>
+    <input type="button"  class="previous action-button-previous"
+        value="Retour" />
+    <input type="submit"   class="next action-button"
+        value="Valider" />
+    <!-- Ajoutez ceci dans la première étape du formulaire -->
+    <div class="error-message" style="color: red;"></div>
+    </form>
+</fieldset>
+                               
                             </form>
                         </div>
                     </div>
@@ -444,3 +477,43 @@ $(".submit").click(function(){
   });
 
 </script>
+
+<script type='text/javascript'>
+    var myLink = document.querySelector('a[href="#"]');
+    myLink.addEventListener('click', function(e) {
+      e.preventDefault();
+  });
+
+
+
+
+        // Sélection des boutons radio
+        const radio1 = document.getElementById("radio1");
+        const radio2 = document.getElementById("radio2");
+
+        // Sélection des champs à afficher/masquer
+        const moyenP1 = document.getElementById("moyenP1");
+        const moyenP2 = document.getElementById("moyenP2");
+        moyenP1.style.display="none"
+        moyenP2.style.display="none"
+
+        // Ajout d'un gestionnaire d'événement pour les boutons radio
+        radio1.addEventListener("change", function() {
+            if (radio1.checked) {
+                moyenP1.style.display = "block";
+                moyenP2.style.display = "none";
+                
+            }
+        });
+
+        radio2.addEventListener("change", function() {
+            if (radio2.checked) {
+                moyenP1.style.display = "none";
+                moyenP2.style.display = "block";
+               
+            }
+        });
+
+
+</script>
+

@@ -65,6 +65,11 @@ class DemandeP007Controller extends Controller
         unset($data['certificat_biodegradabilite']);
 
 
+        unset($data['moyen']);
+        unset($data["numero"]);
+        unset($data["otp"]);
+
+
         $demande = $this->repository->create($data);
         $demande->save();
 

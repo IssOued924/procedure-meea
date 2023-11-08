@@ -2080,6 +2080,9 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
+ /* position: absolute;*/
+  bottom: 0;
+  width: 100%;
   background: #316399;
   padding: 0 0 30px 0;
   color: #fff;
@@ -2634,6 +2637,11 @@ select.list-dt:focus {
   #progressbar #caracteristik:before {
     font-family: FontAwesome;
     content: "\f0ae";
+  }
+
+  #progressbar #paiement:before {
+    font-family: FontAwesome;
+    content:"\f09d";
   }
 
   #progressbar #stockage:before {

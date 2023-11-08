@@ -67,6 +67,11 @@ class DemandeP008Controller extends Controller
         unset($data['doc_avis_mairie']);
         unset($data['doc_desc_technique']);
         unset($data['doc_registre_tracabilite']);
+        
+        unset($data['moyen']);
+        unset($data["numero"]);
+        unset($data["otp"]);
+
         /* Debut détatchement des variables n'apparaissant pas directement dans la table DemandeP008 */
 
         $demande = $this->repository->create($data);

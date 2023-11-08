@@ -70,6 +70,7 @@ class BackendController extends Controller
             "nombreCirculationBois" => $backendRepository->nombreDemandeByProcedure('demande_p005_s', ['etat' => 'D']),
             "nombreEau" => $backendRepository->nombreDemandeByProcedure('demande_p002_s', ['etat' => 'D']),
 
+
         ];
 
         return view('backend.home', $data);

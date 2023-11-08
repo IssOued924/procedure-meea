@@ -252,8 +252,9 @@
                                         <div class="modal fade" id="basicModalEdit{{ $agent->uuid }}" tabindex="-1">
                                             <div class="modal-dialog">
                                                 <div class="modal-content" style="width: 800px">
-                                                <form method="POST"
+                                                <form method="post"
                                                             action="{{ route('agent-update', $agent->uuid) }}">
+                                                            {{ method_field('put') }}
                                                     <div class="modal-header">
                                                         <h5 class="modal-title">Editer l'agent </h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -262,7 +263,7 @@
                                                     <div class="modal-body">
 
                                                             @csrf
-                                                            @method('PUT')
+                                                            @method('GET')
 
                                                             <div class="row">
                                                                 <div class="col-6">

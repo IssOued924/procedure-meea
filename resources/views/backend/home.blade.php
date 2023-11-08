@@ -42,7 +42,36 @@
                 </div>
               </div><!-- End Sales Card -->
 
+<<<<<<< HEAD
+              </div>
+            </div><!-- End Sales Card -->
+
+            <!-- Revenue Card -->
+            <div class="col-xxl-3 col-md-6">
+              <div class="card info-card revenue-card">
+                <div class="card-body">
+                  <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p001_s','procedureName' => 'Produit Chimique']) }}">Procédure</a> <span>| <b>Produit Chimique</b></span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-folder"></i>
+                    </div>
+                    <div class="ps-3">
+
+                      <h6>{{ $nombreProduitChimique }}</h6>
+                      {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
+
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Revenue Card -->
+
+=======
                      {{-- permis de chasse --}}
+>>>>>>> dev
             <div class="col-xxl-3 col-md-6">
                 <div class="card info-card revenue-card">
                   <div class="card-body">
@@ -53,7 +82,9 @@
                         <i class="bi bi-folder"></i>
                       </div>
                       <div class="ps-3">
+
                         <h6>{{ $nombreChasse }}</h6>
+
                         {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
 
                       </div>
@@ -65,8 +96,55 @@
 
             <!-- Customers Card dechets solides -->
 
+<<<<<<< HEAD
+              <div class="card info-card revenue-card">
+                <div class="card-body">
+                  <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p008_s', 'procedureName' => 'Gestion de Dechets']) }}">Procédure</a> <span>| <b>Déchets Solides</b></span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-folder"></i>
+                    </div>
+                    <div class="ps-3">
+
+                      <h6>{{ $nombreDechet }}</h6>
+
+                      {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div><!-- End Customers Card -->
+
+            <div class="col-xxl-3 col-xl-12">
+
+                <div class="card info-card revenue-card">
+                  <div class="card-body">
+                    <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p006_s', 'procedureName' => 'Exemption']) }}">Procédure</a> <span>| <b>Exemption</b></span></h5>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-folder"></i>
+                      </div>
+                      <div class="ps-3">
+
+                        <h6>{{ $nombreExemption }}</h6>
+
+                        {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div><!-- End Customers Card -->
+              <div class="col-xxl-3 col-xl-12">
+=======
              {{-- //coupe de bois --}}
              <div class="col-xxl-3 col-xl-12">
+>>>>>>> dev
 
                 <div class="card info-card revenue-card">
                   <div class="card-body">
@@ -77,7 +155,9 @@
                         <i class="bi bi-folder"></i>
                       </div>
                       <div class="ps-3">
+
                         <h6>{{ $nombreCoupeBois }}</h6>
+
                         {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
                       </div>
@@ -102,8 +182,19 @@
                             <h6>{{ $nombreDetention }}</h6>
                             {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
+<<<<<<< HEAD
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-folder"></i>
+                      </div>
+                      <div class="ps-3">
+
+                        <h6>{{ $nombreDetention }}</h6>
+                        {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
+=======
                           </div>
                         </div>
+>>>>>>> dev
 
                       </div>
                     </div>
@@ -242,6 +333,7 @@
                       </div>
                       <div class="ps-3">
                         <h6>{{ $nombreEau }}</h6>
+
                         {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> --}}
 
                       </div>

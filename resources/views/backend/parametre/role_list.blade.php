@@ -137,6 +137,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Libelle</th>
+                    <th scope="col">Code</th>
 
 
                     {{-- <th scope="col">Commune</th> --}}
@@ -152,6 +153,7 @@
                     <tr>
                         <th scope="row">{{ $i++ }}</th>
                         <td> {{ $role->libelle }}</td>
+                        <td> {{ $role->code }}</td>
 
 
                         <td>

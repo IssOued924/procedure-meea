@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use App\Models\DemandeP005;
+use Illuminate\Support\Facades\DB;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
 
@@ -18,6 +19,7 @@ class DemandeP005Repository extends GenericRepository
     {
         return DemandeP005::class;
     }
+
     public function all($filtre = array())
     {
         $this->newQuery()->eagerLoad();
@@ -27,5 +29,6 @@ class DemandeP005Repository extends GenericRepository
         $this->unsetClauses();
 
         return $models;
+
     }
 }

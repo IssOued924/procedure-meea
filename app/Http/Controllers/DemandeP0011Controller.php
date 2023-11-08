@@ -65,6 +65,9 @@ class DemandeP0011Controller extends Controller
         unset($data['agrement']);
         unset($data['quitance']);
 
+        unset($data['moyen']);
+        unset($data["numero"]);
+        unset($data["otp"]);
 
         $demande = $this->repository->create($data);
         $demande->save();
