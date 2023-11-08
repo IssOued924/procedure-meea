@@ -90,6 +90,7 @@
     @yield('contenuWelcome')
     @yield('contenuLogin')
     @yield('contact')
+    @yield('faq')
     
 
 
