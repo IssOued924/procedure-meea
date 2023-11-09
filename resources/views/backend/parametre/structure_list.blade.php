@@ -75,18 +75,18 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
+                                        <form method="POST"
+                                        action="{{ route('structure-store') }}">
+                                        @csrf
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col">
-                                                    <form method="POST"
-                                                        action="{{ route('structure-store') }}">
-                                                        @csrf
-                                                        <h5 class="card-title">Libelle Court</h5>
+
+                                                        <h5 class="card-title">Nom Abrégé</h5>
                                                         <div class="input-group mb-3">
 
                                                             {{-- <label for="libelle">Libelle</label> --}}
-                                                            <span class="input-group-text"
-                                                                id="basic-addon1">@</span>
+
                                                             <input type="text" name="libelle_court"
                                                                 class="form-control border-success"
                                                                 placeholder="libelle" aria-label="Username"
@@ -94,15 +94,13 @@
 
                                                         </div>
 
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">Libelle Long</h5>
+
+                                                                <h5 class="card-title">Nom complet</h5>
 
                                                                 <div class="input-group mb-3">
 
                                                                     {{-- <label for="libelle">Libelle</label> --}}
-                                                                    <span class="input-group-text"
-                                                                        id="basic-addon1">@</span>
+
                                                                     <input type="text" name="libelle_long"
                                                                         class="form-control border-success"
                                                                         placeholder="libelle long" aria-label="Username"
@@ -111,13 +109,7 @@
                                                                 </div>
                                                                 <!-- End Quill Editor Full -->
 
-                                                            </div>
-                                                        </div>
 
-                                                        <input type="submit" value="Valider"
-                                                            class="btn btn-primary">
-
-                                                    </form>
 
                                                 </div>
                                             </div>
@@ -127,9 +119,10 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger"
                                                 data-bs-dismiss="modal">Fermer</button>
-                                            {{-- <button type="button" class="btn btn-primary">Valider</button>
-                                            --}}
+                                            <button type="submit" class="btn btn-primary">Valider</button>
+
                                         </div>
+                                    </form>
                                     </div>
                                 </div>
                             </div><!-- End Large Modal-->
@@ -141,8 +134,8 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Libelle Court</th>
-                    <th scope="col">Libelle Long</th>
+                    <th scope="col">Nom abrégé</th>
+                    <th scope="col">Nom Complet</th>
 
                     {{-- <th scope="col">Commune</th> --}}
                     <th scope="col">Action</th>
@@ -207,17 +200,17 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
+                                    <form method="POST"
+                                    action="{{ route('structure-update', $str->uuid) }}">
+                                    @csrf
+                                    @method('PUT')
                                     <div class="modal-body">
-                                        <form method="POST"
-                                            action="{{ route('structure-update', $str->uuid) }}">
-                                            @csrf
-                                            @method('PUT')
+
                                             <h5 class="card-title">Libelle Court</h5>
                                             <div class="input-group mb-3">
 
                                                 {{-- <label for="libelle">Libelle</label> --}}
-                                                <span class="input-group-text"
-                                                    id="basic-addon1">@</span>
+
                                                 <input type="text" name="libelle_court"
                                                     class="form-control border-success"
                                                     value="{{ $str->libelle_court }}"
@@ -229,8 +222,7 @@
                                             <div class="input-group mb-3">
 
                                                 {{-- <label for="libelle">Libelle</label> --}}
-                                                <span class="input-group-text"
-                                                    id="basic-addon1">@</span>
+
                                                 <input type="text" name="libelle_long"
                                                     class="form-control border-success"
                                                     value="{{ $str->libelle_long }}"
@@ -239,19 +231,14 @@
 
                                             </div>
 
-
-                                            <input type="submit" value="Modifier"
-                                                class="btn btn-primary center">
-
-                                        </form>
-
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger"
                                             data-bs-dismiss="modal">Fermer</button>
-                                        {{-- <button type="button" class="btn btn-primary">Save
-                                            changes</button> --}}
+                                         <button type="submit" class="btn btn-primary">Modifier
+                                             </button>
                                     </div>
+                                </form>
                                 </div>
                             </div>
                         </div><!-- End Basic Modal-->

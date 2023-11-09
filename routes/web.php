@@ -187,7 +187,7 @@ Route::get('/administration/parametre/procedure', [ProcedureController::class, '
 Route::put('/administration/parametre/procedure/{uuid}', [ProcedureController::class, 'update'])->name('procedure-update');
 Route::get('/administration/parametre/categorie', [CategorieController::class, 'index'])->name('categorie-list');
 Route::get('/administration/parametre/service', [ServiceController::class, 'index'])->name('service-list');
-Route::get('/administration/parametre/service/{uuid}', [ServiceController::class, 'suprimer'])->name('suprimer-service');
+Route::get('/administration/parametre/service/{uuid}', [ServiceController::class, 'supprimer'])->name('suprimer-service');
 Route::post('/administration/parametre/service/', [ServiceController::class, 'store'])->name('service-store');
 Route::get('/administration/parametre/piecejointe/', [PieceJointeController::class, 'index'])->name('piecejointe-list');
 Route::get('/administration/parametre/piecejointe/{uuid}', [PieceJointeController::class, 'supprimer'])->name('suprimer-piecejointe');
