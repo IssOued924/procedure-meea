@@ -22,7 +22,8 @@ class ContactUsFormController extends Controller {
             'message' => 'required'
          ]);
         //  Store data in database
-        Contact::create($request->all());
+        Contact::create($request->all())
+        ;
         //  Send mail to admin
             FacadesMail::send('mail', array(
             'name' => $request->get('name'),

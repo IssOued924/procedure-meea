@@ -2,15 +2,6 @@
 
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\ProfileController;
-use App\Livewire\DemandeCompP002;
-use App\Livewire\DemandeP007Comp;
-use App\Livewire\DemandeComp;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DemandeP001Controller;
-use App\Http\Controllers\DemandeP002Controller;
-use App\Http\Controllers\DemandeP007Controller;
-use App\Http\Controllers\DemandeP006Controller;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\BaseJuridiquesController;
 use App\Http\Controllers\CategorieController;
@@ -18,34 +9,45 @@ use App\Http\Controllers\CommuneController;
 use App\Http\Controllers\ContactUsFormController;
 use App\Http\Controllers\DemandeP0011Controller;
 use App\Http\Controllers\DemandeP0012Controller;
+use App\Http\Controllers\DemandeP001Controller;
+use App\Http\Controllers\DemandeP002Controller;
 use App\Http\Controllers\DemandeP003Controller;
 use App\Http\Controllers\DemandeP004Controller;
 use App\Http\Controllers\DemandeP005Controller;
+use App\Http\Controllers\DemandeP006Controller;
+use App\Http\Controllers\DemandeP007Controller;
 use App\Http\Controllers\DemandeP008Controller;
-
 use App\Http\Controllers\DemandeP009Controller;
 use App\Http\Controllers\PieceJointeController;
+use App\Http\Controllers\PlainteController;
 use App\Http\Controllers\ProcedureController;
+use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\RegionController;
-use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StructureController;
 use App\Http\Controllers\TypeUsagerController;
 use App\Http\Controllers\UsagerController;
+use App\Livewire\DemandeComp;
 use App\Livewire\DemandeCompP0011;
 use App\Livewire\DemandeCompP0012;
+use App\Livewire\DemandeCompP002;
 use App\Livewire\DemandeCompP003;
 use App\Livewire\DemandeCompP004;
-use App\Livewire\DemandeCompP009;
 use App\Livewire\DemandeCompP006;
+use App\Livewire\DemandeCompP009;
 use App\Livewire\DemandeP0012;
 use App\Livewire\DemandeP004;
 use App\Livewire\DemandeP005Comp;
+use App\Livewire\DemandeP007Comp;
 use App\Livewire\DemandeP008Comp;
 use App\Models\DemandeP005;
 use App\Models\Procedure;
+use Illuminate\Support\Facades\Route;
 use PharIo\Manifest\Author;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -212,11 +214,14 @@ Route::post('/administration/utilisateur/user-store', [RegisteredUserController:
 
 Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name('demandes-lists');
 
-
-
 });
 
 Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
+
+
+// plainte
+Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');;
+Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
 
 
 require __DIR__.'/auth.php';
