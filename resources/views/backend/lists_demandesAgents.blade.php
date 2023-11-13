@@ -187,13 +187,17 @@
                                                         </div> <br> --}}
                                                         <h4>Liste des fichiers Soumis</h4>
                                                         <div class="row">
-                                                            <div class="col">
+                                                            <div class="col-6">
 
                                                                 @foreach ( $demande->demandePiece as $chemin)
 
                                                                 <a  class="text-success" target="_blank" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
                                                                 <br>
                                                                 @endforeach
+                                                            </div>
+                                                            <h4>La note d'étude</h4>
+                                                            <div class="col-6">
+                                                                <a  class="text-success"   target="_blank" href="{{ Storage::url($demande->note_etude_file) }}"> Note D'étude</a>
                                                             </div>
                                                         </div>
                                                         <br>

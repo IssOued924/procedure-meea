@@ -6,9 +6,9 @@
 	  .box{
 	   text-align:center;
 	   margin: 20px;
-	  
+
 	   }
-	 
+
 	 </style>
 <section id="about" class="about">
     @if (session()->has('message'))
@@ -57,7 +57,7 @@
                                                     @if($errors->has('identite'))
                                                         <p class="alert alert-danger">{{ $errors->first('identite') }}</p>
                                                     @endif
-                                                    
+
                                                 </div>
                                                 <div class="col-6">
                                                     <label class="pays_residence fw-bold">Pays de résidence<span style="color:red">
@@ -224,7 +224,7 @@
 
                                         <div class="row">
                                             <input type="checkbox" id="confirmationBox" name="confirmed"
-                                                class="required-checkbox   checkbox" value="confirmed">
+                                                class="required-checkbox   checkbox" value="Valider">
                                             @if($errors->has('confirmed'))
                                                         <p class="alert alert-danger">{{ $errors->first('confirmed') }}</p>
                                                     @endif
@@ -238,7 +238,7 @@
 
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Retour" />
-                                   
+
                                      <button type="submit" class="action-button" id="btn_send">Confirmation</button>
                                 </fieldset>
                             </form>
@@ -267,7 +267,7 @@
             e.preventDefault();
         });
      })*/
-     
+
 </script>
 
 <script type='text/javascript'>
@@ -384,7 +384,7 @@ $(".submit").click(function(){
     function deleteRowAutreDocument(me) {
          $(me).closest('tr').remove();
     }
-/*    
+/*
 $("#msform").validate({
         rules: {
             identite: "required",
@@ -412,7 +412,7 @@ $("#msform").validate({
     });*/
    function save(btn_id) {
         var myform = $("#msform");
-        
+
        // window.location=url;
         var id = $('#id').val() * 1;
                     if (id > 0) {
@@ -470,7 +470,7 @@ $("#msform").validate({
                 });
             }
     }
-    
+
     function showErrors(data) {
         if (data && data.responseJSON && data.responseJSON.errors) {
             let errors = data.responseJSON.errors;
@@ -501,7 +501,7 @@ $("#msform").validate({
 
         }
     }
-    
+
     function toast(message, type = 'info') {
         const Toast = Swal.mixin({
             toast: true,

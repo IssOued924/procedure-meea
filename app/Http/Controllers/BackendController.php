@@ -311,7 +311,6 @@ class BackendController extends Controller
 
     {
 
-
         $nextStatus = '';
         switch ($currentStatus) {
             case 'D':
@@ -332,12 +331,21 @@ class BackendController extends Controller
         }
         DB::table($table)->where('uuid', $id)->update(['etat' => $nextStatus]);
 
+
+
         if ($table == 'demande_p001_s') {
+
+            $dataFiles = $request->all();
+        $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+
             $commentaire1 = new CommentaireP001();
             $commentaire1->create([
                 'libelle' => $request->libelle,
                 'demande_p001_id' => $id
             ]);
+            return redirect()->back()->with('success', "La note d'étude a été Joint avec succès !");
+
+        } elseif ($table == 'demande_p003_s') {
         } elseif ($table == 'demande_p002_s') {
             $commentaire2 = new CommentaireP002();
             $commentaire2->create([
@@ -408,6 +416,20 @@ class BackendController extends Controller
         else
         return redirect()->back()->with('success', "Operation echouée !");
     }
+
+    //joindre une note d'etude
+    // public function uploadNoteEtude($id, $currentStatus, $table, Request $request)
+    // {
+    //     $dataFiles = $request->all();
+    //     if ($currentStatus == 'S') {
+
+    //         $acteSigne =  $this->repository->uploadActe($table, $dataFiles, 'output_file', $id);
+    //         return redirect()->back()->with('success', "La note d'étude a été Joint avec succès !");
+    //     }
+    //     else
+    //     return redirect()->back()->with('success', "Operation echouée !");
+    // }
+
 
     public function rejetter($id, $table, Request $request)
     {
@@ -566,26 +588,4 @@ class BackendController extends Controller
         ];
         return view('backend.lists_demandesAgents', $data);
     }
-    
-    public function listDemandep002(DemandeP002Repository $demandeP002Repository, DemandeP002 $demandeP002)
-    {
-
-        $data = [
-            "demandes" => $demandeP002Repository->all()->sortByDesc('created_at'),
-            "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
-            "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
-            "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
-            "statutEtude" => StatutDemande::where('etat', '=', 'E')->first()->statut,
-            "statutComplement" => StatutDemande::where('etat', '=', 'C')->first()->statut,
-            "statutSigne" => StatutDemande::where('etat', '=', 'S')->first()->statut,
-            "statutValide" => StatutDemande::where('etat', '=', 'V')->first()->statut,
-            "demandeEtat" => $demandeP002->statut(),
-            "agents" => Agent::all(),
-        ];
-        //   dd($data['demandes'][0]->demandePiece);
-        // dd($data['demandeEtat']);
-
-        return view('backend.list_demandep002', $data);
-    }
-
 }

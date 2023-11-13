@@ -301,16 +301,20 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="put"
+                                                            <form method="post" enctype="multipart/form-data"
                                                                 action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p001_s'] ) }}">
                                                                 @csrf
-                                                                @method('GET')
-
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
                                                                         <label class="col-form-label">Motif de la validation ?</label>
                                                                             <input type="text" required name="libelle" class="form-control border-success">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="text-center">
+                                                                        <label class="col-form-label">Charger la note d'étude</label>
+                                                                            <input type="file" name="note_etude_file" class="form-control border-success">
                                                                     </div>
 
                                                                 </div>
