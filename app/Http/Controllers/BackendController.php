@@ -125,6 +125,31 @@ class BackendController extends Controller
         return view('backend.list_demande', $data);
     }
 
+
+    // Liste des demandes p002 agrement en eau
+    public function listDemandep002(DemandeP002Repository $demandeP002Repository,  DemandeP002 $demandep002)
+    {
+
+        $data = [
+            "demandes" => $demandeP002Repository->all()->sortByDesc('created_at'),
+            "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
+            "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
+            "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
+            "statutEtude" => StatutDemande::where('etat', '=', 'E')->first()->statut,
+            "statutComplement" => StatutDemande::where('etat', '=', 'C')->first()->statut,
+            "statutSigne" => StatutDemande::where('etat', '=', 'S')->first()->statut,
+            "statutValide" => StatutDemande::where('etat', '=', 'V')->first()->statut,
+            //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
+            "demandeEnCours" => $demandeP002Repository->nombre('demande_p002_s', array('etat' => 'en cours')),
+            "demandeEtat" => $demandep002->statut(),
+            "agents" => Agent::all(),
+        ];
+        //   dd($data['demandes'][0]->demandePiece);
+        // dd($data['demandeEtat']);
+
+        return view('backend.list_demandep002', $data);
+    }
+
     //   liste des demandes de la procedure ecotourisme p0012
 
     public function listDemandep0012(DemandeP0012Repository $demandeP0012Repository,  DemandeP0012 $demandep0012)
@@ -347,49 +372,83 @@ class BackendController extends Controller
             // return redirect()->back()->with('success', "opération effectuée avec succès !");
 
         } elseif ($table == 'demande_p003_s') {
+            $dataFiles = $request->all();
+            $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+
+            $commentaire3 = new CommentaireP003();
+            $commentaire3->create([
+                'libelle' => $request->libelle,
+                'demande_p003_id' => $id
+            ]);
+
         } elseif ($table == 'demande_p002_s') {
+
+            $dataFiles = $request->all();
+            $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+
             $commentaire2 = new CommentaireP002();
             $commentaire2->create([
                 'libelle' => $request->libelle,
                 'demande_p002_id' => $id
             ]);
         }elseif ($table == 'demande_p003_s') {
+            $dataFiles = $request->all();
+            $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+
             $commentaire3 = new CommentaireP003();
             $commentaire3->create([
                 'libelle' => $request->libelle,
                 'demande_p003_id' => $id
             ]);
         } elseif ($table == 'demande_p004_s') {
+            $dataFiles = $request->all();
+            $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+
             $commentaire4 = new CommentaireP004();
             $commentaire4->create([
                 'libelle' => $request->libelle,
                 'demande_p004_id' => $id
             ]);
         } elseif ($table == 'demande_p006_s') {
+            $dataFiles = $request->all();
+            $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+
             $commentaire6 = new CommentaireP006();
             $commentaire6->create([
                 'libelle' => $request->libelle,
                 'demande_p006_id' => $id
             ]);
         } elseif ($table == 'demande_p007_s') {
+            $dataFiles = $request->all();
+            $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+
             $commentaire7 = new CommentaireP007();
             $commentaire7->create([
                 'libelle' => $request->libelle,
                 'demande_p007_id' => $id
             ]);
         } elseif ($table == 'demande_p008_s') {
+            $dataFiles = $request->all();
+            $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+
             $commentaire8 = new CommentaireP008();
             $commentaire8->create([
                 'libelle' => $request->libelle,
                 'demande_p008_id' => $id
             ]);
         } elseif ($table == 'demande_p0011_s') {
+            $dataFiles = $request->all();
+            $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+
             $commentaire11 = new CommentaireP0011();
             $commentaire11->create([
                 'libelle' => $request->libelle,
                 'demande_p0011_id' => $id
             ]);
         } elseif ($table == 'demande_p0012_s') {
+            $dataFiles = $request->all();
+            $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+
             $commentaire12 = new CommentaireP0012();
             $commentaire12->create([
                 'libelle' => $request->libelle,

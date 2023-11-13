@@ -191,8 +191,56 @@
                                                 @endif
 
 
+                                                  {{-- Model de confirmation de Valider --}}
+                                            <div class="modal fade" id="valider{{ $demande->uuid }}"
+                                                data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content bgcustom-gradient-light">
+                                                        <div class="modal-header">
+                                                            <img src="{{ asset('backend/assets/img/valide.png') }}"
+                                                                width="60" height="45" class="d-inline-block align-top"
+                                                                alt="">
+                                                            <h5 class="modal-title m-auto"> Confirmation de Validation
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-dismiss="modal"
+                                                                aria-label="btn-close">
 
-                                            {{-- Model de Joindre acte signé --}}
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="post" enctype="multipart/form-data"
+                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p001_s'] ) }}">
+                                                                @csrf
+
+                                                                <div class="form-group">
+                                                                    <div class="text-center">
+                                                                        <label class="col-form-label">Motif de la validation ?</label>
+                                                                            <input type="text" required name="libelle" class="form-control border-success">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="text-center">
+                                                                        <label class="col-form-label">Charger la note d'étude si y'a lieu</label>
+                                                                            <input type="file" name="note_etude_file" class="form-control border-success">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-warning"
+                                                                        data-dismiss="modal">Non, Annuler</button>
+                                                                    <button type="submit" class="btn btn-success">Oui,
+                                                                        Valider</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Fin Modal Valider-->
+
+
+
+                                            {{-- Modal de Joindre acte signé --}}
                                             <div class="modal fade" id="signer{{ $demande->uuid }}"
                                                 data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -286,52 +334,7 @@
                                             <!-- Fin Modal Valider-->
 
 
-                                            {{-- Model de confirmation de Valider --}}
-                                            <div class="modal fade" id="valider{{ $demande->uuid }}"
-                                                data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content bgcustom-gradient-light">
-                                                        <div class="modal-header">
-                                                            <img src="{{ asset('backend/assets/img/valide.png') }}"
-                                                                width="60" height="45" class="d-inline-block align-top"
-                                                                alt="">
-                                                            <h5 class="modal-title m-auto"> Confirmation de Validation
-                                                            </h5>
-                                                            <button type="button" class="btn-close" data-dismiss="modal"
-                                                                aria-label="btn-close">
 
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form method="post" enctype="multipart/form-data"
-                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p001_s'] ) }}">
-                                                                @csrf
-
-                                                                <div class="form-group">
-                                                                    <div class="text-center">
-                                                                        <label class="col-form-label">Motif de la validation ?</label>
-                                                                            <input type="text" required name="libelle" class="form-control border-success">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <div class="text-center">
-                                                                        <label class="col-form-label">Charger la note d'étude si y'a lieu</label>
-                                                                            <input type="file" name="note_etude_file" class="form-control border-success">
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-warning"
-                                                                        data-dismiss="modal">Non, Annuler</button>
-                                                                    <button type="submit" class="btn btn-success">Oui,
-                                                                        Valider</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Fin Modal Valider-->
 
 
                                             {{-- Model de confirmation de rejet --}}
