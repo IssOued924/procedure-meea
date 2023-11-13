@@ -90,9 +90,9 @@ class DemandeP0012Controller extends Controller
         $demandePieceP0012Repository->setChemin($photo, $demande->uuid, 'Photo d\'Identite');
         $demandePieceP0012Repository->setChemin($list_personne, $demande->uuid, 'Liste des Personnes concernées');
 
-        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
+        return redirect('/demandes-lists?procedure=PETE')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }else {
-        dd($data);
+
     }
     }
 }
