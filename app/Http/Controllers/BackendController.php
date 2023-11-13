@@ -335,15 +335,16 @@ class BackendController extends Controller
 
         if ($table == 'demande_p001_s') {
 
+
             $dataFiles = $request->all();
-        $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
+            $noteEtude =  $this->repository->uploadNoteEtude($table, $dataFiles, 'note_etude_file', $id);
 
             $commentaire1 = new CommentaireP001();
             $commentaire1->create([
                 'libelle' => $request->libelle,
                 'demande_p001_id' => $id
             ]);
-            return redirect()->back()->with('success', "La note d'étude a été Joint avec succès !");
+            // return redirect()->back()->with('success', "opération effectuée avec succès !");
 
         } elseif ($table == 'demande_p003_s') {
         } elseif ($table == 'demande_p002_s') {
@@ -400,7 +401,7 @@ class BackendController extends Controller
         // DB::table('commentaire_p001_s')->insert();
 
 
-        return redirect()->back()->with('success', "La Demande a été Valider avec succès !");
+        return redirect()->back()->with('success', "Operation éffectuée avec succès !");
     }
 
     // fonction de chargement de acte

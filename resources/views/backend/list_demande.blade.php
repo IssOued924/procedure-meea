@@ -94,7 +94,7 @@
                             </div><br>
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable table-bordered table-striped">
+                            <table  id="example1" class="table datatable table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -165,7 +165,6 @@
 
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
 
-
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}">
@@ -183,6 +182,9 @@
                                                         class="btn btn-danger"><i class="bi bi-x-circle"></i></a>
                                                 @endif
                                                 @if ($demande->etat == 'S')
+                                                <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
+                                                    type="button" title="Valider" class="btn btn-success"><i
+                                                        class="bi bi-check-circle"></i> </a>
                                                     <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}"
                                                     type="button" title="Joindre Acte Signé" class="btn btn-success"><i
                                                         class="bi bi-upload"></i> </a>
@@ -313,7 +315,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Charger la note d'étude</label>
+                                                                        <label class="col-form-label">Charger la note d'étude si y'a lieu</label>
                                                                             <input type="file" name="note_etude_file" class="form-control border-success">
                                                                     </div>
 
@@ -540,7 +542,24 @@ swalWithBootstrapButtons.fire({
     function refresh() {
         location.reload(true);
     }
-</script>
+
+
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
 
 
 @endsection

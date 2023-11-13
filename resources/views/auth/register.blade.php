@@ -107,7 +107,7 @@
             <div class="cont_form_login">
                 <div class="row pt-2">
                     <a class="col-2 pl-8" onclick="hidden_login_and_sign_up()" style="color: black">
-                        <i class="material-icons">&#xE5C4;</i>
+                        <i class="text-white material-icons">&#xE5C4;</i>
                     </a>
                     <h5 class="col-10">Personne physique</h5>
                 </div>
