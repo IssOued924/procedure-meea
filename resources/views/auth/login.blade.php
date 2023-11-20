@@ -87,7 +87,7 @@
                         stroke-width: 2px;
                         stroke-linecap: round;
                         stroke-linejoin: round;"></i>
-                            <b>Délai de traitement : 1 Jour</b>
+                            <b>Délai de traitement : {{ $procedure->delai }} Jours</b>
 
 
                             <i class="bi bi-tag"

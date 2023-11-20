@@ -103,6 +103,7 @@
                                         <th scope="col">Quantite/Kg</th>
                                         <th scope="col">Résidence</th>
                                         <th scope="col">etat Demande</th>
+                                        <th scope="col">Délai</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -158,12 +159,18 @@
                                     @endphp
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $demande->created_at->format('d/m/Y H:i:s') }}</td>
+                                        <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
                                         <td> {{ $demande->denomination_sociale_demandeur }}</td>
                                         <td>{{ $demande->quantite }}</td>
                                         <td>{{ $demande->localite->libelle }}</td>
 
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
+                                        @if (isset($demande->delai))
+
+                                        <td><span class="badge bg-dark">{{ $demande->delai}} </span> Jours </td>
+                                        @else
+                                        <td><span class="  ">-</span> </td>
+                                        @endif
 
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "

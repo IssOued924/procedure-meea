@@ -42,6 +42,7 @@ use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\DemandeP002;
 use App\Models\CommentaireP002;
+use Carbon\Carbon;
 
 class BackendController extends Controller
 {
@@ -172,8 +173,15 @@ class BackendController extends Controller
         //   dd($data['demandes'][0]->demandePiece);
         // dd($data['demandeEtat']);
 
+
         return view('backend.list_demandep0012', $data);
     }
+
+
+
+
+
+
 
     //   liste des demandes de la procedure gestion des dechets p008
 

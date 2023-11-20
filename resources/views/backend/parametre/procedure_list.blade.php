@@ -181,6 +181,21 @@
                                                             </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <h5 class="card-title">Délai</h5>
+                                                                    <div class="input-group mb-3">
+
+                                                                        {{-- <label for="libelle">Libelle</label> --}}
+
+                                                                        <input type="number" name="delai"
+                                                                            class="form-control border-success"
+                                                                            value="{{ $proc->delai }}"
+                                                                                required>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
                                                             <div class="card">
                                                                 <div class="card-body">

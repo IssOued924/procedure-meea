@@ -40,8 +40,14 @@ class DemandeP003Controller extends Controller
        // $data['usager_id'] = Auth::user()->uuid;
 
         unset($data['telephone']);
+        unset($data['moyen']);
+        unset($data["numero"]);
+        unset($data["otp"]);
+
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
+
+        $data['delai'] = Procedure::where(['code' => 'P003'])->first('delai')->delai;
         $data['procedure_id'] = Procedure::where(['code' => 'P003'])->first('uuid')->uuid;
 
         $data['reference'] = $this->repository->generateReference('P003');

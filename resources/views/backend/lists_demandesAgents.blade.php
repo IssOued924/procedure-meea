@@ -69,6 +69,7 @@
                                         <th scope="col">Date Démande</th>
                                         <th scope="col">Réference</th>
                                         <th scope="col">etat de mes Démandes</th>
+                                        <th scope="col">Délai</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -125,10 +126,17 @@
                                     @endphp
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $demande->created_at->format('d/m/Y H:i:s') }}</td>
+                                        <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
                                         <td>{{ $demande->reference }}</td>
                                         <td>
                                         <span class="badge {{ $statutColor }} ">{{$statut}}</span> </td>
+
+                                        @if (isset($demande->delai))
+
+                                        <td><span class="badge bg-dark">{{ $demande->delai}} </span> Jours restants </td>
+                                        @else
+                                        <td><span class="  ">-</span> </td>
+                                        @endif
 
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "

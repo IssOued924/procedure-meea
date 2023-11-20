@@ -19,7 +19,7 @@ class ProcedureSeeder extends Seeder
       $str1 =   Structure::create([
             "libelle_court" => "DGEF",
             "libelle_long" =>"Direction Générale des Eaux et Forêts",
-            
+
         ]);
         $str1->save();
 
@@ -32,7 +32,7 @@ class ProcedureSeeder extends Seeder
         $str2 =   Structure::create([
             "libelle_court" => "DGRE",
             "libelle_long" =>"Direction Générale des Ressources en Eaux",
-           
+
         ]);
         $str2->save();
         $serv2 =  Service::create([
@@ -44,7 +44,7 @@ class ProcedureSeeder extends Seeder
         $str3 =   Structure::create([
             "libelle_court" => "DGPE",
             "libelle_long" =>"Direction Générale de la Proctection de L'Environnement",
-          
+
         ]);
         $str3->save();
        $serv3 =  Service::create([
@@ -157,6 +157,6 @@ class ProcedureSeeder extends Seeder
             "code" => "P0011",
             "service_id"=>$serv1->uuid
         ]);
-      
+
     }
 }

@@ -59,6 +59,10 @@ class DemandeP0012Controller extends Controller
         $data['etat'] = 'D'; //code de procedure demande deposee
         $data['reference'] = $this->repository->generateReference('P0012');
 
+        // $data['delai'] = Procedure::pluck('delai');
+        $data['delai'] = Procedure::where(['code' => 'P0012'])->first('delai')->delai;
+
+
 
         $data['procedure_id'] = Procedure::where(['code' => 'P0012'])->first('uuid')->uuid;
       //  dd($data['procedure_id']);

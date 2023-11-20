@@ -104,6 +104,7 @@
                                         <th scope="col">Categorie</th>
                                         <th scope="col">Sous domaine</th>
                                         <th scope="col">etat Demande</th>
+                                        <th scope="col">Délai</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -159,12 +160,18 @@
                                     @endphp
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $demande->created_at->format('d/m/Y H:i:s') }}</td>
+                                        <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
                                         <td> {{ $demande->identite }}</td>
                                         <td>{{ $demande->domaine }}</td>
                                         <td>{{ $demande->categorie }}</td>
                                         <td>{{ $demande->sous_domaine }}</td>
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
+                                        @if (isset($demande->delai))
+
+                                        <td><span class="badge bg-dark">{{ $demande->delai}} </span> Jours </td>
+                                        @else
+                                        <td><span class="  ">-</span> </td>
+                                        @endif
 
 
                                         <td>

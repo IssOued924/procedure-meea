@@ -42,8 +42,10 @@ class DemandeP0011Controller extends Controller
         $data['etat'] = 'D'; //code de procedure demande deposee
 
         $data['reference'] = $this->repository->generateReference('P0011');
+        $data['delai'] = Procedure::where(['code' => 'P0011'])->first('delai')->delai;
 
         $data['procedure_id'] = Procedure::where(['code' => 'P0011'])->first('uuid')->uuid;
+
 
 
         $cnib =  $this->repository->uploadFile($dataFiles, 'cnib');

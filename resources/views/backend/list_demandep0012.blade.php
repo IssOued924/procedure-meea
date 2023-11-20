@@ -100,6 +100,7 @@
 
                                         <th scope="col">Résidence</th>
                                         <th scope="col">Etat Demande</th>
+                                        <th scope="col">Délai</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -155,12 +156,21 @@
                                     @endphp
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $demande->created_at->format('d/m/Y H:i:s') }}</td>
+                                        <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
                                         <td> {{ $demande->usager->nom.' '.$demande->usager->prenom }}</td>
 
                                         <td>{{ $demande->localite->libelle }}</td>
 
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
+                                        @if (isset($demande->delai))
+
+
+                                        <td><span class="badge bg-dark">{{
+
+                                        $demande->delai}} </span> Jours </td>
+                                        @else
+                                        <td><span class="  ">-</span> </td>
+                                        @endif
 
 
 

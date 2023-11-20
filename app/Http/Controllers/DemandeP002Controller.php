@@ -35,6 +35,8 @@ class DemandeP002Controller extends Controller {
             //  'delai' =>'D',
             //  'adresse_beneficiaire' =>'D',
             'procedure_id' => Procedure::where(['code' => 'P002'])->first('uuid')->uuid,
+            'delai' => Procedure::where(['code' => 'P002'])->first('delai')->delai,
+
             'date_certif' => Carbon::parse(Carbon::now())->format('Ymd'),
             'usager_id' => Auth::user()->usager_id,
             'last_modified_by' => Auth::user()->usager_id,
@@ -55,7 +57,7 @@ class DemandeP002Controller extends Controller {
             $cheminCnss = $this->repository->uploadFile($request->file('cnss'));
             $cheminFicheRenseignement = $this->repository->uploadFile($request->file('fiche_renseignement'));
             $cheminDeclarationHonneur = $this->repository->uploadFile($request->file('declaration_honneur'));
-           
+
             //Enregistement des fchiers joints
             $demandePieceP002Repository->setChemin($cheminRecuAchat, $demande->uuid, 'Récu achat dossier');
             $demandePieceP002Repository->setChemin($cheminifu, $demande->uuid, 'Certificat Ifu');
@@ -63,7 +65,7 @@ class DemandeP002Controller extends Controller {
             $demandePieceP002Repository->setChemin($cheminCnss, $demande->uuid, 'Attestation employeur CNSS');
             $demandePieceP002Repository->setChemin($cheminFicheRenseignement, $demande->uuid, 'Fiche Renseignement');
             $demandePieceP002Repository->setChemin($cheminDeclarationHonneur, $demande->uuid, 'Déclaration sur l’honneur de l’exactitude des informations');
-           
+
             //Enregistrement des autres documents
             if ($request->libelle_document && sizeof($request->libelle_document) > 0) {
                 $n = sizeof($request->libelle_document);

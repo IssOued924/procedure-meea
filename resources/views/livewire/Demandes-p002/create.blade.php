@@ -41,7 +41,8 @@
                                     <li id="folder"><strong>Pieces Administratives</strong></li>
                                     <li id="personal"><strong>Domaine et catégorie</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
-                                    <li id="confirm"><strong>Validation</strong></li>
+
+                                    {{-- <li id="confirm"><strong>Validation</strong></li> --}}
                                 </ul>
                                 <!-- fieldsets -->
 
@@ -62,7 +63,7 @@
                                                 <div class="col-6">
                                                     <label class="pays_residence fw-bold">Pays de résidence<span style="color:red">
                                                             *</span></label>
-                                                    <select name="pays" id="pays" class="form-select boerder-success">
+                                                    <select name="pays" id="pays" class="form-select border-success">
                                                     <option >Veuillez choisir pays</option>
                                                     @foreach($pays as $pay)
                                                         <option {{ ($pay->libelle == $default_pays ? 'selected' : '' )}} value="{{$pay->libelle}}">{{$pay->libelle}}</option>
@@ -117,7 +118,7 @@
                                              <div class="col-6">
                                                 <label class="boite_postale">Attestation RCCM<span style="color:red">
                                                         *</span></label>
-                                                <input type="file" name="rccm"  class="form-control" required />
+                                                <input type="file" name="rccm"  class="border-success form-control" required />
                                             </div>
                                             <div class="col-6">
                                                 <label class="adresse fw-bold">Attestation employeur CNSS<span style="color: red">*</span></label>
@@ -128,7 +129,7 @@
                                              <div class="col-6">
                                                 <label class="boite_postale">Fiche Renseignement<span style="color:red">
                                                         *</span></label>
-                                                <input type="file" name="fiche_renseignement" required class="form-control" />
+                                                <input type="file" name="fiche_renseignement" required class="border-success form-control" />
                                             </div>
                                             <div class="col-6">
                                                 <label class="adresse fw-bold">Déclaration sur l’honneur de l’exactitude des informationsr<span style="color: red">*</span></label>
@@ -217,6 +218,7 @@
                                         >Suivant</button>
                                 </fieldset>
 
+
                                 <fieldset>
 
                                     <div class="form-card">
@@ -239,8 +241,9 @@
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Retour" />
 
-                                     <button type="submit" class="action-button" id="btn_send">Confirmation</button>
+                                     <button type="submit" class="action-button" id="btn_send">Valider</button>
                                 </fieldset>
+
                             </form>
                         </div>
                     </div>
@@ -361,6 +364,21 @@ $('.radio-group .radio').click(function(){
 $(".submit").click(function(){
     return false;
 })
+
+//conrol paiement
+$("div#moyenP1").hide();
+$("div#moyenP2").hide();
+
+jQuery('input[name=moyen]:radio').click(function(){
+		$("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+		var divId = jQuery(this).val();
+        if(divId * 1 == 1){
+            $("div#moyenP1").show()
+        }else{
+            $("div#moyenP2").show()
+        }
+		});
 
 });
 </script>
