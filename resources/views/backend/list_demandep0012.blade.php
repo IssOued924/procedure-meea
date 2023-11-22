@@ -247,8 +247,6 @@
                                         </div>
                                         <!-- Fin Modal Valider-->
 
-
-
                                             {{-- Model de Joindre acte signé --}}
                                             <div class="modal fade" id="signer{{ $demande->uuid }}"
                                                 data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
@@ -365,8 +363,6 @@
                                                                 action="{{ route('rejetter', ['id' =>$demande->uuid, 'table' => 'demande_p0012_s']) }}">
                                                                 @csrf
                                                                 @method('PUT')
-
-
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">

@@ -468,7 +468,7 @@ class BackendController extends Controller
         // DB::table('commentaire_p001_s')->insert();
 
 
-        return redirect()->back()->with('success', "Operation éffectuée avec succès !");
+        return redirect()->back()->with('success', "Opération éffectuée avec succès !");
     }
 
     // fonction de chargement de acte
