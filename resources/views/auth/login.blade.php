@@ -296,7 +296,7 @@
                                     {{ __('Se Connecter') }}
                                 </x-primary-button>
                             </div>
-                            <a class="mt-5 underline text-sm text-dark dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                            <a class="mt-5 underline fw-bold text-primary dark:hover:text-gray-100   dark:focus:ring-offset-gray-800"
                                 href="/register">
                                 {{ __("S'inscrire") }}
                             </a>
