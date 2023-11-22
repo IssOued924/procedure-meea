@@ -62,9 +62,10 @@ class DemandeP0012Controller extends Controller
         // $data['delai'] = Procedure::pluck('delai');
         $data['delai'] = Procedure::where(['code' => 'P0012'])->first('delai')->delai;
 
-
-
         $data['procedure_id'] = Procedure::where(['code' => 'P0012'])->first('uuid')->uuid;
+            //paiement
+        $data['paiement'] = 1;
+
       //  dd($data['procedure_id']);
         unset($data['telephone']);
         unset($data['moyen']);

@@ -185,7 +185,7 @@
             <div class="cont_form_sign_up">
                 <div class="row pt-2">
                     <a class="col-2 pl-8" onclick="hidden_login_and_sign_up()" style="color: black">
-                        <i class="material-icons text-white">&#xE5C4;</i>
+                        <i class="material-icons text-white cursor-pointer ">&#xE5C4;</i>
                     </a>
                     <h5 class="col-10">Personne morale</h5>
                 </div>

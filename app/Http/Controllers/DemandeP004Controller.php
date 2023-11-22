@@ -46,7 +46,7 @@ class DemandeP004Controller extends Controller
         $data['reference'] = $this->repository->generateReference('P004');
         $data['delai'] = Procedure::where(['code' => 'P004'])->first('delai')->delai;
         $data['procedure_id'] = Procedure::where(['code' => 'P004'])->first('uuid')->uuid;
-
+        $data['paiement'] =1;
         $certificat_origine =  $this->repository->uploadFile($dataFiles, 'certificat_origine');
         $certificat_sanitaire =  $this->repository->uploadFile($dataFiles, 'certificat_sanitaire');
         unset($data['certificat_origine']);

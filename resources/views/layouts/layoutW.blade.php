@@ -79,19 +79,21 @@
         </script>
 
         <div class="col-lg-6 offset-lg-5 animate__animated animate__fadeInUp">
-            <form class="form-inline">
-                {{-- <i id="filter" class="bi bi-search"></i> --}}
+            {{-- <form class="form-inline " style="display:hidden;">
+
                 <input class="form-control rounded-pill  border-success" id="filter" type="search"
                     placeholder="Recherche ..." aria-label="Search" autocomplete="off">
 
-            </form><br>
+            </form> --}}
+
+            <br>
         </div>
 
     @yield('contenuWelcome')
     @yield('contenuLogin')
     @yield('contact')
     @yield('faq')
-    
+
 
 
     </div>

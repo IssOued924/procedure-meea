@@ -37,7 +37,7 @@ class DemandeP008Controller extends Controller
         $data['etat'] = 'D'; //code de procedure demande deposee
         $data['reference'] = $this->repository->generateReference('P001');
         $data['delai'] = Procedure::where(['code' => 'P008'])->first('delai')->delai;
-
+        $data['paiement'] =1;
         $data['procedure_id'] = Procedure::where(['code' => 'P008'])->first('uuid')->uuid;
 
         unset($data['telephone']);

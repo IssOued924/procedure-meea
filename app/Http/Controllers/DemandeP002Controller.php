@@ -36,7 +36,7 @@ class DemandeP002Controller extends Controller {
             //  'adresse_beneficiaire' =>'D',
             'procedure_id' => Procedure::where(['code' => 'P002'])->first('uuid')->uuid,
             'delai' => Procedure::where(['code' => 'P002'])->first('delai')->delai,
-
+            'paiement' => 1,
             'date_certif' => Carbon::parse(Carbon::now())->format('Ymd'),
             'usager_id' => Auth::user()->usager_id,
             'last_modified_by' => Auth::user()->usager_id,

@@ -70,6 +70,7 @@
                                         <th scope="col">Réference</th>
                                         <th scope="col">etat de mes Démandes</th>
                                         <th scope="col">Délai</th>
+                                        <th scope="col">Paiement</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -129,14 +130,29 @@
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
                                         <td>{{ $demande->reference }}</td>
                                         <td>
-                                        <span class="badge {{ $statutColor }} ">{{$statut}}</span> </td>
+                                            @if ($statut == 'demande en etude')
+                                            <span class="badge {{ $statutColor }} "> Demande en cours d'étude</span> </td>
+
+                                            @elseif ($statut == 'demande signée')
+                                            <span class="badge {{ $statutColor }} "> Demande prête</span> </td>
+                                            @else
+                                            <span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
+                                            @endif
 
                                         @if (isset($demande->delai))
 
-                                        <td><span class="badge bg-dark">{{ $demande->delai}} </span> Jours restants </td>
+                                        <td><span class="badge bg-dark">{{ $demande->delai}} </span> Jours</td>
                                         @else
                                         <td><span class="  ">-</span> </td>
                                         @endif
+
+                                          {{-- partie paiement --}}
+                                          @if ($demande->paiement === 1)
+                                          <td><b><span class="text-success">Payée</span></b></td>
+
+                                          @else
+                                          <td><b><span class="text-warning">Non Payée</span></b></td>
+                                          @endif
 
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "

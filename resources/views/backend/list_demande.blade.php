@@ -104,6 +104,7 @@
                                         <th scope="col">Résidence</th>
                                         <th scope="col">etat Demande</th>
                                         <th scope="col">Délai</th>
+                                        <th scope="col">Paiement</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -169,7 +170,15 @@
 
                                         <td><span class="badge bg-dark">{{ $demande->delai}} </span> Jours </td>
                                         @else
-                                        <td><span class="  ">-</span> </td>
+                                        <td><span class="">-</span> </td>
+                                        @endif
+
+                                        {{-- partie paiement --}}
+                                        @if ($demande->paiement === 1)
+                                        <td><b><span class="text-success">Payé</span></b></td>
+
+                                        @else
+                                        <td><b><span class="text-warning">Non Payé</span></b></td>
                                         @endif
 
                                         <td>
