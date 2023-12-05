@@ -1,7 +1,7 @@
 @extends('backend.layout.base')
 @section('title')
 <div class="pagetitle">
-    <h1>Liste des Démandes d'agréement technique en Eau </h1>
+    <h1>Liste des Demandes de Permis de Circulation de bois et de Charbon de Bois</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
@@ -18,7 +18,6 @@
         <!-- Left side columns -->
         <div class="col-lg-12">
             <div class="row">
-
                 <!-- Recent Sales -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
@@ -30,9 +29,9 @@
                                     <h6>Filter</h6>
                                 </li>
 
-                                <li><a class="dropdown-item" href="#">Aujourd'hui</a></li>
-                                <li><a class="dropdown-item" href="#">Mois Courant</a></li>
-                                <li><a class="dropdown-item" href="#">Cette Année</a></li>
+                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
                             </ul>
                         </div>
 
@@ -41,20 +40,20 @@
 
                         <div class="card-body">
                             <p> @if(session('success'))
-                            <div class="alert alert-success alert-dismissible" role="alert">
-                                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="alert-heading">{{session('success')}}</h4>
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="alert-heading">{{session('success')}}</h4>
 
-                            </div>
+                                </div>
 
-                            <script>
-                                setTimeout(function() {
-                                        document.querySelector('.alert.alert-success').style.display = 'none';
-                                    }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
-                            </script>
-                            @endif</p>
+                                <script>
+                                    setTimeout(function() {
+                                            document.querySelector('.alert.alert-success').style.display = 'none';
+                                        }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                                </script>
+                                @endif</p>
                             <div class="row">
                                 <div class="col-9">
                                     <div class="col-sm-12 col-md-6">
@@ -79,16 +78,14 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-
-
                                     <div style="float: right">
 
-                                    <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
-                                        class="bi bi-arrow-repeat"></i></button>
-                                        <button  title="Ajouter" type="button" class="btn btn-success"><i
-                                            class="bi bi-plus"></i></button>
-                                    </div>
-
+                                        <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
+                                                    class="bi bi-arrow-repeat"></i></button>
+                                                    <button  title="Ajouter" type="button" class="btn btn-success"><i
+                                                        class="bi bi-plus"></i></button>
+                                        </div>
+                                </div>
 
                                 </div>
                             </div><br>
@@ -100,11 +97,10 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Date Demande</th>
                                         <th scope="col">Demandeur</th>
-                                        <th scope="col">Domaine</th>
-                                        <th scope="col">Categorie</th>
-                                        <th scope="col">Sous domaine</th>
-                                        <th scope="col">etat Demande</th>
-                                        <th scope="col">Délai</th>
+
+                                        <th scope="col">Résidence</th>
+                                        <th scope="col">Etat Demande</th>
+                                        {{-- <th scope="col">Délai</th> --}}
                                         <th scope="col">Paiement</th>
 
                                         <th scope="col">Action</th>
@@ -119,60 +115,58 @@
                                     $statut = "";
                                     $statutColor = "";
                                     switch ($demande->etat) {
-                                    case 'D':
-                                    # code...
-                                    $statut = $statutDepose;
-                                    $statutColor ="bg-primary";
-                                    break;
-                                    case 'S':
-                                    # code...
-                                    $statut = $statutSigne;
-                                    $statutColor ="bg-success";
-                                    break;
-                                    case 'A':
-                                    # code...
-                                    $statut = $statutArchive;
-                                    $statutColor ="bg-secondary";
-                                    break;
-                                    case 'V':
-                                    # code...
-                                    $statut = $statutValide;
-                                    $statutColor ="bg-success";
-                                    break;
-                                    case 'C':
-                                    # code...
-                                    $statut = $statutComplement;
-                                    $statutColor ="bg-warning";
-                                    break;
-                                    case 'R':
-                                    # code...
-                                    $statut = $statutRejete;
-                                    $statutColor ="bg-danger";
-                                    break;
-                                    case 'E':
-                                    # code...
-                                    $statut = $statutEtude;
-                                    $statutColor ="bg-info";
-                                    break;
-                                    default:
-                                    # code...
-                                    break;
+                                        case 'D':
+                                            # code...
+                                            $statut = $statutDepose;
+                                            $statutColor ="bg-primary";
+                                            break;
+                                            case 'S':
+                                            # code...
+                                            $statut = $statutSigne;
+                                            $statutColor ="bg-success";
+                                            break;
+                                            case 'A':
+                                            # code...
+                                            $statut = $statutArchive;
+                                            $statutColor ="bg-secondary";
+                                            break;
+                                            case 'V':
+                                            # code...
+                                            $statut = $statutValide;
+                                            $statutColor ="bg-success";
+                                            break;
+                                            case 'C':
+                                            # code...
+                                            $statut = $statutComplement;
+                                            $statutColor ="bg-warning";
+                                            break;
+                                            case 'R':
+                                            # code...
+                                            $statut = $statutRejete;
+                                            $statutColor ="bg-danger";
+                                            break;
+                                            case 'E':
+                                            # code...
+                                            $statut = $statutEtude;
+                                            $statutColor ="bg-info";
+                                            break;
+                                        default:
+                                            # code...
+                                            break;
                                     }
                                     @endphp
-                                    <tr>
+                                    <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
-                                        <td> {{ $demande->identite }}</td>
-                                        <td>{{ $demande->domaine }}</td>
-                                        <td>{{ $demande->categorie }}</td>
-                                        <td>{{ $demande->sous_domaine }}</td>
-                                        <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
-                                        @if (isset($demande->delai))
+                                        <td> {{ $demande->usager->nom.' '.$demande->usager->prenom}}</td>
 
-                                        <td><span class="badge bg-dark">{{ $demande->delai}} </span> Jours </td>
+                                        @if (isset($demande->localite))
+                                        <td>{{ $demande->localite->libelle}}</td>
                                         @else
-                                        <td><span class="  ">-</span> </td>
+                                        <td>-</td>
                                         @endif
+
+                                        <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
 
                                         {{-- partie paiement --}}
                                         @if ($demande->paiement === 1)
@@ -181,6 +175,9 @@
                                         @else
                                         <td><b><span class="text-warning">Non Payée</span></b></td>
                                         @endif
+
+
+
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                             data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}">
@@ -225,7 +222,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <form method="post" enctype="multipart/form-data"
-                                                            action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p002_s'] ) }}">
+                                                            action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p005_s'] ) }}">
                                                             @csrf
 
                                                             <div class="form-group">
@@ -274,7 +271,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form method="post" enctype="multipart/form-data"
-                                                                action="{{ route('uploadActe', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p002_s'] ) }}">
+                                                                action="{{ route('uploadActe', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p005_s'] ) }}">
                                                                 @csrf
 
                                                                 <div class="form-group">
@@ -307,7 +304,7 @@
                                                             <img src="{{ asset('backend/assets/img/assigner.jpg') }}"
                                                                 width="60" height="45" class="d-inline-block align-top"
                                                                 alt="">
-                                                            <h5 class="modal-title m-auto"> Assigner à un Collaborateur
+                                                            <h5 class="modal-title m-auto"> Assigner a un Collaborateur
                                                             </h5>
                                                             <button type="button" class="btn-close" data-dismiss="modal"
                                                                 aria-label="btn-close">
@@ -316,7 +313,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form method="put"
-                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p002_s'] ) }}">
+                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p005_s'] ) }}">
                                                                 @csrf
                                                                 @method('GET')
 
@@ -328,7 +325,7 @@
                                                                             <select name="" id="" class="form-select border-success">
                                                                                 @foreach ($agents as $agent)
 
-                                                                              <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
+                                                                                <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
                                                                                 @endforeach
 
                                                                             </select>
@@ -370,7 +367,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form method="put"
-                                                                action="{{ route('rejetter', ['id' =>$demande->uuid, 'table' => 'demande_p002_s']) }}">
+                                                                action="{{ route('rejetter', ['id' =>$demande->uuid, 'table' => 'demande_p005_s']) }}">
                                                                 @csrf
                                                                 @method('PUT')
 
@@ -379,7 +376,8 @@
                                                                 <div class="form-group">
                                                                     <div class="text-center">
                                                                         <label class="col-form-label">Motif du rejet ?</label>
-                                                                            <input required type="text" name="libelle" class="form-control border-success">
+                                                                        <input required type="text" name="libelle" class="form-control border-success">
+
                                                                     </div>
 
                                                                 </div>
@@ -396,7 +394,8 @@
                                             </div>
                                             <!-- Fin Modal Rejet-->
                                         </td>
-                                            {{-- detail modal     --}}
+
+                                        {{-- Voir detail p003 --}}
                                         <div class="modal fade" id="largeModal{{ $demande->uuid }}" tabindex="-1">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content" style="height: 500px;">
@@ -415,43 +414,25 @@
                                                             </div>
                                                             <div class="col-6">
                                                                 <b>Telephone :</b>
-                                                                <span class="text-success">{{
-                                                                    $demande->usager->telephone}}</span>
+                                                                <span class="text-success">{{ $demande->usager->telephone}}</span>
                                                             </div>
                                                         </div><br>
                                                         <div class="row">
-                                                            <div class="col-6">
-                                                                <b>Domaine:</b>
-                                                                <span
-                                                                    class="text-success">{{$demande->domaine}}</span>
+                                                            <div class="col">
+                                                                <b>Type de Permis:</b>
+
                                                             </div>
-                                                            <div class="col-6">
-                                                                <b>Categorie:</b>
-                                                                <span
-                                                                    class="text-success">{{$demande->categorie}}</span>
-                                                            </div>
+
                                                         </div> <br>
-
-                                                        <div class="row">
-                                                            <div class="col-6">
-                                                                <b>Sous Domaine :</b>
-                                                                <span
-                                                                    class="text-success">{{$demande->sous_domaine}}</span>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <h4>Liste des fichiers Soumis <i
-                                                                class="bi bi-folder text-success"></i></h4>
+                                                        <h4>Liste des fichiers Soumis <i class="bi bi-folder text-success"></i></h4>
                                                         <div class="row">
                                                             <div class="col">
 
                                                                 @foreach ( $demande->demandePiece as $chemin)
 
-                                                                <a class=" text-success" target="_blank"
-                                                                    href="{{ Storage::url($chemin->chemin) }}"><b><i
-                                                                            class="bi bi-file-earmark-pdf"></i>
-                                                                        {{$chemin->libelle}}</b></a>
+
+
+                                                                <a class="text-success"  target="_blank" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
                                                                 <br>
                                                                 @endforeach
                                                             </div>
@@ -490,78 +471,12 @@
     </div>
 </section>
 @endsection
-
-@section('script')
-
 <script>
-    function rejetter(){
-
-    var test = document.getElementById('test')
-    test.submit()
-    const swalWithBootstrapButtons = Swal.mixin({
-  customClass: {
-    confirmButton: 'btn btn-success',
-    cancelButton: 'btn btn-danger'
-  },
-  buttonsStyling: false
-})
-
-swalWithBootstrapButtons.fire({
-  title: 'Etes vous sur de vouloir Rejetter cette Demande?',
-  text: "You won't be able to revert this!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonText: 'Je Confirme!',
-  cancelButtonText: 'Annuler!',
-  reverseButtons: true
-}).then((result) => {
-  if (result.isConfirmed) {
-
-    swalWithBootstrapButtons.fire(
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
-    )
-  } else if (
-    /* Read more about handling dismissals below */
-    result.dismiss === Swal.DismissReason.cancel
-  ) {
-    // swalWithBootstrapButtons.fire(
-    //   'Cancelled',
-    //   'Your imaginary file is safe :)',
-    //   'error'
-    // )
-  }
-})
-    }
-
-    //fonction valider statut
-    function valider(me){
-        Swal.fire({
-  title: 'Do you want to save the changes?',
-  showDenyButton: true,
-  showCancelButton: true,
-  confirmButtonText: 'Save',
-  denyButtonText: `Don't save`,
-}).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
-  if (result.isConfirmed) {
-    let url= $(me).attr('data-url');
-    window.location=url;
-
-
-
-    Swal.fire('Saved!', '', 'success')
-  } else if (result.isDenied) {
-    Swal.fire('Changes are not saved', '', 'info')
-  }
-})
-    }
-
     function refresh() {
         location.reload(true);
     }
 </script>
+@section('script')
 
 
 @endsection

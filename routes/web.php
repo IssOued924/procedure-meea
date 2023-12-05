@@ -153,6 +153,7 @@ Route::get('/administration/demandesp0012-list', [BackendController::class, 'lis
 Route::get('/administration/demandesp008-list', [BackendController::class, 'listDemandep008'])->name('demandesp008-list');
 Route::get('/administration/demandesp003-list', [BackendController::class, 'listDemandep003'])->name('demandesp003-list');
 Route::get('/administration/demandesp004-list', [BackendController::class, 'listDemandep004'])->name('demandesp004-list');
+Route::get('/administration/demandesp005-list', [BackendController::class, 'listDemandep005'])->name('demandesp005-list');
 Route::get('/administration/demandesp0011-list', [BackendController::class, 'listDemandep0011'])->name('demandesp0011-list');
 Route::get('/administration/demandesp006-list', [BackendController::class, 'listDemandep006'])->name('demandesp006-list');
 Route::get('/administration/demandesp007-list', [BackendController::class, 'listDemandep007'])->name('demandesp007-list');

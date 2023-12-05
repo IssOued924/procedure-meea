@@ -98,7 +98,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Date Demande</th>
                                         <th scope="col">Demandeur</th>
-
+                                        <th scope="col">Exploitant</th>
                                         <th scope="col">Résidence</th>
                                         <th scope="col">Etat Demande</th>
                                         <th scope="col">Délai</th>
@@ -160,7 +160,7 @@
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
                                         <td> {{ $demande->usager->nom.' '.$demande->usager->prenom}}</td>
-
+                                        <td>{{ $demande->exploitant }}</td>
                                         @if (isset($demande->localite))
                                         <td>{{ $demande->localite->libelle}}</td>
                                         @else

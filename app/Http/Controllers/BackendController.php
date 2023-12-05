@@ -42,6 +42,9 @@ use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\DemandeP002;
 use App\Models\CommentaireP002;
+use App\Models\CommentaireP005;
+use App\Models\DemandeP005;
+use App\Repositories\DemandeP005Repository;
 use Carbon\Carbon;
 
 class BackendController extends Controller
@@ -258,6 +261,33 @@ class BackendController extends Controller
 
         return view('backend.list_demandep004', $data);
     }
+
+      //   liste des demandes de permis de circulation de bois et de charbon de bois
+
+      public function listDemandep005(DemandeP005Repository $demandeP005Repository,  DemandeP005 $demandep005)
+      {
+
+          $data = [
+              "demandes" => $demandeP005Repository->all()->sortByDesc('created_at'),
+              "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
+              "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
+              "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
+              "statutEtude" => StatutDemande::where('etat', '=', 'E')->first()->statut,
+              "statutComplement" => StatutDemande::where('etat', '=', 'C')->first()->statut,
+              "statutSigne" => StatutDemande::where('etat', '=', 'S')->first()->statut,
+              "statutValide" => StatutDemande::where('etat', '=', 'V')->first()->statut,
+              //   "demandes"=>$demandeTest::where(['demande_p001_id',' =>', $demandeTest->demandePiece])->get(),
+              "demandeEnCours" => $demandeP005Repository->nombre('demande_p004_s', array('etat' => 'en cours')),
+              "demandeEtat" => $demandep005->statut(),
+              "agents" => Agent::all(),
+          ];
+          //   dd($data['demandes'][0]->demandePiece);
+          // dd($data['demandeEtat']);
+
+          return view('backend.list_demandep005', $data);
+      }
+
+
 
     //   liste des demandes de permis de detention dun animal p004
 
@@ -527,6 +557,12 @@ class BackendController extends Controller
                 'libelle' => $request->libelle,
                 'demande_p004_id' => $id
             ]);
+        }elseif ($table == 'demande_p005_s') {
+            $commentaire5 = new CommentaireP005();
+            $commentaire5->create([
+                'libelle' => $request->libelle,
+                'demande_p005_id' => $id
+            ]);
         } elseif ($table == 'demande_p006_s') {
             $commentaire6 = new CommentaireP006();
             $commentaire6->create([
@@ -568,6 +604,7 @@ class BackendController extends Controller
     public function nombreDemandeByProcedure(
         DemandeP001Repository $demandeP001Repository,
         DemandeP004Repository $demandeP004Repository,
+        DemandeP005Repository $demandeP005Repository,
         DemandeP008Repository $demandeP008Repository,
         DemandeP0011Repository $demandeP0011Repository,
         DemandeP003Repository $demandeP003Repository,
@@ -588,6 +625,7 @@ class BackendController extends Controller
             'nbce' => $demandeP006Repository->nombre('demande_p006_s', array('etat' => 'D')),
             'nbhomologation' => $demandeP007Repository->nombre('demande_p007_s', array('etat' => 'D')),
             'nbcoupe' => $demandeP0011Repository->nombre('demande_p0011_s', array('etat' => 'D')),
+            'nbcirculation' => $demandeP005Repository->nombre('demande_p005_s', array('etat' => 'D')),
             "nbAgrementTechique" => $demandeP002Repository->nombre('demande_p002_s', array('etat' => 'D')),
         ));
     }
@@ -599,6 +637,7 @@ class BackendController extends Controller
         DemandeP002Repository $demandeP002Repository,
         DemandeP003Repository $demandeP003Repository,
         DemandeP004Repository $demandeP004Repository,
+        DemandeP005Repository $demandeP005Repository,
         DemandeP006Repository $demandeP006Repository,
         DemandeP007Repository $demandeP007Repository,
         DemandeP008Repository $demandeP008Repository,
@@ -633,6 +672,10 @@ class BackendController extends Controller
                 case 'CDAS':
                     $demandes = $demandeP004Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;
+                    case 'PCBCB2':
+                        $demandes = $demandeP005Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
+                    break;
+
                 case 'PCBCB':
                     $demandes = $demandeP0011Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;

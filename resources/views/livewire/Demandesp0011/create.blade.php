@@ -56,11 +56,11 @@
                                             <div class="row">
                                                 <div class="col-3">
                                                     <label class="nom_societe fw-bold" >Exploitant Forestier</label>
-                                                    <input id='radio1' type="radio" value="1" class="checkbox"  name="exploitant" />
+                                                    <input id='radio1' type="radio" value="Forestier" class="checkbox"  name="exploitant" />
                                                 </div>
                                                 <div class="col-3">
                                                     <label class="siege_social fw-bold ">Exploitant Commercial</label>
-                                                    <input  id='radio2' type="radio" value="1"  name="exploitant"/>
+                                                    <input  id='radio2' type="radio" value="Commercial"  name="exploitant"/>
                                                 </div>
                                             </div>
                                         <div class="row">
@@ -95,7 +95,7 @@
                                             <div class="col-6">
                                                 <label class="boite_postale fw-bold">Telephone<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" name="telephone" value="{{ $telephone }}" class="form-control border-success"    placeholder="Telephone" value="{{ $telephone}}" disabled />
+                                                <input type="text" name="telephone" value="{{ $telephone }}" class="form-control border-success"    placeholder="Telephone" value="{{ $telephone}}" />
                                             </div>
                                         </div>
                                         {{-- <div class="row">
@@ -249,7 +249,7 @@
                                         value="Valider" />
                                 </fieldset>
 
-                              
+
                                 <fieldset>
                                     <form action="">
                                     <div class="form-card">
@@ -260,37 +260,44 @@
                                         <div class="row">
                                             <div class="col-3">
                                                 <label class="nom_societe fw-bold" >ORANGE</label>
-                                                <input id="radio3" type="radio" value="1" class="checkbox"  name="moyen" />
+                                                <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
                                             </div>
                                             <div class="col-3">
                                                 <label class="siege_social fw-bold ">MOOV</label>
-                                                <input id="radio4" type="radio" value="0"  name="moyen"/>
+                                                <input id="radio2" type="radio" value="0"  name="moyen"/>
                                             </div>
-                                           
+
 
                                         </div>
                                         <br>
-                                       
-                                       
+
+
                                         <div class="row">
-                                         
-                                            <label id="moyenP1">  Le somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
-                                            <label id="moyenP2">  Le somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
+                                            <div id="moyenP1">
+                                                <label >  La somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
+
+                                            </div>
+                                            <div id="moyenP2">
+                                                <label >  La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
+
+                                            </div>
                                         <div class="col-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
-                                                <input type="number" name="numero" class="border-success"   placeholder="Telephone" required />
+                                                <input type="number" name="numero" style="width: 50%;" class="border-success form-control"   placeholder="Telephone" required />
                                             </div>
                                             <div class="col-6">
                                                 <label class="boite_postale fw-bold">OTP<span style="color:red">
                                                         *</span></label>
-                                                <input type="number" name="otp" class="border-success"   placeholder="otp" required />
+                                                <input type="number" name="otp"   style="width: 50%;" class="border-success form-control"   placeholder="otp" required />
                                             </div>
                                         </div>
-                                       
-                                       
-                                      
+
+
+
                                     </div>
+
+
                                     <input type="button"  class="previous action-button-previous"
                                         value="Retour" />
                                     <input type="submit"   class="next action-button"
@@ -301,7 +308,7 @@
                                 </fieldset>
 
 
-                           
+
                             </form>
                         </div>
                     </div>
@@ -410,6 +417,20 @@ $(".submit").click(function(){
     return false;
 })
 
+$("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+
+jQuery('input[name=moyen]:radio').click(function(){
+		$("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+		var divId = jQuery(this).val();
+        if(divId * 1 == 1){
+            $("div#moyenP1").show()
+        }else{
+            $("div#moyenP2").show()
+        }
+		});
+
 });
 </script>
 <script type='text/javascript'>
@@ -467,7 +488,7 @@ $(".submit").click(function(){
             if (radio1.checked) {
                 moyenP1.style.display = "block";
                 moyenP2.style.display = "none";
-                
+
             }
         });
 
@@ -475,7 +496,7 @@ $(".submit").click(function(){
             if (radio2.checked) {
                 moyenP1.style.display = "none";
                 moyenP2.style.display = "block";
-               
+
             }
         });
 
