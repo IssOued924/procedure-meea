@@ -105,6 +105,7 @@
                                         <th scope="col">Sous domaine</th>
                                         <th scope="col">etat Demande</th>
                                         <th scope="col">Délai</th>
+                                        <th scope="col">Paiement</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -173,7 +174,13 @@
                                         <td><span class="  ">-</span> </td>
                                         @endif
 
+                                        {{-- partie paiement --}}
+                                        @if ($demande->paiement === 1)
+                                        <td><b><span class="text-success">Payée</span></b></td>
 
+                                        @else
+                                        <td><b><span class="text-warning">Non Payée</span></b></td>
+                                        @endif
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                             data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}">
@@ -414,22 +421,22 @@
                                                         </div><br>
                                                         <div class="row">
                                                             <div class="col-6">
-                                                                <b>Identite Fournisseur:</b>
+                                                                <b>Domaine:</b>
                                                                 <span
-                                                                    class="text-success">{{$demande->denomination_sociale_fournisseur}}</span>
+                                                                    class="text-success">{{$demande->domaine}}</span>
                                                             </div>
                                                             <div class="col-6">
-                                                                <b>Addresse:</b>
+                                                                <b>Categorie:</b>
                                                                 <span
-                                                                    class="text-success">{{$demande->adresse_fournisseur}}</span>
+                                                                    class="text-success">{{$demande->categorie}}</span>
                                                             </div>
                                                         </div> <br>
 
                                                         <div class="row">
                                                             <div class="col-6">
-                                                                <b>Système de transport :</b>
+                                                                <b>Sous Domaine :</b>
                                                                 <span
-                                                                    class="text-success">{{$demande->systeme_transport}}  |  {{$demande->agrement_transport}}</span>
+                                                                    class="text-success">{{$demande->sous_domaine}}</span>
                                                             </div>
 
                                                         </div>

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Commune;
 use App\Models\Demande;
+use App\Models\Pays;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -45,9 +46,11 @@ class DemandeP005Comp extends Component
 
         $searchCriteria = "%".$this->search."%";
         $data = [
-            "p005" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
-            "telephone" => Auth::user()->telephone,
+            "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
+            "telephone" => Auth::user()->usager->telephone,
+            "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
             "communes" => Commune::all(),
+            "pays" => Pays::all(),
         ];
 
         return view('livewire.DemandeP005.index', $data)

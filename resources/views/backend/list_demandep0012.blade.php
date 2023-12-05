@@ -101,6 +101,7 @@
                                         <th scope="col">Résidence</th>
                                         <th scope="col">Etat Demande</th>
                                         <th scope="col">Délai</th>
+                                        <th scope="col">Paiement</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -170,6 +171,14 @@
                                         $demande->delai}} </span> Jours </td>
                                         @else
                                         <td><span class="  ">-</span> </td>
+                                        @endif
+
+                                        {{-- partie paiement --}}
+                                        @if ($demande->paiement === 1)
+                                        <td><b><span class="text-success">Payée</span></b></td>
+
+                                        @else
+                                        <td><b><span class="text-warning">Non Payée</span></b></td>
                                         @endif
 
 
@@ -246,8 +255,6 @@
                                             </div>
                                         </div>
                                         <!-- Fin Modal Valider-->
-
-
 
                                             {{-- Model de Joindre acte signé --}}
                                             <div class="modal fade" id="signer{{ $demande->uuid }}"
@@ -365,8 +372,6 @@
                                                                 action="{{ route('rejetter', ['id' =>$demande->uuid, 'table' => 'demande_p0012_s']) }}">
                                                                 @csrf
                                                                 @method('PUT')
-
-
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">

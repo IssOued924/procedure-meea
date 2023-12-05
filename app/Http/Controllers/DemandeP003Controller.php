@@ -49,7 +49,7 @@ class DemandeP003Controller extends Controller
 
         $data['delai'] = Procedure::where(['code' => 'P003'])->first('delai')->delai;
         $data['procedure_id'] = Procedure::where(['code' => 'P003'])->first('uuid')->uuid;
-
+        $data['paiement'] =1;
         $data['reference'] = $this->repository->generateReference('P003');
 
         // $user = $userRepository->getById(Auth::user()->uuid);

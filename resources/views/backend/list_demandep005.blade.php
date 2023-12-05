@@ -1,7 +1,7 @@
 @extends('backend.layout.base')
 @section('title')
 <div class="pagetitle">
-    <h1>Liste des Demandes de certificat de detention d'un animal sauvage</h1>
+    <h1>Liste des Demandes de Permis de Circulation de bois et de Charbon de Bois</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
@@ -18,8 +18,6 @@
         <!-- Left side columns -->
         <div class="col-lg-12">
             <div class="row">
-
-
                 <!-- Recent Sales -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
@@ -80,7 +78,6 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-
                                     <div style="float: right">
 
                                         <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
@@ -88,6 +85,8 @@
                                                     <button  title="Ajouter" type="button" class="btn btn-success"><i
                                                         class="bi bi-plus"></i></button>
                                         </div>
+                                </div>
+
                                 </div>
                             </div><br>
 
@@ -101,7 +100,7 @@
 
                                         <th scope="col">Résidence</th>
                                         <th scope="col">Etat Demande</th>
-                                        <th scope="col">Délai</th>
+                                        {{-- <th scope="col">Délai</th> --}}
                                         <th scope="col">Paiement</th>
 
                                         <th scope="col">Action</th>
@@ -168,20 +167,15 @@
                                         @endif
 
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
-                                        @if (isset($demande->delai))
 
-                                        <td><span class="badge bg-dark">{{ $demande->delai}} </span> Jours </td>
+                                        {{-- partie paiement --}}
+                                        @if ($demande->paiement === 1)
+                                        <td><b><span class="text-success">Payée</span></b></td>
+
                                         @else
-                                        <td><span class="  ">-</span> </td>
+                                        <td><b><span class="text-warning">Non Payée</span></b></td>
                                         @endif
 
-                                          {{-- partie paiement --}}
-                                          @if ($demande->paiement === 1)
-                                          <td><b><span class="text-success">Payée</span></b></td>
-
-                                          @else
-                                          <td><b><span class="text-warning">Non Payée</span></b></td>
-                                          @endif
 
 
                                         <td>
@@ -228,7 +222,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <form method="post" enctype="multipart/form-data"
-                                                            action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p004_s'] ) }}">
+                                                            action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p005_s'] ) }}">
                                                             @csrf
 
                                                             <div class="form-group">
@@ -277,7 +271,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form method="post" enctype="multipart/form-data"
-                                                                action="{{ route('uploadActe', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p004_s'] ) }}">
+                                                                action="{{ route('uploadActe', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p005_s'] ) }}">
                                                                 @csrf
 
                                                                 <div class="form-group">
@@ -319,7 +313,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form method="put"
-                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p004_s'] ) }}">
+                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p005_s'] ) }}">
                                                                 @csrf
                                                                 @method('GET')
 
@@ -373,7 +367,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form method="put"
-                                                                action="{{ route('rejetter', ['id' =>$demande->uuid, 'table' => 'demande_p004_s']) }}">
+                                                                action="{{ route('rejetter', ['id' =>$demande->uuid, 'table' => 'demande_p005_s']) }}">
                                                                 @csrf
                                                                 @method('PUT')
 
@@ -381,8 +375,8 @@
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Etes vous sûr de
-                                                                            vouloir Rejetter cette Demande ?</label>
+                                                                        <label class="col-form-label">Motif du rejet ?</label>
+                                                                        <input required type="text" name="libelle" class="form-control border-success">
 
                                                                     </div>
 
@@ -399,13 +393,9 @@
                                                 </div>
                                             </div>
                                             <!-- Fin Modal Rejet-->
+                                        </td>
 
-
-
-
-
-                                        {{-- Voir detail modal --}}
-
+                                        {{-- Voir detail p003 --}}
                                         <div class="modal fade" id="largeModal{{ $demande->uuid }}" tabindex="-1">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content" style="height: 500px;">

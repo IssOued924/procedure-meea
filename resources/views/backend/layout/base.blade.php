@@ -219,11 +219,11 @@ rel="stylesheet"
                 </a>
               </li>
 
-              {{-- <li>
-                <a href="#">
-                  <i class="bi bi-circle"></i><span>Procédure Permis de circulation&nbsp;</span>
+              <li>
+                <a href="{{ route('demandesp005-list')}}">
+                  <i class="bi bi-circle"></i><span>Procédure Permis de circulation&nbsp;<span id="prog_circulation" class="badge bg-warning text-white"> </span></span>
                 </a>
-              </li> --}}
+              </li>
 
             @endif
 
@@ -403,6 +403,7 @@ function getNombreDemandeByProcedure(){
                         $('#prog_dechet').text(""+result.nbdechet);
                         $('#prog_detention').text(""+result.nbdetention);
                         $('#prog_coupe').text(""+result.nbcoupe);
+                        $('#prog_circulation').text(""+result.nbcirculation);
                         $('#prog_exemption').text(""+result.nbce);
                         $('#prog_chasse').text(""+result.nbpchasse);
                         $('#prog_homologation').text(""+result.nbhomologation);

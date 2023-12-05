@@ -36,7 +36,7 @@ class DemandeP002Controller extends Controller {
             //  'adresse_beneficiaire' =>'D',
             'procedure_id' => Procedure::where(['code' => 'P002'])->first('uuid')->uuid,
             'delai' => Procedure::where(['code' => 'P002'])->first('delai')->delai,
-
+            'paiement' => 1,
             'date_certif' => Carbon::parse(Carbon::now())->format('Ymd'),
             'usager_id' => Auth::user()->usager_id,
             'last_modified_by' => Auth::user()->usager_id,
@@ -75,7 +75,7 @@ class DemandeP002Controller extends Controller {
                 }
             }
           // return json_encode(array('status' => 'success'));
-        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+        return redirect('/demandes-lists?procedure=OATEA')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
         //return json_encode(array('status' => 'fail'));
     }
 

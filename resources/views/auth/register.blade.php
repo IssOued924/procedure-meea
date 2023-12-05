@@ -44,7 +44,7 @@
     @livewireStyles
 </head>
 
-<body class="">
+<body>
     <!--  -->
     <!-- ======= Top Bar ======= -->
     <x-topbar />
@@ -53,7 +53,7 @@
     <x-header />
     <!-- End Header -->
 
-    <div class="content">
+    <div class="content responsive">
         {{-- La partie de recherche --}}
         <div class="col-lg-6 offset-lg-3 animate__animated animate__fadeInUp">
             {{-- <form class="form-inline">
@@ -170,10 +170,10 @@
                         <div class="flex items-center justify-end mt-2">
                             <a class="underline text-sm col  text-white"
                                 href="{{ route('login') }}" style="color: black">
-                                {{ __('Déja inscrit?') }}
+                                {{ __('Déjà inscrit?') }}
                             </a>
                             <x-primary-button class="col">
-                                {{ __('Inscription') }}
+                                {{ __('Valider') }}
                             </x-primary-button>
                         </div>
                     </form>
@@ -185,7 +185,7 @@
             <div class="cont_form_sign_up">
                 <div class="row pt-2">
                     <a class="col-2 pl-8" onclick="hidden_login_and_sign_up()" style="color: black">
-                        <i class="material-icons">&#xE5C4;</i>
+                        <i class="material-icons text-white cursor-pointer ">&#xE5C4;</i>
                     </a>
                     <h5 class="col-10">Personne morale</h5>
                 </div>
@@ -272,10 +272,10 @@
                         <div class="flex items-center">
                             <a class="underline text-sm col  text-white"
                                 href="{{ route('login') }}" style="color: black">
-                                {{ __('Déja inscrit?') }}
+                                {{ __('Déjà inscrit?') }}
                             </a>
                             <x-primary-button class="col">
-                                {{ __('Inscription') }}
+                                {{ __('Valider') }}
                             </x-primary-button>
                         </div>
                     </form>
