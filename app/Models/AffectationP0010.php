@@ -9,6 +9,7 @@ class AffectationP0010 extends Model
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
+    use \Wildside\Userstamps\Userstamps;
     protected $primaryKey = 'uuid';
     protected $guarded = [];
 }

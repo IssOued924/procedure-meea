@@ -9,7 +9,9 @@ class DemandePieceP006 extends Model
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
-    protected $guarded = [];protected $primaryKey = 'uuid';
+    use \Wildside\Userstamps\Userstamps;
+    protected $guarded = [];
+    protected $primaryKey = 'uuid';
 
     public function Demande(){
         return $this->belongsTo(DemandeP006::class, 'demande_p006_id', 'uuid');

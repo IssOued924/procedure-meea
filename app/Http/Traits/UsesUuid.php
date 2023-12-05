@@ -22,4 +22,6 @@ trait UsesUuid
     {
         return 'string';
     }
+
+
 }
