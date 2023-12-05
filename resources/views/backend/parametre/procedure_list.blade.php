@@ -62,8 +62,8 @@
 
                                     {{-- <input type="submit" value="Create new Porject"
                                         class="btn btn-success float-right bi bi-plus"> --}}
-                                    <button style="float: right " data-bs-toggle="modal" data-bs-target="#createModal"
-                                        type="button" class="btn btn-success mt-5"><i class="bi bi-plus"></i></button>
+                                    {{-- <button style="float: right " data-bs-toggle="modal" data-bs-target="#createModal"
+                                        type="button" class="btn btn-success mt-5"><i class="bi bi-plus"></i></button> --}}
 
                                     {{-- Modal de creation --}}
                                     <div class="modal fade" id="createModal" tabindex="-1">
@@ -107,7 +107,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Nom Abrege</th>
-                                        <th scope="col">Titre</th>
+                                        <th scope="col">Titre Procédure</th>
 
                                         {{-- <th scope="col">Commune</th> --}}
                                         <th scope="col">Action</th>
@@ -179,6 +179,21 @@
                                                                     aria-describedby="basic-addon1" required>
 
                                                             </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <h5 class="card-title">Délai</h5>
+                                                                    <div class="input-group mb-3">
+
+                                                                        {{-- <label for="libelle">Libelle</label> --}}
+
+                                                                        <input type="number" name="delai"
+                                                                            class="form-control border-success"
+                                                                            value="{{ $proc->delai }}"
+                                                                                required>
+
+                                                                    </div>
                                                                 </div>
                                                             </div>
 

@@ -11,13 +11,13 @@
     <div class="container-fluid" id="grad1">
         <div class="row justify-content-center mt-0">
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
-                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
                     <h5><strong>Octroie d'agrement Technique Eau et Assainissaement </strong></h5>
-                   <p> @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif</p>
+                    <p> @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif</p>
                     <p>Les champs suivis d'etoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">
@@ -297,7 +297,7 @@ Je m’engage à importer et à distribuer /utiliser les produits chimiques ci-d
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Retour" />
                                     <input type="submit" name="make_payment" class="next action-button"
-                                        value="Confirmation" />
+                                        value="Valider" />
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">

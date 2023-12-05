@@ -30,11 +30,33 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+         $request->authenticate();
 
-        $request->session()->regenerate();
+         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Bienvenue au Formulaire de demandes d\'avis technique d\'importation de produits chimique !');
+
+        //  return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Bienvenue sur le formulaire de la demande ');
+
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            if(!is_null(Auth::user()->agent_id))
+            {
+                return redirect('/administration');
+            }else{
+         return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Bienvenue ');
+        //  return  redirect('/');
+             }
+        }
+        return back()->withErrors([
+            'email' => 'email incorrects',
+            'password' => 'Mot de passe incorrects',
+        ])->onlyInput('email');
+
     }
 
     /**

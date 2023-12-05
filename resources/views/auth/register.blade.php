@@ -44,7 +44,7 @@
     @livewireStyles
 </head>
 
-<body class="">
+<body>
     <!--  -->
     <!-- ======= Top Bar ======= -->
     <x-topbar />
@@ -53,7 +53,7 @@
     <x-header />
     <!-- End Header -->
 
-    <div class="content">
+    <div class="content responsive">
         {{-- La partie de recherche --}}
         <div class="col-lg-6 offset-lg-3 animate__animated animate__fadeInUp">
             {{-- <form class="form-inline">
@@ -105,9 +105,9 @@
                     alt="" />
             </div> --}}
             <div class="cont_form_login">
-                <div class="row pt-2">  
+                <div class="row pt-2">
                     <a class="col-2 pl-8" onclick="hidden_login_and_sign_up()" style="color: black">
-                        <i class="material-icons">&#xE5C4;</i>
+                        <i class="text-white material-icons">&#xE5C4;</i>
                     </a>
                     <h5 class="col-10">Personne physique</h5>
                 </div>
@@ -117,7 +117,7 @@
 
                         <!-- Name -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="name" :value="__('Nom')" />
+                            <x-input-label class="col-4 text-white" for="name" :value="__('Nom')" />
                             <x-text-input class="col-7" id="name"  type="text" name="name"
                                 :value="old('name')" required autofocus autocomplete="name" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -125,7 +125,7 @@
 
                         <!-- Name -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="prenom" :value="__('Prénom')" />
+                            <x-input-label class="col-4  text-white" for="prenom" :value="__('Prénom')" />
                             <x-text-input class="col-7" id="lastname"  type="text" name="prenom"
                                 :value="old('prenom')" required autofocus autocomplete="prenom" />
                             <x-input-error :messages="$errors->get('prenom')" class="mt-2" />
@@ -133,7 +133,7 @@
 
                         <!-- Email Address -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="email" :value="__('Email')" />
+                            <x-input-label class="col-4  text-white" for="email" :value="__('Email')" />
                             <x-text-input class="col-7" id="email"  type="email" name="email"
                                 :value="old('email')" required autocomplete="username" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
@@ -141,7 +141,7 @@
 
                         <!-- Telephone number -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="telephone" :value="__('Telephone')" />
+                            <x-input-label class="col-4  text-white" for="telephone" :value="__('Telephone')" />
                             <x-text-input class="col-7" id="telephone"  type="number"
                                 name="telephone" required autocomplete="telephone" />
                             <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
@@ -149,7 +149,7 @@
 
                         <!-- Password -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="password" :value="__('Password')" />
+                            <x-input-label class="col-4  text-white" for="password" :value="__('Password')" />
 
                             <x-text-input class="col-7" id="password"  type="password"
                                 name="password" required autocomplete="new-password" />
@@ -159,7 +159,7 @@
 
                         <!-- Confirm Password -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="password_confirmation" :value="__('Confirm Password')" />
+                            <x-input-label class="col-4  text-white" for="password_confirmation" :value="__('Confirm Password')" />
 
                             <x-text-input class="col-7" id="password_confirmation"  type="password"
                                 name="password_confirmation" required autocomplete="new-password" />
@@ -168,12 +168,12 @@
                         </div>
 
                         <div class="flex items-center justify-end mt-2">
-                            <a class="underline text-sm col"
+                            <a class="underline text-sm col  text-white"
                                 href="{{ route('login') }}" style="color: black">
-                                {{ __('Déja inscrit?') }}
+                                {{ __('Déjà inscrit?') }}
                             </a>
                             <x-primary-button class="col">
-                                {{ __('Inscription') }}
+                                {{ __('Valider') }}
                             </x-primary-button>
                         </div>
                     </form>
@@ -183,9 +183,9 @@
             </div>
 
             <div class="cont_form_sign_up">
-                <div class="row pt-2">                    
+                <div class="row pt-2">
                     <a class="col-2 pl-8" onclick="hidden_login_and_sign_up()" style="color: black">
-                        <i class="material-icons">&#xE5C4;</i>
+                        <i class="material-icons text-white cursor-pointer ">&#xE5C4;</i>
                     </a>
                     <h5 class="col-10">Personne morale</h5>
                 </div>
@@ -195,7 +195,7 @@
 
                         <!-- Name -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="name" :value="__('Nom de la societé')" />
+                            <x-input-label class="col-4  text-white" for="name" :value="__('Nom de la societé')" />
                             <x-text-input class="col-7" id="name"  type="text" name="name"
                                 :value="old('name')" required autofocus autocomplete="name" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -203,7 +203,7 @@
 
                         <!-- IFU -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="ifu" :value="__('Numéro IFU')" />
+                            <x-input-label class="col-4  text-white" for="ifu" :value="__('Numéro IFU')" />
                             <x-text-input class="col-7" id="ifu"  type="text" name="ifu"
                                 :value="old('ifu')" required autofocus autocomplete="ifu" />
                             <x-input-error :messages="$errors->get('ifu')" class="mt-2" />
@@ -211,7 +211,7 @@
 
                         <!-- RCCM -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="rccm" :value="__('Numéro RCCM')" />
+                            <x-input-label class="col-4  text-white" for="rccm" :value="__('Numéro RCCM')" />
                             <x-text-input class="col-7" id="rccm"  type="text" name="rccm"
                                 :value="old('rccm')" required autofocus autocomplete="rccm" />
                             <x-input-error :messages="$errors->get('rccm')" class="mt-2" />
@@ -219,7 +219,7 @@
 
                         <!-- Email Address -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="email" :value="__('Email')" />
+                            <x-input-label class="col-4  text-white" for="email" :value="__('Email')" />
                             <x-text-input class="col-7" id="email"  type="email" name="email"
                                 :value="old('email')" required autocomplete="username" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
@@ -227,7 +227,7 @@
 
                         <!-- Telephone number -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="telephone" :value="__('Telephone')" />
+                            <x-input-label class="col-4  text-white" for="telephone" :value="__('Telephone')" />
                             <x-text-input class="col-7" id="telephone"  type="number"
                                 name="telephone" :value="old('telephone')" required autocomplete="telephone" />
                             <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
@@ -235,7 +235,7 @@
 
                         <!-- Siège social -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="siege_social" :value="__('Siège social')" />
+                            <x-input-label class="col-4  text-white" for="siege_social" :value="__('Siège social')" />
                             <x-text-input class="col-7" id="siege_social"  type="text" name="siege_social"
                                 :value="old('siege_social')" required autofocus autocomplete="siege_social" />
                             <x-input-error :messages="$errors->get('siege_social')" class="mt-2" />
@@ -243,7 +243,7 @@
 
                         <!-- Boite postal -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="boite_postale" :value="__('Boîte postale')" />
+                            <x-input-label class="col-4  text-white" for="boite_postale" :value="__('Boîte postale')" />
                             <x-text-input class="col-7" id="boite_postale"  type="text" name="boite_postale"
                                 :value="old('boite_postale')" required autofocus autocomplete="boite_postale" />
                             <x-input-error :messages="$errors->get('boite_postale')" class="mt-2" />
@@ -251,7 +251,7 @@
 
                         <!-- Password -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="password" :value="__('Password')" />
+                            <x-input-label class="col-4  text-white" for="password" :value="__('Password')" />
 
                             <x-text-input class="col-7" id="password"  type="password"
                                 name="password" required autocomplete="new-password" />
@@ -261,7 +261,7 @@
 
                         <!-- Confirm Password -->
                         <div class="row g-3 align-items-center">
-                            <x-input-label class="col-4" for="password_confirmation" :value="__('Confirm Password')" />
+                            <x-input-label class="col-4  text-white" for="password_confirmation" :value="__('Confirm Password')" />
 
                             <x-text-input class="col-7" id="password_confirmation"  type="password"
                                 name="password_confirmation" required autocomplete="new-password" />
@@ -270,12 +270,12 @@
                         </div>
 
                         <div class="flex items-center">
-                            <a class="underline text-sm col"
+                            <a class="underline text-sm col  text-white"
                                 href="{{ route('login') }}" style="color: black">
-                                {{ __('Déja inscrit?') }}
+                                {{ __('Déjà inscrit?') }}
                             </a>
                             <x-primary-button class="col">
-                                {{ __('Inscription') }}
+                                {{ __('Valider') }}
                             </x-primary-button>
                         </div>
                     </form>

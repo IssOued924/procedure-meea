@@ -11,7 +11,7 @@
     <div class="container-fluid" id="grad1">
         <div class="row justify-content-center mt-0">
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
-                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
                     <h5><strong>Demande de permis de détention d'un animal sauvage</strong></h5>
                    <!-- <p> @if(session('success'))
                     <div class="alert alert-success">
@@ -43,13 +43,13 @@
                                                 <label class="nom_societe fw-bold"> <strong>Nom & Prenom</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text"   name="nom"
-                                                    placeholder="Votre nom" class="border-success form-control" value="{{ $name}}" disabled/>
+                                                    placeholder="Votre nom" class="border-success form-control" value="{{ $name}}" />
                                             </div>
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Téléphone</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text"   name="telephone"
-                                                    placeholder="telephone" class="border-success form-control" value="{{ $telephone}}" disabled />
+                                                    placeholder="telephone" class="border-success form-control" value="{{ $telephone}}" />
                                             </div>
                                         </div>
 
@@ -329,6 +329,20 @@ $('.radio-group .radio').click(function(){
 $(".submit").click(function(){
     return false;
 })
+
+$("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+
+jQuery('input[name=moyen]:radio').click(function(){
+		$("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+		var divId = jQuery(this).val();
+        if(divId * 1 == 1){
+            $("div#moyenP1").show()
+        }else{
+            $("div#moyenP2").show()
+        }
+		});
 
 });
 </script>

@@ -11,7 +11,7 @@
     <div class="container-fluid" id="grad1">
         <div class="row justify-content-center mt-0">
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
-                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
                     <h5><strong>Autorisation donnant droit à mener la chasse </strong></h5>
                     <p> @if(session('success'))
                     <div class="alert alert-success">
@@ -30,7 +30,9 @@
                                     <li class="active" id="personal"><strong>Identité du demandeur</strong></li>
                                     <li id="caracteristik"><strong>Pièces Jointes</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
-                                    <li id="confirm"><strong>Validation</strong></li>
+                                    <li id="paiement"><strong>Paiement </strong></li>
+
+                                    {{-- <li id="confirm"><strong>Validation</strong></li> --}}
                                 </ul>
                                 <!-- fieldsets -->
                                 <fieldset>
@@ -44,7 +46,7 @@
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success form-control"
                                                     value="{{ $name }}" name="identite" placeholder="Nom et prenom"
-                                                    required  disabled/>
+                                                    required  />
                                             </div>
                                             <div class="col-6">
                                                 <label class="siege_social fw-bold">Lieu de résidence/siège<span
@@ -156,25 +158,64 @@
                                     <input type="button" class="previous action-button-previous" value="Retour" />
                                     <input type="submit" class="next action-button" value="Valider" />
                                 </fieldset>
+
                                 <fieldset>
+                                    <form action="">
                                     <div class="form-card">
-                                        <h2 class="fs-title text-center">Validation !</h2>
-                                        <br><br>
-                                        <div class="row justify-content-center">
+                                        <h4 class="fs-title">Paiement <span style="color:red">
+                                            *</span></h4>
+                                            <label for="demande timbre" class="fw-bold">Moyens de Paiement<span style="color:red">
+                                                    *</span></label>
+                                        <div class="row">
                                             <div class="col-3">
-                                                <img src="https://img.icons8.com/color/96/000000/ok--v2.png"
-                                                    class="fit-image">
+                                                <label class="nom_societe fw-bold" >ORANGE</label>
+                                                <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="siege_social fw-bold ">MOOV</label>
+                                                <input id="radio2" type="radio" value="0"  name="moyen"/>
+                                            </div>
+
+
+                                        </div>
+                                        <br>
+
+
+                                        <div class="row">
+                                            <div id="moyenP1">
+                                                <label >  La somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
+
+                                            </div>
+                                            <div id="moyenP2">
+                                                <label >  La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
+
+                                            </div>
+                                        <div class="col-6">
+                                                <label class="boite_postale fw-bold">Téléphone<span style="color:red">
+                                                        *</span></label>
+                                                <input type="number" name="numero" style="width: 50%;" class="border-success form-control"   placeholder="Telephone" required />
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="boite_postale fw-bold">OTP<span style="color:red">
+                                                        *</span></label>
+                                                <input type="number" name="otp"   style="width: 50%;" class="border-success form-control"   placeholder="otp" required />
                                             </div>
                                         </div>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-7 text-center">
-                                                <h5>Votre demnde est enregistré avec succès et en cour de traitement!
-                                                </h5>
-                                            </div>
-                                        </div>
+
+
+
                                     </div>
+
+
+                                    <input type="button"  class="previous action-button-previous"
+                                        value="Retour" />
+                                    <input type="submit"   class="next action-button"
+                                        value="Valider" />
+                                    <!-- Ajoutez ceci dans la première étape du formulaire -->
+                                    <div class="error-message" style="color: red;"></div>
+                                    </form>
                                 </fieldset>
+
                             </form>
                         </div>
                     </div>
@@ -282,6 +323,22 @@ $('.radio-group .radio').click(function(){
 $(".submit").click(function(){
     return false;
 })
+
+        $("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+
+jQuery('input[name=moyen]:radio').click(function(){
+		$("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+		var divId = jQuery(this).val();
+        if(divId * 1 == 1){
+            $("div#moyenP1").show()
+        }else{
+            $("div#moyenP2").show()
+        }
+		});
+
+
 
 });
 </script>

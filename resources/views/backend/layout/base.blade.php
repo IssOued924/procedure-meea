@@ -13,6 +13,7 @@
   <link href="{{  asset('img/logo_meea.jpg')  }}" rel="icon">
   <link href="{{ asset('backend/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
+
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -92,67 +93,48 @@ rel="stylesheet"
           </a>
         </li><!-- End Search Icon-->
 
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-danger badge-number" title="Nombres de Nouvelles Demandes"> </span>
-          </a><!-- End Notification Icon -->
-
-
-        </li><!-- End Notification Nav -->
-
 
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src=" {{ asset('backend/assets/img/user.png') }} " alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">I. Ouedraogo</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Issouf Ouedraogo</h6>
-              <span>Web Designer</span>
+              <h6>{{ Auth::user()->agent->service->libelle_court }}</h6>
+
             </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+
 
             <li>
               <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-person"></i>
-                <span>My Profile</span>
+                <span>Mon Profile</span>
               </a>
             </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
 
-            <li>
+
+            {{-- <li>
               <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+            </li> --}}
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
 
             <li>
               <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-dropdown-link :href="route('logout')" class="text-warning" onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                       <i class="bi bi-box-arrow-right"></i>   {{ __('Se Deconnecter') }}
+                    </x-dropdown-link>
+                </form>
               </a>
             </li>
 
@@ -179,69 +161,87 @@ rel="stylesheet"
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#demandes-nav" data-bs-toggle="collapse"  href="{{ route('demandes-list') }}">
-          <i class="bi bi-menu-button-wide"></i><span>Demandes</span><i class="bi bi-folder bi-chevron-down ms-auto"></i>
+          <i class="bi bi-menu-button-wide"></i><span>Démandes</span><i class="bi bi-chevron-down   ms-auto"></i>
         </a>
 
+
+
         <ul id="demandes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+            @if (Auth::user()->agent->service->libelle_court =='DGPE' || Auth::user()->role->libelle == "Administration")
+                <li>
+                    <a href="{{ route('demandes-list') }}">
+                    <i class="bi bi-circle"></i><span>Procédure Produit Chimique &nbsp;<span id="prog_produit_chimique" class="badge bg-warning text-white"> </span> </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('demandesp008-list')}}">
+                      <i class="bi bi-circle"></i><span>Procédure Déchets Solide &nbsp;<span id="prog_dechet" class="badge bg-warning text-white"> </span> </span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="{{ route('demandesp006-list')}}">
+                      <i class="bi bi-circle"></i><span>Procédure Certificats d'exemptions &nbsp; <span id="prog_exemption" class="badge bg-warning text-white"> </span></span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ route('demandesp007-list')}}">
+                      <i class="bi bi-circle"></i><span>Procédure Homologation &nbsp;<span id="prog_homologation" class="badge bg-warning text-white"> </span></span>
+                    </a>
+                  </li>
+
+            @endif
+
+            @if (Auth::user()->agent->service->libelle_court =='DGEF' || Auth::user()->role->libelle == "Administration")
+
+
             <li>
-              <a href="{{ route('demandes-list') }}">
-                <i class="bi bi-circle"></i><span>Procédure Produit Chimique<span id="prog_produit_chimique" class="badge bg-warning text-white"> </span> </span>
-              </a>
-            </li>
+                <a href="{{ route('demandesp0012-list') }}">
+                  <i class="bi bi-circle"></i><span>Procédure écotourisme &nbsp;<span id="prog_ecotourisme" class="badge bg-warning text-white"> </span> </span>
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ route('demandesp003-list')}}">
+                  <i class="bi bi-circle"></i><span>Procédure Permis Chasse  &nbsp;<span id="prog_chasse" class="badge bg-warning text-white"> </span></span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('demandesp004-list')}}">
+                  <i class="bi bi-circle"></i><span>Procédure Détention &nbsp; <span id="prog_detention" class="badge bg-warning text-white"> </span></span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('demandesp0011-list')}}">
+                  <i class="bi bi-circle"></i><span>Procédure Permis Coupe &nbsp;<span id="prog_coupe" class="badge bg-warning text-white"> </span></span>
+                </a>
+              </li>
+
+              <li>
+                <a href="{{ route('demandesp005-list')}}">
+                  <i class="bi bi-circle"></i><span>Procédure Permis de circulation&nbsp;<span id="prog_circulation" class="badge bg-warning text-white"> </span></span>
+                </a>
+              </li>
+
+            @endif
+
+            @if (Auth::user()->agent->service->libelle_court =='DGRE' || Auth::user()->role->libelle == "Administration")
+
             <li>
-              <a href="{{ route('demandesp0012-list') }}">
-                <i class="bi bi-circle"></i><span>Procédure écotourisme <span id="prog_ecotourisme" class="badge bg-warning text-white"> </span> </span>
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('demandesp008-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Déchets <span id="prog_dechet" class="badge bg-warning text-white"> </span> </span>
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('demandesp003-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Permis Chasse <span id="prog_chasse" class="badge bg-warning text-white"> </span></span>
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('demandesp004-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Détention <span id="prog_detention" class="badge bg-warning text-white"> </span></span>
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('demandesp0011-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Permis Coupe <span id="prog_coupe" class="badge bg-warning text-white"> </span></span>
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('demandesp006-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Certificats d'exemptions <span id="prog_exemption" class="badge bg-warning text-white"> </span></span>
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('demandesp007-list')}}">
-                <i class="bi bi-circle"></i><span>Procédure Homologation<span id="prog_homologation" class="badge bg-warning text-white"> </span></span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="bi bi-circle"></i><span>Procedure Agrement en Eau</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="bi bi-circle"></i><span>Procedure Permis circulation</span>
-              </a>
-            </li>
+                <a href="{{ route('demandesp002-list')}}">
+                  <i class="bi bi-circle"></i><span>Procédure Agrement en Eau &nbsp;<span id="prog_agrement_technique" class="badge bg-warning text-white"> </span></span>
+                </a>
+              </li>
+            @endif
 
           </ul>
 
       </li><!-- End Components Nav -->
 
 
-
-
-
+      @if ( Auth::user()->role->libelle == "Administration")
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-person"></i><span>Utilisateur</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -249,17 +249,17 @@ rel="stylesheet"
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{ route('agent-list') }}">
-              <i class="bi bi-circle"></i><span>Agent</span>
+              <i class="bi bi-circle"></i><span>Agents</span>
             </a>
           </li>
           <li>
             <a href="{{ route('usager-list') }}">
-              <i class="bi bi-circle"></i><span>Usager</span>
+              <i class="bi bi-circle"></i><span>Usagers</span>
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>Profile</span>
+            <a href="{{ route('user-list') }}">
+              <i class="bi bi-circle"></i><span>Utilisateurs</span>
             </a>
           </li>
         </ul>
@@ -267,7 +267,7 @@ rel="stylesheet"
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gear"></i><span>Parametre</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-gear"></i><span>Paramètre</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
@@ -341,6 +341,10 @@ rel="stylesheet"
         </ul>
       </li><!-- End Icons Nav -->
 
+      @endif
+
+
+
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -399,9 +403,11 @@ function getNombreDemandeByProcedure(){
                         $('#prog_dechet').text(""+result.nbdechet);
                         $('#prog_detention').text(""+result.nbdetention);
                         $('#prog_coupe').text(""+result.nbcoupe);
+                        $('#prog_circulation').text(""+result.nbcirculation);
                         $('#prog_exemption').text(""+result.nbce);
                         $('#prog_chasse').text(""+result.nbpchasse);
                         $('#prog_homologation').text(""+result.nbhomologation);
+                        $('#prog_agrement_technique').text(""+result.nbAgrementTechique);
 
                          break;
                      default :
@@ -418,24 +424,8 @@ function getNombreDemandeByProcedure(){
         getNombreDemandeByProcedure();
     });
 
-
-
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
-    });
 </script>
+
 
   @yield('script')
 

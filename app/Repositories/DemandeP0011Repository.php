@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use App\Models\DemandeP0011;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
@@ -9,7 +10,7 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 /**
  * Class DemandeP0011Repository.
  */
-class DemandeP0011Repository extends BaseRepository
+class DemandeP0011Repository extends AppRepository
 {
     /**
      * @return string
@@ -27,7 +28,7 @@ class DemandeP0011Repository extends BaseRepository
 
         $this->unsetClauses();
 
-     
+
     $de = new DemandeP0011();
     $tt = $de->genererRandomString(4);
 
@@ -43,6 +44,7 @@ class DemandeP0011Repository extends BaseRepository
 
         return $path;
     }
+
     public function all($filtre = array())
     {
         $this->newQuery()->eagerLoad();
@@ -52,5 +54,6 @@ class DemandeP0011Repository extends BaseRepository
         $this->unsetClauses();
 
         return $models;
+
     }
 }

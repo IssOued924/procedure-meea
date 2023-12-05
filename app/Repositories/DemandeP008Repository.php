@@ -5,12 +5,13 @@ namespace App\Repositories;
 use App\Models\DemandeP008;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 //use Your Model
 
 /**
  * Class DemandeP008Repository.
  */
-class DemandeP008Repository extends BaseRepository
+class DemandeP008Repository extends AppRepository
 {
     /**
      * @return string
@@ -22,9 +23,9 @@ class DemandeP008Repository extends BaseRepository
     }
 
     public function uploadFile(array $data, string $name){
-        
+
         $this->unsetClauses();
-        
+
         if ( isset($data[$name]) ){
             $demande = new DemandeP008();
 
@@ -46,6 +47,7 @@ class DemandeP008Repository extends BaseRepository
         }
         return '';
     }
+
     public function all($filtre = array())
     {
         $this->newQuery()->eagerLoad();
@@ -55,5 +57,6 @@ class DemandeP008Repository extends BaseRepository
         $this->unsetClauses();
 
         return $models;
+
     }
 }

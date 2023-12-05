@@ -15,35 +15,44 @@
             <ul>
                 @guest
                 <li><a class="active" href="/">Accueil</a></li>
-                <li><a href="#">FAQ</a></li>
+                <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Plainte</a></li>
+                <li><a href="contact">Contact</a></li>
+                <li><a href="faq">FAQ</a></li>
                 <li><a href="{{ route('login') }}">Compte</a></li>
-                <li><a href="#">Contact</a></li>
+
                 @else
                 <li><a class="active" href="/">Accueil</a></li>
-                <li><a href="{{ route('demandes-lists') }}">Mes demandes</a></li>
+                <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Plainte</a></li>
 
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="{{ route('demandes-lists') }}">Mes demandes</a></li>
+                <li><a href="contact">Contact</a></li>
+                <li><a href="faq">FAQ</a></li>
+
+                {{-- <li><a href="#">FAQ</a></li>
+                <li><a href="#">Contact</a></li> --}}
 
                 <li class="dropdown">
-                    <a><span>
-                            <div>{{ Auth::user()->usager->prenom.' '.Auth::user()->usager->nom }}</div>
+                   <a>
+                    <i class="bi bi-person"></i><span>
+                        @if (isset(Auth::user()->usager->nom_entreprise))
+                        <div>{{ Auth::user()->usager->nom_entreprise }}</div>
+                        @else
+                            <div>{{ Auth::user()->usager->prenom.'  '.Auth::user()->usager->nom }}</div>
+                        @endif
                         </span> <i class="bi bi-chevron-down"></i>
                     </a>
                     <ul>
                         <li><x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-dropdown-link></li>
-                            <li><x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Tableau de bord') }}
-                            </x-dropdown-link></li>
+
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
                                 <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    {{ __('Se Deconnecter') }}
+                                    {{ __('Se Déconnecter') }}
                                 </x-dropdown-link>
                             </form>
                         </li>

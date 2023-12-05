@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 use App\Models\DemandeP0010;
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
+// use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
 
 /**
  * Class DemandeP0010Repository.
  */
-class DemandeP0010Repository extends BaseRepository
+class DemandeP0010Repository extends AppRepository
 {
     /**
      * @return string
@@ -18,6 +18,7 @@ class DemandeP0010Repository extends BaseRepository
     {
         return DemandeP0010::class;
     }
+
     public function all($filtre = array())
     {
         $this->newQuery()->eagerLoad();
@@ -27,5 +28,6 @@ class DemandeP0010Repository extends BaseRepository
         $this->unsetClauses();
 
         return $models;
+
     }
 }

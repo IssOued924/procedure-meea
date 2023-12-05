@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
      <!-- Favicons -->
-    <link href="{{  asset('img/logo_meea.jpg')  }}" rel="icon">
+    <link href="{{ asset('img/logo_meea.jpg')  }}" rel="icon">
     <link href="{{ asset('backend/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
     <link href="img/armoirie.png" rel="icon">
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -21,14 +21,16 @@
 
 
     <!-- Vendor CSS Files -->
-  <link href="{{ asset('backend/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  {{-- <link href="{{ asset('backend/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('backend/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
   <link href="{{ asset('backend/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('backend/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('backend/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+  <link href="{{ asset('backend/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet"> --}}
+
+  {{-- <link href="{{ asset('backend/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
   <link href="{{ asset('backend/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
-  <link href="{{ asset('backend/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+  <link href="{{ asset('backend/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet"> --}}
   <link href="{{ asset('backend/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+
     <link href="vendor/animate.css/animate.min.css" rel="stylesheet">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -37,9 +39,10 @@
     <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    
-    
+
+
     <link href="css/style.css" rel="stylesheet">
+    {{-- <link href="{{ asset('backend/assets/css/style.css') }}" rel="stylesheet"> --}}
 
     <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" /> -->
     <link href="css/google-font1" rel="stylesheet" />
@@ -57,7 +60,7 @@
 
     @livewireStyles
     @yield('css')
-   @include('sweetalert::alert')
+
 </head>
 
 <body class="background">
@@ -72,34 +75,39 @@
 
     <div class="content">
 
-        <div>
-            @if ($message = Session::get('status'))
-            <div class="alert alert-success alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>{{ $message }}</strong>
+        <p> @if(session('success'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="alert-heading">{{session('success')}}</h5>
+
             </div>
-            @endif
 
-        </div>
+            <script>
+                setTimeout(function() {
+                    document.querySelector('.alert.alert-success').style.display = 'none';
+                }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+            </script>
+        @endif</p>
 
-        <div class="col-lg-6 offset-lg-5 animate__animated animate__fadeInUp">
+        {{-- <div class="col-lg-6 offset-lg-5 animate__animated animate__fadeInUp">
             <form class="form-inline">
-                {{-- <i id="filter" class="bi bi-search"></i> --}}
                 <input class="form-control rounded-pill  border-success" id="filter" type="search"
                     placeholder="Recherche ..." aria-label="Search" autocomplete="off">
 
             </form><br>
-        </div>
+        </div> --}}
 
         @yield('content')
-    
+
 
 
     </div>
     <!-- ======= Footer ======= -->
     <x-footer />
     <!-- End Footer -->
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
     <script>
@@ -122,13 +130,13 @@
     <!-- Template Main JS File -->
     <script src="js/main.js"></script>
     <script src="{{ asset('backend/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
-  <script src="{{ asset('backend/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  {{-- <script src="{{ asset('backend/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
   <script src="{{ asset('backend/assets/vendor/chart.js/chart.umd.js') }}"></script>
   <script src="{{ asset('backend/assets/vendor/echarts/echarts.min.js') }}"></script>
   <script src="{{ asset('backend/assets/vendor/quill/quill.min.js') }}"></script>
   <script src="{{ asset('backend/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
   <script src="{{ asset('backend/assets/vendor/tinymce/tinymce.min.js') }}"></script>
-  <script src="{{ asset('backend/assets/vendor/php-email-form/validate.js') }}"></script>
+  {{-- <script src="{{ asset('backend/assets/vendor/php-email-form/validate.js') }}"></script> --}}
 
   <!-- Template Main JS File -->
   <script src="{{ asset('backend/assets/js/main.js') }}"></script>

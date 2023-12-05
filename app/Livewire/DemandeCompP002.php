@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Commune;
+use App\Models\Pays;
 use App\Models\Demande;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,9 @@ class DemandeCompP002 extends Component
             "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->telephone,
             "communes" => Commune::all(),
+            "pays" => Pays::all(),
+            "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
+            "default_pays" => Auth::user()->usager->pays
         ];
 
         return view('livewire.Demandes-p002.index', $data)

@@ -78,7 +78,7 @@
                         <p style="text-align: justify;text-indent : 10%;">{{ $procedure->description }}</p>
                         <div style=" margin: 18px 0 33px;">
 
-                            <i class="bi bi-clock"
+                            <i class="bi bi-clock text-success"
                                 style="display: inline-block;
                         width: 24px;
                         height: 24px;
@@ -87,10 +87,10 @@
                         stroke-width: 2px;
                         stroke-linecap: round;
                         stroke-linejoin: round;"></i>
-                            <b>Délai de traitement : 1 Jour</b>
+                            <b>Délai de traitement : <b class="text-success">{{ $procedure->delai }} Jours</b>  </b>
 
 
-                            <i class="bi bi-tag"
+                            <i class="bi bi-tag text-success"
                                 style="display: inline-block;
                         width: 24px;
                         height: 24px;
@@ -99,15 +99,15 @@
                         stroke-width: 2px;
                         stroke-linecap: round;
                         stroke-linejoin: round;"></i>
-                            <b>Montant à payer : 1,500 XOF</b><br><br>
+                            <b>Montant à payer : <b class="text-success"> 1500 F CFA</b></b><br><br>
 
 
-                            <i class="bi bi-home"></i>
+                            <i class="bi bi-house text-success"></i>
                             <b style="margin-left:0px">Fourni par</b> <span
-                                style="border: 1px solid #0063cf;
+                                style="border: 1px solid #48cf00c7;
                         color: #0063cf;
                         padding: 0 0.5em;
-                        border-radius: 5px;">{{ $procedure->service->libelle_court }}</span><br><br>
+                        border-radius: 5px;"> <b>{{ $procedure->service->libelle_court }}</b> </span><br><br>
 
 
                         </div>
@@ -124,14 +124,14 @@
                                 <!-- <a href="#">Voir Pieces à fournirrrr</a> -->
                             </h5>
 
-                            <!-- debut Modal pour afficher les details -->
+                            <!-- debut Modal pour afficher basejuridiques -->
                             <div class="modal fade" id="staticBackdrop{{ $procedure->uuid }}" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                                    <div class="modal-content" style="height: 300px;">
+                                    <div class="modal-content"  >
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $procedure->libelle_long }}</h1>
+                                            <h1 class="modal-title fs-5 text-primary" id="staticBackdropLabel"><p style="text-align: justify;"></p>{{ $procedure->libelle_long }}</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
@@ -142,7 +142,7 @@
                                         </div>
                                         @endforeach
                                         <div class="modal-footer">
-                                            <x-secondary-button aria-label="Close" class="ml-4">
+                                            <x-secondary-button  data-bs-dismiss="modal" aria-label="Close" class="ml-4">
                                                 {{ __('Fermer') }}
                                             </x-secondary-button>
 
@@ -159,22 +159,22 @@
                                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $procedure->libelle_long }}</h1>
+                                            <h1 class="modal-title fs-5 single" id="staticBackdropLabel">{{ $procedure->libelle_long }}</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        @foreach ($procedure->pieceJointe as $ppj)
 
                                         <div class="modal-body">
-                                            <ul class="list-group">
+                                            @foreach ($procedure->pieceJointe as $ppj)
+                                            <ul class="list-group list-group-flush ">
                                                 <li class="list-group-item">
                                                     <i class="bi bi-file-earmark-pdf me-1 text-success"> </i>   {{$ppj->libelle }}
                                             </li>
                                         </ul>
-                                        </div>
                                         @endforeach
+                                        </div>
                                         <div class="modal-footer">
-                                            <x-secondary-button aria-label="Close" class="ml-4">
+                                            <x-secondary-button data-bs-dismiss="modal" aria-label="Close" class="ml-4">
                                                 {{ __('Fermer') }}
                                             </x-secondary-button>
 
@@ -208,7 +208,7 @@
                             <div class="mt-4">
                                 <x-input-label class="col-4" for="password" :value="__('Password')" />
 
-                                <x-text-input id="password" class="block mt-1 form-control" type="password"
+                                <x-text-input id="password" class="col-7 block mt-1 form-control" type="password"
                                     name="password" required autocomplete="current-password" />
 
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -237,7 +237,7 @@
                                     {{ __('Se Connecter') }}
                                 </x-primary-button>
                             </div>
-                            <a class="mt-5 underline text-sm text-dark dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                            <a class="mt-5 underline fw-bold text-primary dark:hover:text-gray-100   dark:focus:ring-offset-gray-800"
                                 href="/register">
                                 {{ __("S'inscrire") }}
                             </a>
@@ -258,7 +258,7 @@
                             <!-- Email Address -->
                             <div class="row g-3 align-items-center">
                                 <x-input-label class="col-4" for="email" :value="__('Email')" />
-                                <x-text-input class="col-7" id="email" class="col-7 " type="email"
+                                <x-text-input class="col-7" id="email" class="col-7 block mt-1 form-control " type="email"
                                     name="email" :value="old('email')" required autofocus autocomplete="username" />
                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>
@@ -296,7 +296,7 @@
                                     {{ __('Se Connecter') }}
                                 </x-primary-button>
                             </div>
-                            <a class="mt-5 underline text-sm text-dark dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                            <a class="mt-5 underline fw-bold text-primary dark:hover:text-gray-100   dark:focus:ring-offset-gray-800"
                                 href="/register">
                                 {{ __("S'inscrire") }}
                             </a>

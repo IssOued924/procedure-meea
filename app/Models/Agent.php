@@ -12,8 +12,6 @@ class Agent extends Model
     protected $primaryKey = 'uuid';
     protected $guarded = [];
 
-
-
     public function service(){
         return $this->belongsTo(Service::class, 'service_id');
     }

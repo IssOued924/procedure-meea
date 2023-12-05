@@ -1,49 +1,53 @@
 <?php
 
 use App\Http\Controllers\AgentController;
-use App\Http\Controllers\ProfileController;
-use App\Livewire\DemandeCompP002;
-use App\Livewire\DemandeP007Comp;
-use App\Livewire\DemandeComp;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DemandeP001Controller;
-use App\Http\Controllers\DemandeP002Controller;
-use App\Http\Controllers\DemandeP007Controller;
-use App\Http\Controllers\DemandeP006Controller;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\BaseJuridiquesController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommuneController;
+use App\Http\Controllers\ContactUsFormController;
 use App\Http\Controllers\DemandeP0011Controller;
 use App\Http\Controllers\DemandeP0012Controller;
+use App\Http\Controllers\DemandeP001Controller;
+use App\Http\Controllers\DemandeP002Controller;
 use App\Http\Controllers\DemandeP003Controller;
 use App\Http\Controllers\DemandeP004Controller;
 use App\Http\Controllers\DemandeP005Controller;
+use App\Http\Controllers\DemandeP006Controller;
+use App\Http\Controllers\DemandeP007Controller;
 use App\Http\Controllers\DemandeP008Controller;
-
 use App\Http\Controllers\DemandeP009Controller;
 use App\Http\Controllers\PieceJointeController;
+use App\Http\Controllers\PlainteController;
 use App\Http\Controllers\ProcedureController;
+use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\RegionController;
-use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StructureController;
 use App\Http\Controllers\TypeUsagerController;
 use App\Http\Controllers\UsagerController;
+use App\Livewire\DemandeComp;
 use App\Livewire\DemandeCompP0011;
 use App\Livewire\DemandeCompP0012;
+use App\Livewire\DemandeCompP002;
 use App\Livewire\DemandeCompP003;
 use App\Livewire\DemandeCompP004;
-use App\Livewire\DemandeCompP009;
 use App\Livewire\DemandeCompP006;
+use App\Livewire\DemandeCompP009;
 use App\Livewire\DemandeP0012;
 use App\Livewire\DemandeP004;
 use App\Livewire\DemandeP005Comp;
+use App\Livewire\DemandeP007Comp;
 use App\Livewire\DemandeP008Comp;
 use App\Models\DemandeP005;
 use App\Models\Procedure;
+use Illuminate\Support\Facades\Route;
 use PharIo\Manifest\Author;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -69,10 +73,16 @@ Route::post('/test-store', [DemandeController::class, 'store'])->name('test-rout
 
 Route::get('/testpj', [DemandeController::class, 'testpj']);
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');
+
+Route::get('/contact', [ContactUsFormController::class, 'createForm']);
+Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -119,6 +129,7 @@ Route::middleware('auth')->group(function () {
             // eco tourisme
     Route::get("/P0012", DemandeCompP0012::class)->name("demandesp0012");
     Route::post("/demandesp0012-store", [DemandeP0012Controller::class, 'store'])->name("demandesp0012-store");
+    Route::post("/demandesp0012-payment", [DemandeP0012Controller::class, 'payment'])->name("demandesp0012-payment");
 
 
 
@@ -129,7 +140,11 @@ Route::middleware('auth')->group(function () {
 
 
 
-});
+
+
+
+    //administration
+
 
 // Route partie administration
 Route::get('/administration', [BackendController::class, 'index'])->name('administration');
@@ -138,14 +153,15 @@ Route::get('/administration/demandesp0012-list', [BackendController::class, 'lis
 Route::get('/administration/demandesp008-list', [BackendController::class, 'listDemandep008'])->name('demandesp008-list');
 Route::get('/administration/demandesp003-list', [BackendController::class, 'listDemandep003'])->name('demandesp003-list');
 Route::get('/administration/demandesp004-list', [BackendController::class, 'listDemandep004'])->name('demandesp004-list');
+Route::get('/administration/demandesp005-list', [BackendController::class, 'listDemandep005'])->name('demandesp005-list');
 Route::get('/administration/demandesp0011-list', [BackendController::class, 'listDemandep0011'])->name('demandesp0011-list');
 Route::get('/administration/demandesp006-list', [BackendController::class, 'listDemandep006'])->name('demandesp006-list');
 Route::get('/administration/demandesp007-list', [BackendController::class, 'listDemandep007'])->name('demandesp007-list');
-Route::get('/administration/statusChange/{id}/{currentStatus}/{table}', [BackendController::class, 'statutChange'])->name('statusChange');
+Route::post('/administration/statusChange/{id}/{currentStatus}/{table}', [BackendController::class, 'statutChange'])->name('statusChange');
+Route::post('/administration/uploadActe/{id}/{currentStatus}/{table}', [BackendController::class, 'uploadActe'])->name('uploadActe');
 Route::get('/administration/rejet/{id}/{table}', [BackendController::class, 'rejetter'])->name('rejetter');
 Route::get('/administration/procedure-dashboard/{procedure}/{procedureName}', [BackendController::class, 'procedureDashboard'])->name('procedure-dashboard');
-
-Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
+Route::get('/administration/demandesp002-list', [BackendController::class, 'listDemandep002'])->name('demandesp002-list');
 
     // Route parametre
 Route::get('/administration/parametre/commune', [CommuneController::class, 'index'])->name('commune-list');
@@ -174,7 +190,7 @@ Route::get('/administration/parametre/procedure', [ProcedureController::class, '
 Route::put('/administration/parametre/procedure/{uuid}', [ProcedureController::class, 'update'])->name('procedure-update');
 Route::get('/administration/parametre/categorie', [CategorieController::class, 'index'])->name('categorie-list');
 Route::get('/administration/parametre/service', [ServiceController::class, 'index'])->name('service-list');
-Route::get('/administration/parametre/service/{uuid}', [ServiceController::class, 'suprimer'])->name('suprimer-service');
+Route::get('/administration/parametre/service/{uuid}', [ServiceController::class, 'supprimer'])->name('suprimer-service');
 Route::post('/administration/parametre/service/', [ServiceController::class, 'store'])->name('service-store');
 Route::get('/administration/parametre/piecejointe/', [PieceJointeController::class, 'index'])->name('piecejointe-list');
 Route::get('/administration/parametre/piecejointe/{uuid}', [PieceJointeController::class, 'supprimer'])->name('suprimer-piecejointe');
@@ -189,15 +205,28 @@ Route::get('/administration/parametre/role/{uuid}', [RoleController::class, 'sup
 Route::post('/administration/parametre/role', [RoleController::class, 'store'])->name('role-store');
 
 // Route Utilisateur
-
+Route::get('/administration/utilisateur/user', [RegisteredUserController::class, 'listUsers'])->name('user-list');
 Route::get('/administration/utilisateur/agent', [AgentController::class, 'index'])->name('agent-list');
 Route::post('/administration/utilisateur/agent/', [AgentController::class, 'store'])->name('agent-store');
-Route::get('/administration/utilisateur/agent/{uuid}', [AgentController::class, 'update'])->name('agent-update');
+Route::put('/administration/utilisateur/agent/{uuid}', [AgentController::class, 'update'])->name('agent-update');
 Route::get('/administration/utilisateur/usager', [UsagerController::class, 'index'])->name('usager-list');
 
 Route::get('/administration/utilisateur/profile', [ProfileController::class, 'index'])->name('profile-list');
+Route::get('/administration/utilisateur/user-update/{uuid}', [RegisteredUserController::class, 'update'])->name('user-update');
+Route::post('/administration/utilisateur/user-store', [RegisteredUserController::class, 'userStore'])->name('user-store');
 
 // Liste des demandes d'un agent
 
 Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name('demandes-lists');
+
+});
+
+Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
+
+
+// plainte
+Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');;
+Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
+
+
 require __DIR__.'/auth.php';

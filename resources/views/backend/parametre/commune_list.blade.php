@@ -74,30 +74,31 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
+                                        <form method="POST" action="{{ route('commune-store') }}">
+                                            @csrf
                                         <div class="modal-body">
                                             <div class="row">
-                                                <div class="col">
-                                                    <form method="POST" action="{{ route('commune-store') }}">
-                                                        @csrf
+                                                <div class="col-6">
+
                                                         <label for="">Libelle</label>
                                                         <div class="input-group mb-3">
 
                                                             {{-- <label for="libelle">Libelle</label> --}}
-                                                            <span class="input-group-text"
-                                                                id="basic-addon1">@</span>
+
                                                             <input type="text" name="libelle"
-                                                                class="form-control" placeholder="libelle"
+                                                                class="form-control border-success" placeholder="libelle"
                                                                 aria-label="Username"
                                                                 aria-describedby="basic-addon1" required>
 
                                                         </div>
+                                                </div>
+                                                <div class="col-6">
                                                         <label for="">Province</label>
                                                         <div class="input-group mb-3">
                                                             {{-- <label for="libelle">Libelle</label> --}}
-                                                            <span class="input-group-text"
-                                                                id="basic-addon1">@</span>
+
                                                             <select name="province_id" id="selectMultiple"
-                                                                class="form-select" id="">
+                                                                class="form-select border-success" id="">
                                                                 <option value="">Veuillez choisir sa Province
                                                                 </option>
                                                                 @foreach ( $provinces as $prov)
@@ -108,10 +109,6 @@
 
                                                         </div>
 
-                                                        <input type="submit" value="Valider"
-                                                            class="btn btn-primary">
-
-                                                    </form>
 
                                                 </div>
                                             </div>
@@ -121,9 +118,10 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger"
                                                 data-bs-dismiss="modal">Fermer</button>
-                                            {{-- <button type="button" class="btn btn-primary">Valider</button>
-                                            --}}
+                                            <button type="submit" class="btn btn-primary">Valider</button>
+
                                         </div>
+                                    </form>
                                     </div>
                                 </div>
                             </div><!-- End Large Modal-->
@@ -155,8 +153,8 @@
                         <td> {{ $comm->region }}</td>
 
                         <td>
-                            <button title="Editer" type="button" class="btn btn-info "
-                                data-bs-toggle=" "> <i class="bi bi-pencil-square"></i> </button>
+                            {{-- <button title="Editer" type="button" class="btn btn-info "
+                                data-bs-toggle=" "> <i class="bi bi-pencil-square"></i> </button> --}}
 
                             <a href="{{ route('supprimer-commune', ['uuid' => $comm->uuid]) }}"
                                 title="Supprimer" type="button" class="btn btn-danger "> <i

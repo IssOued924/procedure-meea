@@ -1,8 +1,8 @@
 <section id="about" class="about">
     @if (session()->has('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
-    </div>
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
     @endif
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -11,17 +11,18 @@
     <div class="container-fluid" id="grad1">
         <div class="row justify-content-center mt-0">
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
-                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
                     <h5><strong>Permis de circulation de bois et du charbon de bois</strong></h5>
                    <p> @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif</p>
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+                   </p>
                     <p>Les champs suivis d'etoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">
-                                    <form id="msform" method="POST" action="{{route('demandesp005-store')}}" enctype="multipart/form-data" >
+                            <form id="msform" method="POST" action="{{route('demandesp005-store')}}" enctype="multipart/form-data" >
                                         @csrf
 
                                 <!-- progressbar -->
@@ -30,7 +31,8 @@
                                     <li id="personal"><strong>Information sur le produit</strong></li>
                                     <li id="caracteristik"><strong>Informations relatives au transport</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
-                                    <li id="confirm"><strong>Validation</strong></li>
+                                    <li id="paiement"><strong>Paiement </strong></li>
+
                                 </ul>
                                 <!-- fieldsets -->
                                 <fieldset>
@@ -41,14 +43,23 @@
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Identité du demandeur</strong> <span
                                                         style="color: red">*</span></label>
-                                                <input type="text" class="form-control border-success"  name="identite"
+                                                <input type="text" class="form-control border-success" value="{{ $name }}"  name="identite"
                                                     placeholder="Identité du demandeur" />
                                             </div>
                                             <div class="col-6">
-                                                <label class="siege_social fw-bold">Adresse du demandeur<span style="color:red">
+                                                <label class="siege_social fw-bold">Localité du demandeur<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" class="form-control border-success" name="adresse_demandeur" placeholder="Adresse du demandeur">
+                                                {{-- <input type="text" class="form-control border-success" name="adresse_demandeur" placeholder="Adresse du demandeur"> --}}
+                                                <select name="commune_id" id="selectMultiple" class="form-select border-success"
+                                                required>
+                                                {{-- <input type="text" placeholder="filtrer ici"> --}}
+                                                <option value="">Veuillez choisir une ville</option>
+                                                @foreach ( $communes as $com)
+                                                <option value="{{ $com->uuid }}">{{ $com->libelle }}</option>
+                                                @endforeach
 
+
+                                            </select>
                                             </div>
                                         </div>
                                     </div>
@@ -92,9 +103,9 @@
 
 
                                     </div>
-                                    <input type="button" name="previous" class="previous action-button-previous"
+                                    <input type="button"   class="previous action-button-previous"
                                         value="Retour" />
-                                    <input type="button"   name="make_payment" class="next action-button"
+                                    <input type="button"    class="next action-button"
                                         value="Suivant" />
                                 </fieldset>
                                 <fieldset>
@@ -125,9 +136,9 @@
                                         </div>
 
                                     </div>
-                                    <input type="button" name="previous" class="previous action-button-previous"
+                                    <input type="button"   class="previous action-button-previous"
                                         value="Retour" />
-                                    <input type="button" name="make_payment" class="next action-button"
+                                    <input type="button"   class="next action-button"
                                         value="Suivant" />
                                 </fieldset>
                                 <fieldset>
@@ -136,7 +147,7 @@
                                         <h2 class="fs-title"></h2>
 
                                         <div class="row">
-                                            <input type="checkbox" id="confirmationBox" name="confirmed"
+                                            <input type="checkbox" id="confirmationBox" name="is_certified"
                                                 class="required-checkbox   checkbox" value="confirmed">
                                             <label for="confirmationBox" class="checkbox-label">
                                                 En cochant cette case, je certifie sur mon honneur que les informations
@@ -146,12 +157,12 @@
 
                                     </div>
 
-                                    <input type="button" name="previous" class="previous action-button-previous"
+                                    <input type="button"   class="previous action-button-previous"
                                         value="Retour" />
-                                    <input type="submit" name="make_payment" class="next action-button"
-                                        value="Confirmation" />
+                                    <input type="submit"   class="next action-button"
+                                        value="Suivant" />
                                 </fieldset>
-                                <fieldset>
+                                {{-- <fieldset>
                                     <div class="form-card">
                                         <h2 class="fs-title text-center">Validation !</h2>
                                         <br><br>
@@ -169,6 +180,58 @@
                                             </div>
                                         </div>
                                     </div>
+                                </fieldset> --}}
+
+                                <fieldset>
+                                    <form action="">
+                                    <div class="form-card">
+                                        <h4 class="fs-title">Paiement <span style="color:red">
+                                            *</span></h4>
+                                            <label for="demande timbre" class="fw-bold">Moyens de Paiement<span style="color:red">
+                                                    *</span></label>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label class="nom_societe fw-bold" >ORANGE</label>
+                                                <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="siege_social fw-bold ">MOOV</label>
+                                                <input id="radio2" type="radio" value="0"  name="moyen"/>
+                                            </div>
+
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div id="moyenP1">
+                                                <label >  La somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
+
+                                            </div>
+                                            <div id="moyenP2">
+                                                <label >  La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
+
+                                            </div>
+                                        <div class="col-6">
+                                                <label class="boite_postale fw-bold">Téléphone<span style="color:red">
+                                                        *</span></label>
+                                                <input type="number" name="numero" style="width: 50%;" class="border-success form-control"   placeholder="Telephone" required />
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="boite_postale fw-bold">OTP<span style="color:red">
+                                                        *</span></label>
+                                                <input type="number" name="otp"   style="width: 50%;" class="border-success form-control"   placeholder="otp" required />
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <input type="button"  class="previous action-button-previous"
+                                        value="Retour" />
+                                    <input type="submit"   class="next action-button"
+                                        value="Valider" />
+                                    <!-- Ajoutez ceci dans la première étape du formulaire -->
+                                    <div class="error-message" style="color: red;"></div>
+                                    </form>
                                 </fieldset>
                             </form>
                         </div>
@@ -277,6 +340,22 @@ $('.radio-group .radio').click(function(){
 $(".submit").click(function(){
     return false;
 })
+
+
+
+$("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+
+jQuery('input[name=moyen]:radio').click(function(){
+		$("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+		var divId = jQuery(this).val();
+        if(divId * 1 == 1){
+            $("div#moyenP1").show()
+        }else{
+            $("div#moyenP2").show()
+        }
+		});
 
 });
 </script>

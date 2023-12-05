@@ -26,7 +26,7 @@
 
 
             <div class="card-body">
-              <h5 class="card-title">Demandes <span>| deposée</span></h5>
+              <h5 class="card-title">Demandes <span>| <b>déposées</b></span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -47,7 +47,7 @@
         <div class="col-xxl-3 col-md-6">
           <div class="card info-card revenue-card">
             <div class="card-body">
-              <h5 class="card-title">Demandes <span>| Validée</span></h5>
+              <h5 class="card-title">Demandes <span>| <b>Validées</b></span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -67,7 +67,7 @@
         <div class="col-xxl-3 col-md-6">
             <div class="card info-card revenue-card">
               <div class="card-body">
-                <h5 class="card-title">Demandes <span>| signées</span></h5>
+                <h5 class="card-title">Demandes <span>| <b>Signées</b></span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -89,7 +89,7 @@
 
           <div class="card info-card customers-card">
             <div class="card-body">
-              <h5 class="card-title">Demandes <span>| rejettées</span></h5>
+              <h5 class="card-title">Demandes <span>| <b>rejettées</b></span></h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -110,7 +110,7 @@
 
             <div class="card info-card customers-card">
               <div class="card-body">
-                <h5 class="card-title">Demandes <span>| Attente de Complement de Dossiers</span></h5>
+                <h5 class="card-title">Demandes <span>| <b>Attente de Complement de Dossiers</b></span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -130,7 +130,7 @@
 
             <div class="card info-card customers-card">
               <div class="card-body">
-                <h5 class="card-title">Demandes <span>| En Etude</span></h5>
+                <h5 class="card-title">Demandes <span>| <b>En Etudes</b></span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -152,7 +152,7 @@
           <div class="col-xxl-3 col-xl-12">
             <div class="card info-card customers-card">
               <div class="card-body">
-                <h5 class="card-title">Demandes <span>|  archivées</span></h5>
+                <h5 class="card-title">Demandes <span>|  <b>Archivées</b></span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">

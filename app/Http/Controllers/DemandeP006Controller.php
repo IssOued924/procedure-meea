@@ -38,10 +38,16 @@ class DemandeP006Controller extends Controller
        // $data['usager_id'] = Auth::user()->uuid;
 
         unset($data['telephone']);
+        unset($data['moyen']);
+        unset($data["numero"]);
+        unset($data["otp"]);
+
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
+        $data['reference'] = $this->repository->generateReference('P006');
+        $data['delai'] = Procedure::where(['code' => 'P006'])->first('delai')->delai;
         $data['procedure_id'] = Procedure::where(['code' => 'P006'])->first('uuid')->uuid;
-
+        $data['paiement'] =1;
         // $user = $userRepository->getById(Auth::user()->uuid);
         // $user->telephone = $request->telephone;
         // //$user->identite = $request->identite;
@@ -75,7 +81,7 @@ class DemandeP006Controller extends Controller
         $demandePieceP006Repository->setChemin($document_technique_utilisation, $demande->uuid, 'Document de Technique justifiant utilisation');
         $demandePieceP006Repository->setChemin($registre_tracabilite, $demande->uuid, 'Registre de tracabilite');
 
-        return redirect('/')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
+        return redirect('/demandes-lists?procedure=CEESPNB')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }
 
 

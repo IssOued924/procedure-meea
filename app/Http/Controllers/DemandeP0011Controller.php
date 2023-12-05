@@ -41,7 +41,11 @@ class DemandeP0011Controller extends Controller
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
 
+        $data['reference'] = $this->repository->generateReference('P0011');
+        $data['delai'] = Procedure::where(['code' => 'P0011'])->first('delai')->delai;
+        $data['paiement'] =1;
         $data['procedure_id'] = Procedure::where(['code' => 'P0011'])->first('uuid')->uuid;
+
 
 
         $cnib =  $this->repository->uploadFile($dataFiles, 'cnib');
@@ -63,6 +67,9 @@ class DemandeP0011Controller extends Controller
         unset($data['agrement']);
         unset($data['quitance']);
 
+        unset($data['moyen']);
+        unset($data["numero"]);
+        unset($data["otp"]);
 
         $demande = $this->repository->create($data);
         $demande->save();
@@ -76,6 +83,6 @@ class DemandeP0011Controller extends Controller
         $demandePieceP0011Repository->setChemin($agrement, $demande->uuid, 'Agrement');
         $demandePieceP0011Repository->setChemin($quitance, $demande->uuid, 'Quittance');
 
-        return redirect('/')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+        return redirect('/demandes-lists?procedure=PCBCB')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
     }
 }
