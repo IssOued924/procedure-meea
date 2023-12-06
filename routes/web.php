@@ -47,7 +47,7 @@ use App\Models\DemandeP005;
 use App\Models\Procedure;
 use Illuminate\Support\Facades\Route;
 use PharIo\Manifest\Author;
-
+use App\Livewire\DemandeFontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +95,7 @@ Route::middleware('auth')->group(function () {
     // Route des demandes d\'octroie d\'agrement technique Eau et Assainissement
     Route::get("/P002", DemandeCompP002::class)->name("demandes-p002");
     Route::post('/demandesp002-store', [DemandeP002Controller::class, 'store'])->name('demandesp002-store');
+    Route::post('/demandesp002-update', [DemandeP002Controller::class, 'update'])->name('demandesp002-update');
 
 
      // Certificat d'exemption des emballages et sachets plastiques non biodégradables
@@ -228,6 +229,6 @@ Route::get('/administration/statistique/nombreDemandeEncours', [BackendControlle
 // plainte
 Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');;
 Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
-
+Route::get("/procedure/modification/{id}/{procedure}", DemandeFontController::class, 'editerDemande')->name("editer-demande");
 
 require __DIR__.'/auth.php';
