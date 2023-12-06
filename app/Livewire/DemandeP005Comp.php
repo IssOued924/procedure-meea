@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Commune;
 use App\Models\Demande;
+use App\Models\Procedure;
 use App\Models\Pays;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,18 @@ class DemandeP005Comp extends Component
             "communes" => Commune::all(),
             "pays" => Pays::all(),
         ];
+
+        $procedure = Procedure::where("code", request()->segment(1))->first();
+        
+        $startDate = Carbon::parse($procedure->session_debut);
+        $endDate = Carbon::parse($procedure->session_fin);
+        $checkSession = Carbon::now()->between($startDate, $endDate);
+
+        if ($procedure->estperiodique && $checkSession) {
+            return view('livewire.sessionMsg', $data)
+                ->extends("layouts.template")
+                ->section("contenu");
+        }
 
         return view('livewire.DemandeP005.index', $data)
             ->extends("layouts.template")
