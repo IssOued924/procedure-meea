@@ -9,7 +9,7 @@ class DemandeP007 extends Demande
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
-
+    use \Wildside\Userstamps\Userstamps;
     protected $guarded = [];protected $primaryKey = 'uuid';
 
     function genererRandomString($longueur = 10) {

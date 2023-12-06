@@ -9,6 +9,7 @@ class DemandeP0012 extends Demande
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
+    use \Wildside\Userstamps\Userstamps;
     protected $guarded = [];protected $primaryKey = 'uuid';
 
     protected $fillable=[

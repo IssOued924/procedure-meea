@@ -47,6 +47,11 @@ use App\Models\DemandeP005;
 use App\Repositories\DemandeP005Repository;
 use Carbon\Carbon;
 
+use App\Models\User;
+use App\Mail\ValidateDemandMailable;
+use App\Mail\RejectDemandMailable;
+use Illuminate\Support\Facades\Mail;
+
 class BackendController extends Controller
 {
     public $repository;
@@ -82,10 +87,13 @@ class BackendController extends Controller
 
     public function procedureDashboard($procedure, $procedureName)
     {
+        // dd($this->repository->uuidProcedureByDemande($procedure));
 
+        // Procedure::where('etat', '=', 'D')->first()->statut;
         $data = [
 
             //  "demandes" => $demandeP001Repository->all(),
+            "procedure" => $this->repository->uuidProcedureByDemande($procedure, ['estperiodique' => '1']),
             "procedureName" => $procedureName,
             "demandeDeposee" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'D']),
             "demandeValider" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'V']),
@@ -94,9 +102,6 @@ class BackendController extends Controller
             "demandeArchive" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'A']),
             "demandeComplement" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'C']),
             "demandeEtude" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'E']),
-
-
-
         ];
 
         return view('backend.home_detail', $data);
@@ -498,6 +503,16 @@ class BackendController extends Controller
         // DB::table('commentaire_p001_s')->insert();
 
 
+        $proc_id = DB::table($table)->where('uuid', $id)->first()->procedure_id;
+        $usager_id = DB::table($table)->where('uuid', $id)->first()->usager_id;
+        $user_email = User::where('usager_id', $usager_id)->first()->email;
+        $demand = array(
+            "procedure"  => Procedure::where('uuid', $proc_id)->first()->libelle_long,
+            "uuid" => $id,
+            "etat"   => StatutDemande::where('etat', $nextStatus)->first()->statut
+        );
+        Mail::to($user_email)->send(new ValidateDemandMailable( $demand ));
+
         return redirect()->back()->with('success', "Opération éffectuée avec succès !");
     }
 
@@ -595,6 +610,18 @@ class BackendController extends Controller
             ]);
         }
 
+        $proc_id = DB::table($table)->where('uuid', $id)->first()->procedure_id;
+        $usager_id = DB::table($table)->where('uuid', $id)->first()->usager_id;
+        $user_email = User::where('usager_id', $usager_id)->first()->email;
+        $currentStatus = DB::table($table)->where('uuid', $id)->first()->etat;
+        $demand = array(
+            "procedure"  => Procedure::where('uuid', $proc_id)->first()->libelle_long,
+            "uuid" => $id,
+            "etat"   => StatutDemande::where('etat', $currentStatus)->first()->statut,
+            "motif"   => $request->libelle
+        );
+        Mail::to($user_email)->send(new RejectDemandMailable( $demand ));
+        
         return redirect()->back()->with('success', "La Demande a été Rejetter avec succès !");
     }
 
