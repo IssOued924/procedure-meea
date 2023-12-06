@@ -78,5 +78,77 @@ class DemandeP002Controller extends Controller {
         return redirect('/demandes-lists?procedure=OATEA')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
         //return json_encode(array('status' => 'fail'));
     }
+    
+    public function update(Request $request,
+            DemandePieceP002Repository $demandePieceP002Repository,
+            DemandeP002 $demande) {
+        $dataDemande = ['etat' => 'D',
+            'updated_at' => Carbon::parse(Carbon::now())->format('Ymd'),
+            'identite' => $request->identite,
+            'beneficiaire' => $request->beneficiaire,
+            'date_certif' => Carbon::parse(Carbon::now())->format('Ymd'),
+            'last_modified_by' => Auth::user()->usager_id,
+            'is_certified' => true,
+            'domaine' => $request->domaine,
+            'categorie' => $request->categorie,
+            'sous_domaine' => $request->sous_domaine];
+
+        // Sauvegarde de la demande
+
+        $this->repository->updateById($request->uuid, $dataDemande);
+        $demande = $this->repository->getById($request->uuid, $request->uuid);
+        
+              //Recuperation du chemin des fichiers joint
+            if ($request->file('recu_achat_dossier')) {
+                $cheminRecuAchat = $this->repository->uploadFile($request->file('recu_achat_dossier'));
+                $demandePieceP002Repository->setChemin($cheminRecuAchat, $demande->uuid, 'Récu achat dossier');
+                DB::table('demande_piece_p002_s')->where('chemin',  $request->current_recu)->delete();
+                @unlink($request->current_recu);
+            }
+            if ($request->file('ifu')) {
+                 $cheminifu = $this->repository->uploadFile($request->file('ifu'));
+                 $demandePieceP002Repository->setChemin($cheminifu, $demande->uuid, 'Certificat Ifu');
+                 DB::table('demande_piece_p002_s')->where('chemin',  $request->current_ifu)->delete();
+                 @unlink($request->current_ifu);
+            }
+            if ($request->file('rccm')) {
+                 $cheminRccm = $this->repository->uploadFile($request->file('rccm'));
+                 $demandePieceP002Repository->setChemin($cheminRccm, $demande->uuid, 'Rccm');
+                 DB::table('demande_piece_p002_s')->where('chemin',  $request->current_rccm)->delete();
+                 @unlink($request->current_rccm);
+            }
+            if ($request->file('cnss')) {
+                 $cheminCnss = $this->repository->uploadFile($request->file('cnss'));
+                 $demandePieceP002Repository->setChemin($cheminCnss, $demande->uuid, 'Attestation employeur CNSS');
+                 DB::table('demande_piece_p002_s')->where('chemin',  $request->current_cnss)->delete();
+                 @unlink($request->current_cnss);
+            }
+            if ($request->file('fiche_renseignement')) {
+                $cheminFicheRenseignement = $this->repository->uploadFile($request->file('fiche_renseignement'));
+                $demandePieceP002Repository->setChemin($cheminFicheRenseignement, $demande->uuid, 'Fiche Renseignement');
+                DB::table('demande_piece_p002_s')->where('chemin',  $request->current_rens)->delete();
+                @unlink($request->current_rens);
+            }
+            if ($request->file('declaration_honneur')) {
+                $cheminDeclarationHonneur = $this->repository->uploadFile($request->file('declaration_honneur'));
+                $demandePieceP002Repository->setChemin($cheminDeclarationHonneur, $demande->uuid, 'Déclaration sur l’honneur de l’exactitude des informations');
+                DB::table('demande_piece_p002_s')->where('chemin',  $request->declaration_honneur)->delete();
+                @unlink($request->declaration_honneur);
+            }
+            //Enregistrement des autres documents
+            if ($request->libelle_document && sizeof($request->libelle_document) > 0) {
+                $n = sizeof($request->libelle_document);
+                for ($i = 0; $i < $n; $i++) {
+                    $chemin = $this->repository->uploadFile($request->file('fichier_document')[$i]);
+                    $demandePieceP002Repository->setChemin($chemin, $demande->uuid, $request->libelle_document[$i]);
+                }
+            }
+            
+            
+          // return json_encode(array('status' => 'success'));
+        return redirect('/demandes-lists?procedure=OATEA')->with('success', 'Votre Demande à bien été modifiée et en cours de traitement !!');
+        //return json_encode(array('status' => 'fail'));
+    }
+    
 
 }
