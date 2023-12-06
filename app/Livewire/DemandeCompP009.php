@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Commune;
 use App\Models\Demande;
+use App\Models\Procedure;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -53,6 +54,17 @@ class DemandeCompP009 extends Component
         ];
 
 
+        $procedure = Procedure::where("code", request()->segment(1))->first();
+        
+        $startDate = Carbon::parse($procedure->session_debut);
+        $endDate = Carbon::parse($procedure->session_fin);
+        $checkSession = Carbon::now()->between($startDate, $endDate);
+
+        if ($procedure->estperiodique && $checkSession) {
+            return view('livewire.sessionMsg', $data)
+                ->extends("layouts.template")
+                ->section("contenu");
+        }
 
         return view('livewire.Demandesp009.index', $data)
             ->extends("layouts.template")

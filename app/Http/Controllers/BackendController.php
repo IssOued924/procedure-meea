@@ -82,10 +82,13 @@ class BackendController extends Controller
 
     public function procedureDashboard($procedure, $procedureName)
     {
+        // dd($this->repository->uuidProcedureByDemande($procedure));
 
+        // Procedure::where('etat', '=', 'D')->first()->statut;
         $data = [
 
             //  "demandes" => $demandeP001Repository->all(),
+            "procedure" => $this->repository->uuidProcedureByDemande($procedure, ['estperiodique' => '1']),
             "procedureName" => $procedureName,
             "demandeDeposee" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'D']),
             "demandeValider" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'V']),
@@ -94,9 +97,6 @@ class BackendController extends Controller
             "demandeArchive" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'A']),
             "demandeComplement" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'C']),
             "demandeEtude" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'E']),
-
-
-
         ];
 
         return view('backend.home_detail', $data);

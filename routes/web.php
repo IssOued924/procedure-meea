@@ -188,6 +188,7 @@ Route::put('/administration/parametre/structure/{uuid}', [StructureController::c
 Route::post('/administration/parametre/structure', [StructureController::class, 'store'])->name('structure-store');
 Route::get('/administration/parametre/procedure', [ProcedureController::class, 'index'])->name('procedure-list');
 Route::put('/administration/parametre/procedure/{uuid}', [ProcedureController::class, 'update'])->name('procedure-update');
+Route::put('/administration/parametre/procedure/session/{uuid}', [ProcedureController::class, 'sessionUpdate'])->name('procedure-session-update');
 Route::get('/administration/parametre/categorie', [CategorieController::class, 'index'])->name('categorie-list');
 Route::get('/administration/parametre/service', [ServiceController::class, 'index'])->name('service-list');
 Route::get('/administration/parametre/service/{uuid}', [ServiceController::class, 'supprimer'])->name('suprimer-service');

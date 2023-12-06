@@ -33,6 +33,19 @@ class BackendRepository extends AppRepository
 
     }
 
+
+    public function uuidProcedureByDemande($demande, $champ=array())
+    {
+
+        return DB::table('procedures')
+                            ->join($demande, 'procedures.uuid', '=', $demande.'.procedure_id')
+                            ->select('procedures.*')
+                            ->first();
+
+
+
+    }
+
     
 
 }
