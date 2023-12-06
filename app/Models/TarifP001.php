@@ -9,8 +9,9 @@ class TarifP001 extends Model
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
-
-    protected $guarded = [];protected $primaryKey = 'uuid';
+    use \Wildside\Userstamps\Userstamps;
+    protected $guarded = [];
+    protected $primaryKey = 'uuid';
 
     public function Demande(){
         return $this->belongsTo(Demande::class, 'demande_p001_id', 'uuid');

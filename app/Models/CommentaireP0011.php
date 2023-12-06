@@ -9,6 +9,7 @@ class CommentaireP0011 extends Model
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
+    use \Wildside\Userstamps\Userstamps;
 
     protected $guarded = [];protected $primaryKey = 'uuid';
 

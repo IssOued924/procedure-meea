@@ -9,6 +9,7 @@ class Arrondissement extends Model
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
+    use \Wildside\Userstamps\Userstamps;
     protected $primaryKey = 'uuid';
     public $fillable = ['libelle', 'commune_id'];
     public function commune(){
