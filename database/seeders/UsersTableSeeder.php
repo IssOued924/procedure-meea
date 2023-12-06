@@ -16,21 +16,21 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $agent = Agent::create([
+      /*  $agent = Agent::create([
             'matricule' => 'SORO Halilou',
             'nom' => 'Soro',
             'prenom' => 'Halilou',
             'fonction' => 'Informaticien',
             'service_id' => 'caa0d29c-2a76-4e2b-bb49-cbd88c7b9794',
-        ]);
+        ]);*/
         $admin = User::create([
-            'name' => 'SORO Halilou',
-            'email' => 'ingitsoro@gmail.com',
+            'name' => 'Admin Admin',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('123'),
-            'agent_id' => $agent->uuid,
-           // 'role_id' => 'ingitsoro@gmail.com',
+            'agent_id' => '3fce48ca-f4e4-47c1-9253-ecadcc5a0475',
+           'role_id' => 'dd82e467-0703-4928-8399-6ec4f8734965',
         ]);
-        $usager = Usager::create([
+       /* $usager = Usager::create([
             'nom' => 'Nanema',
             'prenom' => 'Ed',
             'domicile' => 'Ouagadadougou',
@@ -45,6 +45,6 @@ class UsersTableSeeder extends Seeder
             'email' => 'usager@usager.com',
             'password' => Hash::make('123'),
             'usager_id' => $usager->uuid
-        ]);
+        ]);*/
     }
 }
