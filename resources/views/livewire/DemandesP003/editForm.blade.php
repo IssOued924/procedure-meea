@@ -21,8 +21,10 @@
                     <p>Les champs suivis d'étoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">
-                            <form id="msform" method="POST" action="{{route("demandesp003-store")}}"
+                            <form id="msform" method="POST" action="{{route("demandesp003-update")}}"
                                 enctype="multipart/form-data">
+
+                                <input type="hidden" class="border-success" name="uuid" value='{{$demande->uuid}}'/>
                                 @csrf
 
                                 <!-- progressbar -->
@@ -58,7 +60,7 @@
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option value="">Veuillez choisir une ville</option>
                                                     @foreach ( $communes as $com)
-                                                    <option value="{{ $com->uuid }}">{{ $com->libelle }}</option>
+                                                    <option {{ $demande->commune_id == $com->uuid ? 'selected' : '' }} value="{{ $com->uuid }}">{{ $com->libelle }}</option>
                                                     @endforeach
 
 
@@ -72,13 +74,13 @@
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success form-input"
                                                     name="adresse_beneficiaire"
-                                                    placeholder="Adresse ou numero de telephone" required />
+                                                    placeholder="Adresse ou numero de telephone" value="{{ $demande->adresse_beneficiaire }}" required />
                                             </div>
                                             <div class="col-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" class="form-control border-success"
-                                                    placeholder="Telephone" value="{{ $telephone}}" disabled />
+                                                    placeholder="Telephone" value="{{ $telephone}}"   />
                                             </div>
                                         </div>
                                         {{-- <div class="row">
@@ -100,17 +102,39 @@
                                 <fieldset>
                                     <div class="form-card">
                                         <h2 class="fs-title">Pièces à Fournir</h2>
+
+                                        <?php
+                                                    $pathArme ='';
+                                                    $pathPhoto ='';
+                                                    $pathCnib='';
+                                                    $pathDocArme='';
+
+                                                    foreach ( $documents as $doc){
+                                                        if($doc->libelle =="Permis de port d'arme")
+                                                            $pathArme = $doc->chemin;
+                                                        elseif($doc->libelle == "Photo d'identite")
+                                                            $pathPhoto = $doc->chemin;
+                                                        elseif($doc->libelle == "CNIB/PASSEPORT")
+                                                            $pathCnib = $doc->chemin;
+                                                        elseif($doc->libelle == "Document de l'arme")
+                                                            $pathDocArme = $doc->chemin;
+                                                       ?>
+                                                        <a  class="text-success" target="_blank" href="{{ Storage::url($doc->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$doc->libelle}}</b></a>
+                                                         <br>
+                                                       <?php }?>
                                         <div class="row">
                                             <div class="col-6">
-                                                <label for="demande timbre" class="fw-bold">Permis de port d'arme <span
-                                                        style="color: red">*</span></label>
+                                                <label for="demande timbre" class="fw-bold">Permis de port d'arme  </label>
                                                 <input type="file" class="form-control border-success"
-                                                    name="permis_arme" required>
+                                                    name="permis_arme">
+
+                                                    <input type="hidden"  value="{{ $pathArme  }}" class="form-control border-success"
+                                                    name="current_permis_arme">
                                             </div>
                                             <div class="col-6">
-                                                <label for="demande timbre" class="fw-bold">Photo d'identité <span
-                                                        style="color: red">*</span></label>
-                                                <input type="file" class="form-control border-success" name="photo" required>
+                                                <label for="demande timbre" class="fw-bold">Photo d'identité  </label>
+                                                <input type="file" class="form-control border-success" name="photo">
+                                                <input type="hidden"  value="{{ $pathPhoto }}" class="form-control border-success" name="current_photo" >
                                             </div>
 
 
@@ -118,16 +142,19 @@
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <label for="demande timbre" class="fw-bold">CNIB ou passeport <span
-                                                        style="color: red">*</span></label>
+                                                <label for="demande timbre" class="fw-bold">CNIB ou passeport  </label>
                                                 <input type="file" class="form-control border-success"
-                                                    name="cnib_passport" required>
+                                                    name="cnib_passport">
+                                                    <input type="hidden" value="{{ $pathCnib  }}" class="form-control border-success"
+                                                    name="current_cnib_passport">
                                             </div>
                                             <div class="col-6">
-                                                <label for="demande timbre" class="fw-bold">Document de l'arme <span
-                                                        style="color: red">*</span></label>
+                                                <label for="demande timbre" class="fw-bold">Document de l'arme  </label>
                                                 <input type="file" class="form-control border-success"
-                                                    name="document_arme" required>
+                                                    name="document_arme"  >
+
+                                                    <input type="hidden" value="{{ $pathDocArme }}" class="form-control border-success"
+                                                    name="current_document_arme">
                                             </div>
 
                                         </div>
@@ -146,8 +173,8 @@
 
                                         <div class="row">
                                             <input type="checkbox" id="confirmationBox" name="is_certified"
-                                                class="required-checkbox   checkbox" value="1">
-                                            <label for="confirmationBox" class="checkbox-label" required>
+                                                class="required-checkbox   checkbox" {{ intval($demande->is_certified==1) ? 'checked' : ''}} value="1">
+                                            <label for="confirmationBox"   class="checkbox-label" required>
                                                 En cochant cette case, je certifie sur mon honneur que les informations
                                                 renseignées sont correctes.
                                             </label>

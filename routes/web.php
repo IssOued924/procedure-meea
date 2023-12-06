@@ -91,6 +91,8 @@ Route::middleware('auth')->group(function () {
     // Route::get('/P001', [DemandeP001Controller::class, 'create'])->name('demandesp001-create');
     Route::get("/P001", DemandeComp::class)->name("demandes");
     Route::post('/demandesp001-store', [DemandeP001Controller::class, 'store'])->name('demandesp001-store');
+    Route::post('/demandesp001-update', [DemandeP001Controller::class, 'update'])->name('demandesp001-update');
+
 
     // Route des demandes d\'octroie d\'agrement technique Eau et Assainissement
     Route::get("/P002", DemandeCompP002::class)->name("demandes-p002");
@@ -107,6 +109,7 @@ Route::middleware('auth')->group(function () {
     //   Demande poo4 certificat de detention d'un animal sauvage
     Route::get('/P004', DemandeCompP004::class)->name('demandesp004-create');
     Route::post('/demandesp004-store', [DemandeP004Controller::class, 'store'])->name('demandesp004-store');
+    Route::post('/demandesp004-update', [DemandeP004Controller::class, 'update'])->name('demandesp004-update');
 
 
     //   Demande poo5 permis de circulation de bois et de charbon de bois
@@ -137,6 +140,7 @@ Route::middleware('auth')->group(function () {
     // Permis de chasse
     Route::get("/P003", DemandeCompP003::class)->name("demandesp003");
     Route::post("/demandesp003-store", [DemandeP003Controller::class, 'store'])->name("demandesp003-store");
+    Route::post("/demandesp003-update", [DemandeP003Controller::class, 'update'])->name("demandesp003-update");
 
 
 
