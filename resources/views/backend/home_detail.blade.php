@@ -6,6 +6,20 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
       <li class="breadcrumb-item active">{{  $procedureName }}</li>
+      {{-- <li class="" style="margin-left: auto">
+        <a href="#">Paramétres des sessions
+          <i class="bi bi-clock" @style("font-size: 48px;") title="Paramétres des sessions"></i>
+        </a>
+      </li> --}}
+      @if ($procedure->estperiodique)
+      <li class="" style="margin-left: auto">
+        <button title="Editer" type="button" class="btn btn-info "
+          data-bs-toggle="modal"
+          data-bs-target="#sessionModalEdit">
+          <i class="bi bi-clock"></i> Paramétres des sessions</button>
+      </li>
+          
+      @endif
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -176,6 +190,66 @@
     </div><!-- End Left side columns -->
 
   </div>
+
+                                        {{-- editer modal --}}
+                                        <div class="modal fade" id="sessionModalEdit" 
+                                        tabindex="-1">
+                                          <div class="modal-dialog">
+                                              <div class="modal-content" style="width: 800px">
+                                                  <div class="modal-header">
+                                                      <h5 class="modal-title">Editer la Session </h5>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                          aria-label="Close"></button>
+                                                  </div>
+                                                  <form method="POST" action="{{ route('procedure-session-update', $procedure->uuid) }}">
+                                                  @csrf
+                                                  @method('PUT')
+                                                  <div class="modal-body">
+
+                                                          <div class="row">
+                                                              <div class="col">
+                                                                  <h5 class="card-title">Date début</h5>
+                                                                  <div class="input-group mb-3">
+
+                                                                      {{-- <label for="libelle">Libelle</label> --}}
+
+                                                                      <input type="date" name="session_debut"
+                                                                          class="form-control border-success"
+                                                                          {{-- value="{{ $proc->session_debut }}" --}}
+                                                                          aria-describedby="basic-addon1" required>
+
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col">
+                                                                  <h5 class="card-title">Date fin</h5>
+                                                          <div class="input-group mb-3">
+
+                                                              {{-- <label for="libelle">Libelle</label> --}}
+
+                                                              <input type="date" name="session_fin"
+                                                                  class="form-control border-success"
+                                                                  {{-- value="{{ $proc->session_fin }}" --}}
+                                                                  aria-describedby="basic-addon1" required>
+
+                                                          </div>
+                                                              </div>
+                                                          </div>
+
+                                                              <div class="modal-footer">
+                                                                  <button type="button" class="btn btn-danger"
+                                                                      data-bs-dismiss="modal">Fermer</button>
+                                                                  <button type="submit" class="btn btn-primary">Modifier
+                                                                       </button>
+                                                              </div>
+
+
+
+                                                  </div>
+                                              </form>
+
+                                              </div>
+                                          </div>
+                                      </div><!-- End Basic Modal-->
 </section>
 @endsection
 

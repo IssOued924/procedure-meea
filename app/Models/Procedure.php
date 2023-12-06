@@ -9,8 +9,10 @@ class Procedure extends Model
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
+    use \Wildside\Userstamps\Userstamps;
 
-    protected $guarded = [];protected $primaryKey = 'uuid';
+    protected $guarded = [];
+    protected $primaryKey = 'uuid';
 
     public function baseJuridique(){
         return $this->belongsToMany(BaseJuridiques::class, 'procedure_base_juridiques', 'procedure_id', 'base_juridique_id');

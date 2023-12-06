@@ -72,7 +72,7 @@
 
                                                             <span class="checkbox payment-radio">
                                                                 <label for="wish_payment_type_4" class="fw-bold">
-                                                                  <input class="checkbox check_boxes required" id="wish_payment_type_4" name="is_distributeur" type="checkbox" value="1">Utilisateur
+                                                                  <input class="checkbox check_boxes required" id="wish_payment_type_4" name="is_utilisateur" type="checkbox" value="1">Utilisateur
                                                                 </label>
                                                               </span>
                                                         </div>

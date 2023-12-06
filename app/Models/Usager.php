@@ -11,6 +11,7 @@ class Usager extends Model
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
+    use \Wildside\Userstamps\Userstamps;
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $guarded = [];

@@ -47,7 +47,7 @@ use App\Models\DemandeP005;
 use App\Models\Procedure;
 use Illuminate\Support\Facades\Route;
 use PharIo\Manifest\Author;
-
+use App\Livewire\DemandeFontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,10 +91,13 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     // Route::get('/P001', [DemandeP001Controller::class, 'create'])->name('demandesp001-create');
     Route::get("/P001", DemandeComp::class)->name("demandes");
     Route::post('/demandesp001-store', [DemandeP001Controller::class, 'store'])->name('demandesp001-store');
+    Route::post('/demandesp001-update', [DemandeP001Controller::class, 'update'])->name('demandesp001-update');
+
 
     // Route des demandes d\'octroie d\'agrement technique Eau et Assainissement
     Route::get("/P002", DemandeCompP002::class)->name("demandes-p002");
     Route::post('/demandesp002-store', [DemandeP002Controller::class, 'store'])->name('demandesp002-store');
+    Route::post('/demandesp002-update', [DemandeP002Controller::class, 'update'])->name('demandesp002-update');
 
 
      // Certificat d'exemption des emballages et sachets plastiques non biodégradables
@@ -106,6 +109,7 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     //   Demande poo4 certificat de detention d'un animal sauvage
     Route::get('/P004', DemandeCompP004::class)->name('demandesp004-create');
     Route::post('/demandesp004-store', [DemandeP004Controller::class, 'store'])->name('demandesp004-store');
+    Route::post('/demandesp004-update', [DemandeP004Controller::class, 'update'])->name('demandesp004-update');
 
 
     //   Demande poo5 permis de circulation de bois et de charbon de bois
@@ -136,6 +140,7 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     // Permis de chasse
     Route::get("/P003", DemandeCompP003::class)->name("demandesp003");
     Route::post("/demandesp003-store", [DemandeP003Controller::class, 'store'])->name("demandesp003-store");
+    Route::post("/demandesp003-update", [DemandeP003Controller::class, 'update'])->name("demandesp003-update");
 
 
 
@@ -188,6 +193,7 @@ Route::put('/administration/parametre/structure/{uuid}', [StructureController::c
 Route::post('/administration/parametre/structure', [StructureController::class, 'store'])->name('structure-store');
 Route::get('/administration/parametre/procedure', [ProcedureController::class, 'index'])->name('procedure-list');
 Route::put('/administration/parametre/procedure/{uuid}', [ProcedureController::class, 'update'])->name('procedure-update');
+Route::put('/administration/parametre/procedure/session/{uuid}', [ProcedureController::class, 'sessionUpdate'])->name('procedure-session-update');
 Route::get('/administration/parametre/categorie', [CategorieController::class, 'index'])->name('categorie-list');
 Route::get('/administration/parametre/service', [ServiceController::class, 'index'])->name('service-list');
 Route::get('/administration/parametre/service/{uuid}', [ServiceController::class, 'supprimer'])->name('suprimer-service');
@@ -227,6 +233,6 @@ Route::get('/administration/statistique/nombreDemandeEncours', [BackendControlle
 // plainte
 Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');;
 Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
-
+Route::get("/procedure/modification/{id}/{procedure}", DemandeFontController::class, 'editerDemande')->name("editer-demande");
 
 require __DIR__.'/auth.php';
