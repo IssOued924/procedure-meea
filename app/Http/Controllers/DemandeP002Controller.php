@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Repositories\DemandeP002Repository;
 use Carbon\Carbon;
 use App\Http\Requests\StoreDemandeP002Request;
+use Illuminate\Support\Facades\DB;
 
 class DemandeP002Controller extends Controller {
 
@@ -88,6 +89,7 @@ class DemandeP002Controller extends Controller {
             'beneficiaire' => $request->beneficiaire,
             'date_certif' => Carbon::parse(Carbon::now())->format('Ymd'),
             'last_modified_by' => Auth::user()->usager_id,
+            'updated_by' => Auth::user()->usager_id,
             'is_certified' => true,
             'domaine' => $request->domaine,
             'categorie' => $request->categorie,
@@ -96,7 +98,7 @@ class DemandeP002Controller extends Controller {
         // Sauvegarde de la demande
 
         $this->repository->updateById($request->uuid, $dataDemande);
-        $demande = $this->repository->getById($request->uuid, $request->uuid);
+        $demande = $this->repository->getById($request->uuid);
         
               //Recuperation du chemin des fichiers joint
             if ($request->file('recu_achat_dossier')) {
