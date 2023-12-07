@@ -2,11 +2,15 @@
 
 namespace Database\Seeders;
 
+use App\Models\Agent;
+use App\Models\Role;
 use App\Models\Structure;
 use App\Models\Service;
 use App\Models\Procedure;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProcedureSeeder extends Seeder
 {
@@ -19,9 +23,57 @@ class ProcedureSeeder extends Seeder
       $str1 =   Structure::create([
             "libelle_court" => "DGEF",
             "libelle_long" =>"Direction Générale des Eaux et Forêts",
-
+            
         ]);
         $str1->save();
+      
+
+
+
+
+        $strDSI =   Structure::create([
+            "libelle_court" => "DSI",
+            "libelle_long" =>"Direction des Services Informatiques",
+            
+        ]);
+        $strDSI->save();
+         
+        $servDSI = Service::create([
+            "libelle_court" => "DSI",
+            "libelle_long" =>"Direction des Services Informatiques",
+            "structure_id"=> $strDSI->uuid
+        ]);
+       
+        $servDSI->save();
+        
+       $roleAdmin =  Role::create([
+            "libelle" => "Administration",
+            "code" =>"ADMIN",
+            
+        ]);
+
+        $roleAdmin->save();
+
+      $agent =   Agent::create([
+            "nom" => "MEEA",
+            "prenom" => "MEEA",
+            "matricule" => "782255G",
+            "service_id" => $servDSI->uuid,
+            "role_id" => $roleAdmin->uuid,
+        ]);
+$agent->save();
+
+        User::create([
+            'name' => 'adminMeea',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('123456789'),
+            'agent_id' => $agent->uuid,
+            'role_id'=>$roleAdmin->uuid
+        ]);
+
+
+
+
 
        $serv1 = Service::create([
             "libelle_court" => "DGEF",
@@ -32,7 +84,7 @@ class ProcedureSeeder extends Seeder
         $str2 =   Structure::create([
             "libelle_court" => "DGRE",
             "libelle_long" =>"Direction Générale des Ressources en Eaux",
-
+           
         ]);
         $str2->save();
         $serv2 =  Service::create([
@@ -44,7 +96,7 @@ class ProcedureSeeder extends Seeder
         $str3 =   Structure::create([
             "libelle_court" => "DGPE",
             "libelle_long" =>"Direction Générale de la Proctection de L'Environnement",
-
+          
         ]);
         $str3->save();
        $serv3 =  Service::create([
@@ -63,7 +115,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/dechet.png",
             "code_color" => "#359b27",
             "code" => "P008",
-            "service_id"=>$serv3->uuid
+            "service_id"=>$serv3->uuid,
+            "delai"=> "32"
         ]);
 
 
@@ -74,7 +127,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/chim.png",
             "code_color" => "#f26b56",
             "code" => "P001",
-            "service_id"=>$serv3->uuid
+            "service_id"=>$serv3->uuid,
+            "delai"=> "32"
         ]);
         Procedure::create([
             "libelle_court" => "CEESPNB",
@@ -83,7 +137,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/degra.png",
             "code_color" => "#2274bb",
             "code" => "P006",
-            "service_id"=>$serv3->uuid
+            "service_id"=>$serv3->uuid,
+            "delai"=> "32"
         ]);
         Procedure::create([
             "libelle_court" => "CHESPB",
@@ -92,7 +147,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/9.png",
             "code_color" => "#bf6e12",
             "code" => "P007",
-            "service_id"=>$serv3->uuid
+            "service_id"=>$serv3->uuid,
+            "delai"=> "32"
         ]);
         Procedure::create([
             "libelle_court" => "OATEA",
@@ -103,7 +159,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/fg.png",
             "code_color" => "#abd9fe",
             "code" => "P002",
-            "service_id"=>$serv2->uuid
+            "service_id"=>$serv2->uuid,
+            "delai"=> "75"
         ]);
         Procedure::create([
             "libelle_court" => "PETE",
@@ -115,7 +172,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/3.png",
             "code_color" => "#d3b521",
             "code" => "P0012",
-            "service_id"=>$serv1->uuid
+            "service_id"=>$serv1->uuid,
+            "delai"=> "7"
         ]);
         Procedure::create([
             "libelle_court" => "CDAS",
@@ -127,7 +185,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/dff.png",
             "code_color" => "#e2853d",
             "code" => "P004",
-            "service_id"=>$serv1->uuid
+            "service_id"=>$serv1->uuid,
+            "delai"=> "40"
         ]);
         Procedure::create([
             "libelle_court" => "ADDMC",
@@ -137,7 +196,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/gfd.png",
             "code_color" => "#629449",
             "code" => "P003",
-            "service_id"=>$serv1->uuid
+            "service_id"=>$serv1->uuid,
+            "delai"=> "7"
         ]);
         Procedure::create([
             "libelle_court" => "PCBCB",
@@ -146,7 +206,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/60.png",
             "code_color" => "#14b522",
             "code" => "P005",
-            "service_id"=>$serv1->uuid
+            "service_id"=>$serv1->uuid,
+            "delai"=> "8"
         ]);
         Procedure::create([
             "libelle_court" => "PCBCB",
@@ -155,8 +216,10 @@ class ProcedureSeeder extends Seeder
             "img" => "img/10.png",
             "code_color" => "#b7703d",
             "code" => "P0011",
-            "service_id"=>$serv1->uuid
+            "service_id"=>$serv1->uuid,
+            "delai"=> "8"
         ]);
 
+      
     }
 }

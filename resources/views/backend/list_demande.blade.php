@@ -105,6 +105,8 @@
                                         <th scope="col">etat Demande</th>
                                         <th scope="col">Délai</th>
                                         <th scope="col">Paiement</th>
+                                        <th scope="col">Déposé</th>
+                                        <th scope="col">Assigné a</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -166,12 +168,6 @@
                                         <td>{{ $demande->localite->libelle }}</td>
 
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
-                                        @if (isset($demande->delai))
-
-                                        <td><span class="badge bg-dark">{{ $demande->delai}} </span> Jours </td>
-                                        @else
-                                        <td><span class="">-</span> </td>
-                                        @endif
 
                                         {{-- partie paiement --}}
                                         @if ($demande->paiement === 1)
@@ -179,6 +175,16 @@
 
                                         @else
                                         <td><b><span class="text-warning">Non Payé</span></b></td>
+                                        @endif
+
+                                        <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
+
+                                        <td>{{ $demande->created_at->diffForHumans() }}</td>
+
+                                        @if($demande->last_agent_assign != null)
+                                        <td> <span class="badge bg-primary"> {{ $demande->agent->nom. " " .$demande->agent->prenom}} </span> </td>
+                                        @else
+                                        <td> <span class="badge bg-danger"> non assigné </span> </td>
                                         @endif
 
                                         <td>
@@ -315,24 +321,24 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="put"
-                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p001_s'] ) }}">
+                                                            <form method="post" enctype="multipart/form-data" action="{{ route('assignation', ['model' =>'AffectationP001', 'idDemande' => $demande->uuid ,'nameDemandeId'=> 'demande_p001_id', 'tableName'=>'demande_p001_s'] ) }}">
                                                                 @csrf
-                                                                @method('GET')
 
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                      <h5>Choisir le collaborateur à assigné</h5>
+                                                                        <h5>Choisir le collaborateur à assigné</h5>
 
-                                                                            <select name="" id="" class="form-select border-success">
-                                                                                @foreach ($agents as $agent)
+                                                                        <select name="agent_id" id="" class="form-select border-success">
+                                                        ""                    @foreach ($agents as $agent)
 
-                                                                              <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
-                                                                                @endforeach
+                                                                            @if($agent->service->libelle_court == $demande->procedure->service->libelle_court)
+                                                                            <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
+                                                                            @endif
+                                                                            
+                                                                            @endforeach
 
-                                                                            </select>
-
+                                                                        </select>
                                                                     </div>
 
                                                                 </div>

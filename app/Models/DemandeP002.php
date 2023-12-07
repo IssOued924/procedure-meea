@@ -48,4 +48,10 @@ class DemandeP002  extends Demande
     public function localite(){
         return $this->belongsTo(Commune::class, 'commune_id');
     }
+
+    // recuperation de l'agent affecté sur le dossier
+    public function agent()
+    {
+        return $this->belongsTo(Agent::class, 'last_agent_assign');
+    }
 }

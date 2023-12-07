@@ -97,11 +97,12 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Date Demande</th>
                                         <th scope="col">Demandeur</th>
-
                                         <th scope="col">Résidence</th>
                                         <th scope="col">Etat Demande</th>
-                                        {{-- <th scope="col">Délai</th> --}}
                                         <th scope="col">Paiement</th>
+                                        <th scope="col">Délai</th>
+                                        <th scope="col">Déposé</th>
+                                        <th scope="col">Assigné a</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -176,7 +177,15 @@
                                         <td><b><span class="text-warning">Non Payée</span></b></td>
                                         @endif
 
+                                        <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
 
+                                        <td>{{ $demande->created_at->diffForHumans() }}</td>
+
+                                        @if($demande->last_agent_assign != null)
+                                        <td> <span class="badge bg-primary"> {{ $demande->agent->nom. " " .$demande->agent->prenom}} </span> </td>
+                                        @else
+                                        <td> <span class="badge bg-danger"> non assigné </span> </td>
+                                        @endif
 
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
