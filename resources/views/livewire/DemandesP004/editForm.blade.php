@@ -62,7 +62,7 @@
                                                 <select name="commune_id" id="selectMultiple" class="form-select" required>
                                                     <option value="">Veuillez choisir une ville</option>
                                                     @foreach ( $communes as  $com)
-                                                     <option value="{{ $com->uuid }}" >{{ $com->libelle }}</option>
+                                                     <option {{ $demande->commune_id == $com->uuid ? 'selected' : '' }} value="{{ $com->uuid }}" >{{ $com->libelle }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -89,13 +89,13 @@
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold">Nom commun<span
                                                         style="color: red">*</span></label>
-                                                <input type="text" class="border-success" name="nom_commun"
+                                                <input type="text" class="border-success" value="{{ $demande->nom_commun }}" name="nom_commun"
                                                     placeholder="Nom Commun" required/>
                                             </div>
                                             <div class="col-6">
                                                 <label class="pays_residence fw-bold">Nom scientifique<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" name="nom_scientifique" class="border-success form-control" placeholder="Nom scientifique" required />
+                                                <input type="text" name="nom_scientifique" value="{{ $demande->nom_scientifique }}" class="border-success form-control" placeholder="Nom scientifique" required />
                                             </div>
                                         </div>
 
@@ -103,7 +103,7 @@
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold">Classe d'age<span
                                                         style="color: red">*</span></label>
-                                                <input type="text" class="border-success" name="classe_age_animal"
+                                                <input type="text" class="border-success" value="{{ $demande->classe_age_animal }}" name="classe_age_animal"
                                                     placeholder="Classe d'age" required />
                                             </div>
                                             <div class="col-6">
@@ -111,7 +111,7 @@
                                                         *</span></label>
 
                                                 <select name="sexe_animal" id="" class="border-success form-select" required>
-                                                    <option value="">Veuillez choisir le sexe de l'animal</option>
+                                                    <option value="{{ $demande->sexe_animal == 'Mâle' ? 'Femelle' : '' }}"  >Veuillez choisir le sexe de l'animal</option>
                                                     <option value="">Mâle</option>
                                                     <option value="">Femelle</option>
                                                 </select>
@@ -127,22 +127,22 @@
                                                     <select name="lieu_provenance" id="selectMultiple" class="form-select" required>
                                                         <option value="">Veuillez choisir un pays</option>
                                                         @foreach ( $pays as  $pay)
-                                                         <option value="{{ $pay->uuid }}" >{{ $pay->libelle }}</option>
+                                                         <option {{ $demande->lieu_provenance == $pay->uuid ? 'selected' : ''}} value="{{ $pay->uuid }}" >{{ $pay->libelle }}</option>
                                                         @endforeach
                                                     </select>
                                             </div>
                                             <div class="col-6">
                                                 <label class="pays_residence fw-bold">Conditions d'acquisition<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" name="condition_acquisition" class="border-success form-control" placeholder="Conditions d'acquisition" required/>
+                                                <input type="text" name="condition_acquisition" value="{{ $demande->condition_acquisition }}" class="border-success form-control" placeholder="Conditions d'acquisition" required/>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold">Motif de la détention<span
                                                         style="color: red">*</span></label>
-                                                <textarea type="text" class="border-success" name="motif_detention"
-                                                    placeholder="Motif de la detention" required ></textarea>
+                                                <textarea type="text"  class="border-success" name="motif_detention"
+                                                    placeholder="Motif de la detention" required >{{ $demande->motif_detention }}</textarea>
                                             </div>
 
                                         </div>
@@ -158,21 +158,35 @@
                                     <div class="form-card">
                                         <h2 class="fs-title">Pièces jointes</h2>
 
+                                        <?php
+                                                    $pathCertificatOrigine ='';
+                                                    $pathCertificatSanitaire ='';
+                                                    foreach ( $documents as $doc){
+                                                        if($doc->libelle =="Certificat Origine")
+                                                            $pathCertificatOrigine = $doc->chemin;
+                                                        elseif($doc->libelle == "Certificat Sanitaire")
+                                                            $pathCertificatSanitaire = $doc->chemin;
+
+                                                       ?>
+                                                        <a  class="text-success" target="_blank" href="{{ Storage::url($doc->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$doc->libelle}}</b></a>
+                                                         <br>
+                                                       <?php }?>
+
                                         <div class="row">
 
                                             <div class="col-6">
-                                                <label class="pays_residence fw-bold">Fichier certificat d'origine<span style="color:red">
-                                                        *</span></label>
+                                                <label class="pays_residence fw-bold">Fichier certificat d'origine </label>
 
                                                         <br/>
-                                                <input type="file" name="certificat_origine" class="form-control border-success" required/>
+                                                <input type="file" name="certificat_origine" class="form-control border-success"  />
+                                                <input type="hidden" name="current_certificat_origine" value="{{ $pathCertificatOrigine }}" class="form-control border-success"  />
                                             </div>
 
                                             <div class="col-6">
-                                                <label class="pays_residence fw-bold">Fichier certificat sanitaire<span style="color:red">
-                                                        *</span></label>
+                                                <label class="pays_residence fw-bold">Fichier certificat sanitaire </label>
                                                         <br/>
-                                                <input type="file" name="certificat_sanitaire" class="form-control border-success" required />
+                                                <input type="file" name="certificat_sanitaire" class="form-control border-success"   />
+                                                <input type="hidden" name="current_certificat_sanitaire" value="{{ $pathCertificatSanitaire }}" class="form-control border-success"   />
                                             </div>
                                         </div>
 
@@ -190,7 +204,7 @@
                                         <h2 class="fs-title"> </h2>
 
                                         <div class="row">
-                                            <input type="checkbox" id="confirmationBox" name="is_certified"
+                                            <input type="checkbox" id="confirmationBox" {{ intval($demande->is_certified==1) ? 'checked' : '' }} name="is_certified"
                                                 class="required-checkbox   checkbox" value="1" required>
                                             <label for="confirmationBox" class="checkbox-label">
                                                 En cochant cette case, je certifie sur mon honneur que les informations
@@ -218,7 +232,7 @@
                                         <br><br>
                                         <div class="row justify-content-center">
                                             <div class="col-7 text-center">
-                                                <h5>Votre demnde est enregistré avec succes et en cour de traitement!
+                                                <h5>Votre demnde est Modifiée avec success et en cour de traitement!
                                                 </h5>
                                             </div>
                                         </div>
