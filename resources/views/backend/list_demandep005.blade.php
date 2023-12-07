@@ -156,6 +156,7 @@
                                             break;
                                     }
                                     @endphp
+                                    @if ($demande->last_agent_assign == null || $demande->last_agent_assign == Auth::user()->agent->uuid || Auth::user()->role->code == "ADMIN")
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
@@ -457,9 +458,8 @@
                                                 </div>
                                             </div>
                                         </div><!-- End Large Modal-->
-
-
                                     </tr>
+                                    @endif
                                     @endforeach
 
 
