@@ -34,10 +34,10 @@
                 <li class="dropdown">
                    <a>
                     <i class="bi bi-person"></i><span>
-                        @if (isset(Auth::user()->name))
-                        <div>{{ Auth::user()->name }}</div>
+                        @if (isset(Auth::user()->usager->nom_entreprise))
+                        <div>{{ Auth::user()->usager->nom_entreprise }}</div>
                         @else
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>{{ Auth::user()->usager->prenom.'  '.Auth::user()->usager->nom }}</div>
                         @endif
                         </span> <i class="bi bi-chevron-down"></i>
                     </a>
