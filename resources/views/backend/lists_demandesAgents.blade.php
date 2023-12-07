@@ -69,10 +69,11 @@
                                         <th scope="col">Date Démande</th>
                                         <th scope="col">Réference</th>
                                         <th scope="col">etat de mes Démandes</th>
-                                        <th scope="col">Délai</th>
+                                        <th scope="col">Délai de traitement</th>
+                                        <th scope="col">Déposé</th>
                                         <th scope="col">Paiement</th>
-
                                         <th scope="col">Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -139,12 +140,9 @@
                                             <span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
                                             @endif
 
-                                        @if (isset($demande->delai))
+                                            <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
 
-                                        <td><span class="badge bg-dark">{{ $demande->delai}} </span> Jours</td>
-                                        @else
-                                        <td><span class="  ">-</span> </td>
-                                        @endif
+                                            <td>{{ $demande->created_at->diffForHumans() }}</td>
 
                                           {{-- partie paiement --}}
                                           @if ($demande->paiement === 1)

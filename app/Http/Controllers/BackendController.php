@@ -57,6 +57,7 @@ class BackendController extends Controller
     public $repository;
     public function __construct(BackendRepository $repository)
     {
+        Carbon::setLocale("fr");
         $this->repository = $repository;
     }
 
@@ -371,6 +372,25 @@ class BackendController extends Controller
         return view('backend.list_demandep007', $data);
     }
 
+    // fonction d'assignation d'un collaborateur a un dossier
+    public function assignation( $model,  $idDemande,   $nameDemandeId, $tableName, Request $request) {
+        //Creer une affection
+        $data = $request->all();
+    
+        $modele = app("App\Models\\$model");
+       // $affectation = new $table();
+       
+         $modele::create([
+            $nameDemandeId=>$idDemande,
+            'agent_id' => $data["agent_id"]
+         ]);
+    
+         DB::table($tableName)->where('uuid', $idDemande)->update(['last_agent_assign' => $data["agent_id"]]);
+    
+        Alert::success('Succès', 'demande assignée !');
+        return redirect()->back();
+        
+    }
 
 
     //Function de mise a jour de statut demande
