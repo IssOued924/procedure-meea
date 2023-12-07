@@ -264,6 +264,8 @@ rel="stylesheet"
         </ul>
       </li><!-- End Charts Nav -->
 
+
+
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gear"></i><span>Paramètre</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -340,6 +342,32 @@ rel="stylesheet"
         </ul>
       </li><!-- End Icons Nav -->
 
+
+
+
+
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#plainte-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-pencil-square"></i> <span>Plaintes</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="plainte-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('listePlainte') }}">
+              <i class="bi bi-circle"></i><span>Liste des plaintes</span>
+            </a>
+          </li>
+          <!-- 
+          <li>
+            <a href="{{ route('usager-list') }}">
+              <i class="bi bi-circle"></i><span>Plainte en cours</span>
+            </a>
+          </li>
+          -->
+          
+        </ul>
+      </li><!-- End Charts Nav -->
       @endif
 
 

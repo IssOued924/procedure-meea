@@ -379,7 +379,7 @@
                                         </td>
 
 
-
+                                        
                                         {{-- Voir detail Modal --}}
                                         <div class="modal fade" id="largeModal{{ $demande->uuid }}" tabindex="-1">
                                             <div class="modal-dialog modal-lg">

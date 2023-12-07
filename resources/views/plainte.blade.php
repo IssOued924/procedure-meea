@@ -15,7 +15,7 @@
     padding: 40px 50px 45px;">
     @csrf
     <div class="form-group">
-        <label>Nom</label>
+        <label>Nom & Prénom</label>
         <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value={{ old('name') }}>
         <!-- Error -->
         @if ($errors->has('name'))
@@ -24,6 +24,7 @@
         </div>
         @endif
     </div>
+
     <div class="form-group">
         <label>Email</label>
         <input type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email" id="email" value={{ old('email') }}>
@@ -33,6 +34,7 @@
         </div>
         @endif
     </div>
+
     <div class="form-group">
         <label>Numero de telephone</label>
         <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone" id="phone" value={{ old('phone') }}>
@@ -42,8 +44,34 @@
         </div>
         @endif
     </div>
+
+
     <div class="form-group">
-        <label>Sujet</label>
+        <label>Catégorie de la plainte </label>
+         <select name="category" id="category" class="form-select">
+            <option value=""> </option>
+            <option value="Généralité"> Généralité</option>
+            <option value="Permis d'écotourisme ou de tourisme écologique"> Permis d'écotourisme ou de tourisme écologique </option>
+            <option value="Délivrance d'avis technique d'importation de produits chimiques"> Délivrance d'avis technique d'importation de produits chimiques </option>
+            <option value="Autorisation donnant droit à mener la chasse"> Autorisation donnant droit à mener la chasse </option>
+            <option value="Autorisation de gestion des déchets Solide"> Autorisation de gestion des déchets Solide </option>
+            <option value="Certificat d'exemption des emballages et sachets plastiques non biodégradables"> Certificat d'exemption des emballages et sachets plastiques non biodégradables </option>
+            <option value="Permis de coupe du bois et charbon de bois"> Permis de coupe du bois et charbon de bois </option>
+            <option value="Certificat de détention d'un animal sauvage"> Certificat de détention d'un animal sauvage </option>
+            <option value="Permis de circulation du bois et charbon de bois"> Permis de circulation du bois et charbon de bois </option>
+            <option value="Octroit d'agrément technique eau et assainissement"> Octroit d'agrément technique eau et assainissement </option>
+            <option value="Certificat d'Homologation des emballages et sachets plastiques biodégradables"> Certificat d'Homologation des emballages et sachets plastiques biodégradables </option>
+         </select>
+        @if ($errors->has('category'))
+        <div class="error">
+            {{ $errors->first('category') }}
+        </div>
+        @endif
+    </div>
+
+
+    <div class="form-group">
+        <label>Objet de la plainte (sujet)</label>
         <input type="text" class="form-control {{ $errors->has('subject') ? 'error' : '' }}" name="subject" value="{{ old('subject') }}"
             id="subject">
         @if ($errors->has('subject'))
@@ -52,6 +80,7 @@
         </div>
         @endif
     </div>
+
     <div class="form-group">
         <label>Message</label>
         <textarea class="form-control {{ $errors->has('message') ? 'error' : '' }}" name="message" id="message" value="{{ old('message') }}"
@@ -62,6 +91,7 @@
         </div>
         @endif
     </div>
+
     <br />
     <input type="submit" value="Envoyer" class="btn btn-dark btn-block">
 </form>

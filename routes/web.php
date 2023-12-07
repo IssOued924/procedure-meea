@@ -224,8 +224,10 @@ Route::get('/administration/statistique/nombreDemandeEncours', [BackendControlle
 
 
 // plainte
-Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');;
+Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
 Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
+Route::get('/listePlainte', [PlainteController::class, 'listePlainte'])->name('listePlainte');
+Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
 
 
 require __DIR__.'/auth.php';
