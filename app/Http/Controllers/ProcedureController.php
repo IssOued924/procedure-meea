@@ -46,6 +46,7 @@ class ProcedureController extends Controller
         'libelle_long' => 'required',
         'description' => 'required',
         'delai' => 'required',
+        'tarif' => 'required',
     ]);
 
     $type = Procedure::find($uuid);
@@ -54,6 +55,7 @@ class ProcedureController extends Controller
         'libelle_long' => $request->input('libelle_long'),
         'description' => $request->input('description'),
         'delai' => $request->input('delai'),
+        'tarif' => $request->input('tarif'),
     ]);
 
     return redirect()->route('procedure-list')->with('success', ' Procedure  mis à jour avec succès !');

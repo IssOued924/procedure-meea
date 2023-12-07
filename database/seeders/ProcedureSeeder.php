@@ -63,7 +63,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/dechet.png",
             "code_color" => "#359b27",
             "code" => "P008",
-            "service_id"=>$serv3->uuid
+            "service_id"=>$serv3->uuid,
+            "tarif" => 1500
         ]);
 
 
@@ -74,7 +75,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/chim.png",
             "code_color" => "#f26b56",
             "code" => "P001",
-            "service_id"=>$serv3->uuid
+            "service_id"=>$serv3->uuid,
+            "tarif" => 1600
         ]);
         Procedure::create([
             "libelle_court" => "CEESPNB",
@@ -83,7 +85,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/degra.png",
             "code_color" => "#2274bb",
             "code" => "P006",
-            "service_id"=>$serv3->uuid
+            "service_id"=>$serv3->uuid,
+            "tarif" => 1700
         ]);
         Procedure::create([
             "libelle_court" => "CHESPB",
@@ -92,7 +95,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/9.png",
             "code_color" => "#bf6e12",
             "code" => "P007",
-            "service_id"=>$serv3->uuid
+            "service_id"=>$serv3->uuid,
+            "tarif" => 1800
         ]);
         Procedure::create([
             "libelle_court" => "OATEA",
@@ -103,7 +107,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/fg.png",
             "code_color" => "#abd9fe",
             "code" => "P002",
-            "service_id"=>$serv2->uuid
+            "service_id"=>$serv2->uuid,
+            "code" => 1400
         ]);
         Procedure::create([
             "libelle_court" => "PETE",
@@ -115,7 +120,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/3.png",
             "code_color" => "#d3b521",
             "code" => "P0012",
-            "service_id"=>$serv1->uuid
+            "service_id"=>$serv1->uuid,
+            "code" => 1300
         ]);
         Procedure::create([
             "libelle_court" => "CDAS",
@@ -127,7 +133,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/dff.png",
             "code_color" => "#e2853d",
             "code" => "P004",
-            "service_id"=>$serv1->uuid
+            "service_id"=>$serv1->uuid,
+            "code" => 1200
         ]);
         Procedure::create([
             "libelle_court" => "ADDMC",
@@ -137,7 +144,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/gfd.png",
             "code_color" => "#629449",
             "code" => "P003",
-            "service_id"=>$serv1->uuid
+            "service_id"=>$serv1->uuid,
+            "code" => 1100
         ]);
         Procedure::create([
             "libelle_court" => "PCBCB",
@@ -146,7 +154,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/60.png",
             "code_color" => "#14b522",
             "code" => "P005",
-            "service_id"=>$serv1->uuid
+            "service_id"=>$serv1->uuid,
+            "code" => 1000
         ]);
         Procedure::create([
             "libelle_court" => "PCBCB",
@@ -155,7 +164,8 @@ class ProcedureSeeder extends Seeder
             "img" => "img/10.png",
             "code_color" => "#b7703d",
             "code" => "P0011",
-            "service_id"=>$serv1->uuid
+            "service_id"=>$serv1->uuid,
+            "code" => 1500
         ]);
 
     }
