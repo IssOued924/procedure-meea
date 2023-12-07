@@ -46,7 +46,9 @@ class DemandeCompP002 extends Component
         Carbon::setLocale("fr");
 
         $searchCriteria = "%".$this->search."%";
+        $procedure = Procedure::where("code", request()->segment(1))->first();
         $data = [
+            "procedure" => $procedure,
             "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->telephone,
             "communes" => Commune::all(),
@@ -54,14 +56,12 @@ class DemandeCompP002 extends Component
             "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
             "default_pays" => Auth::user()->usager->pays
         ];
-
-        $procedure = Procedure::where("code", request()->segment(1))->first();
         
         $startDate = Carbon::parse($procedure->session_debut);
         $endDate = Carbon::parse($procedure->session_fin);
         $checkSession = Carbon::now()->between($startDate, $endDate);
 
-        if ($procedure->estperiodique && $checkSession) {
+        if ($procedure->estperiodique && !$checkSession && $procedure->session_debut && $procedure->session_fin) {
             return view('livewire.sessionMsg', $data)
                 ->extends("layouts.template")
                 ->section("contenu");

@@ -50,7 +50,9 @@ class DemandeCompP0012 extends Component
 
         $searchCriteria = "%".$this->search."%";
 
+        $procedure = Procedure::where("code", request()->segment(1))->first();
         $data = [
+            "procedure" => $procedure,
             "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->usager->telephone,
             "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
@@ -58,13 +60,13 @@ class DemandeCompP0012 extends Component
         ];
 
 
-        $procedure = Procedure::where("code", request()->segment(1))->first();
-        
         $startDate = Carbon::parse($procedure->session_debut);
         $endDate = Carbon::parse($procedure->session_fin);
         $checkSession = Carbon::now()->between($startDate, $endDate);
 
-        if ($procedure->estperiodique && $checkSession) {
+        //dd($checkSession, $procedure->estperiodique);
+
+        if ($procedure->estperiodique && !$checkSession && $procedure->session_debut && $procedure->session_fin) {
             return view('livewire.sessionMsg', $data)
                 ->extends("layouts.template")
                 ->section("contenu");
