@@ -196,6 +196,19 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-6">
+                                                                    <h5 class="card-title">Tarif</h5>
+                                                                    <div class="input-group mb-3">
+
+                                                                        {{-- <label for="libelle">Libelle</label> --}}
+
+                                                                        <input type="number" name="tarif"
+                                                                            class="form-control border-success"
+                                                                            value="{{ $proc->tarif }}"
+                                                                                required>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
                                                                     <h5 class="card-title">Est périodique</h5>
                                                                     <div class="input-group mb-3">
 

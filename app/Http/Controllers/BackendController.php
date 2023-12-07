@@ -528,7 +528,7 @@ class BackendController extends Controller
         $user_email = User::where('usager_id', $usager_id)->first()->email;
         $demand = array(
             "procedure"  => Procedure::where('uuid', $proc_id)->first()->libelle_long,
-            "uuid" => $id,
+            "reference" => DB::table($table)->where('uuid', $id)->first()->reference,
             "etat"   => StatutDemande::where('etat', $nextStatus)->first()->statut
         );
         Mail::to($user_email)->send(new ValidateDemandMailable( $demand ));
@@ -636,7 +636,7 @@ class BackendController extends Controller
         $currentStatus = DB::table($table)->where('uuid', $id)->first()->etat;
         $demand = array(
             "procedure"  => Procedure::where('uuid', $proc_id)->first()->libelle_long,
-            "uuid" => $id,
+            "reference" => DB::table($table)->where('uuid', $id)->first()->reference,
             "etat"   => StatutDemande::where('etat', $currentStatus)->first()->statut,
             "motif"   => $request->libelle
         );

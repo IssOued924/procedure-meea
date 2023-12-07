@@ -47,6 +47,7 @@ class ProcedureController extends Controller
         'libelle_long' => 'required',
         'description' => 'required',
         'delai' => 'required',
+        'tarif' => 'required',
     ]);
 
     
@@ -59,6 +60,7 @@ class ProcedureController extends Controller
         'description' => $request->input('description'),
         'delai' => $request->input('delai'),
         'estperiodique' => ($request->input('estperiodique')) ? 1 : 0,
+        'tarif' => $request->input('tarif'),
     ]);
 
     return redirect()->route('procedure-list')->with('success', ' Procedure  mis à jour avec succès !');
