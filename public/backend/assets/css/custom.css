@@ -1,0 +1,26 @@
+.datatable-top {
+    display: none;
+}
+
+.datatable-bottom {
+    display: none;
+}
+
+.card-title {
+    padding-bottom: 0px;
+}
+
+.card-body {
+    padding-top: 0px;
+}
+
+select {
+    background-color: silver !important;
+    height: 2.1rem;
+    width: 3rem;
+    text-align: center;
+}
+
+/*.dataTables_wrapper .dataTables_length select {
+    background-color: blueviolet;
+}*/
