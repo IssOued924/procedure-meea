@@ -16,7 +16,7 @@ class MustResetPasswordMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
-        if($user && $user->must_reset_password){
+        if($user && $user->must_reset_password && $user->agent_id){
             return redirect('/update-password');
         }
 

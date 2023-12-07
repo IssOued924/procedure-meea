@@ -59,30 +59,35 @@ use App\Livewire\DemandeFontController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::middleware(['mustreset'])->group(function () {
+    Route::get('/', function () {
+        $procedure=Procedure::all();
+        return view('welcome', [
+            'procedure' => $procedure
+        ]);
+    });
 
-Route::get('/', function () {
-    $procedure=Procedure::all();
-    return view('welcome', [
-        'procedure' => $procedure
-    ]);
+    // routes des tests
+    Route::get('/test', [DemandeController::class, 'index']);
+    Route::post('/test-store', [DemandeController::class, 'store'])->name('test-route');
+
+    Route::get('/testpj', [DemandeController::class, 'testpj']);
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth', 'verified'])->name('dashboard');
+
+    Route::get('/faq', function () {
+        return view('faq');
+    })->name('faq');
+
+    Route::get('/contact', [ContactUsFormController::class, 'createForm']);
+    Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
+
+    // plainte
+    Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
+    Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
 });
-
-// routes des tests
-Route::get('/test', [DemandeController::class, 'index']);
-Route::post('/test-store', [DemandeController::class, 'store'])->name('test-route');
-
-Route::get('/testpj', [DemandeController::class, 'testpj']);
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/faq', function () {
-    return view('faq');
-})->name('faq');
-
-Route::get('/contact', [ContactUsFormController::class, 'createForm']);
-Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
 Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -230,9 +235,6 @@ Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name(
 Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
 
 
-// plainte
-Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');;
-Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
 Route::get("/procedure/modification/{id}/{procedure}", DemandeFontController::class, 'editerDemande')->name("editer-demande");
 
 require __DIR__.'/auth.php';
