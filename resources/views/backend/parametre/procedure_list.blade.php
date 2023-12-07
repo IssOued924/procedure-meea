@@ -208,25 +208,6 @@
 
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-6">
-                                                                    <h5 class="card-title">Est périodique</h5>
-                                                                    <div class="input-group mb-3">
-
-                                                                        {{-- <label for="libelle">Libelle</label> --}}
-
-                                                                        {{-- <input type="number" name="delai"
-                                                                            class="form-control border-success"
-                                                                            value="{{ $proc->delai }}"
-                                                                                required> --}}
-                                                                        {{-- <input type="checkbox"  name="estperiodique"
-                                                                                class="border-success" value="1"> --}}
-                                                                        
-                                                                        <input type="checkbox" name="estperiodique" 
-                                                                            class="required-checkbox checkbox" value="1"
-                                                                            {{ $proc->estperiodique == 1 ? 'checked' : '' }}>
-
-                                                                    </div>
-                                                                </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-6">
