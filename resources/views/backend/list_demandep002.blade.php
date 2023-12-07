@@ -161,6 +161,7 @@
                                     break;
                                     }
                                     @endphp
+                                    @if ($demande->last_agent_assign == null || $demande->last_agent_assign == Auth::user()->agent->uuid || Auth::user()->role->code == "ADMIN")
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
@@ -477,9 +478,8 @@
 
 
                                     </tr>
+                                    @endif
                                     @endforeach
-
-
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
