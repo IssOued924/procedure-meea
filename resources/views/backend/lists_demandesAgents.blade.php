@@ -167,7 +167,9 @@
                                                             class="bi bi-pencil-square text-white">Modifier </i> </a>
                                                     @endif
 
-                                                    @if ($demande->etat == 'S' &&  !is_null($demande->output_file))
+                                                    @if ($demande->etat == 'S' &&   !is_null($demande->output_file) ||
+                                                    $demande->etat == 'A' &&   !is_null($demande->output_file))
+
 
                                                     <a class="btn btn-success text-white"
                                                                     href="{{ Storage::url($demande->output_file) }}" target="_blank"><b><i
