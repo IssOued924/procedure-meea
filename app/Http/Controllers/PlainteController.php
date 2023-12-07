@@ -37,8 +37,8 @@ class PlainteController extends Controller
          $plainte->message = $request->message;
          $plainte->usager_id = Auth::user()->usager->uuid; // "5f1a4492-64fd-4219-a29e-48b1e3a7ab89" ;
          $plainte->save(); 
-
-        // ou 
+        
+         // ou 
         // Plainte::create($request->all());
 
         return redirect('/')->with('success', 'Votre plainte à bien été soumise et est en cours de traitement !!');
@@ -50,7 +50,7 @@ class PlainteController extends Controller
     // recuperation de la liste des plaintes
     public function listePlainte(Request $request){
 
-         $listePlainte = Plainte::all();
+        $listePlainte = Plainte::all();
         // $listePlainte = $this->repository->all();
                 
         return view('/backend/list_plaintes', ['listePlainte' =>  $listePlainte ]);
