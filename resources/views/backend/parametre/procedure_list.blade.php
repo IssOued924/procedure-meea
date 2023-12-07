@@ -218,7 +218,7 @@
                                                                     <p>Description longue</p>
 
                                                                     <textarea name="description" id=""
-                                                                        class="quill-editor-full border-success"
+                                                                        class="border-success"
                                                                         style="width: 100%; height:150px;">
                                                                            {{ $proc->description }}
                                                                     </textarea>
