@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Commune;
 use App\Models\Pays;
 use App\Models\Demande;
+use App\Models\Procedure;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -53,6 +54,18 @@ class DemandeCompP002 extends Component
             "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
             "default_pays" => Auth::user()->usager->pays
         ];
+
+        $procedure = Procedure::where("code", request()->segment(1))->first();
+        
+        $startDate = Carbon::parse($procedure->session_debut);
+        $endDate = Carbon::parse($procedure->session_fin);
+        $checkSession = Carbon::now()->between($startDate, $endDate);
+
+        if ($procedure->estperiodique && $checkSession) {
+            return view('livewire.sessionMsg', $data)
+                ->extends("layouts.template")
+                ->section("contenu");
+        }
 
         return view('livewire.Demandes-p002.index', $data)
             ->extends("layouts.template")

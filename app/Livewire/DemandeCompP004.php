@@ -6,6 +6,7 @@ use App\Models\Commune;
 use App\Models\Demande;
 use App\Models\DemandeP004;
 use App\Models\Pays;
+use App\Models\Procedure;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -50,7 +51,19 @@ class DemandeCompP004 extends Component
             "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
             "pays" => Pays::all(),
         ];
-        ;
+
+        $procedure = Procedure::where("code", request()->segment(1))->first();
+        
+        $startDate = Carbon::parse($procedure->session_debut);
+        $endDate = Carbon::parse($procedure->session_fin);
+        $checkSession = Carbon::now()->between($startDate, $endDate);
+
+        if ($procedure->estperiodique && $checkSession) {
+            return view('livewire.sessionMsg', $data)
+                ->extends("layouts.template")
+                ->section("contenu");
+        }
+
         return view('livewire.DemandesP004.index', $data)
             ->extends("layouts.template")
             ->section("contenu");

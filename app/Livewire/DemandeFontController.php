@@ -44,7 +44,7 @@ class DemandeFontController extends Component
 
     protected $paginationTheme = "bootstrap";
 
-    
+
     public $search;
     public $updateMode = false;
     public $currentPage = PAGECREATEFORM;
@@ -54,9 +54,10 @@ class DemandeFontController extends Component
 
         $id = $request->id;
         $procedure = $request->procedure ;
+
         Carbon::setLocale("fr");
         $searchCriteria = "%".$this->search."%";
-        
+
         $demande = null;
         $data = [];
         $view ='';
@@ -81,9 +82,12 @@ class DemandeFontController extends Component
                     $view ='livewire.Demandes.edit';
                     $data = [
                         "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
+                        "demande" => $demande,
                         "documents"  => $documents,
                         "telephone" => Auth::user()->usager->telephone,
                         "communes" => Commune::all(),
+                        "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
+                        "default_pays" => Auth::user()->usager->pays,
                         "pays" => Pays::all(),
                     ];
                     break;
@@ -181,10 +185,13 @@ class DemandeFontController extends Component
                     # code...
                     break;
             }
+
         }
-        return view('livewire.Demandes-p002.edit', $data)
+
+
+        return view($view, $data)
             ->extends("layouts.template")
             ->section("contenu");
     }
-    
+
 }
