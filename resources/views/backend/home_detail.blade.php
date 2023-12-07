@@ -22,6 +22,21 @@
       @endif
     </ol>
   </nav>
+  <p> @if(session('success'))
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">{{session('success')}}</h4>
+
+    </div>
+
+    <script>
+        setTimeout(function() {
+                document.querySelector('.alert.alert-success').style.display = 'none';
+            }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+    </script>
+    @endif</p>
 </div><!-- End Page Title -->
 @endsection
 
@@ -215,7 +230,8 @@
 
                                                                       <input type="date" name="session_debut"
                                                                           class="form-control border-success"
-                                                                          {{-- value="{{ $proc->session_debut }}" --}}
+                                                                          min="{{ date('Y-m-d',strtotime(now())) }}"
+                                                                          value="{{ $procedure->session_debut ? date('Y-m-d',strtotime($procedure->session_debut)) : ''}}"
                                                                           aria-describedby="basic-addon1" required>
 
                                                                   </div>
@@ -227,8 +243,8 @@
                                                               {{-- <label for="libelle">Libelle</label> --}}
 
                                                               <input type="date" name="session_fin"
-                                                                  class="form-control border-success"
-                                                                  {{-- value="{{ $proc->session_fin }}" --}}
+                                                                  class="form-control border-success" 
+                                                                  value="{{ $procedure->session_fin ? date('Y-m-d',strtotime($procedure->session_fin)) : '' }}"
                                                                   aria-describedby="basic-addon1" required>
 
                                                           </div>
