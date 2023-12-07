@@ -83,7 +83,8 @@ class ProcedureController extends Controller
         'session_fin' => $request->input('session_fin'),
     ]);
 
-    return redirect()->route('procedure-list')->with('success', ' Procedure  mis à jour avec succès !');
+    return redirect()->back()->with('success', ' Session  mis à jour avec succès !');
+    // return redirect()->route('procedure-list')->with('success', ' Procedure  mis à jour avec succès !');
 }
 
             // Supression
