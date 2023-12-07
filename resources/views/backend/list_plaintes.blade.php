@@ -103,7 +103,7 @@
                                         <th scope="col">Plaignant</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Tel</th>
-                                        <th scope="col">Categorie</th>
+                                        <th scope="col">procedure</th>
                                         <th scope="col">Etat</th>
 
                                         <th scope="col">Action</th>
@@ -132,10 +132,10 @@
                                         <tr>
                                             <th scope="row">{{ $i++ }}</th>
                                             <td>{{ $plainte->created_at->format('d/m/Y H:i:s') }}</td>
-                                            <td>{{ $plainte->name }}</td>
-                                            <td>{{ $plainte->email }}</td>
-                                            <td>{{ $plainte->phone }}</td>
-                                            <td>{{ $plainte->category }}</td>
+                                            <td>{{ $plainte->usager_id }}</td>
+                                            <td>{{ $plainte->usager_id }}</td>
+                                            <td>{{ $plainte->usager_id }}</td>
+                                            <td>{{ $plainte->procedure }}</td>
                                             <td><span class="badge {{ $statutColor }} ">{{ $plainte->etat }}</span> </td>
                                             <td>
                                                 <button title="Voir détail de la plainte" type="button" class="btn btn-primary" 
@@ -256,10 +256,15 @@
                                                                 <div class="form-group">
                                                                     <div class="text-center">
                                                                         <label class="col-form-label">Modifier l'état de la plainte</label>
-                                                                            <select class="form-select" name="etat">
+                                                                            <select class="form-select" name="etat" required>
                                                                                 <option class=""> </option> 
-                                                                                <option value="en cours" @if ($plainte->etat == 'en cours') selected @endif> En cours de traitement</option> 
-                                                                                <option value="fermer" @if ($plainte->etat == 'fermer') selected @endif> Fermer la plainte (traitée)</option> 
+                                                                                @if ($plainte->etat == 'nouveau')
+                                                                                    <option value="en cours" @if ($plainte->etat == 'en cours') selected @endif> En cours de traitement</option> 
+                                                                                @endif 
+
+                                                                                @if ($plainte->etat == 'en cours')
+                                                                                    <option value="fermer" @if ($plainte->etat == 'fermer') selected @endif> Fermer la plainte (traitée)</option> 
+                                                                                @endif
                                                                             <select>
                                                                     </div>
 

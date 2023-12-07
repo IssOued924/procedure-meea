@@ -9,48 +9,24 @@
                 {{Session::get('success')}}
             </div>
         @endif
-        <h1 style="text-align: center; font-size: 24px; color: #1A33FF;">Déposez une plainte</h1>
-        <form action="" method="post" action="{{ route('plainte.store') }}" style="border: 1px solid #1A33FF;
-    background: #ecf5fc;
-    padding: 40px 50px 45px;">
-    @csrf
+    <h1 style="text-align: center; font-size: 24px; color: #1A33FF;">Déposez une plainte</h1>
+    <form method="post" action="{{ route('plainte.store') }}" style="border: 1px solid #1A33FF; background: #ecf5fc; padding: 40px 50px 45px;">
+    @csrf    
+
     <div class="form-group">
-        <label>Nom & Prénom</label>
-        <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value={{ old('name') }}>
-        <!-- Error -->
-        @if ($errors->has('name'))
-        <div class="error">
-            {{ $errors->first('name') }}
-        </div>
-        @endif
+        <label>Votre identité</label>
+            <div> Nom : {{ Auth::user()->usager->prenom.'  '.Auth::user()->usager->nom }}</div>
+            <div> Téléphone : {{ Auth::user()->usager->telephone }}</div>
     </div>
-
-    <div class="form-group">
-        <label>Email</label>
-        <input type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email" id="email" value={{ old('email') }}>
-        @if ($errors->has('email'))
-        <div class="error">
-            {{ $errors->first('email') }}
-        </div>
-        @endif
-    </div>
-
-    <div class="form-group">
-        <label>Numero de telephone</label>
-        <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone" id="phone" value={{ old('phone') }}>
-        @if ($errors->has('phone'))
-        <div class="error">
-            {{ $errors->first('phone') }}
-        </div>
-        @endif
-    </div>
+    <br />
+   
 
 
     <div class="form-group">
-        <label>Catégorie de la plainte </label>
-         <select name="category" id="category" class="form-select">
+        <label>Plainte lié à la procédure</label>
+         <select name="procedure" id="procedure" class="form-select">
             <option value=""> </option>
-            <option value="Généralité"> Généralité</option>
+            <!-- <option value="Généralité"> Généralité</option> -->
             <option value="Permis d'écotourisme ou de tourisme écologique"> Permis d'écotourisme ou de tourisme écologique </option>
             <option value="Délivrance d'avis technique d'importation de produits chimiques"> Délivrance d'avis technique d'importation de produits chimiques </option>
             <option value="Autorisation donnant droit à mener la chasse"> Autorisation donnant droit à mener la chasse </option>
@@ -62,9 +38,9 @@
             <option value="Octroit d'agrément technique eau et assainissement"> Octroit d'agrément technique eau et assainissement </option>
             <option value="Certificat d'Homologation des emballages et sachets plastiques biodégradables"> Certificat d'Homologation des emballages et sachets plastiques biodégradables </option>
          </select>
-        @if ($errors->has('category'))
+        @if ($errors->has('procedure'))
         <div class="error">
-            {{ $errors->first('category') }}
+            {{ $errors->first('procedure') }}
         </div>
         @endif
     </div>

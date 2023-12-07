@@ -11,8 +11,14 @@ class Plainte extends Model
 
     protected $guarded = [];
     
+
     public function user()
     {
         return $this->hasOne(User::class,'uuid','user_id');
+    }
+
+
+    public function usager(){
+        return $this->belongsTo(Usager::class, 'uuid', 'usager_id');
     }
 }

@@ -218,9 +218,6 @@ Route::post('/administration/utilisateur/user-store', [RegisteredUserController:
 
 Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name('demandes-lists');
 
-});
-
-Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
 
 
 // plainte
@@ -228,6 +225,12 @@ Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte
 Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
 Route::get('/listePlainte', [PlainteController::class, 'listePlainte'])->name('listePlainte');
 Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
+
+
+});
+
+Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
+
 
 
 require __DIR__.'/auth.php';
