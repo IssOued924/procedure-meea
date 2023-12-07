@@ -36,8 +36,14 @@ class DemandeP008Controller extends Controller
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
         $data['reference'] = $this->repository->generateReference('P001');
-
+        $data['delai'] = Procedure::where(['code' => 'P008'])->first('delai')->delai;
+        $data['paiement'] =1;
         $data['procedure_id'] = Procedure::where(['code' => 'P008'])->first('uuid')->uuid;
+
+        unset($data['telephone']);
+        unset($data['moyen']);
+        unset($data["numero"]);
+        unset($data["otp"]);
 
         /* DEBUT Mise-à-jour des infos pro de la société demandeuse */
         $user = $userRepository->getById(Auth::user()->uuid);
@@ -67,7 +73,7 @@ class DemandeP008Controller extends Controller
         unset($data['doc_avis_mairie']);
         unset($data['doc_desc_technique']);
         unset($data['doc_registre_tracabilite']);
-        
+
         unset($data['moyen']);
         unset($data["numero"]);
         unset($data["otp"]);
@@ -86,6 +92,6 @@ class DemandeP008Controller extends Controller
         $demandePieceP008Repository->setChemin ($chemin_registre_tracabilite, $demande->uuid, 'Registre tracabilité');
         /* FIN Mise-à-jour des pièce-jointes de sorte à retrouver la demande associée */
 
-        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise !!');
+        return redirect('/demandes-lists?procedure=AGDS')->with('success', 'Votre Demande à bien été Soumise !!');
     }
 }

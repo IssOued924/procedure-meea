@@ -30,7 +30,9 @@
                                     <li class="active" id="personal"><strong>Identité du demandeur</strong></li>
                                     <li id="caracteristik"><strong>Pièces Jointes</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
-                                    <li id="confirm"><strong>Validation</strong></li>
+                                    {{-- <li id="paiement"><strong>Paiement </strong></li> --}}
+
+                                    {{-- <li id="confirm"><strong>Validation</strong></li> --}}
                                 </ul>
                                 <!-- fieldsets -->
                                 <fieldset>
@@ -156,25 +158,9 @@
                                     <input type="button" class="previous action-button-previous" value="Retour" />
                                     <input type="submit" class="next action-button" value="Valider" />
                                 </fieldset>
-                                <fieldset>
-                                    <div class="form-card">
-                                        <h2 class="fs-title text-center">Validation !</h2>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-3">
-                                                <img src="https://img.icons8.com/color/96/000000/ok--v2.png"
-                                                    class="fit-image">
-                                            </div>
-                                        </div>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-7 text-center">
-                                                <h5>Votre demnde est enregistré avec succès et en cour de traitement!
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
+
+
+
                             </form>
                         </div>
                     </div>
@@ -282,6 +268,22 @@ $('.radio-group .radio').click(function(){
 $(".submit").click(function(){
     return false;
 })
+
+        $("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+
+jQuery('input[name=moyen]:radio').click(function(){
+		$("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+		var divId = jQuery(this).val();
+        if(divId * 1 == 1){
+            $("div#moyenP1").show()
+        }else{
+            $("div#moyenP2").show()
+        }
+		});
+
+
 
 });
 </script>

@@ -19,9 +19,6 @@
         <div class="col-lg-12">
             <div class="row">
 
-
-
-
                 <!-- Recent Sales -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
@@ -99,7 +96,7 @@
 
                                                                             {{-- <label for="libelle">Libelle</label> --}}
 
-                                                                            <select name="procedure_id" id="" class="form-select">
+                                                                            <select name="procedure_id" id="" class="form-select border-success">
                                                                                 <option value="">Veuillez Choisir la procédure</option>
                                                                                 @foreach ($procedures as $proc)
                                                                                 <option value="{{ $proc->uuid }}">{{ $proc->libelle_long }}</option>
@@ -110,8 +107,8 @@
 
                                                                 </div>
 
-                                                                <div class="card">
-                                                                    <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-6">
                                                                         <h5 class="card-title">Montant</h5>
 
                                                                         <div class="input-group mb-3">
@@ -180,9 +177,9 @@
 
 
                                         <td>
-                                            <button title="Voir detail" type="button" class="btn btn-primary "
+                                            {{-- <button title="Voir detail" type="button" class="btn btn-primary "
                                                 data-bs-toggle="modal" data-bs-target="#basicModal{{ $piece->uuid }}">
-                                                <i class="bi bi-eye"></i> </button>
+                                                <i class="bi bi-eye"></i> </button> --}}
 
                                             <button title="Editer" type="button" class="btn btn-info "
                                                 data-bs-toggle="modal"
@@ -233,9 +230,9 @@
                                                                     <div class="input-group mb-3">
                                                                         {{-- <label for="libelle">Libelle</label> --}}
 
-                                                                        <select name="procedure_id" id="" class="form-select">
+                                                                        <select name="procedure_id" id="" class="form-select border-success">
                                                                             @foreach ($piece->procedure as $ppj)
-                                                                            <option value="{{ $ppj->code }}">{{ $ppj->code }}</option>
+                                                                            <option value="{{ $ppj->code }}">{{ $ppj->libelle_long }}</option>
 
                                                                             @endforeach
                                                                         </select>
@@ -248,19 +245,23 @@
 
 
                                                             </div>
-                                                            <h5 class="card-title">Montant</h5>
-                                                            <div class="input-group mb-3">
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <h5 class="card-title">Montant</h5>
+                                                                    <div class="input-group mb-3">
 
-                                                                {{-- <label for="libelle">Libelle</label> --}}
+                                                                        {{-- <label for="libelle">Libelle</label> --}}
 
+                                                                        <input type="number" name="montant"
+                                                                            class="form-control border-success"
+                                                                            value="{{ $piece->montant }}" placeholder="libelle"
+                                                                            aria-label="Username"
+                                                                            aria-describedby="basic-addon1" required>
 
-                                                                <input type="number" name="montant"
-                                                                    class="form-control border-success"
-                                                                    value="{{ $piece->montant }}" placeholder="libelle"
-                                                                    aria-label="Username"
-                                                                    aria-describedby="basic-addon1" required>
-
+                                                                    </div>
+                                                                </div>
                                                             </div>
+
 
 
 

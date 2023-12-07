@@ -59,8 +59,13 @@ class DemandeP0012Controller extends Controller
         $data['etat'] = 'D'; //code de procedure demande deposee
         $data['reference'] = $this->repository->generateReference('P0012');
 
+        // $data['delai'] = Procedure::pluck('delai');
+        $data['delai'] = Procedure::where(['code' => 'P0012'])->first('delai')->delai;
 
         $data['procedure_id'] = Procedure::where(['code' => 'P0012'])->first('uuid')->uuid;
+            //paiement
+        $data['paiement'] = 1;
+
       //  dd($data['procedure_id']);
         unset($data['telephone']);
         unset($data['moyen']);
@@ -90,9 +95,9 @@ class DemandeP0012Controller extends Controller
         $demandePieceP0012Repository->setChemin($photo, $demande->uuid, 'Photo d\'Identite');
         $demandePieceP0012Repository->setChemin($list_personne, $demande->uuid, 'Liste des Personnes concernées');
 
-        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
+        return redirect('/demandes-lists?procedure=PETE')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }else {
-        dd($data);
+
     }
     }
 }

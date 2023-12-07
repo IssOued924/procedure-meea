@@ -41,7 +41,9 @@
                                     <li id="folder"><strong>Pieces Administratives</strong></li>
                                     <li id="personal"><strong>Domaine et catégorie</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
-                                    <li id="confirm"><strong>Validation</strong></li>
+                                    <li id="paiement"><strong>Paiement </strong></li>
+
+                                    {{-- <li id="confirm"><strong>Validation</strong></li> --}}
                                 </ul>
                                 <!-- fieldsets -->
 
@@ -60,12 +62,12 @@
 
                                                 </div>
                                                 <div class="col-6">
-                                                    <label class="pays_residence fw-bold">Pays de résidence<span style="color:red">
+                                                    <label class="pays_residence fw-bold">Lieu de Residence<span style="color:red">
                                                             *</span></label>
-                                                    <select name="pays" id="pays" class="form-select boerder-success">
-                                                    <option >Veuillez choisir pays</option>
-                                                    @foreach($pays as $pay)
-                                                        <option {{ ($pay->libelle == $default_pays ? 'selected' : '' )}} value="{{$pay->libelle}}">{{$pay->libelle}}</option>
+                                                    <select name="pays" id="pays" class="form-select border-success">
+                                                    <option >Veuillez choisir le lieu</option>
+                                                    @foreach($communes as $pay)
+                                                        <option {{ ($pay->libelle == $default_pays ? 'selected' : '' )}} value="{{$pay->libelle}}">{{utf8_decode($pay->libelle)}}</option>
                                                     @endforeach
                                                     </select> <br /><br />
                                                     @if($errors->has('pays'))
@@ -78,7 +80,7 @@
                                                 *</span></h4>
                                             <div class="row">
                                                 <div class="col-3">
-                                                    <label class="nom_societe fw-bold" >Moi Meme</label>
+                                                    <label class="nom_societe fw-bold" >Moi Même</label>
                                                     <input type="radio" value="Moi même" class="checkbox"  name="beneficiaire" />
                                                 </div>
                                                 <div class="col-3">
@@ -117,7 +119,7 @@
                                              <div class="col-6">
                                                 <label class="boite_postale">Attestation RCCM<span style="color:red">
                                                         *</span></label>
-                                                <input type="file" name="rccm"  class="form-control" required />
+                                                <input type="file" name="rccm"  class="border-success form-control" required />
                                             </div>
                                             <div class="col-6">
                                                 <label class="adresse fw-bold">Attestation employeur CNSS<span style="color: red">*</span></label>
@@ -128,7 +130,7 @@
                                              <div class="col-6">
                                                 <label class="boite_postale">Fiche Renseignement<span style="color:red">
                                                         *</span></label>
-                                                <input type="file" name="fiche_renseignement" required class="form-control" />
+                                                <input type="file" name="fiche_renseignement" required class="border-success form-control" />
                                             </div>
                                             <div class="col-6">
                                                 <label class="adresse fw-bold">Déclaration sur l’honneur de l’exactitude des informationsr<span style="color: red">*</span></label>
@@ -150,7 +152,7 @@
                                             <div class="col-4">
                                                 <label for="domaine" class="siege_social">Domaine
                                                     <span style="color:red">*</span></label>
-                                                <select name="domaine" id="domaine" class="form-select boerder-success">
+                                                <select name="domaine" id="domaine" class="form-select border-success">
                                                     <option value="">Veuillez choisir le domaine</option>
                                                     <option value="Eau potable">Eau Potable</option>
                                                     <option value="Assainissement">Assainissement</option>
@@ -164,7 +166,7 @@
                                             <div class="col-4">
                                                <label for="categorie" class="siege_social">Catégorie
                                                     <span style="color:red">*</span></label>
-                                                <select name="categorie" id="categorie" class="form-select boerder-success">
+                                                <select name="categorie" id="categorie" class="form-select border-success">
                                                     <option value="">Veuillez choisir la catégorie</option>
                                                     <option value="Etude et contrôle">Etude et contrôle</option>
                                                     <option value="Travaux">Travaux</option>
@@ -217,6 +219,7 @@
                                         >Suivant</button>
                                 </fieldset>
 
+
                                 <fieldset>
 
                                     <div class="form-card">
@@ -236,11 +239,75 @@
 
                                     </div>
 
-                                    <input type="button" name="previous" class="previous action-button-previous"
+                                    {{-- <input type="button" name="previous" class="previous action-button-previous"
                                         value="Retour" />
 
-                                     <button type="submit" class="action-button" id="btn_send">Confirmation</button>
+                                     <button type="submit" class="action-button" id="btn_send">Valider</button> --}}
+                                     <button type="button" name="previous" class="previous action-button-previous"
+                                     >Retour</button>
+                                 <button type="button"   name="make_payment" id="next_piece" class="next action-button"
+                                     >Suivant</button>
                                 </fieldset>
+
+
+                                <fieldset>
+                                    <form action="">
+                                    <div class="form-card">
+                                        <h4 class="fs-title">Paiement <span style="color:red">
+                                            *</span></h4>
+                                            <label for="demande timbre" class="fw-bold">Moyens de Paiement<span style="color:red">
+                                                    *</span></label>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label class="nom_societe fw-bold" >ORANGE</label>
+                                                <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="siege_social fw-bold ">MOOV</label>
+                                                <input id="radio2" type="radio" value="0"  name="moyen"/>
+                                            </div>
+
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div id="moyenP1">
+                                                <label >  La somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
+
+                                            </div>
+                                            <div id="moyenP2">
+                                                <label >  La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
+
+                                            </div>
+                                        <div class="col-6">
+                                                <label class="boite_postale fw-bold">Téléphone<span style="color:red">
+                                                        *</span></label>
+                                                <input type="number" name="numero" style="width: 50%;" class="border-success form-control"   placeholder="Telephone" required />
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="boite_postale fw-bold">OTP<span style="color:red">
+                                                        *</span></label>
+                                                <input type="number" name="otp"   style="width: 50%;" class="border-success form-control"   placeholder="otp" required />
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    {{-- <input type="button"  class="previous action-button-previous"
+                                        value="Retour" />
+                                    <input type="submit"   class="next action-button"
+                                        value="Valider" /> --}}
+
+                                        <input type="button" name="previous" class="previous action-button-previous"
+                                        value="Retour" />
+
+                                     <button type="submit" class="action-button" id="btn_send">Valider</button>
+
+                                    <!-- Ajoutez ceci dans la première étape du formulaire -->
+                                    <div class="error-message" style="color: red;"></div>
+                                    </form>
+                                </fieldset>
+
                             </form>
                         </div>
                     </div>
@@ -361,6 +428,21 @@ $('.radio-group .radio').click(function(){
 $(".submit").click(function(){
     return false;
 })
+
+//conrol paiement
+$("div#moyenP1").hide();
+$("div#moyenP2").hide();
+
+jQuery('input[name=moyen]:radio').click(function(){
+		$("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+		var divId = jQuery(this).val();
+        if(divId * 1 == 1){
+            $("div#moyenP1").show()
+        }else{
+            $("div#moyenP2").show()
+        }
+		});
 
 });
 </script>

@@ -10,6 +10,7 @@ class DemandeP001 extends Demande
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
+    use \Wildside\Userstamps\Userstamps;
     protected $guarded = [];
     protected $primaryKey = 'uuid';
 
@@ -92,6 +93,12 @@ class DemandeP001 extends Demande
         //recuperation de localite de demandeur
     public function localite(){
         return $this->belongsTo(Commune::class, 'commune_id');
+    }
+
+    // recuperation de l'agent affecté sur le dossier
+    public function agent()
+    {
+        return $this->belongsTo(Agent::class, 'last_agent_assign');
     }
 
 }

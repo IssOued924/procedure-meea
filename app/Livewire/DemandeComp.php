@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Commune;
 use App\Models\Demande;
+use App\Models\Procedure;
 use App\Models\Pays;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -45,13 +46,26 @@ class DemandeComp extends Component
         Carbon::setLocale("fr");
 
         $searchCriteria = "%".$this->search."%";
+        
+        $procedure = Procedure::where("code", request()->segment(1))->first();
         $data = [
+            "procedure" => $procedure,
             "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->usager->telephone,
             "communes" => Commune::all(),
             "pays" => Pays::all(),
         ];
-        ;
+        
+        $startDate = Carbon::parse($procedure->session_debut);
+        $endDate = Carbon::parse($procedure->session_fin);
+        $checkSession = Carbon::now()->between($startDate, $endDate);
+
+        if ($procedure->estperiodique && !$checkSession && $procedure->session_debut && $procedure->session_fin) {
+            return view('livewire.sessionMsg', $data)
+                ->extends("layouts.template")
+                ->section("contenu");
+        }
+
         return view('livewire.Demandes.index', $data)
             ->extends("layouts.template")
             ->section("contenu");

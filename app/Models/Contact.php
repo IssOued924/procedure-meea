@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends Model
 {
     use HasFactory;
+    use \Wildside\Userstamps\Userstamps;
     public $fillable = ['name', 'email', 'phone', 'subject', 'message'];
 }

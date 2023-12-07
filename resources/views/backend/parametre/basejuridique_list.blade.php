@@ -19,9 +19,6 @@
         <div class="col-lg-12">
             <div class="row">
 
-
-
-
                 <!-- Recent Sales -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
@@ -86,9 +83,7 @@
                                                                 <div class="row">
                                                                     <div class="col-6">
                                                                         <div class="input-group mb-3">
-                                                                            {{-- <label for="libelle">Libelle</label> --}}
-                                                                            <span class="input-group-text"
-                                                                                id="basic-addon1">@</span>
+
                                                                             <input type="text" name="libelle_court"
                                                                                 class="form-control border-success"
 
@@ -99,9 +94,8 @@
                                                                     <div class="col-6">
                                                                         <div class="input-group mb-3">
                                                                             {{-- <label for="libelle">Libelle</label> --}}
-                                                                            <span class="input-group-text"
-                                                                                id="basic-addon1">@</span>
-                                                                           <select name="procedure_id" id="" class="form-select">
+
+                                                                           <select name="procedure_id" id="" class="form-select border-success">
                                                                             <option value="">Veuillez choisir la procedure concernee</option>
                                                                             @foreach ($procedures as $proc )
                                                                             <option value="{{ $proc->uuid }}">{{ $proc->libelle_long }}</option>
@@ -120,15 +114,12 @@
 
                                                                         <textarea name="libelle_long" id=""
                                                                             class="quill-editor-full border-success"
-                                                                            style="width: 100%"></textarea>
+                                                                            style="width: 100%; height:150px;"></textarea>
 
                                                                         <!-- End Quill Editor Full -->
 
                                                                     </div>
                                                                 </div>
-
-
-
 
 
                                                         </div>
@@ -196,15 +187,16 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <b>
-                                                            {{ $base->libelle_long }}
-                                                        </b>
-
                                                         @foreach ($base->procedure as $bp)
-                                                        <p>
-                                                            {{ $bp->code }}
-                                                        </p>
+                                                        <b>
+                                                            {{ $bp->libelle_long }}
+                                                        </b><br>
                                                         @endforeach
+                                                        <p>
+                                                            {{ $base->libelle_long }}
+                                                        </p>
+
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-danger"
@@ -226,11 +218,12 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <form method="POST"
+                                                    <form method="POST"
                                                             action="{{ route('basejuridique-update', $base->uuid) }}">
                                                             @csrf
                                                             @method('PUT')
+                                                    <div class="modal-body">
+
                                                             <h5 class="card-title">Libelle Court</h5>
                                                             <div class="row">
                                                                 <div class="col-6">
@@ -254,7 +247,7 @@
                                                                        <select name="procedure_id" id="" class="form-select">
                                                                         <option value="">Veuillez choisir la procedure concernee</option>
                                                                         @foreach ($procedures as $proc )
-                                                                        <option value="{{ $proc->uuid }}">{{ $proc->libelle_long }}</option>
+                                                                        <option {{ ($base->code == $proc->code? 'selected' : '') }} value="{{ $proc->uuid }}">{{ $proc->libelle_long }}</option>
                                                                         @endforeach
                                                                        </select>
                                                                     </div>
@@ -279,18 +272,14 @@
                                                                 </div>
                                                             </div>
 
-                                                            <input type="submit" value="Modifier"
-                                                                class="btn btn-primary center">
-
-                                                        </form>
-
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-danger"
                                                             data-bs-dismiss="modal">Fermer</button>
-                                                        {{-- <button type="button" class="btn btn-primary">Save
-                                                            changes</button> --}}
+                                                         <button type="submit" class="btn btn-primary">Modifier
+                                                             </button>
                                                     </div>
+                                                </form>
                                                 </div>
                                             </div>
                                         </div><!-- End Basic Modal-->

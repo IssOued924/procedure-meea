@@ -94,7 +94,7 @@
                             </div><br>
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable table-bordered table-striped">
+                            <table  id="example1" class="table datatable table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -103,6 +103,10 @@
                                         <th scope="col">Quantite/Kg</th>
                                         <th scope="col">Résidence</th>
                                         <th scope="col">etat Demande</th>
+                                        <th scope="col">Délai</th>
+                                        <th scope="col">Paiement</th>
+                                        <th scope="col">Déposé</th>
+                                        <th scope="col">Assigné a</th>
 
                                         <th scope="col">Action</th>
                                     </tr>
@@ -158,13 +162,30 @@
                                     @endphp
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $demande->created_at->format('d/m/Y H:i:s') }}</td>
+                                        <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
                                         <td> {{ $demande->denomination_sociale_demandeur }}</td>
                                         <td>{{ $demande->quantite }}</td>
                                         <td>{{ $demande->localite->libelle }}</td>
 
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
 
+                                        {{-- partie paiement --}}
+                                        @if ($demande->paiement === 1)
+                                        <td><b><span class="text-success">Payé</span></b></td>
+
+                                        @else
+                                        <td><b><span class="text-warning">Non Payé</span></b></td>
+                                        @endif
+
+                                        <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
+
+                                        <td>{{ $demande->created_at->diffForHumans() }}</td>
+
+                                        @if($demande->last_agent_assign != null)
+                                        <td> <span class="badge bg-primary"> {{ $demande->agent->nom. " " .$demande->agent->prenom}} </span> </td>
+                                        @else
+                                        <td> <span class="badge bg-danger"> non assigné </span> </td>
+                                        @endif
 
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
@@ -183,14 +204,65 @@
                                                         class="btn btn-danger"><i class="bi bi-x-circle"></i></a>
                                                 @endif
                                                 @if ($demande->etat == 'S')
+                                                <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
+                                                    type="button" title="Valider" class="btn btn-success"><i
+                                                        class="bi bi-check-circle"></i> </a>
                                                     <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}"
                                                     type="button" title="Joindre Acte Signé" class="btn btn-success"><i
                                                         class="bi bi-upload"></i> </a>
                                                 @endif
 
 
+                                                  {{-- Model de confirmation de Valider --}}
+                                            <div class="modal fade" id="valider{{ $demande->uuid }}"
+                                                data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content bgcustom-gradient-light">
+                                                        <div class="modal-header">
+                                                            <img src="{{ asset('backend/assets/img/valide.png') }}"
+                                                                width="60" height="45" class="d-inline-block align-top"
+                                                                alt="">
+                                                            <h5 class="modal-title m-auto"> Confirmation de Validation
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-dismiss="modal"
+                                                                aria-label="btn-close">
 
-                                            {{-- Model de Joindre acte signé --}}
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="post" enctype="multipart/form-data"
+                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p001_s'] ) }}">
+                                                                @csrf
+
+                                                                <div class="form-group">
+                                                                    <div class="text-center">
+                                                                        <label class="col-form-label">Motif de la validation ?</label>
+                                                                            <input type="text" required name="libelle" class="form-control border-success">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="text-center">
+                                                                        <label class="col-form-label">Charger la note d'étude si y'a lieu</label>
+                                                                            <input type="file" name="note_etude_file" class="form-control border-success">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-warning"
+                                                                        data-dismiss="modal">Non, Annuler</button>
+                                                                    <button type="submit" class="btn btn-success">Oui,
+                                                                        Valider</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Fin Modal Valider-->
+
+
+
+                                            {{-- Modal de Joindre acte signé --}}
                                             <div class="modal fade" id="signer{{ $demande->uuid }}"
                                                 data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -249,24 +321,24 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="put"
-                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p001_s'] ) }}">
+                                                            <form method="post" enctype="multipart/form-data" action="{{ route('assignation', ['model' =>'AffectationP001', 'idDemande' => $demande->uuid ,'nameDemandeId'=> 'demande_p001_id', 'tableName'=>'demande_p001_s'] ) }}">
                                                                 @csrf
-                                                                @method('GET')
 
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                      <h5>Choisir le collaborateur à assigné</h5>
+                                                                        <h5>Choisir le collaborateur à assigné</h5>
 
-                                                                            <select name="" id="" class="form-select border-success">
-                                                                                @foreach ($agents as $agent)
+                                                                        <select name="agent_id" id="" class="form-select border-success">
+                                                        ""                    @foreach ($agents as $agent)
 
-                                                                              <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
-                                                                                @endforeach
+                                                                            @if($agent->service->libelle_court == $demande->procedure->service->libelle_court)
+                                                                            <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
+                                                                            @endif
+                                                                            
+                                                                            @endforeach
 
-                                                                            </select>
-
+                                                                        </select>
                                                                     </div>
 
                                                                 </div>
@@ -284,52 +356,7 @@
                                             <!-- Fin Modal Valider-->
 
 
-                                            {{-- Model de confirmation de Valider --}}
-                                            <div class="modal fade" id="valider{{ $demande->uuid }}"
-                                                data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content bgcustom-gradient-light">
-                                                        <div class="modal-header">
-                                                            <img src="{{ asset('backend/assets/img/valide.png') }}"
-                                                                width="60" height="45" class="d-inline-block align-top"
-                                                                alt="">
-                                                            <h5 class="modal-title m-auto"> Confirmation de Validation
-                                                            </h5>
-                                                            <button type="button" class="btn-close" data-dismiss="modal"
-                                                                aria-label="btn-close">
 
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form method="post" enctype="multipart/form-data"
-                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p001_s'] ) }}">
-                                                                @csrf
-
-                                                                <div class="form-group">
-                                                                    <div class="text-center">
-                                                                        <label class="col-form-label">Motif de la validation ?</label>
-                                                                            <input type="text" required name="libelle" class="form-control border-success">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <div class="text-center">
-                                                                        <label class="col-form-label">Charger la note d'étude</label>
-                                                                            <input type="file" name="note_etude_file" class="form-control border-success">
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-warning"
-                                                                        data-dismiss="modal">Non, Annuler</button>
-                                                                    <button type="submit" class="btn btn-success">Oui,
-                                                                        Valider</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Fin Modal Valider-->
 
 
                                             {{-- Model de confirmation de rejet --}}
@@ -540,7 +567,24 @@ swalWithBootstrapButtons.fire({
     function refresh() {
         location.reload(true);
     }
-</script>
+
+
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
 
 
 @endsection

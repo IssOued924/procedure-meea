@@ -44,9 +44,9 @@ class DemandeP004Controller extends Controller
         $data['etat'] = 'D'; //code de procedure demande deposee
 
         $data['reference'] = $this->repository->generateReference('P004');
-
+        $data['delai'] = Procedure::where(['code' => 'P004'])->first('delai')->delai;
         $data['procedure_id'] = Procedure::where(['code' => 'P004'])->first('uuid')->uuid;
-
+        $data['paiement'] =1;
         $certificat_origine =  $this->repository->uploadFile($dataFiles, 'certificat_origine');
         $certificat_sanitaire =  $this->repository->uploadFile($dataFiles, 'certificat_sanitaire');
         unset($data['certificat_origine']);
@@ -62,6 +62,6 @@ class DemandeP004Controller extends Controller
         $demandePieceP004Repository->setChemin($certificat_sanitaire, $demande->uuid, 'Certificat Sanitaire');
 
 
-        return redirect('/demandes-lists')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+        return redirect('/demandes-lists?procedure=CDAS')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
     }
 }

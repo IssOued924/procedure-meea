@@ -17,6 +17,8 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
+use function PHPUnit\Framework\isEmpty;
+
 //use Your Model
 
 /**
@@ -155,13 +157,16 @@ class AppRepository extends BaseRepository
 
 
          $tt = $de->genererRandomString(4);
+        if(!isEmpty($name)){
+            $fileName = time().$tt.'.'.$data[$name]->getClientOriginalExtension();
+            $url = 'public/'.$libelle;
+            Storage::makeDirectory($url);
 
-       $fileName = time().$tt.'.'.$data[$name]->getClientOriginalExtension();
-        $url = 'public/'.$libelle;
-        Storage::makeDirectory($url);
+            $path = $data[$name]->storeAs('public/'.$libelle, $fileName);
+            DB::table($table)->where('uuid', $id)->update(['note_etude_file' => $path]);
+        }
 
-        $path = $data[$name]->storeAs('public/'.$libelle, $fileName);
-        DB::table($table)->where('uuid', $id)->update(['note_etude_file' => $path]);
+
 
     }
 

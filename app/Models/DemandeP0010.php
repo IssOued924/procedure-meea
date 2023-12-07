@@ -9,6 +9,7 @@ class DemandeP0010 extends DemandeP005
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
+    use \Wildside\Userstamps\Userstamps;
     protected $guarded = [];protected $primaryKey = 'uuid';
 
     function genererRandomString($longueur = 10) {
@@ -46,5 +47,11 @@ class DemandeP0010 extends DemandeP005
     public function demandeCommentaire()
     {
         return $this->hasMany(CommentaireP0010::class, 'demande_p0010_id');
+    }
+
+    // recuperation de l'agent affecté sur le dossier
+    public function agent()
+    {
+        return $this->belongsTo(Agent::class, 'last_agent_assign');
     }
 }

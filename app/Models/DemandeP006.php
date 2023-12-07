@@ -9,6 +9,7 @@ class DemandeP006  extends Demande
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
+    use \Wildside\Userstamps\Userstamps;
 
     protected $guarded = [];protected $primaryKey = 'uuid';
 
@@ -46,5 +47,11 @@ class DemandeP006  extends Demande
     public function demandeCommentaire()
     {
         return $this->hasMany(CommentaireP006::class, 'demande_p006_id');
+    }
+
+    // recuperation de l'agent affecté sur le dossier
+    public function agent()
+    {
+        return $this->belongsTo(Agent::class, 'last_agent_assign');
     }
 }

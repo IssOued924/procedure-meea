@@ -9,6 +9,7 @@ class Province extends Model
 {
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
+    use \Wildside\Userstamps\Userstamps;
     protected $primaryKey = 'uuid';
     public $fillable = ['libelle', 'region_id'];
     public function region(){

@@ -90,7 +90,7 @@
                                             <div class="col-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" name="telephone" class="border-success"   placeholder="Telephone" value="{{ $telephone}}" disabled/>
+                                                <input type="text" name="telephone" class="border-success"   placeholder="Telephone" value="{{ $telephone}}" />
                                             </div>
                                         </div>
                                         {{-- <div class="row">
@@ -186,9 +186,14 @@
 
 
                                         <div class="row">
+                                            <div id="moyenP1">
+                                                <label >  La somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
 
-                                            <label id="moyenP1">  La somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
-                                            <label id="moyenP2">  La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
+                                            </div>
+                                            <div id="moyenP2">
+                                                <label >  La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
+
+                                            </div>
                                         <div class="col-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
@@ -341,6 +346,20 @@ $(".submit").click(function(){
     return false;
 })
 
+        $("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+
+jQuery('input[name=moyen]:radio').click(function(){
+		$("div#moyenP1").hide();
+		$("div#moyenP2").hide();
+		var divId = jQuery(this).val();
+        if(divId * 1 == 1){
+            $("div#moyenP1").show()
+        }else{
+            $("div#moyenP2").show()
+        }
+		});
+
 });
 </script>
 <script type='text/javascript'>
@@ -358,34 +377,6 @@ $(".submit").click(function(){
   });
 
 
-
-
-        // Sélection des boutons radio
-        const radio1 = document.getElementById("radio1");
-        const radio2 = document.getElementById("radio2");
-
-        // Sélection des champs à afficher/masquer
-        const moyenP1 = document.getElementById("moyenP1");
-        const moyenP2 = document.getElementById("moyenP2");
-        moyenP1.style.display="none"
-        moyenP2.style.display="none"
-
-        // Ajout d'un gestionnaire d'événement pour les boutons radio
-        radio1.addEventListener("change", function() {
-            if (radio1.checked) {
-                moyenP1.style.display = "block";
-                moyenP2.style.display = "none";
-
-            }
-        });
-
-        radio2.addEventListener("change", function() {
-            if (radio2.checked) {
-                moyenP1.style.display = "none";
-                moyenP2.style.display = "block";
-
-            }
-        });
 
 
 </script>

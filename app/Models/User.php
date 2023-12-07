@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use \App\Http\Traits\UsesUuid;
+    use \Wildside\Userstamps\Userstamps;
     use HasApiTokens, HasFactory, Notifiable;
 
 
@@ -32,6 +33,7 @@ class User extends Authenticatable
         'role_id',
         'email',
         'password',
+        'must_reset_password',
     ];
 
     /**
@@ -52,6 +54,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'must_reset_password' => 'boolean',
     ];
 
     public function agent()

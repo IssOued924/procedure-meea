@@ -69,8 +69,11 @@
                                         <th scope="col">Date Démande</th>
                                         <th scope="col">Réference</th>
                                         <th scope="col">etat de mes Démandes</th>
-
+                                        <th scope="col">Délai de traitement</th>
+                                        <th scope="col">Déposé</th>
+                                        <th scope="col">Paiement</th>
                                         <th scope="col">Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -125,10 +128,29 @@
                                     @endphp
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $demande->created_at->format('d/m/Y H:i:s') }}</td>
+                                        <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
                                         <td>{{ $demande->reference }}</td>
                                         <td>
-                                        <span class="badge {{ $statutColor }} ">{{$statut}}</span> </td>
+                                            @if ($statut == 'demande en etude')
+                                            <span class="badge {{ $statutColor }} "> Demande en cours d'étude</span> </td>
+
+                                            @elseif ($statut == 'demande signée')
+                                            <span class="badge {{ $statutColor }} "> Demande prête</span> </td>
+                                            @else
+                                            <span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
+                                            @endif
+
+                                            <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
+
+                                            <td>{{ $demande->created_at->diffForHumans() }}</td>
+
+                                          {{-- partie paiement --}}
+                                          @if ($demande->paiement === 1)
+                                          <td><b><span class="text-success">Payée</span></b></td>
+
+                                          @else
+                                          <td><b><span class="text-warning">Non Payée</span></b></td>
+                                          @endif
 
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
@@ -136,9 +158,11 @@
                                                     class="bi bi-eye"></i> Voir </button>
 
                                                     @if ($demande->etat =='R')
-                                                    <button title="Modifier" type="button" class="btn btn-info "
+                                                    <!--button title="Modifier" type="button" class="btn btn-info "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
-                                                    class="bi bi-pencil-square text-white">Modifier </i> </button>
+                                                    class="bi bi-pencil-square text-white">Modifier </i> </button-->
+                                                     <a title="Modifier" class="btn btn-info" href="{{ route('editer-demande', ['id' =>$demande->uuid, 'procedure' => $selectedProcedure] ) }}"> <i
+                                                            class="bi bi-pencil-square text-white">Modifier </i> </a>
                                                     @endif
 
                                                     @if ($demande->etat == 'S' &&  !is_null($demande->output_file))

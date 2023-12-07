@@ -4,7 +4,7 @@
     @endif
 
     @if ($currentPage == PAGEEDITFORM)
-        @include("livewire.Demandes-p002.details")
+        @include("livewire.Demandes-p002.editForm")
     @endif
 
     @if($currentPage == PAGELIST)

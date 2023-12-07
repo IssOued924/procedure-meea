@@ -20,7 +20,6 @@
           <div class="row">
 
 
-
             <!-- Recent Sales -->
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
@@ -79,7 +78,7 @@
                                                         @csrf
                                         <div class="modal-body">
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col-6">
 
                                                         <h5 class="card-title">nom  </h5>
                                                         <div class="input-group mb-3">
@@ -92,6 +91,8 @@
                                                                 aria-describedby="basic-addon1" required>
 
                                                         </div>
+                                                </div>
+                                                <div class="col-6">
 
                                                         <h5 class="card-title">Code  </h5>
                                                         <div class="input-group mb-3">
@@ -105,9 +106,6 @@
 
                                                         </div>
 
-                                                        <input type="submit" value="Valider"
-                                                        class="btn btn-primary">
-
 
 
                                                 </div>
@@ -117,12 +115,10 @@
 
                                         </div>
                                         <div class="modal-footer">
-
-
                                             <button type="button" class="btn btn-danger"
                                                 data-bs-dismiss="modal">Fermer</button>
-                                            {{-- <button type="button" class="btn btn-primary">Valider</button>
-                                            --}}
+                                             <button type="submit" class="btn btn-primary">Valider</button>
+
                                         </div>
                                     </form>
                                     </div>
@@ -157,23 +153,19 @@
 
 
                         <td>
-                            <button title="Voir detail" type="button" class="btn btn-primary "
+                            {{-- <button title="Voir detail" type="button" class="btn btn-primary "
                                 data-bs-toggle="modal" data-bs-target="#basicModal{{ $role->uuid }}"> <i
-                                    class="bi bi-eye"></i> </button>
+                                    class="bi bi-eye"></i> </button> --}}
 
-                            <button title="Editer" type="button" class="btn btn-info "
+                            {{-- <button title="Editer" type="button" class="btn btn-info "
                                 data-bs-toggle="modal" > <i
-                                    class="bi bi-pencil-square"></i> </button>
+                                    class="bi bi-pencil-square"></i> </button> --}}
 
                             <a href="{{ route('suprimer-role', ['uuid' => $role->uuid]) }}"
                                 title="Supprimer" type="button" class="btn btn-danger "> <i
                                     class="bi bi-x"></i> </a>
 
                         </td>
-
-
-
-
 
                       </tr>
                     @endforeach

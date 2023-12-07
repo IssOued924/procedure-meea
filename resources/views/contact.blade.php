@@ -3,8 +3,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 @section('contact')
 <div class="container mt-5" style="max-width: 500px; margin: 50px auto; text-align: left; font-family: sans-serif;">
-      
-     
+
+
         <h1 style="text-align: center; font-size: 24px; color: #1A33FF;">Contactez-nous</h1>
         <form action="" method="post" action="{{ route('contact.store') }}" style="border: 1px solid #1A33FF;
     background: #ecf5fc;
@@ -58,7 +58,7 @@
         </div>
         @endif
     </div>
-    <input type="submit" name="send" value="Envoyer" class="btn btn-dark btn-block">
+    <input type="submit" name="send" value="Envoyer" class="btn btn-primary btn-block">
 </form>
     </div>
     @endsection

@@ -19,7 +19,7 @@ class StoreDemandeP002Request extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-   
+
 
     public function rules(){
         $baseRules = [
@@ -40,7 +40,7 @@ class StoreDemandeP002Request extends FormRequest
         return $baseRules;
     }
     public function messages(){
-        
+
       $message = [
         'identite.required' =>'Identité : est obligtoire',
         'pays.required' =>'Pays : est obligatoire',

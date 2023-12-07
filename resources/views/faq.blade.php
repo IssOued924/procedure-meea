@@ -2,13 +2,20 @@
 @section('faq')
 
 <div class="container" style="margin: 0 auto; padding: 0 auto; width: 60rem;">
-  <h2>Frequently Asked Questions</h2>
+  <h2>Questions frequemment posées</h2>
   <div class="accordion">
     <!-- Permis d'écotourisme ou de tourisme écologique -->
     <div class="accordion-item">
       <button id="accordion-button-1" aria-expanded="false"><span class="accordion-title">Comment obtenir un permis d'écotourisme ou de tourisme écologique?</span><span class="icon" aria-hidden="true"></span></button>
       <div class="accordion-content">
         <p>Pour obtenir un permis d'écotourisme, suivez les étapes suivantes... [Informations spécifiques aux permis d'écotourisme.]</p>
+        <ol>
+            <li>il Faut disposer des ces pieces</li>
+            <li>Avoir le momtant (1500 F CFA) pour payer</li>
+            <li>il Faut disposer des ces pieces</li>
+            <li>il Faut disposer des ces pieces</li>
+            <li>il Faut disposer des ces pieces</li>
+        </ol>
       </div>
     </div>
     <div class="accordion-item">
@@ -74,11 +81,11 @@ const items = document.querySelectorAll(".accordion button");
 
 function toggleAccordion() {
   const itemToggle = this.getAttribute('aria-expanded');
-  
+
   for (i = 0; i < items.length; i++) {
     items[i].setAttribute('aria-expanded', 'false');
   }
-  
+
   if (itemToggle == 'false') {
     this.setAttribute('aria-expanded', 'true');
   }
