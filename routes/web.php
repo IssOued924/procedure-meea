@@ -229,5 +229,7 @@ Route::get('/administration/statistique/nombreDemandeEncours', [BackendControlle
 Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');;
 Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
 Route::get("/procedure/modification/{id}/{procedure}", DemandeFontController::class, 'editerDemande')->name("editer-demande");
+Route::get('/get-sous-domaine-by-categorie', [DemandeP002Controller::class, 'getSousDomaineByCategorie'])->name('get-sous-domaine-by-categorie');
+Route::get('/get-delete-autre-document', [DemandeP002Controller::class, 'deleteAutreDocument'])->name('get-delete-autre-document');
 
 require __DIR__.'/auth.php';

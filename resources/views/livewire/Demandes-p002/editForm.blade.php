@@ -61,16 +61,16 @@
                                                     
                                                 </div>
                                                 <div class="col-6">
-                                                    <label class="pays_residence fw-bold">Pays de résidence<span style="color:red">
+                                                    <label class="pays_residence fw-bold">Commune de résidence<span style="color:red">
                                                             *</span></label>
-                                                    <select name="pays" id="pays" class="form-select boerder-success">
-                                                    <option >Veuillez choisir pays</option>
-                                                    @foreach($pays as $pay)
-                                                        <option {{ ($pay->libelle == $default_pays ? 'selected' : '' )}} value="{{$pay->libelle}}">{{$pay->libelle}}</option>
+                                                    <select name="commune_id" id="commune_id" class="form-select boerder-success">
+                                                    <option >Veuillez choisir la commune</option>
+                                                    @foreach($communes as $com)
+                                                        <option {{ ($com->uuid == $demande->commune_id ? 'selected' : '' )}} value="{{$com->uuid}}">{{ $com->libelle }}</option>
                                                     @endforeach
                                                     </select> <br /><br />
-                                                    @if($errors->has('pays'))
-                                                        <p class="alert alert-danger">{{ $errors->first('pays') }}</p>
+                                                    @if($errors->has('commune_id'))
+                                                        <p class="alert alert-danger">{{ $errors->first('commune_id') }}</p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -184,11 +184,11 @@
                                             <div class="col-4">
                                                 <label for="domaine" class="siege_social">Domaine
                                                     <span style="color:red">*</span></label>
-                                                <select name="domaine" id="domaine" class="form-select boerder-success">
+                                                <select name="domaine" id="domaine" onchange="getSousDomaine()" class="form-select border-success">
                                                     <option value="">Veuillez choisir le domaine</option>
-                                                    <option value="Eau potable" {{ ($demande->domaine == 'Eau potable' ? 'selected' : '' )}}>Eau Potable</option>
-                                                    <option value="Assainissement" {{ ($demande->domaine == 'Assainissement' ? 'selected' : '' )}}>Assainissement</option>
-                                                    <option value="Barrage" {{ ($demande->domaine == 'Barrage' ? 'selected' : '' )}}>Barrage</option>
+                                                    @foreach($domaines as $dom)
+                                                    <option {{ ($dom->libelle_long == $demande->domaine ? 'selected' : '' )}} value="{{ $dom->uuid}}">{{  $dom->libelle_long }}</option>
+                                                    @endforeach
                                                 </select>
                                                  @if($errors->has('domaine'))
                                                         <p class="alert alert-danger">{{ $errors->first('domaine') }}</p>
@@ -198,10 +198,11 @@
                                             <div class="col-4">
                                                <label for="categorie" class="siege_social">Catégorie
                                                     <span style="color:red">*</span></label>
-                                                <select name="categorie" id="categorie" class="form-select boerder-success">
+                                                <select name="categorie" id="categorie" onchange="getSousDomaine()" class="form-select border-success">
                                                     <option value="">Veuillez choisir la catégorie</option>
-                                                    <option value="Etude et contrôle" {{ ($demande->categorie == 'Etude et contrôle' ? 'selected' : '' )}}>Etude et contrôle</option>
-                                                    <option value="Travaux" {{ ($demande->categorie == 'Travaux' ? 'selected' : '' )}}>Travaux</option>
+                                                     @foreach($categories as $cat)
+                                                        <option {{ ($cat->libelle_long == $demande->categorie ? 'selected' : '' )}} value="{{  $cat->uuid}}">{{  $cat->libelle_long }}</option>
+                                                     @endforeach
                                                 </select>
                                                  @if($errors->has('categorie'))
                                                         <p class="alert alert-danger">{{ $errors->first('categorie') }}</p>
@@ -210,7 +211,8 @@
                                             <div class="col-4">
                                                <label for="sousdomaine" class="nom_societe">Sous domaine
                                                     <span style="color: red">*</span></label>
-                                                <input type="text" class="border-success" name="sous_domaine" value='{{$demande->sous_domaine}}' id="sousdomaine" required />
+                                                    <input type="text" class="border-success" readonly name="sous_domaine_old" value='{{$demande->sous_domaine}}' id="sousdomaine_old" required />
+                                                 <select name="sous_domaine[]" id="sousdomaine" class="form-select border-success"></select>
                                                  @if($errors->has('sous_domaine'))
                                                         <p class="alert alert-danger">{{ $errors->first('sous_domaine') }}</p>
                                                     @endif
@@ -220,13 +222,17 @@
                                          <hr>
                                         <h2 class="fs-title">Autres documents</h2>
                                         <div class="row">
+                                            
                                             <div class="col-12">
-                                                <table class="table datatable table-bordered table-striped datatable-table" id="dt_autre_documents">
+                                                <table class="table datatable table-bordered table-striped datatable-table">
                                                     <thead class="dst-form-thead">
                                                         <tr>
+                                                            <th colspan="3" style="text-align: center">Liste moyens humains et matériels</th>
+                                                        </tr>
+                                                        <tr>
                                                             <th>Nom du document <span style="color:red">*</span></th>
-                                                            <th>Fichier <span style="color:red">*</span></th>
-                                                            <th></th>
+                                                            <th>Fichier</th>
+                                                            <th>-</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -239,12 +245,33 @@
                                                            @if (!in_array($autre->libelle, $docObligatoire))
                                                                 <tr>
                                                                     
-                                                                    <td colspan="3">
+                                                                    <td colspan="2">
                                                                          <a  class="text-success" target="_blank" href="{{ Storage::url($autre->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$autre->libelle}}</b></a>
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <a  class="text-danger" href="javascript:;'" onclick="deleteDocument(this,'{{$autre->uuid}}', '{{$autre->chemin}}')"><b><i class="bi bi-trash"></i>  Retirer ce fichier</b></a>
                                                                     </td>
                                                                 </tr>
                                                            @endif
                                                         @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <hr>
+                                            <div class="col-12">
+                                                <table class="table datatable table-bordered table-striped datatable-table" id="dt_autre_documents">
+                                                    <thead class="dst-form-thead">
+                                                        <tr>
+                                                            <th colspan="3" style="text-align: center">Liste Personnel</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Nom du document <span style="color:red">*</span></th>
+                                                            <th>Fichier <span style="color:red">*</span></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
@@ -252,6 +279,65 @@
                                                                 <a class="btn btn-default" onclick="addRowAutreDocument()">
                                                                     <i class="fa fa-plus-circle text-success"></i>
                                                                     <span>Ajouter un document </span>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+
+                                            </div>
+                                            
+                                            <hr>
+                                             
+                                              <div class="col-12">
+                                                <table class="table datatable table-bordered table-striped datatable-table" id="dt_materiel_roulant">
+                                                    <thead class="dst-form-thead">
+                                                        <tr>
+                                                            <th colspan="3" style="text-align: center">Materiels roulants</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Nom du document <span style="color:red">*</span></th>
+                                                            <th>Fichier <span style="color:red">*</span></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="3" style="text-align: right;">
+                                                                <a class="btn btn-default" onclick="addRowMaterielRoulant()">
+                                                                    <i class="fa fa-plus-circle text-success"></i>
+                                                                    <span>Ajouter matériels roulants </span>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+
+                                            </div>
+                                               <hr>
+                                               
+                                                <div class="col-12">
+                                                <table class="table datatable table-bordered table-striped datatable-table" id="dt_materiel_non_roulant">
+                                                    <thead class="dst-form-thead">
+                                                        <tr>
+                                                            <th colspan="3" style="text-align: center">Materiels non roualants</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Nom du document <span style="color:red">*</span></th>
+                                                            <th>Fichier <span style="color:red">*</span></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="3" style="text-align: right;">
+                                                                <a class="btn btn-default" onclick="addRowMaterielNonRoulant()">
+                                                                    <i class="fa fa-plus-circle text-success"></i>
+                                                                    <span>Ajouter matériel non document </span>
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -406,7 +492,69 @@ $(".submit").click(function(){
       e.preventDefault();
   });
 
-    function addRowAutreDocument() {
+function addRowAutreDocument() {
+   var listePersonnel = ["Contrôleur génie civil (Niveau CAP)",
+            "Technicien supérieur génie civil ou génie rural ou génie sanitaire (BAC+2)", 
+            "Animateur spécialisé ",
+            "Spécialiste en sciences humaines et sociales",
+            "Technicien supérieur en génie sanitaire",
+            "Ingénieur Génie Civil ou Génie Rural ou Assimilé",
+            "Technicien Supérieur Génie Rural ou Génie Civil ou assimilé",
+            "Comptable Gestionnaire",
+            "Agent de liaison",
+            "Ingénieur Topographe",
+            "Géotechnicien",
+            "Ingénieur hydrologue",
+            "Agro pédologue environnementaliste",
+            "Sociologue ou économiste",
+            "Ingénieur hydraulicien ou GR",
+            "T.S HER",
+            "Surveillant de chantier maçon ( CAP ou 5 ans d’expérience)",
+            "Technicien pompe",
+            "Technicien supérieur en génie civil",
+            "Technicien supérieur du Génie Rural ou forages",
+            "Ingénieur hydrogéologue ou GR",
+            "Opérateur BEPC ou CEPE + 5ans d’expérience",
+            "Technicien Supérieur en Génie Rural ou en Science de la terre",
+            "Sociologue ou géographe ou économiste",
+            "Opérateur géophysicien",
+            "Ingénieur GR",
+            "Sondeur, 5 ans d’expérience",
+            "Aide sondeur",
+            "Mécanicien 5 ans d’expérience ou CAP",
+            "Mécanicien BTS",
+            "Maçon",
+            "CAP Génie civil",
+            "DECISION DE LA CAAT",
+            "Surveillant de chantier CAP maçonnerie",
+            "Plombier",
+            "Technicien en maçonnerie (CAP minimum)",
+            "Chef d’équipe terrassement",
+            "Opérateur topographe (niveau CAP minimum)",
+            "Technicien de laboratoire géotechnique",
+            "Gestionnaire des Ressources Humaines",
+            "Opérateur topographe (niveau CAP minimum)",
+            "Electromécanicien",
+            "Chef mécanicien (diesel ou diéséliste)"];
+    var options = '<option value=""></option>';
+    for(var i = 0; i < listePersonnel.length; i++) {
+        var opt = listePersonnel[i];
+        options += '<option value="' + opt + '">' + opt + '</option>';
+    } 
+        $("#dt_autre_documents").append([
+            '<tr class="">',
+            '<td class="rs">'+
+               ' <select name="libelle_document[]" class="form-select border-success requis">' + options+
+                  
+               + '</select>'+
+             '</td>',
+            '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document[]"> </td>',
+            '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowAutreDocument(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
+            '</tr>',
+                ].join()
+                );
+    }
+   /* function addRowAutreDocument() {
         $("#dt_autre_documents").append([
             '<tr class="">',
             '<td class="rs"><input type="text" class="border-success form-control requis" required name="libelle_document[]"></td>',
@@ -415,11 +563,150 @@ $(".submit").click(function(){
             '</tr>',
                 ].join()
                 );
-    }
+    }*/
 
     function deleteRowAutreDocument(me) {
          $(me).closest('tr').remove();
     }
+    
+  function addRowMaterielRoulant() {
+   var listeMaterielRoulant = ["Véhicule de liaison",
+                                "Motocyclettes",
+                                "Moto",
+                                "Camionnette",
+                                "Camion benne basculante",
+                                "Servicing (véhicule porteur)",
+                                "Camion d’accompagnement avec grue",
+                                "Camion-citerne (eau, carburant)",
+                                "Grue motorisée",
+                                "Chargeuse de faible puissance 15/20 cv",
+                                "Moto basculeur inf. 2500 litres",
+                                "Compacteur de type à patin vibrant",
+                                "Citerne à gasoil d’au moins 10 000 litres",
+                                "Bulldozer 70 à 200 cv",
+                                "Pelle chargeuse de 200 à 250cv",
+                                "Pelle hydraulique 125 à 200 cv",
+                                "Niveleuse inf 150 cv",
+                                "Tracteur pour labour sup 80cv + accessoires",
+                                "Camion benne basculante d’au moins 6 m3",
+                                "Camion benne basculante d’au moins 12 m3",
+                                "Bétonnière de capacité minimum 350 litres",
+                                "Camion semi-remorque ou plateau au moins 10 T",
+                                "Camion atelier",
+                                "Camion-citerne à eau d’au moins 10 000 litres",
+                                "Camion-citerne à eau d’au moins 30 000 litres",
+                                "Citerne à gasoil d’au moins 10 000 litres",
+                                "Cuve à gasoil de 10 000 litres",
+                                "Compacteur à rouleau lisse au moins 100 cv",
+                                "Compacteur pied de mouton au moins 130 cv",
+                                "Tracteur pour labour sup 80cv + accessoires",
+                                "Bulldozer 200 à 250 cv",
+                                "Compacteur rouleau lisse type JV 100",
+                                "Pelle hydraulique 125  200 cv",
+                                "Compacteur type 815",
+                                "Compacteur pied de mouton type JV 100",
+                                "Bulldozer sup 200 cv",
+                                "Pelle chargeuse sup à 250cv",
+                                "Pelle hydraulique sup 250 cv",
+                                "Compacteur rouleau lisse type JV 100",
+                                "Niveleuse sup 150 cv",
+                                "Unité de concassag",
+                                "Tracteur pour labour sup 80cv + accessoires"
+                        ];
+    var options = '<option value=""></option>';
+    for(var i = 0; i < listeMaterielRoulant.length; i++) {
+        var opt = listeMaterielRoulant[i];
+        options += '<option value="' + opt + '">' + opt + '</option>';
+    } 
+        $("#dt_materiel_roulant").append([
+            '<tr class="">',
+            '<td class="rs">'+
+               ' <select name="libelle_document_roulant[]" class="form-select border-success requis">' + options+
+                  
+               + '</select>'+
+             '</td>',
+            '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document_roulant[]"> </td>',
+            '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowAutreDocument(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
+            '</tr>',
+                ].join()
+                );
+    }
+
+  function addRowMaterielNonRoulant() {
+   var listeMaterielNonRoulant = ["Groupe électrogène",
+                        "Matériel audio-visuel",
+                        "Matériel de sonorisation",
+                        "Matériel topographique",
+                        "Matériel géotechnique",
+                        "Vibreur",
+                        "Outillage pose pompe",
+                        "Sonde",
+                        "Matériel de levage",
+                        "GPS",
+                        "Groupe électrogène 5 KVA minimum",
+                        "Compresseur 8 bars minimum",
+                        "Pompe immergée + accessoires",
+                        "Sonde de niveau élect",
+                        "Débitmètre (compteur, bac jaugé)",
+                        "Matériel de mesure in situ",
+                        "Appareil géophysique et accessoires",
+                        "Lot de tige de forage",
+                        "Masse de tige",
+                        "Lot de casing ou tubage perdu (PVC)",
+                        "Matériel de sécurité (lot)",
+                        "Atelier mécanique",
+                        "Matériel de cimentation",
+                        "Matériel de maçonnerie",
+                        "Bétonnière",
+                        "Marteau piqueur",
+                        "Marteau perforateur",
+                        "Jeux de moules",
+                        "Cuffat",
+                        "Pelle mécanique de moins de 60 cv",
+                        "Mini pelle sur chenille empâtement 0,90 à 1,20 m",
+                        "Matériel de plomberie",
+                        "Petit outillage de chantier (lots)",
+                        "Compacteur manuel",
+                        "Lot de matériel topographique (niveau de chantier, théodolite, + accessoires)",
+                        "Motopompe",
+                        "Compacteur pied de mouton au moins 130 cv",
+                        "Compacteur pied de mouton type JV 100",
+                        "Compresseur (7 bars)",
+                        "Groupe électrogène (15 KVA)",
+                        "Lot de matériel géotechnique de chantier et de densité",
+                        "Pompe d’épreuve",
+                        "Palan + chèvre ",
+                        "Manomètre sup 15 bars",
+                        "Etau",
+                        "Boite à filière complète",
+                        "Petit matériel de chantier (caisse à outils plombier. Lots)",
+                        "Aiguille vibrante",
+                        "Matériel de signalisation (lots)",
+                        "Clé à griffe (lot)",
+                        "Boite à filière complète",
+                        "Boite à filière complète",
+                        "Tir fort",
+                        "Central à béton",
+                        "Motopompe (5 m3/h minimum)"]; 
+    var options = '<option value=""></option>';
+    for(var i = 0; i < listeMaterielNonRoulant.length; i++) {
+        var opt = listeMaterielNonRoulant[i];
+        options += '<option value="' + opt + '">' + opt + '</option>';
+    } 
+        $("#dt_materiel_non_roulant").append([
+            '<tr class="">',
+            '<td class="rs">'+
+               ' <select name="libelle_document_non_roulant[]" class="form-select border-success requis">' + options+
+                  
+               + '</select>'+
+             '</td>',
+            '<td class="rs"><input type="file" class="border-success form-control requis" required name="fichier_document_non_roulant[]"> </td>',
+            '<td><a class="btn btn-xs" data-id="0" onclick="deleteRowAutreDocument(this)" title="Supprimer la ligne"> <i class="fa fa-trash text-danger"></i></a></td>',
+            '</tr>',
+                ].join()
+                );
+    }
+
 /*    
 $("#msform").validate({
         rules: {
@@ -543,7 +830,7 @@ $("#msform").validate({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
-            timer: 15000,
+            timer: 5000,
             timerProgressBar: true,
             onOpen: (toast) => {
                 toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -560,4 +847,100 @@ $("#msform").validate({
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+   function getSousDomaine() {
+    if( $('#domaine').val().length > 0 && $('#categorie').val().length>0){
+        $.ajax({
+        type: 'GET',
+        url: '/get-sous-domaine-by-categorie',
+        data: {
+            domaine: $('#domaine').val(),
+            categorie: $('#categorie').val()
+        },
+        dataType: 'json',
+        cache: false,
+        success: function (data) {
+             let select = $('#sousdomaine');
+             let options = get_values_from_select(data.sousDomaines, {key: 'id', value: 'libelle'});
+             append_select_options(select, options);
+             document.getElementById("sousdomaine").multiple = true; 
+        },
+        error: function () {
+           showErrors(data);
+        }
+    });
+    }else{
+        
+    }
+    
+}
+
+  
+function get_values_from_select(data, options, with_empty = true) {
+    var options = options || {};
+    var key = options.key || 'id';
+    var value = options.value || 'valeur';
+    var selected = options.selected || null;
+    var returnValues = '';
+    if (Array.isArray(data)) {
+        $.each(data, function (i, item) {
+            returnValues += '<option value="' + item[key] + '"';
+            if (selected == item[key]) {
+                returnValues += ' selected >';
+            } else {
+                returnValues += ' > ';
+            }
+            returnValues += item[value] + '</option>';
+        });
+    } else {
+        var attr = options.attr || 'values';
+        $.each(data[attr], function (i, item) {
+            returnValues += '<option value="' + item[key] + '"';
+            if (selected == item[key]) {
+                returnValues += ' selected >';
+            } else {
+                returnValues += ' > ';
+            }
+            returnValues += item[value] + '</option>';
+        });
+    }
+    if (with_empty) {
+        return "<option></option>" + returnValues;
+    }
+    return returnValues;
+}
+
+function append_select_options($select, options, set_old_value = true) {
+    Array.from($select).forEach(function (the_select) {
+        var $the_select = $(the_select);
+        var value = $the_select.val();
+        $the_select.empty().append(options);
+        setTimeout(() => {
+            if (set_old_value && value) {
+                $the_select.val(value);
+            }
+        }, 300);
+    });
+}
+
+function deleteDocument(me, uuid, chemin){
+     
+        $.ajax({
+        type: 'GET',
+        url: '/get-delete-autre-document',
+        data: {
+            uuid: uuid,
+            chemin: chemin
+        },
+        dataType: 'json',
+        cache: false,
+        success: function (data) {
+              toast("Document supprimé avec succès.", type = 'success');
+              $(me).closest('tr').remove();
+        },
+        error: function () {
+           showErrors(data);
+        }
+    });
+
+ }
 </script>
