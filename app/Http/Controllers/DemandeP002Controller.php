@@ -16,7 +16,9 @@ use App\Repositories\DemandeP002Repository;
 use Carbon\Carbon;
 use App\Http\Requests\StoreDemandeP002Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\DemandeCategorieP002;
+use App\Models\DemandeDomaineP002;
+use App\Models\DemandeSousDomaineP002;
 class DemandeP002Controller extends Controller {
 
     public $repository;
@@ -31,10 +33,8 @@ class DemandeP002Controller extends Controller {
         $dataDemande = ['etat' => 'D',
             'date_demande' => Carbon::parse(Carbon::now())->format('Ymd'),
             'identite' => $request->identite,
+            'commune_id' => $request->commune_id,
             'beneficiaire' => $request->beneficiaire,
-            //'montant' =>0,
-            //  'delai' =>'D',
-            //  'adresse_beneficiaire' =>'D',
             'procedure_id' => Procedure::where(['code' => 'P002'])->first('uuid')->uuid,
             'delai' => Procedure::where(['code' => 'P002'])->first('delai')->delai,
             'paiement' => 1,
@@ -43,9 +43,14 @@ class DemandeP002Controller extends Controller {
             'last_modified_by' => Auth::user()->usager_id,
             'is_certified' => true,
             'reference' => $this->repository->generateReference('P002'),
-            'domaine' => $request->domaine,
-            'categorie' => $request->categorie,
-            'sous_domaine' => $request->sous_domaine];
+            'domaine' => DemandeDomaineP002::where(['uuid' => $request->domaine])->first('libelle_long')->libelle_long,
+            'categorie' => DemandeCategorieP002::where(['uuid' => $request->categorie])->first('libelle_long')->libelle_long];
+            if($request->sous_domaine && sizeof($request->sous_domaine)>0){
+                if(strlen($request->sous_domaine[0]> 0)){
+                    $sousdomaine = implode(", ", $request->sous_domaine);
+                    $dataDemande['sous_domaine'] =$sousdomaine;
+                }
+            }
 
         // Sauvegarde de la demande
 
@@ -67,12 +72,28 @@ class DemandeP002Controller extends Controller {
             $demandePieceP002Repository->setChemin($cheminFicheRenseignement, $demande->uuid, 'Fiche Renseignement');
             $demandePieceP002Repository->setChemin($cheminDeclarationHonneur, $demande->uuid, 'Déclaration sur l’honneur de l’exactitude des informations');
 
-            //Enregistrement des autres documents
+            //Enregistrement des documents liste u personnel
             if ($request->libelle_document && sizeof($request->libelle_document) > 0) {
                 $n = sizeof($request->libelle_document);
                 for ($i = 0; $i < $n; $i++) {
                     $chemin = $this->repository->uploadFile($request->file('fichier_document')[$i]);
                     $demandePieceP002Repository->setChemin($chemin, $demande->uuid, $request->libelle_document[$i]);
+                }
+            }
+            //Enregistrement des documents pour le matériel roulant
+            if ($request->libelle_document_roulant && sizeof($request->libelle_document_roulant) > 0) {
+                $n = sizeof($request->libelle_document_roulant);
+                for ($i = 0; $i < $n; $i++) {
+                    $chemin = $this->repository->uploadFile($request->file('fichier_document_roulant')[$i]);
+                    $demandePieceP002Repository->setChemin($chemin, $demande->uuid, $request->libelle_document_roulant[$i]);
+                }
+            }
+              //Enregistrement des documents pour le matériel non roulant
+            if ($request->libelle_document_non_roulant && sizeof($request->libelle_document_non_roulant) > 0) {
+                $n = sizeof($request->libelle_document_non_roulant);
+                for ($i = 0; $i < $n; $i++) {
+                    $chemin = $this->repository->uploadFile($request->file('fichier_document_non_roulant')[$i]);
+                    $demandePieceP002Repository->setChemin($chemin, $demande->uuid, $request->libelle_document_non_roulant[$i]);
                 }
             }
           // return json_encode(array('status' => 'success'));
@@ -83,18 +104,25 @@ class DemandeP002Controller extends Controller {
     public function update(Request $request,
             DemandePieceP002Repository $demandePieceP002Repository,
             DemandeP002 $demande) {
-        $dataDemande = ['etat' => 'D',
-            'updated_at' => Carbon::parse(Carbon::now())->format('Ymd'),
-            'identite' => $request->identite,
-            'beneficiaire' => $request->beneficiaire,
-            'date_certif' => Carbon::parse(Carbon::now())->format('Ymd'),
-            'last_modified_by' => Auth::user()->usager_id,
-            'updated_by' => Auth::user()->usager_id,
-            'is_certified' => true,
-            'domaine' => $request->domaine,
-            'categorie' => $request->categorie,
-            'sous_domaine' => $request->sous_domaine];
-
+            
+            $dataDemande = ['etat' => 'D',
+                    'updated_at' => Carbon::parse(Carbon::now())->format('Ymd'),
+                    'identite' => $request->identite,
+                    'commune_id' => $request->commune_id,
+                    'beneficiaire' => $request->beneficiaire,
+                    'date_certif' => Carbon::parse(Carbon::now())->format('Ymd'),
+                    'last_modified_by' => Auth::user()->usager_id,
+                    'updated_by' => Auth::user()->usager_id,
+                    'is_certified' => true,
+                    'domaine' => DemandeDomaineP002::where(['uuid' => $request->domaine])->first('libelle_long')->libelle_long,
+                    'categorie' => DemandeCategorieP002::where(['uuid' => $request->categorie])->first('libelle_long')->libelle_long,
+                    ];
+            if($request->sous_domaine && sizeof($request->sous_domaine)>0){
+                if(strlen($request->sous_domaine[0]> 0)){
+                    $sousdomaine = implode(", ", $request->sous_domaine);
+                    $dataDemande['sous_domaine'] =$sousdomaine;
+                }
+            }
         // Sauvegarde de la demande
 
         $this->repository->updateById($request->uuid, $dataDemande);
@@ -137,12 +165,28 @@ class DemandeP002Controller extends Controller {
                 DB::table('demande_piece_p002_s')->where('chemin',  $request->declaration_honneur)->delete();
                 @unlink($request->declaration_honneur);
             }
-            //Enregistrement des autres documents
+            //Enregistrement des documents du personnel
             if ($request->libelle_document && sizeof($request->libelle_document) > 0) {
                 $n = sizeof($request->libelle_document);
                 for ($i = 0; $i < $n; $i++) {
                     $chemin = $this->repository->uploadFile($request->file('fichier_document')[$i]);
                     $demandePieceP002Repository->setChemin($chemin, $demande->uuid, $request->libelle_document[$i]);
+                }
+            }
+            //Enregistrement des documents pour le matériel roulant
+            if ($request->libelle_document_roulant && sizeof($request->libelle_document_roulant) > 0) {
+                $n = sizeof($request->libelle_document_roulant);
+                for ($i = 0; $i < $n; $i++) {
+                    $chemin = $this->repository->uploadFile($request->file('fichier_document_roulant')[$i]);
+                    $demandePieceP002Repository->setChemin($chemin, $demande->uuid, $request->libelle_document_roulant[$i]);
+                }
+            }
+              //Enregistrement des documents pour le matériel non roulant
+            if ($request->libelle_document_non_roulant && sizeof($request->libelle_document_non_roulant) > 0) {
+                $n = sizeof($request->libelle_document_non_roulant);
+                for ($i = 0; $i < $n; $i++) {
+                    $chemin = $this->repository->uploadFile($request->file('fichier_document_non_roulant')[$i]);
+                    $demandePieceP002Repository->setChemin($chemin, $demande->uuid, $request->libelle_document_non_roulant[$i]);
                 }
             }
             
@@ -151,6 +195,14 @@ class DemandeP002Controller extends Controller {
         return redirect('/demandes-lists?procedure=OATEA')->with('success', 'Votre Demande à bien été modifiée et en cours de traitement !!');
         //return json_encode(array('status' => 'fail'));
     }
-    
+    public function getSousDomaineByCategorie(Request $request) {
+        $sousDomaines = $this->repository->getSousDomaine(['demande_domaine_p002_id' => $request->domaine, 'demande_categorie_p002_id' => $request->categorie]);
+        print json_encode(array('sousDomaines' => $sousDomaines, 'status' => 'success'));
+    }
+    public function deleteAutreDocument(Request $request) {
+        DB::table('demande_piece_p002_s')->where('uuid',  $request->uuid)->delete();
+        @unlink($request->chemin);
+        print json_encode(array('status' => 'success'));
+    }
 
 }
