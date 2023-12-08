@@ -12,6 +12,7 @@ use App\Repositories\DemandePieceP0012Repository;
 use App\Repositories\UserRepository;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DemandeP0012Controller extends Controller
 {
@@ -100,4 +101,54 @@ class DemandeP0012Controller extends Controller
 
     }
     }
+
+    public function update(Request $request, UserRepository $userRepository,
+    DemandePieceP0012Repository $demandePieceP0012Repository, DemandeP0012 $demande)
+   {
+
+       $data =  $request->all();
+
+       $dataFiles = $request->all();
+       $data['etat'] = 'D'; //code de procedure demande deposee
+
+       // $data['delai'] = Procedure::pluck('delai');
+       $data['delai'] = Procedure::where(['code' => 'P0012'])->first('delai')->delai;
+
+       unset($data['cnib']);
+       unset($data['telephone']);
+       unset($data['photo']);
+       unset($data['list_personne']);
+       unset($data['current_cnib']);
+       unset($data['current_photo']);
+       unset($data['current_list_personne']);
+
+       $this->repository->updateById($request->uuid, $data);
+       $demande = $this->repository->getById($request->uuid);
+
+         //Recuperation du chemin des fichiers joint
+         if ($request->file('cnib')) {
+            $cnib =  $this->repository->uploadFile($dataFiles, 'cnib');
+            $demandePieceP0012Repository->setChemin($cnib, $demande->uuid, 'CNIB');
+            DB::table('demande_piece_p0012_s')->where('chemin',  $request->current_cnib)->delete();
+            @unlink($request->current_cnib);
+        }
+
+        if ($request->file('photo')) {
+            $photo =  $this->repository->uploadFile($dataFiles, 'photo');
+            $demandePieceP0012Repository->setChemin($photo, $demande->uuid, 'Photo d\'Identite');
+            DB::table('demande_piece_p0012_s')->where('chemin',  $request->current_photo)->delete();
+            @unlink($request->current_photo);
+        }
+
+        if ($request->file('list_personne')) {
+            $list_personne =  $this->repository->uploadFile($dataFiles, 'list_personne');
+            $demandePieceP0012Repository->setChemin($list_personne, $demande->uuid, 'Liste des Personnes concernées');
+            DB::table('demande_piece_p0012_s')->where('chemin',  $request->current_list_personne)->delete();
+            @unlink($request->current_list_personne);
+        }
+
+
+       return redirect('/demandes-lists?procedure=PETE')->with('success', 'Votre Demande à bien été Modifiée et  en cours de traitement !');
+
+   }
 }

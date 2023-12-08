@@ -59,38 +59,45 @@ use App\Livewire\DemandeFontController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::middleware(['mustreset'])->group(function () {
+    Route::get('/', function () {
+        $procedure=Procedure::all();
+        return view('welcome', [
+            'procedure' => $procedure
+        ]);
+    });
 
-Route::get('/', function () {
-    $procedure=Procedure::all();
-    return view('welcome', [
-        'procedure' => $procedure
-    ]);
+    // routes des tests
+    Route::get('/test', [DemandeController::class, 'index']);
+    Route::post('/test-store', [DemandeController::class, 'store'])->name('test-route');
+
+    Route::get('/testpj', [DemandeController::class, 'testpj']);
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth', 'verified'])->name('dashboard');
+
+    Route::get('/faq', function () {
+        return view('faq');
+    })->name('faq');
+
+    Route::get('/contact', [ContactUsFormController::class, 'createForm']);
+    Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
+
+    // plainte
+    Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
+    Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
 });
 
-// routes des tests
-Route::get('/test', [DemandeController::class, 'index']);
-Route::post('/test-store', [DemandeController::class, 'store'])->name('test-route');
-
-Route::get('/testpj', [DemandeController::class, 'testpj']);
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/faq', function () {
-    return view('faq');
-})->name('faq');
-
-Route::get('/contact', [ContactUsFormController::class, 'createForm']);
-Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
-
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // Route::get('/P001', [DemandeP001Controller::class, 'create'])->name('demandesp001-create');
     Route::get("/P001", DemandeComp::class)->name("demandes");
     Route::post('/demandesp001-store', [DemandeP001Controller::class, 'store'])->name('demandesp001-store');
+    Route::post('/demandesp001-update', [DemandeP001Controller::class, 'update'])->name('demandesp001-update');
+
 
     // Route des demandes d\'octroie d\'agrement technique Eau et Assainissement
     Route::get("/P002", DemandeCompP002::class)->name("demandes-p002");
@@ -102,34 +109,41 @@ Route::middleware('auth')->group(function () {
 
    Route::get("/P006", DemandeCompP006::class)->name("demandes-p006");
    Route::post('/demandesp006-store', [DemandeP006Controller::class, 'store'])->name('demandesp006-store');
+   Route::post('/demandesp006-update', [DemandeP006Controller::class, 'update'])->name('demandesp006-update');
 
 
     //   Demande poo4 certificat de detention d'un animal sauvage
     Route::get('/P004', DemandeCompP004::class)->name('demandesp004-create');
     Route::post('/demandesp004-store', [DemandeP004Controller::class, 'store'])->name('demandesp004-store');
+    Route::post('/demandesp004-update', [DemandeP004Controller::class, 'update'])->name('demandesp004-update');
 
 
     //   Demande poo5 permis de circulation de bois et de charbon de bois
     Route::get('/P005', DemandeP005Comp::class)->name('demandesp005-create');
     Route::post('/demandesp005-store', [DemandeP005Controller::class, 'store'])->name('demandesp005-store');
+    Route::post('/demandesp005-update', [DemandeP005Controller::class, 'update'])->name('demandesp005-update');
 
      //***************** DEMANDE P007 Homologations ********************************//
     Route::get("/P007", DemandeP007Comp::class)->name("demandes-p007");
     Route::post('/demandesp007-store', [DemandeP007Controller::class, 'store'])->name('demandesp007-store');
+    Route::post('/demandesp007-update', [DemandeP007Controller::class, 'update'])->name('demandesp007-update');
 
 
     	// P008 Demande d'autorisation de gestion de dechets
 	Route::get("/P008", DemandeP008Comp::class)->name("demandep008");
     Route::post("/demandesp008-store", [DemandeP008Controller::class, 'store'])->name("demandesp008-store");
+    Route::post("/demandesp008-update", [DemandeP008Controller::class, 'update'])->name("demandesp008-update");
 
 
               // Permis de coupe de bois et charbon de bois
     Route::get("/P0011", DemandeCompP0011::class)->name("demandesp0011");
     Route::post("/demandesp0011-store", [DemandeP0011Controller::class, 'store'])->name("demandesp0011-store");
+    Route::post("/demandesp0011-update", [DemandeP0011Controller::class, 'update'])->name("demandesp0011-update");
 
             // eco tourisme
     Route::get("/P0012", DemandeCompP0012::class)->name("demandesp0012");
     Route::post("/demandesp0012-store", [DemandeP0012Controller::class, 'store'])->name("demandesp0012-store");
+    Route::post("/demandesp0012-update", [DemandeP0012Controller::class, 'update'])->name("demandesp0012-update");
     Route::post("/demandesp0012-payment", [DemandeP0012Controller::class, 'payment'])->name("demandesp0012-payment");
 
 
@@ -137,6 +151,7 @@ Route::middleware('auth')->group(function () {
     // Permis de chasse
     Route::get("/P003", DemandeCompP003::class)->name("demandesp003");
     Route::post("/demandesp003-store", [DemandeP003Controller::class, 'store'])->name("demandesp003-store");
+    Route::post("/demandesp003-update", [DemandeP003Controller::class, 'update'])->name("demandesp003-update");
 
 
 
@@ -159,6 +174,9 @@ Route::get('/administration/demandesp0011-list', [BackendController::class, 'lis
 Route::get('/administration/demandesp006-list', [BackendController::class, 'listDemandep006'])->name('demandesp006-list');
 Route::get('/administration/demandesp007-list', [BackendController::class, 'listDemandep007'])->name('demandesp007-list');
 Route::post('/administration/statusChange/{id}/{currentStatus}/{table}', [BackendController::class, 'statutChange'])->name('statusChange');
+
+Route::post('/administration/assignation/{model}/{idDemande}/{nameDemandeId}/{tableName}', [BackendController::class, 'assignation'])->name('assignation');
+
 Route::post('/administration/uploadActe/{id}/{currentStatus}/{table}', [BackendController::class, 'uploadActe'])->name('uploadActe');
 Route::get('/administration/rejet/{id}/{table}', [BackendController::class, 'rejetter'])->name('rejetter');
 Route::get('/administration/procedure-dashboard/{procedure}/{procedureName}', [BackendController::class, 'procedureDashboard'])->name('procedure-dashboard');
@@ -189,6 +207,7 @@ Route::put('/administration/parametre/structure/{uuid}', [StructureController::c
 Route::post('/administration/parametre/structure', [StructureController::class, 'store'])->name('structure-store');
 Route::get('/administration/parametre/procedure', [ProcedureController::class, 'index'])->name('procedure-list');
 Route::put('/administration/parametre/procedure/{uuid}', [ProcedureController::class, 'update'])->name('procedure-update');
+Route::put('/administration/parametre/procedure/session/{uuid}', [ProcedureController::class, 'sessionUpdate'])->name('procedure-session-update');
 Route::get('/administration/parametre/categorie', [CategorieController::class, 'index'])->name('categorie-list');
 Route::get('/administration/parametre/service', [ServiceController::class, 'index'])->name('service-list');
 Route::get('/administration/parametre/service/{uuid}', [ServiceController::class, 'supprimer'])->name('suprimer-service');
@@ -225,9 +244,6 @@ Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name(
 Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
 
 
-// plainte
-Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');;
-Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
 Route::get("/procedure/modification/{id}/{procedure}", DemandeFontController::class, 'editerDemande')->name("editer-demande");
 Route::get('/get-sous-domaine-by-categorie', [DemandeP002Controller::class, 'getSousDomaineByCategorie'])->name('get-sous-domaine-by-categorie');
 Route::get('/get-delete-autre-document', [DemandeP002Controller::class, 'deleteAutreDocument'])->name('get-delete-autre-document');

@@ -9,6 +9,7 @@ use App\Repositories\DemandeP0011Repository;
 use App\Repositories\DemandePieceP0011Repository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DemandeP0011Controller extends Controller
 {
@@ -84,5 +85,80 @@ class DemandeP0011Controller extends Controller
         $demandePieceP0011Repository->setChemin($quitance, $demande->uuid, 'Quittance');
 
         return redirect('/demandes-lists?procedure=PCBCB')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+    }
+
+    // modification des demandes
+
+    public function update(Request $request, UserRepository $userRepository, DemandePieceP0011Repository $demandePieceP0011Repository, DemandeP0011 $demande)
+    {
+
+        $data =  $request->all();
+        $dataFiles = $request->all();
+        //dd($data['exploitant']);
+        unset($data['telephone']);
+        $data['etat'] = 'D'; //code de procedure demande deposee
+        $data['delai'] = Procedure::where(['code' => 'P0011'])->first('delai')->delai;
+
+        //    dd($cheminFaisabilite, $cheminRccm, $facture_pro_format);
+        unset($data['cnib']);
+        unset($data['current_cnib']);
+        if (isset($data['rccm'])) {
+        unset($data['rccm']);
+        unset($data['current_rccm']);
+    }
+    unset($data['rccm']);
+    unset($data['current_rccm']);
+    unset($data['protocole_daccord']);
+        unset($data['agrement']);
+        unset($data['quitance']);
+        unset($data['current_quitance']);
+        unset($data['current_agrement']);
+
+        unset($data['current_protocole_daccord']);
+        unset($data['current_agrement']);
+
+
+        $this->repository->updateById($request->uuid, $data);
+        $demande = $this->repository->getById($request->uuid);
+
+          //Recuperation du chemin des fichiers joint
+          if ($request->file('cnib')) {
+            $cnib =  $this->repository->uploadFile($dataFiles, 'cnib');
+            $demandePieceP0011Repository->setChemin($cnib, $demande->uuid, 'CNIB/PASSEPORT');
+             DB::table('demande_piece_p0011_s')->where('chemin',  $request->current_cnib)->delete();
+             @unlink($request->current_cnib);
+         }
+         if (isset($data['rccm'])) {
+         if ($request->file('rccm')) {
+            $cheminRccm =  $this->repository->uploadFile($dataFiles, 'rccm');
+            $demandePieceP0011Repository->setChemin($cheminRccm, $demande->uuid, 'RCCM');
+             DB::table('demande_piece_p0011_s')->where('chemin',  $request->current_rccm)->delete();
+             @unlink($request->current_rccm);
+         }
+        }
+
+         if ($request->file('protocole_daccord')) {
+            $protocole_daccord =  $this->repository->uploadFile($dataFiles, 'protocole_daccord');
+            $demandePieceP0011Repository->setChemin($protocole_daccord, $demande->uuid, 'Protocole d\'accord');
+             DB::table('demande_piece_p0011_s')->where('chemin',  $request->current_protocole_daccord)->delete();
+             @unlink($request->current_protocole_daccord);
+         }
+
+         if ($request->file('agrement')) {
+            $agrement =  $this->repository->uploadFile($dataFiles, 'agrement');
+            $demandePieceP0011Repository->setChemin($agrement, $demande->uuid, 'Agrement');
+             DB::table('demande_piece_p0011_s')->where('chemin',  $request->current_agrement)->delete();
+             @unlink($request->current_agrement);
+         }
+
+         if ($request->file('quitance')) {
+            $quitance =  $this->repository->uploadFile($dataFiles, 'quitance');
+            $demandePieceP0011Repository->setChemin($quitance, $demande->uuid, 'Quittance');
+             DB::table('demande_piece_p0011_s')->where('chemin',  $request->current_quitance)->delete();
+             @unlink($request->current_quitance);
+         }
+
+
+        return redirect('/demandes-lists?procedure=PCBCB')->with('success', 'Votre Demande à bien été Modifiée et en cours de traitement !!');
     }
 }

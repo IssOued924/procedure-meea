@@ -47,4 +47,10 @@ class DemandeP0011 extends Demande
     {
         return $this->hasMany(CommentaireP0011::class, 'demande_p0011_id');
     }
+
+    // recuperation de l'agent affecté sur le dossier
+    public function agent()
+    {
+        return $this->belongsTo(Agent::class, 'last_agent_assign');
+    }
 }

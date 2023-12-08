@@ -46,5 +46,12 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('123'),
             'usager_id' => $usager->uuid
         ]);
+        $admin = User::create([
+            'name' => 'Admin Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('123'),
+            'agent_id' => 'd13d6f91-780c-49ae-8397-c471fac7b2',
+           'role_id' => '5298df89-26e0-4a6f-a677-dfc70d833419',
+        ]);
     }
 }

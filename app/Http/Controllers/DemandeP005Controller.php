@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Repositories\DemandeP005Repository;
 use App\Repositories\DemandePieceP005Repository;
 use App\Repositories\UserRepository;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class DemandeP005Controller extends Controller
@@ -84,4 +85,25 @@ class DemandeP005Controller extends Controller
 
         return redirect('/demandes-lists?procedure=PCBCB2')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }
+
+    // modification des demandes
+
+    public function update(Request $request, UserRepository $userRepository,
+    DemandePieceP005Repository $demandePieceP003Repository, DemandeP005 $demande)
+   {
+
+       $data =  $request->all();
+
+       $data['etat'] = 'D'; //code de procedure demande deposee
+       $data['updated_at'] = Carbon::parse(Carbon::now())->format('Ymd');
+
+       $data['delai'] = Procedure::where(['code' => 'P005'])->first('delai')->delai;
+
+
+       $this->repository->updateById($request->uuid, $data);
+       $demande = $this->repository->getById($request->uuid);
+
+
+       return redirect('/demandes-lists?procedure=PCBCB2')->with('success', 'Votre Demande à bien été Modifiée et  en cours de traitement !');
+   }
 }
