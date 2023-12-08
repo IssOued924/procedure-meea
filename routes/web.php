@@ -84,9 +84,6 @@ Route::middleware(['mustreset'])->group(function () {
     Route::get('/contact', [ContactUsFormController::class, 'createForm']);
     Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
-    // plainte
-    Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
-    Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
 });
 
 Route::middleware(['auth', 'mustreset'])->group(function () {
@@ -238,7 +235,7 @@ Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name(
 // plainte
 Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
 Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
-Route::get('/listePlainte', [PlainteController::class, 'listePlainte'])->name('listePlainte');
+Route::get('/listePlainte/{procedure}', [PlainteController::class, 'listePlainte'])->name('listePlainte');
 Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
 
 

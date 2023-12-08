@@ -18,7 +18,6 @@
         <!-- Left side columns -->
         <div class="col-lg-12">
             <div class="row">
-
                 <!-- Recent Sales -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
@@ -38,6 +37,8 @@
 
 
                         <h5 class="card-title">Liste des plaintes   <span>| plaintes</span></h5>
+
+                       
 
                         <div class="card-body">
                             <p> @if(session('success'))
@@ -80,30 +81,33 @@
                                 </div>
                                 <div class="col-3">
 
-
                                     <div style="float: right">
-
                                     <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
                                         class="bi bi-arrow-repeat"></i></button>
                                         <button  title="Ajouter" type="button" class="btn btn-success"><i
                                             class="bi bi-plus"></i></button>
                                     </div>
-
-
                                 </div>
                             </div><br>
 
 
                             <!-- Table with stripped rows -->
                             <table class="table datatable table-bordered table-striped">
+                                <label>Filtrer les plaintes par procédure</label>
+                                <select name="procedure" id="procedure" class="form-select border-success" onchange="changeTypePlainte()">
+                                <option class="mb-3" value="Toutes">Toutes les plaintes</option>
+                                    @foreach($procedures as $proc)
+                                        <option class="mb-3" {{($selectedProcedure == $proc->libelle_court ? 'selected': '')}} value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
+                                    @endforeach
+                                </select><br><br>
+
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Date plainte</th>
                                         <th scope="col">Plaignant</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Tel</th>
-                                        <th scope="col">procedure</th>
+                                        <th scope="col">Telephone</th>
+                                        <th scope="col">Procedure</th>
                                         <th scope="col">Etat</th>
 
                                         <th scope="col">Action</th>
@@ -132,9 +136,8 @@
                                         <tr>
                                             <th scope="row">{{ $i++ }}</th>
                                             <td>{{ $plainte->created_at->format('d/m/Y H:i:s') }}</td>
-                                            <td>{{ $plainte->usager_id }}</td>
-                                            <td>{{ $plainte->usager_id }}</td>
-                                            <td>{{ $plainte->usager_id }}</td>
+                                            <td> {{ $plainte->usager->nom.' '.$plainte->usager->prenom}}</td>
+                                            <td>{{  $plainte->usager->telephone }}</td>
                                             <td>{{ $plainte->procedure }}</td>
                                             <td><span class="badge {{ $statutColor }} ">{{ $plainte->etat }}</span> </td>
                                             <td>
@@ -168,30 +171,32 @@
                                                                     </div>
 
                                                                     <div class="col-6">
-                                                                        <b>Identite du plaignant : </b>
-                                                                        <span class="text-success">{{ $plainte->name }}</span>
+                                                                        <b>Etat actuelle de la plainte :</b>
+                                                                        <span class="text-success">{{ $plainte->etat}}</span>
                                                                     </div>
                                                                 </div><br>
 
 
 
-                                                                <div class="row">
+                                                                <div class="row"> 
                                                                     <div class="col-6">
-                                                                        <b>Email du plaignant :</b>
-                                                                        <span class="text-success">{{ $plainte->email}}</span>
+                                                                        <b>Identite du plaignant : </b>
+                                                                        <span class="text-success"> {{ $plainte->usager->nom.' '.$plainte->usager->prenom}} </span>
                                                                     </div>
 
                                                                     <div class="col-6">
                                                                         <b>Telephone du plaignant : </b>
-                                                                        <span class="text-success">{{ $plainte->phone }}</span>
+                                                                        <span class="text-success">{{ $plainte->usager->telephone }}</span>
                                                                     </div>
+
                                                                 </div><br>
 
 
-                                                                <div class="row">
+                                                                <div class="row">   
+                                                                    
                                                                     <div class="col-6">
-                                                                        <b>Categorie :</b>
-                                                                        <span class="text-success">{{ $plainte->category}}</span>
+                                                                        <b>Procedure :</b>
+                                                                        <span class="text-success">{{ $plainte->procedure}}</span>
                                                                     </div>
 
                                                                     <div class="col-6">
@@ -200,6 +205,7 @@
                                                                     </div>
                                                                 </div><br>
 
+
                                                                 <div class="row">
                                                                     <div class="col-6">
                                                                         <b>Message :</b>
@@ -207,19 +213,11 @@
                                                                     </div>
 
                                                                     <div class="col-6">
-                                                                        <b>Etat actuelle de la demande :</b>
-                                                                        <span class="text-success">{{ $plainte->etat}}</span>
-                                                                    </div>
-                                                                </div>
-                                                                <br />
-
-                                                                <div class="row">
-                                                                    <div class="col-12">
                                                                         <b>Derniere modification </b> <br />
                                                                         <span class="text-success"> {{ !empty($plainte->user)? $plainte->user->name:""  }} le {{ $plainte->updated_at }}</span>
                                                                     </div>
                                                                 </div>
- 
+                                                                <br /> 
 
 
                                                             </div>
@@ -257,7 +255,7 @@
                                                                     <div class="text-center">
                                                                         <label class="col-form-label">Modifier l'état de la plainte</label>
                                                                             <select class="form-select" name="etat" required>
-                                                                                <option class=""> </option> 
+                                                                                <option class=""> </option>
                                                                                 @if ($plainte->etat == 'nouveau')
                                                                                     <option value="en cours" @if ($plainte->etat == 'en cours') selected @endif> En cours de traitement</option> 
                                                                                 @endif 
@@ -265,7 +263,11 @@
                                                                                 @if ($plainte->etat == 'en cours')
                                                                                     <option value="fermer" @if ($plainte->etat == 'fermer') selected @endif> Fermer la plainte (traitée)</option> 
                                                                                 @endif
-                                                                            <select>
+                                                                            <select> <br />
+                                                                            
+                                                                            <label class="col-form-label">Commentaire</label> <br />
+                                                                            <textarea class="form-control" name="commentaire"> {{ $plainte->commentaire }}
+                                                                            </textarea>
                                                                     </div>
 
                                                                 </div>
@@ -306,72 +308,13 @@
 @section('script')
 
 <script>
-    function rejetter(){
-
-    var test = document.getElementById('test')
-    test.submit()
-    const swalWithBootstrapButtons = Swal.mixin({
-  customClass: {
-    confirmButton: 'btn btn-success',
-    cancelButton: 'btn btn-danger'
-  },
-  buttonsStyling: false
-})
-
-swalWithBootstrapButtons.fire({
-  title: 'Etes vous sur de vouloir Rejetter cette Demande?',
-  text: "You won't be able to revert this!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonText: 'Je Confirme!',
-  cancelButtonText: 'Annuler!',
-  reverseButtons: true
-}).then((result) => {
-  if (result.isConfirmed) {
-
-    swalWithBootstrapButtons.fire(
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
-    )
-  } else if (
-    /* Read more about handling dismissals below */
-    result.dismiss === Swal.DismissReason.cancel
-  ) {
-    // swalWithBootstrapButtons.fire(
-    //   'Cancelled',
-    //   'Your imaginary file is safe :)',
-    //   'error'
-    // )
-  }
-})
-    }
-
-    //fonction valider statut
-    function valider(me){
-        Swal.fire({
-  title: 'Do you want to save the changes?',
-  showDenyButton: true,
-  showCancelButton: true,
-  confirmButtonText: 'Save',
-  denyButtonText: `Don't save`,
-}).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
-  if (result.isConfirmed) {
-    let url= $(me).attr('data-url');
-    window.location=url;
-
-
-
-    Swal.fire('Saved!', '', 'success')
-  } else if (result.isDenied) {
-    Swal.fire('Changes are not saved', '', 'info')
-  }
-})
-    }
-
-    function refresh() {
-        location.reload(true);
+    
+    function changeTypePlainte() {
+        procedureSelect = document.getElementById("procedure").value;
+        let url = "{{ route('listePlainte', ['procedure'=>'procedureSelect']) }}";
+        url = url.replace('procedureSelect', procedureSelect);
+        // alert(url);
+        document.location.href=url;
     }
 </script>
 

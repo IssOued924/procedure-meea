@@ -358,7 +358,7 @@
         </a>
         <ul id="plainte-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="{{ route('listePlainte') }}">
+            <a href="{{ route('listePlainte', ['procedure'=>'Toutes']) }}">
               <i class="bi bi-circle"></i><span>Liste des plaintes</span>
             </a>
           </li>

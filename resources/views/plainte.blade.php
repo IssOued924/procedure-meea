@@ -24,20 +24,13 @@
 
     <div class="form-group">
         <label>Plainte lié à la procédure</label>
-         <select name="procedure" id="procedure" class="form-select">
-            <option value=""> </option>
-            <!-- <option value="Généralité"> Généralité</option> -->
-            <option value="Permis d'écotourisme ou de tourisme écologique"> Permis d'écotourisme ou de tourisme écologique </option>
-            <option value="Délivrance d'avis technique d'importation de produits chimiques"> Délivrance d'avis technique d'importation de produits chimiques </option>
-            <option value="Autorisation donnant droit à mener la chasse"> Autorisation donnant droit à mener la chasse </option>
-            <option value="Autorisation de gestion des déchets Solide"> Autorisation de gestion des déchets Solide </option>
-            <option value="Certificat d'exemption des emballages et sachets plastiques non biodégradables"> Certificat d'exemption des emballages et sachets plastiques non biodégradables </option>
-            <option value="Permis de coupe du bois et charbon de bois"> Permis de coupe du bois et charbon de bois </option>
-            <option value="Certificat de détention d'un animal sauvage"> Certificat de détention d'un animal sauvage </option>
-            <option value="Permis de circulation du bois et charbon de bois"> Permis de circulation du bois et charbon de bois </option>
-            <option value="Octroit d'agrément technique eau et assainissement"> Octroit d'agrément technique eau et assainissement </option>
-            <option value="Certificat d'Homologation des emballages et sachets plastiques biodégradables"> Certificat d'Homologation des emballages et sachets plastiques biodégradables </option>
-         </select>
+        <select name="procedure" id="procedure" class="form-select border-success">
+        <option class="mb-3" value=""></option>
+            @foreach($procedures as $proc)
+                <option class="mb-3" value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
+            @endforeach
+        </select><br>
+
         @if ($errors->has('procedure'))
         <div class="error">
             {{ $errors->first('procedure') }}
@@ -69,7 +62,7 @@
     </div>
 
     <br />
-    <input type="submit" value="Envoyer" class="btn btn-dark btn-block">
+    <input type="submit" value="Envoyer la plainte" class="btn btn-dark btn-block">
 </form>
     </div>
 @endsection

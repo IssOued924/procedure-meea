@@ -20,6 +20,6 @@ class Plainte extends Model
 
 
     public function usager(){
-        return $this->belongsTo(Usager::class, 'uuid', 'usager_id');
+        return $this->belongsTo(Usager::class, 'usager_id', 'uuid');
     }
 }
