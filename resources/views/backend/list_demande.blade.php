@@ -80,7 +80,7 @@
                                             <th scope="col">Quantite/Kg</th>
                                             <th scope="col">Résidence</th>
                                             <th scope="col">etat Demande</th>
-                                            <th scope="col">Délai</th>
+                                            {{-- <th scope="col">Délai de Traitement</th> --}}
                                             <th scope="col">Paiement</th>
                                             <th scope="col">Delai de Traitement</th>
                                             <th scope="col">Déposé</th>
@@ -151,12 +151,12 @@
 
                                                     <td><span class="badge {{ $statutColor }} ">{{ $statut }}</span>
                                                     </td>
-                                                    @if (isset($demande->delai))
+                                                    {{-- @if (isset($demande->delai))
                                                         <td><span class="badge bg-dark">{{ $demande->delai }} </span> Jours
                                                         </td>
                                                     @else
                                                         <td><span class="">-</span> </td>
-                                                    @endif
+                                                    @endif --}}
 
                                                     {{-- partie paiement --}}
                                                     @if ($demande->paiement === 1)
@@ -165,8 +165,7 @@
                                                         <td><b><span class="text-warning">Non Payé</span></b></td>
                                                     @endif
 
-                                                    <td><span class="badge bg-dark">{{ $demande->procedure->delai }} </span>
-                                                        Jours </td>
+                                                    <td><span class="badge bg-dark">{{ $demande->procedure->delai }} Jours</span> </td>
 
                                                     <td>{{ $demande->created_at->diffForHumans() }}</td>
 
