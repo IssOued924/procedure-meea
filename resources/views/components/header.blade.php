@@ -37,7 +37,7 @@
                         @if (isset(Auth::user()->usager->nom_entreprise))
                         <div>{{ Auth::user()->usager->nom_entreprise }}</div>
                         @else
-                            <div>{{ Auth::user()->usager->prenom.'  '.Auth::user()->usager->nom }}</div>
+                            {{-- <div>{{ Auth::user()->usager->prenom.'  '.Auth::user()->usager->nom }}</div> --}}
                         @endif
                         </span> <i class="bi bi-chevron-down"></i>
                     </a>
