@@ -5,7 +5,9 @@ namespace App\Livewire;
 use App\Models\Commune;
 use App\Models\Pays;
 use App\Models\Demande;
-use App\Models\Procedure;
+use App\Models\DemandeCategorieP002;
+use App\Models\DemandeDomaineP002;
+use App\Models\DemandeSousDomaineP002;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -54,7 +56,10 @@ class DemandeCompP002 extends Component
             "communes" => Commune::all(),
             "pays" => Pays::all(),
             "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
-            "default_pays" => Auth::user()->usager->pays
+           // "default_pays" => Auth::user()->usager->pays,
+            "domaines" => DemandeDomaineP002::all(),
+            "categories" => DemandeCategorieP002::all(),
+            "sousDomianes" => DemandeSousDomaineP002::all(),
         ];
         
         $startDate = Carbon::parse($procedure->session_debut);

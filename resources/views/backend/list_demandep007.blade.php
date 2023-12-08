@@ -157,7 +157,7 @@
                                             break;
                                     }
                                     @endphp
-                                    @if ($demande->last_agent_assign == null || $demande->last_agent_assign == Auth::user()->agent->uuid || Auth::user()->role->code == "ADMIN")
+                                   
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
@@ -195,26 +195,59 @@
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                             data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}">
                                             <i class="bi bi-eye"></i> </button>
+                                            @php
+    $userRole = Auth::user()->role->libelle; 
+@endphp
 
-                                            @if ($demande->etat != 'A' && $demande->etat != 'S' )
-                                                <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
-                                                    type="button" title="Valider" class="btn btn-success"><i
-                                                        class="bi bi-check-circle"></i> </a>
+<!-- Boutons d'action en fonction de l'état et du rôle -->
+@if (($demande->etat == 'D' && in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
+     ($demande->etat == 'E' && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
+     ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||
+     ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration']))) 
+    <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}" type="button" title="Valider" class="btn btn-success">
+        <i class="bi bi-check-circle"></i>
+    </a>
+@endif
 
-                                                <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur"
-                                                    class="btn btn-primary"><i class="bi bi-folder-symlink"></i></button>
+@if ($demande->etat == 'D' && in_array($userRole, ['Gestionnaire', 'Administration']))
+    <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur"
+            class="btn btn-primary">
+        <i class="bi bi-folder-symlink"></i>
+    </button>
+@endif
+@if ($demande->etat == 'E' && in_array($userRole, ['Gestionnaire', 'Administration']))
+    <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur"
+            class="btn btn-primary">
+        <i class="bi bi-folder-symlink"></i>
+    </button>
+@endif
 
-                                                <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejetter"
-                                                    class="btn btn-danger"><i class="bi bi-x-circle"></i></a>
-                                            @endif
-                                            @if ($demande->etat == 'S')
-                                            <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
-                                                type="button" title="Valider" class="btn btn-success"><i
-                                                    class="bi bi-check-circle"></i> </a>
-                                                <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}"
-                                                type="button" title="Joindre Acte Signé" class="btn btn-success"><i
-                                                    class="bi bi-upload"></i> </a>
-                                            @endif
+@if ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration',]))
+    <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}" type="button" title="Joindre Acte Signé"
+        class="btn btn-success">
+        <i class="bi bi-upload"></i>
+    </a>
+@endif
+
+@if (($demande->etat != 'A' && $demande->etat != 'S' && $demande->etat != 'R') && in_array($userRole, [ 'Gestionnaire', 'Administration']))
+    <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter"
+        class="btn btn-danger">
+        <i class="bi bi-x-circle"></i>
+    </a>
+@endif
+@if (($demande->etat != 'A' && $demande->etat != 'S'&& $demande->etat != 'E'&& $demande->etat != 'V'&& $demande->etat != 'R') && in_array($userRole, ['Réception']))
+    <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter"
+        class="btn btn-danger">
+        <i class="bi bi-x-circle"></i>
+    </a>
+@endif
+@if (($demande->etat != 'A' && $demande->etat != 'S'&& $demande->etat != 'V'&& $demande->etat != 'R') && in_array($userRole, ['Etudes']))
+    <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter"
+        class="btn btn-danger">
+        <i class="bi bi-x-circle"></i>
+    </a>
+@endif
+
 
 
                                               {{-- Model de confirmation de Validation et note detude --}}
@@ -469,7 +502,7 @@
                                             </div>
                                         </div><!-- End Large Modal-->
                                     </tr>
-                                    @endif
+                                   
                                     @endforeach
 
 
