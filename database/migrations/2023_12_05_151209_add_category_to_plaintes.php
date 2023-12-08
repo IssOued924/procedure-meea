@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('plaintes', function (Blueprint $table) {
             //
-            $table->string('category');
+            $table->string('procedure');
             $table->string('etat');
         });
     }

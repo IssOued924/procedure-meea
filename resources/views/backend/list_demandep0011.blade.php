@@ -181,9 +181,9 @@
                                           @endif
 
                                           @if($demande->exploitant == "Forestier")
-                                          <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
-                                          @else
                                           <td><span class="badge bg-dark"> 10</span> Jours </td>
+                                          @else
+                                          <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
                                           @endif
                                           
 
