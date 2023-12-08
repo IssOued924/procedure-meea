@@ -24,7 +24,7 @@ class StoreDemandeP002Request extends FormRequest
     public function rules(){
         $baseRules = [
            'identite' => 'required',
-            'pays' => 'required',
+            'commune_id' => 'required',
             'beneficiaire' => 'required',
             'recu_achat_dossier' => 'required',
             'ifu' => 'required',
@@ -43,7 +43,7 @@ class StoreDemandeP002Request extends FormRequest
 
       $message = [
         'identite.required' =>'Identité : est obligtoire',
-        'pays.required' =>'Pays : est obligatoire',
+        'commune_id.required' =>'Lieu de Residence : est obligatoire',
         'beneficiaire.required' => 'Bénéficiaire : est obligatoire',
         'recu_achat_dossier.required' => 'Reçu d’achat du dossier de demande : est obligatoire',
         'ifu.required'=>'Certificat IFU : est requis',
