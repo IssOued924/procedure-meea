@@ -91,6 +91,35 @@
                                 </div>
                             </div><br>
 
+                            <div class="row delai">
+                                <div class="">
+                                    {{-- <div class="col-sm-12 col-md-6"> --}}
+                                        {{-- <div class="dt-buttons btn-group flex-wrap"> --}}
+
+                                            <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0"
+                                                aria-controls="example1" type="button" id="tous"><span>Tous les delais</span></button>
+                                           
+                                        {{-- </div> --}}
+                                    {{-- </div> --}}
+                                </div>
+                                <div class="">
+
+                                    {{-- <div style="float: right"> --}}
+
+                                        <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0"
+                                        aria-controls="example1" type="button" id="enCours"><span>Delais en cours</span></button>
+                                    {{-- </div> --}}
+                                </div>
+                                <div class="">
+
+                                    {{-- <div style="float: right"> --}}
+
+                                        <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0"
+                                        aria-controls="example1" type="button" id="depasse"><span>Delais depasses</span></button>
+                                    {{-- </div> --}}
+                                </div>
+                            </div><br>
+
                             <!-- Table with stripped rows -->
                             <table class="table datatable table-bordered table-striped">
                                 <thead>
@@ -107,7 +136,7 @@
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="filter">
                                     @php
                                     $i = 1;
                                     @endphp
@@ -476,10 +505,22 @@
 </section>
 @endsection
 
+<script src="{{ asset('js/jquery.min.js') }}"></script>
 <script>
     function refresh() {
         location.reload(true);
-    }
+    };
+
+
+    $(document).ready(function() {
+        $('#tous').click(function() {
+            $('.filter').show();
+        });
+
+        $('#enCours').click(function() {
+            $('.filter').hide();
+        });
+    });
 </script>
 @section('script')
 
