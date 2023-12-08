@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             //StructureSeeder::class
            // UsersTableSeeder::class
             AgremenTechniqueTableSeeder::class,
-           UsersTableSeeder::class
+          // UsersTableSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
 
