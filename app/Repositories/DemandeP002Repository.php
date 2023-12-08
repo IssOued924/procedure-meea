@@ -5,6 +5,7 @@ use App\Models\DemandeP002;
 use Faker\Core\File;
 use Illuminate\Support\Facades\Storage;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
+use Illuminate\Support\Facades\DB;
 //use Your Model
 
 /**
@@ -43,6 +44,12 @@ class DemandeP002Repository extends AppRepository
         $path = $file->storeAs('public/' . $libelle, $fileName);
         return $path;
     }
-
-
+    
+    public function getSousDomaine($filtre = array()){
+         return DB::table('demande_sous_domaine_p002_s')
+                        ->select('libelle_court as id', 'libelle_long as libelle')
+                        ->where($filtre)
+                        //->orderBy('demandes.created_at', 'DESC')
+                        ->get();
+    }
 }

@@ -84,9 +84,6 @@ Route::middleware(['mustreset'])->group(function () {
     Route::get('/contact', [ContactUsFormController::class, 'createForm']);
     Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
-    // plainte
-    Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
-    Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
 });
 
 Route::middleware(['auth', 'mustreset'])->group(function () {
@@ -228,7 +225,7 @@ Route::post('/administration/parametre/role', [RoleController::class, 'store'])-
 Route::get('/administration/utilisateur/user', [RegisteredUserController::class, 'listUsers'])->name('user-list');
 Route::get('/administration/utilisateur/agent', [AgentController::class, 'index'])->name('agent-list');
 Route::post('/administration/utilisateur/agent/', [AgentController::class, 'store'])->name('agent-store');
-Route::put('/administration/utilisateur/agent/{uuid}', [AgentController::class, 'update'])->name('agent-update');
+Route::put('/7dministration/utilisateur/agent/{uuid}', [AgentController::class, 'update'])->name('agent-update');
 Route::get('/administration/utilisateur/usager', [UsagerController::class, 'index'])->name('usager-list');
 
 Route::get('/administration/utilisateur/profile', [ProfileController::class, 'index'])->name('profile-list');
@@ -239,11 +236,22 @@ Route::post('/administration/utilisateur/user-store', [RegisteredUserController:
 
 Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name('demandes-lists');
 
+
+
+// plainte
+Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
+Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
+Route::get('/listePlainte/{procedure}', [PlainteController::class, 'listePlainte'])->name('listePlainte');
+Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
+
+
 });
 
 Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
 
 
 Route::get("/procedure/modification/{id}/{procedure}", DemandeFontController::class, 'editerDemande')->name("editer-demande");
+Route::get('/get-sous-domaine-by-categorie', [DemandeP002Controller::class, 'getSousDomaineByCategorie'])->name('get-sous-domaine-by-categorie');
+Route::get('/get-delete-autre-document', [DemandeP002Controller::class, 'deleteAutreDocument'])->name('get-delete-autre-document');
 
 require __DIR__.'/auth.php';

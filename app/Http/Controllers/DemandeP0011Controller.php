@@ -47,8 +47,6 @@ class DemandeP0011Controller extends Controller
         $data['paiement'] =1;
         $data['procedure_id'] = Procedure::where(['code' => 'P0011'])->first('uuid')->uuid;
 
-
-
         $cnib =  $this->repository->uploadFile($dataFiles, 'cnib');
         //if($data['exploitant'] == '1') {
             if (isset($data['rccm'])) {

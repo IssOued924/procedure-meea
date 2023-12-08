@@ -177,7 +177,7 @@
                                         @else
                                         <td><b><span class="text-warning">Non Payée</span></b></td>
                                         @endif
-
+                                        
                                         <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
 
                                         <td>{{ $demande->created_at->diffForHumans() }}</td>

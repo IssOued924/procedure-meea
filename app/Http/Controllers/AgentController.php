@@ -54,11 +54,14 @@ class AgentController extends Controller
     ]);
 
     $agent = Agent::find($uuid);
+    
     $agent->update([
         'nom' => $request->input('nom'),
         'prenom' => $request->input('prenom'),
         'matricule' => $request->input('matricule'),
         'fonction' => $request->input('fonction'),
+        'service_id' => $request->input('service_id'),
+        'role_id' => $request->input('role_id'),
     ]);
 
     return redirect()->route('agent-list')->with('success', 'Agent  mis à jour avec succès !');

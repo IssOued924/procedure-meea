@@ -72,10 +72,18 @@
                     </style>
 
                     @if($procedure)
-                    <div class="col-lg-7 box ">
+                    <div class="col-lg-7 box" >
                         <h5 class="single">
                             {{ $procedure->libelle_long }}
                         </h5>
+                        @if ($checkSession)
+                        <marquee font style="bold" scrolldelay="100">
+                            <h6 style="color:red">
+                                *** Les demandes sont closes pour cette année ***
+                             </h6>
+                        </marquee>
+                            
+                        @endif
                         <p style="text-align: justify;text-indent : 10%;">{{ $procedure->description }}</p>
                         <div style=" margin: 18px 0 33px;">
 
@@ -248,7 +256,7 @@
                     </div>
                     @else
                     {{-- La partie de connexion --}}
-                    <div class="col-lg-6 offset-lg-3  box">
+                    <div class="col-lg-6 offset-lg-3  box" >
                         <h2>Connexion</h2>
                         <!-- Session Status -->
                         <x-auth-session-status class="mb-4" :status="session('status')" />
