@@ -8,6 +8,7 @@ use App\Models\Demande;
 use App\Models\DemandeCategorieP002;
 use App\Models\DemandeDomaineP002;
 use App\Models\DemandeSousDomaineP002;
+use App\Models\Procedure;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -61,7 +62,7 @@ class DemandeCompP002 extends Component
             "categories" => DemandeCategorieP002::all(),
             "sousDomianes" => DemandeSousDomaineP002::all(),
         ];
-        
+
         $startDate = Carbon::parse($procedure->session_debut);
         $endDate = Carbon::parse($procedure->session_fin);
         $checkSession = Carbon::now()->between($startDate, $endDate);

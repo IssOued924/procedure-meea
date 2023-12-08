@@ -56,11 +56,11 @@
                                             <div class="row">
                                                 <div class="col-3">
                                                     <label class="nom_societe fw-bold" >Exploitant Forestier</label>
-                                                    <input id='radio1' type="radio" value="Forestier" class="checkbox"  name="exploitant" />
+                                                    <input id='radio1Exp' type="radio" value="Forestier" class="checkbox"  name="exploitant" />
                                                 </div>
                                                 <div class="col-3">
                                                     <label class="siege_social fw-bold ">Exploitant Commercial</label>
-                                                    <input  id='radio2' type="radio" value="Commercial"  name="exploitant"/>
+                                                    <input  id='radio2Forest' type="radio" value="Commercial"  name="exploitant"/>
                                                 </div>
                                             </div>
                                         <div class="row">
@@ -98,14 +98,7 @@
                                                 <input type="text" name="telephone" value="{{ $telephone }}" class="form-control border-success"    placeholder="Telephone" value="{{ $telephone}}" />
                                             </div>
                                         </div>
-                                        {{-- <div class="row">
-                                            <div class="col-12">
-                                                <label class="activite">Activités ménées<span
-                                                        style="color: red">*</span></label>
-                                                <textarea class="border-success" name="activite"
-                                                    placeholder="Activités ménées"></textarea>
-                                            </div>
-                                        </div> --}}
+
                                     </div>
                                     <input type="button"   class="next action-button btn btn-success"
                                         value="Suivant" />
@@ -124,40 +117,40 @@
                                                 <label class="nom_societe fw-bold"> <strong>Statut de la zone</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input id='statut' type="text"  class="form-control border-success"   name="statut"
-                                                    placeholder="statut" />
+                                                    placeholder="statut"  required/>
                                             </div>
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Escpèce Concerné</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input id='espece' type="text" class="form-control border-success"    name="espece_coupe"
-                                                    placeholder="espèce" />
+                                                    placeholder="espèce" required/>
                                             </div>
 
                                             <div id='superficie' class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Superficie</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input  type="number" class="form-control border-success"    name="superficie"
-                                                    placeholder="superficie" />
+                                                    placeholder="superficie"  required/>
                                             </div>
 
                                             <div id='depot' class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Depot</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input  type="text" class="form-control border-success"    name="depot"
-                                                    placeholder="depot" />
+                                                    placeholder="depot" required />
                                             </div>
 
                                             <div id='nature' class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Nature du produit</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input  type="text" class="form-control border-success"    name="nature_produit"
-                                                    placeholder="superficie" />
+                                                    placeholder="superficie" required />
                                             </div>
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Quota/Quantite</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input id='quota' type="number" class="form-control border-success"    name="quantite"
-                                                    placeholder="Quota/Quantite" />
+                                                    placeholder="Quota/Quantite" required />
                                             </div>
                                             {{-- <div class="col-6">
                                                 <label class="siege_social fw-bold">Espece Concernés<span style="color:red">
@@ -440,11 +433,9 @@ jQuery('input[name=moyen]:radio').click(function(){
   });
 
 
-
-
-        // Sélection des boutons radio
-        const radio1 = document.getElementById("radio1");
-        const radio2 = document.getElementById("radio2");
+        // Sélection des boutons radio de exploitant
+        const radio1Exp = document.getElementById("radio1Exp");
+        const radio2Forest = document.getElementById("radio2Forest");
 
         // Sélection des champs à afficher/masquer
         const superficie = document.getElementById("superficie");
@@ -454,8 +445,8 @@ jQuery('input[name=moyen]:radio').click(function(){
         const agrement = document.getElementById("agrement");
 
         // Ajout d'un gestionnaire d'événement pour les boutons radio
-        radio1.addEventListener("change", function() {
-            if (radio1.checked) {
+        radio1Exp.addEventListener("change", function() {
+            if (radio1Exp.checked) {
                 superficie.style.display = "block";
                 rccm.style.display = "none";
                 nature.style.display = "none"
@@ -463,7 +454,7 @@ jQuery('input[name=moyen]:radio').click(function(){
             }
         });
 
-        radio2.addEventListener("change", function() {
+        radio2Forest.addEventListener("change", function() {
             if (radio2.checked) {
                 superficie.style.display = "none";
                 rccm.style.display = "block";

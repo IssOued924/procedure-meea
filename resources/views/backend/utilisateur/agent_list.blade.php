@@ -252,9 +252,11 @@
                                         <div class="modal fade" id="basicModalEdit{{ $agent->uuid }}" tabindex="-1">
                                             <div class="modal-dialog">
                                                 <div class="modal-content" style="width: 800px">
-                                                <form method="post"
+                                                <form method="POST"
                                                             action="{{ route('agent-update', $agent->uuid) }}">
-                                                            {{ method_field('put') }}
+                                                            @csrf
+                                                            @method('PUT')
+
                                                     <div class="modal-header">
                                                         <h5 class="modal-title">Editer l'agent </h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -262,8 +264,8 @@
                                                     </div>
                                                     <div class="modal-body">
 
-                                                            @csrf
-                                                            @method('GET')
+
+
 
                                                             <div class="row">
                                                                 <div class="col-6">
@@ -344,19 +346,19 @@
                                                                                 Direction
                                                                             </option>
                                                                             @foreach ( $services as $serv)
-                                                                            <option value="{{ $agent->service_id }}">{{
-                                                                                $serv->libelle_long}}</option>
+                                                                            <option {{ $agent->service_id ==  $serv->uuid ? 'selected' : '' }} value="{{ $serv->uuid }}">{{
+                                                                               $agent->service->libelle_long}}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
                                                                     <!-- End Quill Editor Full -->
                                                                 </div>
                                                                 <div class="col">
-                                                                    <h5 class="card-title">Roles</h5>
+                                                                    <h5 class="card-title">Profil</h5>
                                                                     <div class="input-group mb-3">
                                                                         <select   class="form-select border-success" name="role_id" id="" required>
                                                                         @foreach ($roles as $role)
-                                                                       <option value="{{ $role->uuid }}">{{ $role->libelle }}</option>
+                                                                       <option {{ $agent->role_id ==  $role->uuid ? 'selected' : '' }} value="{{ $role->uuid }}">{{ $role->libelle }}</option>
                                                                         &nbsp;&nbsp;
                                                                         @endforeach
                                                                     </select>
