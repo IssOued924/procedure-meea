@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
             PaysSeeder::class,
             StatutDemandeSeeder::class,
             TypeUsagerSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
             //StructureSeeder::class
-           // UsersTableSeeder::class
+           UsersTableSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
 
