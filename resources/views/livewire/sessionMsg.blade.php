@@ -37,7 +37,7 @@
                                     <h4>Nous tenons à exprimer notre gratitude envers tous ceux qui ont manifesté leur intérêt et nous espérons vous accueillir lors des prochaines saisons.</h4>
                                     <h4>Restez à l\'écoute pour les mises à jour futures et d'autres opportunités passionnantes.</h4> --}}
                                     <h4>Rendez-vous à la prochaines saison prévu pour 
-                                        <span style="color:blue !important"> {{ date('M-Y',strtotime($procedure->session_fin)) }}.</span>
+                                        <span style="color:blue !important"> {{ date('M-Y',strtotime($procedure->session_fin.' +1 year')) }}.</span>
                                     </h4>
                                     <h4>Merci de votre compréhension.</h4>
                                     <h4>Cordialement,</h4>

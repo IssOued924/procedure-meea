@@ -84,9 +84,6 @@ Route::middleware(['mustreset'])->group(function () {
     Route::get('/contact', [ContactUsFormController::class, 'createForm']);
     Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
-    // plainte
-    Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
-    Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
 });
 
 Route::middleware(['auth', 'mustreset'])->group(function () {
@@ -238,6 +235,15 @@ Route::post('/administration/utilisateur/user-store', [RegisteredUserController:
 // Liste des demandes d'un agent
 
 Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name('demandes-lists');
+
+
+
+// plainte
+Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
+Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
+Route::get('/listePlainte/{procedure}', [PlainteController::class, 'listePlainte'])->name('listePlainte');
+Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
+
 
 });
 

@@ -15,6 +15,7 @@
             <ul>
                 @guest
                 <li><a class="active" href="/">Accueil</a></li>
+                <li><a href="#">FAQ</a></li>
                 <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Plainte</a></li>
                 <li><a href="contact">Contact</a></li>
                 <li><a href="faq">FAQ</a></li>
@@ -25,6 +26,8 @@
                 <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Plainte</a></li>
 
                 <li><a href="{{ route('demandes-lists') }}">Mes demandes</a></li>
+                <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Déposer une plainte</a></li>
+
                 <li><a href="contact">Contact</a></li>
                 <li><a href="faq">FAQ</a></li>
 

@@ -11,4 +11,15 @@ class Plainte extends Model
     use \Wildside\Userstamps\Userstamps;
 
     protected $guarded = [];
+    
+
+    public function user()
+    {
+        return $this->hasOne(User::class,'uuid','user_id');
+    }
+
+
+    public function usager(){
+        return $this->belongsTo(Usager::class, 'usager_id', 'uuid');
+    }
 }
