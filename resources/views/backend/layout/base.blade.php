@@ -245,7 +245,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse"
                         href="#">
-                        <i class="bi bi-person"></i><span>Utilisateur</span><i class="bi bi-chevron-down ms-auto"></i>
+                        <i class="bi bi-person"></i><span>Utilisateurs</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
@@ -310,20 +310,20 @@
                         </li>
 
                         {{-- <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Piece-Justificative</span>
-            </a>
-          </li> --}}
+                            <a href="icons-boxicons.html">
+                            <i class="bi bi-circle"></i><span>Piece-Justificative</span>
+                            </a>
+                        </li> --}}
                         <li>
                             <a href=" {{ route('basejuridique-list') }}">
                                 <i class="bi bi-circle"></i><span>Base Juridique</span>
                             </a>
                         </li>
                         {{-- <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Tarif</span>
-            </a>
-          </li> --}}
+                            <a href="icons-boxicons.html">
+                            <i class="bi bi-circle"></i><span>Tarif</span>
+                            </a>
+                        </li> --}}
                         <li>
                             <a href=" {{ route('commune-list') }}">
                                 <i class="bi bi-circle"></i><span>Commune</span>
@@ -352,6 +352,17 @@
     </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
+        <div>
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="alert-heading">{{session('success')}}</h4>
+
+            @endif
+        </div>
+
         @yield('title')
 
         @yield('content')

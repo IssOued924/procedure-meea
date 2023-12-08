@@ -81,7 +81,8 @@ class AuthenticatedSessionController extends Controller
             'password' => Hash::make($request->password)
         ]);
         
-        return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Mot de passe modifie avec succes ');
+        return redirect('/administration')->with('success', 'Mot de passe modifie avec succes ');
+        // return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Mot de passe modifie avec succes ');
         
     }
 

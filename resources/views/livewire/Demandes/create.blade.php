@@ -265,7 +265,7 @@
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <label class="nom_societe  fw-bold">Une copie de l’avis de faisabilité ou conformite
+                                                <label class="nom_societe  fw-bold">Une copie de l’avis de faisabilité ou conformité
                                                     <span style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success"
                                                     name="avis_faisabilite" required />
