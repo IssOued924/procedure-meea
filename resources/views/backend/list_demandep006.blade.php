@@ -86,6 +86,9 @@
                                             <th scope="col">Etat Demande</th>
                                             <th scope="col">Délai</th>
                                             <th scope="col">Paiement</th>
+                                            <th scope="col">Délai</th>
+                                            <th scope="col">Déposé</th>
+                                            <th scope="col">Assigné à</th>
 
                                             <th scope="col">Action</th>
                                         </tr>
@@ -474,7 +477,7 @@
                                                                             <span
                                                                                 class="text-success">{{ $demande->usager->nom .
                                                                                     '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ' .
                                                                                     $demande->usager->prenom }}</span>
 
                                                                         </div>

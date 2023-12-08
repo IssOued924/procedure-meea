@@ -86,6 +86,7 @@
                                             <th scope="col">Demandeur</th>
                                             <th scope="col">Résidence</th>
                                             <th scope="col">Etat Demande</th>
+                                            <th scope="col">Délai</th>
                                             <th scope="col">Paiement</th>
                                             <th scope="col">Délai</th>
                                             <th scope="col">Déposé</th>
@@ -362,7 +363,6 @@
                                                                                                 {{ $agent->nom . ' ' . $agent->prenom }}
                                                                                             </option>
                                                                                         @endif
-
                                                                                     @endforeach
 
                                                                                 </select>
@@ -459,7 +459,7 @@
                                                                             <span
                                                                                 class="text-success">{{ $demande->usager->nom .
                                                                                     '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ' .
                                                                                     $demande->usager->prenom }}</span>
 
                                                                         </div>
@@ -515,8 +515,6 @@
                     </div>
                 </div><!-- End Large Modal-->
                 </tr>
-                @endif
-                @endforeach
 
 
                 </tbody>

@@ -83,6 +83,7 @@
                                         <th scope="col">Demandeur</th>
                                         <th scope="col">Résidence</th>
                                         <th scope="col">Etat Demande</th>
+                                        <th scope="col">Délai</th>
                                         <th scope="col">Paiement</th>
                                         <th scope="col">Délai</th>
                                         <th scope="col">Déposé</th>
@@ -172,7 +173,8 @@
 
                                                 @if ($demande->last_agent_assign != null)
                                                     <td> <span class="badge bg-primary">
-                                                            {{ $demande->agent->nom . ' ' . $demande->agent->prenom }} </span>
+                                                            {{ $demande->agent->nom . ' ' . $demande->agent->prenom }}
+                                                        </span>
                                                     </td>
                                                 @else
                                                     <td> <span class="badge bg-danger"> non assigné </span> </td>
@@ -453,7 +455,7 @@
                                                                         <span
                                                                             class="text-success">{{ $demande->usager->nom .
                                                                                 '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ' .
                                                                                 $demande->usager->prenom }}</span>
 
                                                                     </div>
