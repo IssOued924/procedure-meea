@@ -59,32 +59,34 @@ use App\Livewire\DemandeFontController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::middleware(['mustreset'])->group(function () {
+    Route::get('/', function () {
+        $procedure=Procedure::all();
+        return view('welcome', [
+            'procedure' => $procedure
+        ]);
+    });
 
-Route::get('/', function () {
-    $procedure=Procedure::all();
-    return view('welcome', [
-        'procedure' => $procedure
-    ]);
+    // routes des tests
+    Route::get('/test', [DemandeController::class, 'index']);
+    Route::post('/test-store', [DemandeController::class, 'store'])->name('test-route');
+
+    Route::get('/testpj', [DemandeController::class, 'testpj']);
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth', 'verified'])->name('dashboard');
+
+    Route::get('/faq', function () {
+        return view('faq');
+    })->name('faq');
+
+    Route::get('/contact', [ContactUsFormController::class, 'createForm']);
+    Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
+
 });
 
-// routes des tests
-Route::get('/test', [DemandeController::class, 'index']);
-Route::post('/test-store', [DemandeController::class, 'store'])->name('test-route');
-
-Route::get('/testpj', [DemandeController::class, 'testpj']);
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/faq', function () {
-    return view('faq');
-})->name('faq');
-
-Route::get('/contact', [ContactUsFormController::class, 'createForm']);
-Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
-
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -169,6 +171,9 @@ Route::get('/administration/demandesp0011-list', [BackendController::class, 'lis
 Route::get('/administration/demandesp006-list', [BackendController::class, 'listDemandep006'])->name('demandesp006-list');
 Route::get('/administration/demandesp007-list', [BackendController::class, 'listDemandep007'])->name('demandesp007-list');
 Route::post('/administration/statusChange/{id}/{currentStatus}/{table}', [BackendController::class, 'statutChange'])->name('statusChange');
+
+Route::post('/administration/assignation/{model}/{idDemande}/{nameDemandeId}/{tableName}', [BackendController::class, 'assignation'])->name('assignation');
+
 Route::post('/administration/uploadActe/{id}/{currentStatus}/{table}', [BackendController::class, 'uploadActe'])->name('uploadActe');
 Route::get('/administration/rejet/{id}/{table}', [BackendController::class, 'rejetter'])->name('rejetter');
 Route::get('/administration/procedure-dashboard/{procedure}/{procedureName}', [BackendController::class, 'procedureDashboard'])->name('procedure-dashboard');
@@ -231,14 +236,22 @@ Route::post('/administration/utilisateur/user-store', [RegisteredUserController:
 
 Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name('demandes-lists');
 
+
+
+// plainte
+Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
+Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
+Route::get('/listePlainte/{procedure}', [PlainteController::class, 'listePlainte'])->name('listePlainte');
+Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
+
+
 });
 
 Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
 
 
-// plainte
-Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');;
-Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
 Route::get("/procedure/modification/{id}/{procedure}", DemandeFontController::class, 'editerDemande')->name("editer-demande");
+Route::get('/get-sous-domaine-by-categorie', [DemandeP002Controller::class, 'getSousDomaineByCategorie'])->name('get-sous-domaine-by-categorie');
+Route::get('/get-delete-autre-document', [DemandeP002Controller::class, 'deleteAutreDocument'])->name('get-delete-autre-document');
 
 require __DIR__.'/auth.php';

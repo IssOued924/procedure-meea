@@ -4,12 +4,17 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\UpdatePWDRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\View\View;
 use App\Models\Procedure;
+use App\Models\User;
+use Carbon\Carbon;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -19,10 +24,28 @@ class AuthenticatedSessionController extends Controller
     public function create($code=null): View
     {
         $procedure=Procedure::where("code", $code)->first();
-        // dd($procedure);
+        //dd($procedure);
+        $checkPeriode = false;
+        if($procedure){
+            $startDate = Carbon::parse($procedure->session_debut);
+            $endDate = Carbon::parse($procedure->session_fin);
+            $checkSession = Carbon::now()->between($startDate, $endDate);
+            $checkPeriode = ($procedure->estperiodique && !$checkSession && $procedure->session_debut && $procedure->session_fin) ? 1 : 0;
+        }
+        
         return view('auth.login', [
-            'procedure' => $procedure
+            'procedure' => $procedure,
+            'checkSession' => $checkPeriode,
         ]);
+    }
+
+
+    /**
+     * Display the createPWD view.
+     */
+    public function createPWD(): View
+    {
+        return view('auth.update-password');
     }
 
     /**
@@ -48,7 +71,7 @@ class AuthenticatedSessionController extends Controller
             {
                 return redirect('/administration');
             }else{
-         return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Bienvenue ');
+                return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Bienvenue ');
         //  return  redirect('/');
              }
         }
@@ -57,6 +80,19 @@ class AuthenticatedSessionController extends Controller
             'password' => 'Mot de passe incorrects',
         ])->onlyInput('email');
 
+    }
+
+    public function updatePassword(UpdatePWDRequest $request): RedirectResponse
+    {
+        // dd($request->all());
+
+        Auth::user()->update([
+            'must_reset_password' => 0,
+            'password' => Hash::make($request->password)
+        ]);
+        
+        return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Mot de passe modifie avec succes ');
+        
     }
 
     /**

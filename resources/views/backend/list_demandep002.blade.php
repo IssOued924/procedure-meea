@@ -104,9 +104,11 @@
                                         <th scope="col">Categorie</th>
                                         <th scope="col">Sous domaine</th>
                                         <th scope="col">etat Demande</th>
-                                        <th scope="col">Délai</th>
                                         <th scope="col">Paiement</th>
-
+                                        <th scope="col">Délai</th>
+                                        <th scope="col">Déposé</th>
+                                        <th scope="col">Assigné a</th>
+                                        <th scope="col">Commentaires</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -159,6 +161,7 @@
                                     break;
                                     }
                                     @endphp
+                                    @if ($demande->last_agent_assign == null || $demande->last_agent_assign == Auth::user()->agent->uuid || Auth::user()->role->code == "ADMIN")
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
@@ -167,12 +170,6 @@
                                         <td>{{ $demande->categorie }}</td>
                                         <td>{{ $demande->sous_domaine }}</td>
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
-                                        @if (isset($demande->delai))
-
-                                        <td><span class="badge bg-dark">{{ $demande->delai}} </span> Jours </td>
-                                        @else
-                                        <td><span class="  ">-</span> </td>
-                                        @endif
 
                                         {{-- partie paiement --}}
                                         @if ($demande->paiement === 1)
@@ -181,6 +178,19 @@
                                         @else
                                         <td><b><span class="text-warning">Non Payée</span></b></td>
                                         @endif
+
+                                        <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
+
+                                        <td>{{ $demande->created_at->diffForHumans() }}</td>
+
+                                        @if($demande->last_agent_assign != null)
+                                        <td> <span class="badge bg-primary"> {{ $demande->agent->nom. " " .$demande->agent->prenom}} </span> </td>
+                                        @else
+                                        <td> <span class="badge bg-danger"> non assigné </span> </td>
+                                        @endif
+
+                                        <td>{{ $demande->commentaire }}</td>
+
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                             data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}">
@@ -315,24 +325,30 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="put"
-                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p002_s'] ) }}">
+                                                            <form method="post" enctype="multipart/form-data" action="{{ route('assignation', ['model' =>'AffectationP002', 'idDemande' => $demande->uuid ,'nameDemandeId'=> 'demande_p002_id', 'tableName'=>'demande_p002_s'] ) }}">
                                                                 @csrf
-                                                                @method('GET')
-
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                      <h5>Choisir le collaborateur à assigné</h5>
+                                                                        <h5>Choisir le collaborateur à assigné</h5>
 
-                                                                            <select name="" id="" class="form-select border-success">
-                                                                                @foreach ($agents as $agent)
+                                                                        <select name="agent_id" id="" class="form-select border-success">
+                                                                            @foreach ($agents as $agent)
 
-                                                                              <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
-                                                                                @endforeach
+                                                                            @if($agent->service->libelle_court == $demande->procedure->service->libelle_court)
+                                                                            <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
+                                                                            @endif
 
-                                                                            </select>
+                                                                            @endforeach
 
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="text-center">
+                                                                            <label class="col-form-label">Commentaires</label>
+                                                                                <textarea required name="commentaire" class="form-control border-success"></textarea>
+                                                                        </div>
                                                                     </div>
 
                                                                 </div>
@@ -470,9 +486,8 @@
 
 
                                     </tr>
+                                    @endif
                                     @endforeach
-
-
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->

@@ -5,6 +5,9 @@ namespace App\Livewire;
 use App\Models\Commune;
 use App\Models\Pays;
 use App\Models\Demande;
+use App\Models\DemandeCategorieP002;
+use App\Models\DemandeDomaineP002;
+use App\Models\DemandeSousDomaineP002;
 use App\Models\Procedure;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -46,22 +49,25 @@ class DemandeCompP002 extends Component
         Carbon::setLocale("fr");
 
         $searchCriteria = "%".$this->search."%";
+        $procedure = Procedure::where("code", request()->segment(1))->first();
         $data = [
+            "procedure" => $procedure,
             "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->telephone,
             "communes" => Commune::all(),
             "pays" => Pays::all(),
             "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
-            "default_pays" => Auth::user()->usager->pays
+           // "default_pays" => Auth::user()->usager->pays,
+            "domaines" => DemandeDomaineP002::all(),
+            "categories" => DemandeCategorieP002::all(),
+            "sousDomianes" => DemandeSousDomaineP002::all(),
         ];
 
-        $procedure = Procedure::where("code", request()->segment(1))->first();
-        
         $startDate = Carbon::parse($procedure->session_debut);
         $endDate = Carbon::parse($procedure->session_fin);
         $checkSession = Carbon::now()->between($startDate, $endDate);
 
-        if ($procedure->estperiodique && $checkSession) {
+        if ($procedure->estperiodique && !$checkSession && $procedure->session_debut && $procedure->session_fin) {
             return view('livewire.sessionMsg', $data)
                 ->extends("layouts.template")
                 ->section("contenu");

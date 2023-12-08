@@ -15,6 +15,7 @@
             <ul>
                 @guest
                 <li><a class="active" href="/">Accueil</a></li>
+                <li><a href="#">FAQ</a></li>
                 <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Plainte</a></li>
                 <li><a href="contact">Contact</a></li>
                 <li><a href="faq">FAQ</a></li>
@@ -25,6 +26,8 @@
                 <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Plainte</a></li>
 
                 <li><a href="{{ route('demandes-lists') }}">Mes demandes</a></li>
+                <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Déposer une plainte</a></li>
+
                 <li><a href="contact">Contact</a></li>
                 <li><a href="faq">FAQ</a></li>
 
@@ -33,11 +36,11 @@
 
                 <li class="dropdown">
                    <a>
-                    <i class="bi bi-person"></i><span>
-                        @if (isset(Auth::user()->usager->nom_entreprise))
-                        <div>{{ Auth::user()->usager->nom_entreprise }}</div>
+                   <i class="bi bi-person"></i><span>
+                        @if (isset(Auth::user()->name))
+                        <div>{{ Auth::user()->name }}</div>
                         @else
-                            <div>{{ Auth::user()->usager->prenom.'  '.Auth::user()->usager->nom }}</div>
+                            <div>{{ Auth::user()->name }}</div>
                         @endif
                         </span> <i class="bi bi-chevron-down"></i>
                     </a>
