@@ -48,6 +48,7 @@ use App\Repositories\DemandeP005Repository;
 use Carbon\Carbon;
 
 use App\Models\User;
+use App\Mail\AffectDemandMailable;
 use App\Mail\ValidateDemandMailable;
 use App\Mail\RejectDemandMailable;
 use Illuminate\Support\Facades\Mail;
@@ -387,6 +388,17 @@ class BackendController extends Controller
     
          DB::table($tableName)->where('uuid', $idDemande)->update(['last_agent_assign' => $data["agent_id"]]);
          DB::table($tableName)->where('uuid', $idDemande)->update(['commentaire' => $data["commentaire"]]);
+
+         $proc_id = DB::table($tableName)->where('uuid', $idDemande)->first()->procedure_id;
+         $currentStatus = DB::table($tableName)->where('uuid', $idDemande)->first()->etat;
+         $agent_email = User::where('agent_id', $data["agent_id"])->first()->email;
+         $demand = array(
+             "procedure"  => Procedure::where('uuid', $proc_id)->first()->libelle_long,
+             "reference" => DB::table($tableName)->where('uuid', $idDemande)->first()->reference,
+             "etat"   => StatutDemande::where('etat', $currentStatus)->first()->statut,
+             "commentaire" => $data["commentaire"]
+         );
+         Mail::to($agent_email)->send(new AffectDemandMailable( $demand ));
     
         Alert::success('Succès', 'demande assignée !');
         return redirect()->back();
