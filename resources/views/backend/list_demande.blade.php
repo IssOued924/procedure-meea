@@ -107,7 +107,7 @@
                                         <th scope="col">Paiement</th>
                                         <th scope="col">Déposé</th>
                                         <th scope="col">Assigné a</th>
-
+                                        <th scope="col">Commentaires</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -187,6 +187,8 @@
                                         @else
                                         <td> <span class="badge bg-danger"> non assigné </span> </td>
                                         @endif
+
+                                        <td>{{ $demande->commentaire }}</td>
 
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
@@ -340,6 +342,12 @@
                                                                             @endforeach
 
                                                                         </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="text-center">
+                                                                            <label class="col-form-label">Commentaires</label>
+                                                                                <textarea required name="commentaire" class="form-control border-success"></textarea>
+                                                                        </div>
                                                                     </div>
 
                                                                 </div>

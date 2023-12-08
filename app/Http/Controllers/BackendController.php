@@ -379,13 +379,14 @@ class BackendController extends Controller
     
         $modele = app("App\Models\\$model");
        // $affectation = new $table();
-       
          $modele::create([
             $nameDemandeId=>$idDemande,
-            'agent_id' => $data["agent_id"]
+            'agent_id' => $data["agent_id"],
+            'commentaire' => $data["commentaire"]
          ]);
     
          DB::table($tableName)->where('uuid', $idDemande)->update(['last_agent_assign' => $data["agent_id"]]);
+         DB::table($tableName)->where('uuid', $idDemande)->update(['commentaire' => $data["commentaire"]]);
     
         Alert::success('Succès', 'demande assignée !');
         return redirect()->back();
