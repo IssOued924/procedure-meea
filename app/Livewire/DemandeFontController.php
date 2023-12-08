@@ -24,6 +24,7 @@ use App\Models\DemandeP006;
 use App\Models\DemandeP007;
 use App\Models\DemandeP008;
 use App\Models\DemandeP002;
+use App\Models\DemandeP005;
 use App\Models\DemandePieceP001;
 use App\Models\DemandePieceP0010;
 use App\Models\DemandePieceP0011;
@@ -35,6 +36,9 @@ use App\Models\DemandePieceP005;
 use App\Models\DemandePieceP006;
 use App\Models\DemandePieceP007;
 use App\Models\DemandePieceP008;
+use App\Models\DemandeCategorieP002;
+use App\Models\DemandeDomaineP002;
+use App\Models\DemandeSousDomaineP002;
 
 class DemandeFontController extends Component
 {
@@ -153,6 +157,18 @@ class DemandeFontController extends Component
                             "communes" => Commune::all(),
                         ];
                     break;
+
+                    case 'PCBCB2':
+                        $demande = DemandeP005::where(['uuid' => $id])->first();
+                        $documents = DemandePieceP005::where(['demande_p005_id' => $id])->get();
+                        $view ='livewire.Demandep005.edit';
+                        $data = [
+                                "demande" => $demande,
+                                "telephone" => Auth::user()->usager->telephone,
+                                "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
+                                "communes" => Commune::all(),
+                            ];
+                        break;
                 case 'OATEA':
                     $demande = DemandeP002::where(['uuid' => $id])->first();
                     $documents = DemandePieceP002::where(['demande_p002_id' => $id])->get();
@@ -162,9 +178,10 @@ class DemandeFontController extends Component
                         "documents" => $documents,
                         "telephone" => Auth::user()->telephone,
                         "communes" => Commune::all(),
-                        "pays" => Pays::all(),
                         "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
-                        "default_pays" => Auth::user()->usager->pays
+                        "domaines" => DemandeDomaineP002::all(),
+                        "categories" => DemandeCategorieP002::all(),
+                        "sousDomianes" => DemandeSousDomaineP002::all(),
                     ];
                     break;
                 case 'CHESPB':

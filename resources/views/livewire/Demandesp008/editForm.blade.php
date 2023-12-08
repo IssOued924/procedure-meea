@@ -16,14 +16,15 @@
                     {{-- <p>Veuillez remplir tous les champs avant de passer une Etape</p> --}}
                     <div class="row">
                         <div class="col-md-12 mx-0">
-                            <form id="msform" method="POST" action="{{ route("demandesp008-store") }}" enctype="multipart/form-data">
+                            <form id="msform" method="POST" action="{{ route("demandesp008-update") }}" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" class="border-success" name="uuid" value='{{$demande->uuid}}'/>
+
                                 <!-- progressbar -->
                                 <ul id="progressbar">
                                     <li class="active" id="personal"><strong>Infos entreprise</strong></li>
                                     <li id="entreprise"><strong>Documents joints</strong></li>
                                     <li id="folder"><strong>Engagement</strong></li>
-                                    <li id="paiement"><strong>Paiement </strong></li>
                                     <li id="confirm"><strong>Validation</strong></li>
                                 </ul>
                                 <!-- fieldsets -->
@@ -35,7 +36,7 @@
                                                 <label for="beneficiaire" class="nom_societe">Dénomination de la société
                                                     <span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="beneficiaire"
-                                                    placeholder=" " required />
+                                                    placeholder=" " value="{{ $demande->beneficiaire }}" required />
                                             </div>
                                             <div class="col-6">
                                                 <label for="siege_social" class="siege_social">Siège social
@@ -43,7 +44,7 @@
                                                 <select name="commune_id" id="" class="form-select border-success">
                                                     <option value="">Veuillez choisir le siege</option>
                                                     @foreach ($communes as $com)
-                                                    <option value="{{ $com->uuid }}">{{ $com->libelle }}</option>
+                                                    <option  {{ $demande->commune_id== $com->uuid ? 'selected' : ''}} value="{{ $com->uuid }}">{{ $com->libelle }}</option>
 
                                                     @endforeach
                                                 </select>
@@ -53,20 +54,20 @@
                                             <div class="col-6">
                                                 <label for="adresse_beneficiaire" class="adresse fw-bold">Adresse
                                                     <span style="color: red">*</span></label>
-                                                <input type="text" class="border-success" name="adresse_beneficiaire"
+                                                <input type="text" class="border-success" value="{{ $demande->adresse_beneficiaire }}" name="adresse_beneficiaire"
                                                     placeholder=" " required />
                                             </div>
                                             <div class="col-6">
                                                 <label for="boite_postale" class="boite_postale fw-bold">Boite postale<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" name="boite_postale" class="border-success" placeholder=" " required />
+                                                <input type="text" value="{{ $demande->boite_postale }}" name="boite_postale" class="border-success" placeholder=" " required />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <label class="activite fw-bold">Activités ménées
                                                     <!--span style="color: red">*</span--></label>
-                                                <input type="text" class="border-success" name="activite_menes"
+                                                <input type="text" class="border-success" value="{{ $demande->activite_menes }}" name="activite_menes"
                                                     placeholder="">
                                             </div>
                                         </div>
@@ -79,30 +80,56 @@
                                 <fieldset>
                                     <div class="form-card mb-3">
                                         <h2 class="fs-title">Documents à fournir</h2>
+                                        <?php
+                                        $pathRccm ='';
+                                        $pathFaisabilite ='';
+                                        $pathAvis ='';
+                                        $pathDt ='';
+                                        $pathTracabilite ='';
+
+                                        foreach ( $documents as $doc){
+                                            if($doc->libelle =="RCCM")
+                                                $pathRccm = $doc->chemin;
+                                            if($doc->libelle =="Arreter de faisabilité")
+                                                $pathFaisabilite = $doc->chemin;
+                                            if($doc->libelle =="Avis Mairie")
+                                                $pathAvis = $doc->chemin;
+                                            if($doc->libelle =="Description Technique")
+                                                $pathDt = $doc->chemin;
+                                            if($doc->libelle =="Registre tracabilité")
+                                                $pathTracabilite = $doc->chemin;
+                                                      ?>
+                                                    <a  class="text-success" target="_blank" href="{{ Storage::url($doc->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$doc->libelle}}</b></a>
+                                                    <br>
+                                               <?php }?>
 
                                             <div class="row">
                                                 <div class="col-6">
                                                     <label for="doc_rccm" class="nom_societe fw-bold">RCCM
-                                                        <span style="color: red">*</span></label>
-                                                    <input type="file" class="border-success  form-control" name="doc_rccm" required/>
+                                                        </label>
+                                                    <input type="file" class="border-success  form-control" name="doc_rccm"  />
+                                                    <input type="hidden" class="border-success  form-control" value="{{ $pathRccm }}"  name="current_doc_rccm"  />
                                                 </div>
                                                 <div class="col-6">
                                                     <label for="doc_arrete_faisabilite" class="nom_societe fw-bold">Arrete de faisabilité
-                                                        <span style="color: red">*</span></label>
-                                                    <input type="file" class="border-success  form-control" name="doc_arrete_faisabilite" required/>
+                                                         </label>
+                                                    <input type="file" class="border-success  form-control" name="doc_arrete_faisabilite"  />
+                                                    <input type="hidden" class="border-success  form-control" value="{{ $pathFaisabilite }}" name="doc_arrete_faisabilite" required/>
                                                 </div>
                                             </div><br>
 
                                            <div class="row">
                                                 <div class="col-6">
                                                     <label for="doc_avis_mairie" class="nom_societe fw-bold">Avis favorable de mairie
-                                                        <span style="color: red">*</span></label>
-                                                    <input type="file" class="border-success  form-control" name="doc_avis_mairie" required/>
+                                                         </label>
+                                                    <input type="file" class="border-success  form-control" name="doc_avis_mairie"  />
+                                                    <input type="hidden" class="border-success  form-control" value="{{ $pathAvis }}" name="current_doc_avis_mairie" required/>
                                                 </div>
                                                 <div class="col-6">
                                                     <label for="doc_desc_technique" class="nom_societe fw-bold">Document technique descriptif
-                                                        <span style="color: red">*</span></label>
-                                                    <input type="file" class="border-success  form-control" name="doc_desc_technique" required/>
+                                                     </label>
+                                                    <input type="file" class="border-success  form-control" name="doc_desc_technique"  />
+                                                    <input type="hidden" class="border-success  form-control" value="{{ $pathDt }}" name="current_doc_desc_technique" required/>
                                                 </div>
                                             </div><br>
 
@@ -110,6 +137,7 @@
                                             <div class="col-6">
                                                 <label for="doc_registre_tracabilite" class="activite fw-bold">Registre de traçabilité </label>
                                                 <input type="file" class="border-success  form-control" name="doc_registre_tracabilite"/>
+                                                <input type="hidden" class="border-success  form-control" value="{{ $pathTracabilite }}" name="current_doc_registre_tracabilite"/>
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +149,7 @@
                                         <h2 class="fs-title"> </h2>
 
                                         <div class="row">
-                                            <input type="checkbox" id="confirmationBox" value="1" name="is_certified"
+                                            <input type="checkbox" {{ intval($demande->is_certified==1) ? 'checked' : '' }} name="is_certified" id="confirmationBox"
                                                 class="required-checkbox checkbox">
                                             <label for="confirmationBox" class="checkbox-label">
                                                 En cochant cette case, je certifie sur mon honneur que les informations
@@ -134,84 +162,6 @@
                                     <input type="button" class="previous action-button-previous" value="Retour" />
                                     <input type="submit" class="next action-button" value="Valider" />
                                 </fieldset>
-                                <!--fieldset>
-                                    <div class="form-card">
-                                        <h2 class="fs-title text-center">Validation !</h2>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-3">
-                                                <img src="https://img.icons8.com/color/96/000000/ok--v2.png"
-                                                    class="fit-image">
-                                            </div>
-                                        </div>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-7 text-center">
-                                                <h5>Votre demnde est enregistré avec succes et en cour de traitement!
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset-->
-                                <fieldset>
-                                    <form action="">
-                                    <div class="form-card">
-                                        <h4 class="fs-title">Paiement <span style="color:red">
-                                            *</span></h4>
-                                            <label for="demande timbre" class="fw-bold">Moyens de Paiement<span style="color:red">
-                                                    *</span></label>
-                                        <div class="row">
-                                            <div class="col-3">
-                                                <label class="nom_societe fw-bold" >ORANGE</label>
-                                                <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
-                                            </div>
-                                            <div class="col-3">
-                                                <label class="siege_social fw-bold ">MOOV</label>
-                                                <input id="radio2" type="radio" value="0"  name="moyen"/>
-                                            </div>
-
-
-                                        </div>
-                                        <br>
-
-
-                                        <div class="row">
-                                            <div id="moyenP1">
-                                                <label >  La somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
-
-                                            </div>
-                                            <div id="moyenP2">
-                                                <label >  La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
-
-                                            </div>
-                                        <div class="col-6">
-                                                <label class="boite_postale fw-bold">Téléphone<span style="color:red">
-                                                        *</span></label>
-                                                <input type="number" name="numero" style="width: 50%;" class="border-success form-control"   placeholder="Telephone" required />
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="boite_postale fw-bold">OTP<span style="color:red">
-                                                        *</span></label>
-                                                <input type="number" name="otp"   style="width: 50%;" class="border-success form-control"   placeholder="otp" required />
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-
-
-                                    <input type="button"  class="previous action-button-previous"
-                                        value="Retour" />
-                                    <input type="submit"   class="next action-button"
-                                        value="Valider" />
-                                    <!-- Ajoutez ceci dans la première étape du formulaire -->
-                                    <div class="error-message" style="color: red;"></div>
-                                    </form>
-                                </fieldset>
-
-
-
 
                             </form>
                         </div>

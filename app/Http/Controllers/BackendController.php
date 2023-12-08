@@ -48,6 +48,7 @@ use App\Repositories\DemandeP005Repository;
 use Carbon\Carbon;
 
 use App\Models\User;
+use App\Mail\AffectDemandMailable;
 use App\Mail\ValidateDemandMailable;
 use App\Mail\RejectDemandMailable;
 use Illuminate\Support\Facades\Mail;
@@ -185,11 +186,6 @@ class BackendController extends Controller
 
         return view('backend.list_demandep0012', $data);
     }
-
-
-
-
-
 
 
     //   liste des demandes de la procedure gestion des dechets p008
@@ -379,13 +375,25 @@ class BackendController extends Controller
     
         $modele = app("App\Models\\$model");
        // $affectation = new $table();
-       
          $modele::create([
             $nameDemandeId=>$idDemande,
-            'agent_id' => $data["agent_id"]
+            'agent_id' => $data["agent_id"],
+            'commentaire' => $data["commentaire"]
          ]);
     
          DB::table($tableName)->where('uuid', $idDemande)->update(['last_agent_assign' => $data["agent_id"]]);
+         DB::table($tableName)->where('uuid', $idDemande)->update(['commentaire' => $data["commentaire"]]);
+
+         $proc_id = DB::table($tableName)->where('uuid', $idDemande)->first()->procedure_id;
+         $currentStatus = DB::table($tableName)->where('uuid', $idDemande)->first()->etat;
+         $agent_email = User::where('agent_id', $data["agent_id"])->first()->email;
+         $demand = array(
+             "procedure"  => Procedure::where('uuid', $proc_id)->first()->libelle_long,
+             "reference" => DB::table($tableName)->where('uuid', $idDemande)->first()->reference,
+             "etat"   => StatutDemande::where('etat', $currentStatus)->first()->statut,
+             "commentaire" => $data["commentaire"]
+         );
+         Mail::to($agent_email)->send(new AffectDemandMailable( $demand ));
     
         Alert::success('Succès', 'demande assignée !');
         return redirect()->back();
@@ -528,7 +536,7 @@ class BackendController extends Controller
         $user_email = User::where('usager_id', $usager_id)->first()->email;
         $demand = array(
             "procedure"  => Procedure::where('uuid', $proc_id)->first()->libelle_long,
-            "uuid" => $id,
+            "reference" => DB::table($table)->where('uuid', $id)->first()->reference,
             "etat"   => StatutDemande::where('etat', $nextStatus)->first()->statut
         );
         Mail::to($user_email)->send(new ValidateDemandMailable( $demand ));
@@ -636,7 +644,7 @@ class BackendController extends Controller
         $currentStatus = DB::table($table)->where('uuid', $id)->first()->etat;
         $demand = array(
             "procedure"  => Procedure::where('uuid', $proc_id)->first()->libelle_long,
-            "uuid" => $id,
+            "reference" => DB::table($table)->where('uuid', $id)->first()->reference,
             "etat"   => StatutDemande::where('etat', $currentStatus)->first()->statut,
             "motif"   => $request->libelle
         );

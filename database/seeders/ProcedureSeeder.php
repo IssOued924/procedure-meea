@@ -116,7 +116,8 @@ $agent->save();
             "code_color" => "#359b27",
             "code" => "P008",
             "service_id"=>$serv3->uuid,
-            "delai"=> "32"
+            "delai"=> "32",
+            "tarif" => 1500
         ]);
 
 
@@ -128,7 +129,8 @@ $agent->save();
             "code_color" => "#f26b56",
             "code" => "P001",
             "service_id"=>$serv3->uuid,
-            "delai"=> "32"
+            "delai"=> "32",
+            "tarif" => 1600
         ]);
         Procedure::create([
             "libelle_court" => "CEESPNB",
@@ -138,7 +140,8 @@ $agent->save();
             "code_color" => "#2274bb",
             "code" => "P006",
             "service_id"=>$serv3->uuid,
-            "delai"=> "32"
+            "delai"=> "32",
+            "tarif" => 1700
         ]);
         Procedure::create([
             "libelle_court" => "CHESPB",
@@ -148,7 +151,8 @@ $agent->save();
             "code_color" => "#bf6e12",
             "code" => "P007",
             "service_id"=>$serv3->uuid,
-            "delai"=> "32"
+            "delai"=> "32",
+            "tarif" => 1800
         ]);
         Procedure::create([
             "libelle_court" => "OATEA",
@@ -160,7 +164,8 @@ $agent->save();
             "code_color" => "#abd9fe",
             "code" => "P002",
             "service_id"=>$serv2->uuid,
-            "delai"=> "75"
+            "delai"=> "75",
+            "code" => 1400
         ]);
         Procedure::create([
             "libelle_court" => "PETE",
@@ -173,7 +178,8 @@ $agent->save();
             "code_color" => "#d3b521",
             "code" => "P0012",
             "service_id"=>$serv1->uuid,
-            "delai"=> "7"
+            "delai"=> "7",
+            "code" => 1300
         ]);
         Procedure::create([
             "libelle_court" => "CDAS",
@@ -186,7 +192,8 @@ $agent->save();
             "code_color" => "#e2853d",
             "code" => "P004",
             "service_id"=>$serv1->uuid,
-            "delai"=> "40"
+            "delai"=> "40",
+            "code" => 1200
         ]);
         Procedure::create([
             "libelle_court" => "ADDMC",
@@ -197,7 +204,8 @@ $agent->save();
             "code_color" => "#629449",
             "code" => "P003",
             "service_id"=>$serv1->uuid,
-            "delai"=> "7"
+            "delai"=> "7",
+            "code" => 1100
         ]);
         Procedure::create([
             "libelle_court" => "PCBCB",
@@ -207,7 +215,8 @@ $agent->save();
             "code_color" => "#14b522",
             "code" => "P005",
             "service_id"=>$serv1->uuid,
-            "delai"=> "8"
+            "delai"=> "8",
+            "code" => 1000
         ]);
         Procedure::create([
             "libelle_court" => "PCBCB",
@@ -217,7 +226,8 @@ $agent->save();
             "code_color" => "#b7703d",
             "code" => "P0011",
             "service_id"=>$serv1->uuid,
-            "delai"=> "8"
+            "delai"=> "8",
+            "code" => 1500
         ]);
 
       

@@ -36,7 +36,7 @@
 
                 <li class="dropdown">
                    <a>
-                    <i class="bi bi-person"></i><span>
+                   <i class="bi bi-person"></i><span>
                         @if (isset(Auth::user()->name))
                         <div>{{ Auth::user()->name }}</div>
                         @else
