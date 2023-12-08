@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('usager_id')->references('uuid')->on('usagers')->onDelete('cascade');
 
             $table->text('commentaire')->nullable();
-            $table->renameColumn('category', 'procedure');
+            //$table->renameColumn('category', 'procedure');
         });
     }
 
@@ -33,6 +33,7 @@ return new class extends Migration
         Schema::table('plaintes', function (Blueprint $table) {
             //
             $table->dropColumn('usager_id');
+            //$table->renameColumn('procedure', 'category');
         });
     }
 };
