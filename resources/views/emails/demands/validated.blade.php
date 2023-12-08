@@ -6,7 +6,7 @@
         {{ $demand['procedure'] }}
     </div>
     <div class="card-body">
-        <h5 class="card-title">Demande n°{{ $demand['uuid'] }}</h5>
+        <h5 class="card-title">Demande {{ $demand['reference'] }}</h5>
         <p class="card-text">Nous sommes heureux de vous informer que votre demande a été traité. Elle a un nouvel état!!</p>
         <span class="badge bg-info text-dark">{{ $demand['etat'] }}</span>
     </div>

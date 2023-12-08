@@ -103,7 +103,7 @@
                                         <th scope="col">Délai</th>
                                         <th scope="col">Déposé</th>
                                         <th scope="col">Assigné a</th>
-
+                                        <th scope="col">Commentaires</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -156,6 +156,7 @@
                                             break;
                                     }
                                     @endphp
+                                    
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
@@ -187,30 +188,66 @@
                                         <td> <span class="badge bg-danger"> non assigné </span> </td>
                                         @endif
 
+                                        <td>{{ $demande->commentaire }}</td>
+
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
                                             data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}">
                                             <i class="bi bi-eye"></i> </button>
 
-                                            @if ($demande->etat != 'A' && $demande->etat != 'S' )
-                                                <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
-                                                    type="button" title="Valider" class="btn btn-success"><i
-                                                        class="bi bi-check-circle"></i> </a>
+                                            @php
+    $userRole = Auth::user()->role->libelle; 
+@endphp
 
-                                                <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur"
-                                                    class="btn btn-primary"><i class="bi bi-folder-symlink"></i></button>
+<!-- Boutons d'action en fonction de l'état et du rôle -->
+@if (($demande->etat == 'D' && in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
+     ($demande->etat == 'E' && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
+     ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||
+     ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration']))) 
+    <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}" type="button" title="Valider" class="btn btn-success">
+        <i class="bi bi-check-circle"></i>
+    </a>
+@endif
 
-                                                <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejetter"
-                                                    class="btn btn-danger"><i class="bi bi-x-circle"></i></a>
-                                            @endif
-                                            @if ($demande->etat == 'S')
-                                            <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}"
-                                                type="button" title="Valider" class="btn btn-success"><i
-                                                    class="bi bi-check-circle"></i> </a>
-                                                <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}"
-                                                type="button" title="Joindre Acte Signé" class="btn btn-success"><i
-                                                    class="bi bi-upload"></i> </a>
-                                            @endif
+@if ($demande->etat == 'D' && in_array($userRole, ['Gestionnaire', 'Administration']))
+    <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur"
+            class="btn btn-primary">
+        <i class="bi bi-folder-symlink"></i>
+    </button>
+@endif
+@if ($demande->etat == 'E' && in_array($userRole, ['Gestionnaire', 'Administration']))
+    <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur"
+            class="btn btn-primary">
+        <i class="bi bi-folder-symlink"></i>
+    </button>
+@endif
+
+@if ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration',]))
+    <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}" type="button" title="Joindre Acte Signé"
+        class="btn btn-success">
+        <i class="bi bi-upload"></i>
+    </a>
+@endif
+
+@if (($demande->etat != 'A' && $demande->etat != 'S' && $demande->etat != 'R') && in_array($userRole, [ 'Gestionnaire', 'Administration']))
+    <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter"
+        class="btn btn-danger">
+        <i class="bi bi-x-circle"></i>
+    </a>
+@endif
+@if (($demande->etat != 'A' && $demande->etat != 'S'&& $demande->etat != 'E'&& $demande->etat != 'V'&& $demande->etat != 'R') && in_array($userRole, ['Réception']))
+    <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter"
+        class="btn btn-danger">
+        <i class="bi bi-x-circle"></i>
+    </a>
+@endif
+@if (($demande->etat != 'A' && $demande->etat != 'S'&& $demande->etat != 'V'&& $demande->etat != 'R') && in_array($userRole, ['Etudes']))
+    <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter"
+        class="btn btn-danger">
+        <i class="bi bi-x-circle"></i>
+    </a>
+@endif
+
 
 
                                               {{-- Model de confirmation de Validation et note detude --}}
@@ -321,24 +358,31 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="put"
-                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p005_s'] ) }}">
+                                                            <form method="post" enctype="multipart/form-data" action="{{ route('assignation', ['model' =>'AffectationP005', 'idDemande' => $demande->uuid ,'nameDemandeId'=> 'demande_p005_id', 'tableName'=>'demande_p005_s'] ) }}">
                                                                 @csrf
-                                                                @method('GET')
 
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                      <h5>Choisir le collaborateur à assigné</h5>
+                                                                        <h5>Choisir le collaborateur à assigné</h5>
 
-                                                                            <select name="" id="" class="form-select border-success">
-                                                                                @foreach ($agents as $agent)
+                                                                        <select name="agent_id" id="" class="form-select border-success">
+                                                                            @foreach ($agents as $agent)
 
-                                                                                <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
-                                                                                @endforeach
+                                                                            @if($agent->service->libelle_court == $demande->procedure->service->libelle_court)
+                                                                            <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
+                                                                            @endif
+                                                                            
+                                                                            @endforeach
 
-                                                                            </select>
+                                                                        </select>
 
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="text-center">
+                                                                            <label class="col-form-label">Commentaires</label>
+                                                                                <textarea required name="commentaire" class="form-control border-success"></textarea>
+                                                                        </div>
                                                                     </div>
 
                                                                 </div>
@@ -457,9 +501,8 @@
                                                 </div>
                                             </div>
                                         </div><!-- End Large Modal-->
-
-
                                     </tr>
+                                
                                     @endforeach
 
 

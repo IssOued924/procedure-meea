@@ -154,9 +154,11 @@
                                                     <span style="color:red">*</span></label>
                                                 <select name="domaine" id="domaine" class="form-select border-success">
                                                     <option value="">Veuillez choisir le domaine</option>
-                                                    <option value="Eau potable">Eau Potable</option>
-                                                    <option value="Assainissement">Assainissement</option>
-                                                    <option value="Barrage">Barrage</option>
+                                                    <option value="Eau potable">Approvisionnement en Eau Potable (AEP)</option>
+                                                    <option value="Assainissement">Assainissement des
+                                                        Eaux Usées et Excréta (AEUE)
+                                                        </option>
+                                                    <option value="Barrage">Barrage et Aménagement Hydro-Agricole (BAHA)</option>
                                                 </select>
                                                  @if($errors->has('domaine'))
                                                         <p class="alert alert-danger">{{ $errors->first('domaine') }}</p>

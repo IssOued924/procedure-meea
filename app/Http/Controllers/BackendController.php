@@ -379,13 +379,14 @@ class BackendController extends Controller
     
         $modele = app("App\Models\\$model");
        // $affectation = new $table();
-       
          $modele::create([
             $nameDemandeId=>$idDemande,
-            'agent_id' => $data["agent_id"]
+            'agent_id' => $data["agent_id"],
+            'commentaire' => $data["commentaire"]
          ]);
     
          DB::table($tableName)->where('uuid', $idDemande)->update(['last_agent_assign' => $data["agent_id"]]);
+         DB::table($tableName)->where('uuid', $idDemande)->update(['commentaire' => $data["commentaire"]]);
     
         Alert::success('Succès', 'demande assignée !');
         return redirect()->back();
@@ -528,7 +529,7 @@ class BackendController extends Controller
         $user_email = User::where('usager_id', $usager_id)->first()->email;
         $demand = array(
             "procedure"  => Procedure::where('uuid', $proc_id)->first()->libelle_long,
-            "uuid" => $id,
+            "reference" => DB::table($table)->where('uuid', $id)->first()->reference,
             "etat"   => StatutDemande::where('etat', $nextStatus)->first()->statut
         );
         Mail::to($user_email)->send(new ValidateDemandMailable( $demand ));
@@ -636,7 +637,7 @@ class BackendController extends Controller
         $currentStatus = DB::table($table)->where('uuid', $id)->first()->etat;
         $demand = array(
             "procedure"  => Procedure::where('uuid', $proc_id)->first()->libelle_long,
-            "uuid" => $id,
+            "reference" => DB::table($table)->where('uuid', $id)->first()->reference,
             "etat"   => StatutDemande::where('etat', $currentStatus)->first()->statut,
             "motif"   => $request->libelle
         );

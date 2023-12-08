@@ -140,7 +140,7 @@
                         stroke-width: 2px;
                         stroke-linecap: round;
                         stroke-linejoin: round;"></i>
-                            <b>Montant à payer : <b class="text-success"> 1500 F CFA</b></b><br><br>
+                            <b>Montant à payer : <b class="text-success"> {{ $procedure->tarif }} F CFA</b></b><br><br>
 
 
                             <i class="bi bi-house text-success"></i>

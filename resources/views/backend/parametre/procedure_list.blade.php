@@ -196,6 +196,21 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-6">
+                                                                    <h5 class="card-title">Tarif</h5>
+                                                                    <div class="input-group mb-3">
+
+                                                                        {{-- <label for="libelle">Libelle</label> --}}
+
+                                                                        <input type="number" name="tarif"
+                                                                            class="form-control border-success"
+                                                                            value="{{ $proc->tarif }}"
+                                                                                required>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-6">
                                                                     <h5 class="card-title">Est périodique</h5>
                                                                     <div class="input-group mb-3">
 
@@ -224,7 +239,7 @@
                                                                     <p>Description longue</p>
 
                                                                     <textarea name="description" id=""
-                                                                        class="quill-editor-full border-success"
+                                                                        class="border-success"
                                                                         style="width: 100%; height:150px;">
                                                                            {{ $proc->description }}
                                                                     </textarea>

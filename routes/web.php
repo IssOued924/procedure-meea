@@ -109,6 +109,7 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
 
    Route::get("/P006", DemandeCompP006::class)->name("demandes-p006");
    Route::post('/demandesp006-store', [DemandeP006Controller::class, 'store'])->name('demandesp006-store');
+   Route::post('/demandesp006-update', [DemandeP006Controller::class, 'update'])->name('demandesp006-update');
 
 
     //   Demande poo4 certificat de detention d'un animal sauvage
@@ -120,24 +121,29 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     //   Demande poo5 permis de circulation de bois et de charbon de bois
     Route::get('/P005', DemandeP005Comp::class)->name('demandesp005-create');
     Route::post('/demandesp005-store', [DemandeP005Controller::class, 'store'])->name('demandesp005-store');
+    Route::post('/demandesp005-update', [DemandeP005Controller::class, 'update'])->name('demandesp005-update');
 
      //***************** DEMANDE P007 Homologations ********************************//
     Route::get("/P007", DemandeP007Comp::class)->name("demandes-p007");
     Route::post('/demandesp007-store', [DemandeP007Controller::class, 'store'])->name('demandesp007-store');
+    Route::post('/demandesp007-update', [DemandeP007Controller::class, 'update'])->name('demandesp007-update');
 
 
     	// P008 Demande d'autorisation de gestion de dechets
 	Route::get("/P008", DemandeP008Comp::class)->name("demandep008");
     Route::post("/demandesp008-store", [DemandeP008Controller::class, 'store'])->name("demandesp008-store");
+    Route::post("/demandesp008-update", [DemandeP008Controller::class, 'update'])->name("demandesp008-update");
 
 
               // Permis de coupe de bois et charbon de bois
     Route::get("/P0011", DemandeCompP0011::class)->name("demandesp0011");
     Route::post("/demandesp0011-store", [DemandeP0011Controller::class, 'store'])->name("demandesp0011-store");
+    Route::post("/demandesp0011-update", [DemandeP0011Controller::class, 'update'])->name("demandesp0011-update");
 
             // eco tourisme
     Route::get("/P0012", DemandeCompP0012::class)->name("demandesp0012");
     Route::post("/demandesp0012-store", [DemandeP0012Controller::class, 'store'])->name("demandesp0012-store");
+    Route::post("/demandesp0012-update", [DemandeP0012Controller::class, 'update'])->name("demandesp0012-update");
     Route::post("/demandesp0012-payment", [DemandeP0012Controller::class, 'payment'])->name("demandesp0012-payment");
 
 
