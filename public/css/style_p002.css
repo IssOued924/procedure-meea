@@ -2356,7 +2356,7 @@ ul.liste-sous-theme li:last-child a:hover{
 .content{
   position: relative;
   width: 100%; /* Largeur à 100% de la fenêtre */
-  height: 100vh; /* Hauteur à 100% de la fenêtre */
+  /* height: 100vh; Hauteur à 100% de la fenêtre */
   background-image: url('../img/back.jpg'); /* Remplacez 'votre-image.jpg' par le chemin de votre image */
   background-size: cover; /* Ajuste la taille de l'image pour couvrir tout le conteneur */
   background-position: center; /* Centre l'image horizontalement et verticalement */

@@ -36,6 +36,9 @@ use App\Models\DemandePieceP005;
 use App\Models\DemandePieceP006;
 use App\Models\DemandePieceP007;
 use App\Models\DemandePieceP008;
+use App\Models\DemandeCategorieP002;
+use App\Models\DemandeDomaineP002;
+use App\Models\DemandeSousDomaineP002;
 
 class DemandeFontController extends Component
 {
@@ -175,9 +178,10 @@ class DemandeFontController extends Component
                         "documents" => $documents,
                         "telephone" => Auth::user()->telephone,
                         "communes" => Commune::all(),
-                        "pays" => Pays::all(),
                         "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
-                        "default_pays" => Auth::user()->usager->pays
+                        "domaines" => DemandeDomaineP002::all(),
+                        "categories" => DemandeCategorieP002::all(),
+                        "sousDomianes" => DemandeSousDomaineP002::all(),
                     ];
                     break;
                 case 'CHESPB':

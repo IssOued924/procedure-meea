@@ -56,11 +56,11 @@
                                             <div class="row">
                                                 <div class="col-3">
                                                     <label class="nom_societe fw-bold" >Exploitant Forestier</label>
-                                                    <input id='radio1' type="radio" value="Forestier" class="checkbox"  name="exploitant" />
+                                                    <input id='radio1Forestier' type="radio" value="Forestier" class="checkbox"  name="exploitant" />
                                                 </div>
                                                 <div class="col-3">
                                                     <label class="siege_social fw-bold ">Exploitant Commercial</label>
-                                                    <input  id='radio2' type="radio" value="Commercial"  name="exploitant"/>
+                                                    <input  id='radio2Commercial' type="radio" value="Commercial"  name="exploitant"/>
                                                 </div>
                                             </div>
                                         <div class="row">
@@ -98,14 +98,7 @@
                                                 <input type="text" name="telephone" value="{{ $telephone }}" class="form-control border-success"    placeholder="Telephone" value="{{ $telephone}}" />
                                             </div>
                                         </div>
-                                        {{-- <div class="row">
-                                            <div class="col-12">
-                                                <label class="activite">Activités ménées<span
-                                                        style="color: red">*</span></label>
-                                                <textarea class="border-success" name="activite"
-                                                    placeholder="Activités ménées"></textarea>
-                                            </div>
-                                        </div> --}}
+
                                     </div>
                                     <input type="button"   class="next action-button btn btn-success"
                                         value="Suivant" />
@@ -124,27 +117,27 @@
                                                 <label class="nom_societe fw-bold"> <strong>Statut de la zone</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input id='statut' type="text"  class="form-control border-success"   name="statut"
-                                                    placeholder="statut" />
+                                                    placeholder="statut"  required/>
                                             </div>
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Escpèce Concerné</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input id='espece' type="text" class="form-control border-success"    name="espece_coupe"
-                                                    placeholder="espèce" />
+                                                    placeholder="espèce" required/>
                                             </div>
 
                                             <div id='superficie' class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Superficie</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input  type="number" class="form-control border-success"    name="superficie"
-                                                    placeholder="superficie" />
+                                                    placeholder="superficie"   />
                                             </div>
 
                                             <div id='depot' class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Depot</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input  type="text" class="form-control border-success"    name="depot"
-                                                    placeholder="depot" />
+                                                    placeholder="depot"   />
                                             </div>
 
                                             <div id='nature' class="col-6">
@@ -157,7 +150,7 @@
                                                 <label class="nom_societe fw-bold"> <strong>Quota/Quantite</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input id='quota' type="number" class="form-control border-success"    name="quantite"
-                                                    placeholder="Quota/Quantite" />
+                                                    placeholder="Quota/Quantite" required />
                                             </div>
                                             {{-- <div class="col-6">
                                                 <label class="siege_social fw-bold">Espece Concernés<span style="color:red">
@@ -417,10 +410,10 @@ $(".submit").click(function(){
     return false;
 })
 
-$("div#moyenP1").hide();
+        $("div#moyenP1").hide();
 		$("div#moyenP2").hide();
 
-jQuery('input[name=moyen]:radio').click(function(){
+        jQuery('input[name=moyen]:radio').click(function(){
 		$("div#moyenP1").hide();
 		$("div#moyenP2").hide();
 		var divId = jQuery(this).val();
@@ -431,74 +424,95 @@ jQuery('input[name=moyen]:radio').click(function(){
         }
 		});
 
+
+        // partie control de exploitant forestier et commerciale
+           $("#superficie").hide()
+            $("#nature").hide()
+            $("#depot").hide()
+            $("#rccm").hide()
+
+        jQuery('input[name=exploitant]:radio').click(function(){
+
+		var divId = jQuery(this).val();
+
+        if(divId == 'Forestier'){
+            $("#superficie").show()
+            $("#nature").hide()
+            $("#depot").hide()
+            $("#rccm").hide()
+        }else if(divId == 'Commercial'){
+            $("#superficie").hide()
+            $("#nature").show()
+            $("#depot").show()
+            $("#rccm").show()
+        }
+		});
+
 });
 </script>
 <script type='text/javascript'>
-    var myLink = document.querySelector('a[href="#"]');
-    myLink.addEventListener('click', function(e) {
-      e.preventDefault();
-  });
+//     var myLink = document.querySelector('a[href="#"]');
+//     myLink.addEventListener('click', function(e) {
+//       e.preventDefault();
+//   });
 
 
+        // Sélection des boutons radio de exploitant
+        // const radio1Forestier = document.getElementById("radio1Exp");
+        // const radio2Commercial = document.getElementById("radio2Forest");
+
+        // Sélection des champs à afficher/masquer
+        // const superficie = document.getElementById("superficie");
+        // const rccm = document.getElementById("rccm");
+        // const depot = document.getElementById("depot");
+        // const nature = document.getElementById("nature");
+        // const agrement = document.getElementById("agrement");
+
+        // Ajout d'un gestionnaire d'événement pour les boutons radio
+        // radio1Exp.addEventListener("change", function() {
+        //     if (radio1Exp.checked) {
+        //         superficie.style.display = "block";
+        //         rccm.style.display = "none";
+        //         nature.style.display = "none"
+        //         depot.style.display = "none"
+        //     }
+        // });
+
+        // radio2Forest.addEventListener("change", function() {
+        //     if (radio2.checked) {
+        //         superficie.style.display = "none";
+        //         rccm.style.display = "block";
+        //         nature.style.display = "block"
+        //         depot.style.display = "block"
+        //     }
+        // });
 
 
         // Sélection des boutons radio
-        const radio1 = document.getElementById("radio1");
-        const radio2 = document.getElementById("radio2");
+        // const radio3 = document.getElementById("radio3");
+        // const radio4 = document.getElementById("radio4");
 
         // Sélection des champs à afficher/masquer
-        const superficie = document.getElementById("superficie");
-        const rccm = document.getElementById("rccm");
-        const depot = document.getElementById("depot");
-        const nature = document.getElementById("nature");
-        const agrement = document.getElementById("agrement");
+        // const moyenP1 = document.getElementById("moyenP1");
+        // const moyenP2 = document.getElementById("moyenP2");
+        // moyenP1.style.display="none"
+        // moyenP2.style.display="none"
 
         // Ajout d'un gestionnaire d'événement pour les boutons radio
-        radio1.addEventListener("change", function() {
-            if (radio1.checked) {
-                superficie.style.display = "block";
-                rccm.style.display = "none";
-                nature.style.display = "none"
-                depot.style.display = "none"
-            }
-        });
+        // radio3.addEventListener("change", function() {
+        //     if (radio1.checked) {
+        //         moyenP1.style.display = "block";
+        //         moyenP2.style.display = "none";
+        //     }
+        // });
 
-        radio2.addEventListener("change", function() {
-            if (radio2.checked) {
-                superficie.style.display = "none";
-                rccm.style.display = "block";
-                nature.style.display = "block"
-                depot.style.display = "block"
-            }
-        });
+        // radio4.addEventListener("change", function() {
+        //     if (radio2.checked) {
+        //         moyenP1.style.display = "none";
+        //         moyenP2.style.display = "block";
 
-
-        // Sélection des boutons radio
-        const radio3 = document.getElementById("radio3");
-        const radio4 = document.getElementById("radio4");
-
-        // Sélection des champs à afficher/masquer
-        const moyenP1 = document.getElementById("moyenP1");
-        const moyenP2 = document.getElementById("moyenP2");
-        moyenP1.style.display="none"
-        moyenP2.style.display="none"
-
-        // Ajout d'un gestionnaire d'événement pour les boutons radio
-        radio3.addEventListener("change", function() {
-            if (radio1.checked) {
-                moyenP1.style.display = "block";
-                moyenP2.style.display = "none";
-
-            }
-        });
-
-        radio4.addEventListener("change", function() {
-            if (radio2.checked) {
-                moyenP1.style.display = "none";
-                moyenP2.style.display = "block";
-
-            }
-        });
+        //     }
+        // });
 
 
 

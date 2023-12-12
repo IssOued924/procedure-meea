@@ -165,7 +165,7 @@ $agent->save();
             "code" => "P002",
             "service_id"=>$serv2->uuid,
             "delai"=> "75",
-            "code" => 1400
+            "tarif" => 1400
         ]);
         Procedure::create([
             "libelle_court" => "PETE",
@@ -179,7 +179,7 @@ $agent->save();
             "code" => "P0012",
             "service_id"=>$serv1->uuid,
             "delai"=> "7",
-            "code" => 1300
+            "tarif" => 1300
         ]);
         Procedure::create([
             "libelle_court" => "CDAS",
@@ -193,7 +193,7 @@ $agent->save();
             "code" => "P004",
             "service_id"=>$serv1->uuid,
             "delai"=> "40",
-            "code" => 1200
+            "tarif" => 1200
         ]);
         Procedure::create([
             "libelle_court" => "ADDMC",
@@ -205,7 +205,7 @@ $agent->save();
             "code" => "P003",
             "service_id"=>$serv1->uuid,
             "delai"=> "7",
-            "code" => 1100
+            "tarif" => 1100
         ]);
         Procedure::create([
             "libelle_court" => "PCBCB",
@@ -216,7 +216,7 @@ $agent->save();
             "code" => "P005",
             "service_id"=>$serv1->uuid,
             "delai"=> "8",
-            "code" => 1000
+            "tarif" => 1000
         ]);
         Procedure::create([
             "libelle_court" => "PCBCB",
@@ -227,7 +227,7 @@ $agent->save();
             "code" => "P0011",
             "service_id"=>$serv1->uuid,
             "delai"=> "8",
-            "code" => 1500
+            "tarif" => 1500
         ]);
 
       
