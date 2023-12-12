@@ -37,23 +37,23 @@
                         </div>
 
 
-                        <h5 class="card-title">Liste des Demandes   <span>| Demandes</span></h5>
+                        <h5 class="card-title">Liste des Demandes <span>| Demandes</span></h5>
 
                         <div class="card-body">
                             <p> @if(session('success'))
-                                <div class="alert alert-success alert-dismissible" role="alert">
-                                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <h4 class="alert-heading">{{session('success')}}</h4>
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="alert-heading">{{session('success')}}</h4>
 
-                                </div>
+                            </div>
 
-                                <script>
-                                    setTimeout(function() {
+                            <script>
+                                setTimeout(function() {
                                         document.querySelector('.alert.alert-success').style.display = 'none';
                                     }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
-                                </script>
+                            </script>
                             @endif</p>
                             <div class="row">
                                 <div class="col-9">
@@ -82,11 +82,11 @@
 
                                     <div style="float: right">
 
-                                        <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
-                                                    class="bi bi-arrow-repeat"></i></button>
-                                                    <button  title="Ajouter" type="button" class="btn btn-success"><i
-                                                        class="bi bi-plus"></i></button>
-                                        </div>
+                                        <button title="Actualiser la Page" type="button" onclick="refresh()"
+                                            class="btn btn-success"><i class="bi bi-arrow-repeat"></i></button>
+                                        <button title="Ajouter" type="button" class="btn btn-success"><i
+                                                class="bi bi-plus"></i></button>
+                                    </div>
                                 </div>
                             </div><br>
 
@@ -109,6 +109,11 @@
                                 </thead>
                                 <tbody>
                                     @php
+
+
+                                    $userRole = Auth::user()->role->libelle;
+
+
                                     $i = 1;
                                     @endphp
                                     @foreach ($demandes as $demande)
@@ -116,47 +121,51 @@
                                     $statut = "";
                                     $statutColor = "";
                                     switch ($demande->etat) {
-                                        case 'D':
-                                            # code...
-                                            $statut = $statutDepose;
-                                            $statutColor ="bg-primary";
-                                            break;
-                                            case 'S':
-                                            # code...
-                                            $statut = $statutSigne;
-                                            $statutColor ="bg-success";
-                                            break;
-                                            case 'A':
-                                            # code...
-                                            $statut = $statutArchive;
-                                            $statutColor ="bg-secondary";
-                                            break;
-                                            case 'V':
-                                            # code...
-                                            $statut = $statutValide;
-                                            $statutColor ="bg-success";
-                                            break;
-                                            case 'C':
-                                            # code...
-                                            $statut = $statutComplement;
-                                            $statutColor ="bg-warning";
-                                            break;
-                                            case 'R':
-                                            # code...
-                                            $statut = $statutRejete;
-                                            $statutColor ="bg-danger";
-                                            break;
-                                            case 'E':
-                                            # code...
-                                            $statut = $statutEtude;
-                                            $statutColor ="bg-info";
-                                            break;
-                                        default:
-                                            # code...
-                                            break;
+                                    case 'D':
+                                    # code...
+                                    $statut = $statutDepose;
+                                    $statutColor ="bg-primary";
+                                    break;
+                                    case 'S':
+                                    # code...
+                                    $statut = $statutSigne;
+                                    $statutColor ="bg-success";
+                                    break;
+                                    case 'A':
+                                    # code...
+                                    $statut = $statutArchive;
+                                    $statutColor ="bg-secondary";
+                                    break;
+                                    case 'V':
+                                    # code...
+                                    $statut = $statutValide;
+                                    $statutColor ="bg-success";
+                                    break;
+                                    case 'C':
+                                    # code...
+                                    $statut = $statutComplement;
+                                    $statutColor ="bg-warning";
+                                    break;
+                                    case 'R':
+                                    # code...
+                                    $statut = $statutRejete;
+                                    $statutColor ="bg-danger";
+                                    break;
+                                    case 'E':
+                                    # code...
+                                    $statut = $statutEtude;
+                                    $statutColor ="bg-info";
+                                    break;
+                                    default:
+                                    # code...
+                                    break;
                                     }
                                     @endphp
-                                   
+                                    @if (Auth::user()->agent->province_id == $demande->province_id ||
+                                    in_array($userRole, ['Gestionnaire',
+                                    'Administration',]))
+
+
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
@@ -174,12 +183,14 @@
                                         <td><b><span class="text-warning">Non Payée</span></b></td>
                                         @endif
 
-                                        <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
+                                        <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours
+                                        </td>
 
                                         <td>{{ $demande->created_at->diffForHumans() }}</td>
 
                                         @if($demande->last_agent_assign != null)
-                                        <td> <span class="badge bg-primary"> {{ $demande->agent->nom. " " .$demande->agent->prenom}} </span> </td>
+                                        <td> <span class="badge bg-primary"> {{ $demande->agent->nom. " "
+                                                .$demande->agent->prenom}} </span> </td>
                                         @else
                                         <td> <span class="badge bg-danger"> non assigné </span> </td>
                                         @endif
@@ -187,11 +198,12 @@
                                         <td>{{ $demande->commentaire }}</td>
                                         <td>
                                             <button title="Voir Détail" type="button" class="btn btn-primary "
+
                                             data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}">
                                             <i class="bi bi-eye"></i> </button>
 
                                             @php
-    $userRole = Auth::user()->role->libelle; 
+    $userRole = Auth::user()->role->libelle;
 @endphp
 
 <!-- Boutons d'action en fonction de l'état et du rôle -->
@@ -200,7 +212,7 @@
      ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||
      ($demande->etat == 'D' && $demande->last_agent_assign == Auth::user()->agent->uuid  || in_array($userRole, ['Gestionnaire', 'Administration'])) ||
      ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid  && Auth::user()->role->code != "RCT" ||  in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-     ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration']))) 
+     ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration'])))
     <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}" type="button" title="Valider" class="btn btn-success">
         <i class="bi bi-check-circle"></i>
     </a>
@@ -240,7 +252,7 @@
 @if (($demande->etat == 'E' && $demande->last_agent_assign == null) && in_array($userRole, ['Etudes']) ||
 ($demande->etat == 'D' && $demande->last_agent_assign == null) && in_array($userRole, ['Etudes']) ||
 ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid) && in_array($userRole, ['Etudes'])
-) 
+)
 
     <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter"
         class="btn btn-danger">
@@ -264,38 +276,106 @@
                                                         <button type="button" class="btn-close" data-dismiss="modal"
                                                             aria-label="btn-close">
 
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form method="post" enctype="multipart/form-data"
-                                                            action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p0012_s'] ) }}">
-                                                            @csrf
 
-                                                            <div class="form-group">
-                                                                <div class="text-center">
-                                                                    <label class="col-form-label">Motif de la validation ?</label>
-                                                                        <input type="text" required name="libelle" class="form-control border-success">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="text-center">
-                                                                    <label class="col-form-label">Charger la note d'étude si y'a lieu</label>
-                                                                        <input type="file" name="note_etude_file" class="form-control border-success">
-                                                                </div>
+                                            @if ($demande->etat == 'D' && in_array($userRole, ['Gestionnaire',
+                                            'Administration']))
+                                            <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}"
+                                                type="button" title="Assigner à un collaborateur"
+                                                class="btn btn-primary">
+                                                <i class="bi bi-folder-symlink"></i>
+                                            </button>
+                                            @endif
+                                            @if ($demande->etat == 'E' && in_array($userRole, ['Gestionnaire',
+                                            'Administration']))
+                                            <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}"
+                                                type="button" title="Assigner à un collaborateur"
+                                                class="btn btn-primary">
+                                                <i class="bi bi-folder-symlink"></i>
+                                            </button>
+                                            @endif
 
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-warning"
-                                                                    data-dismiss="modal">Non, Annuler</button>
-                                                                <button type="submit" class="btn btn-success">Oui,
-                                                                    Valider</button>
-                                                            </div>
-                                                        </form>
+                                            @if ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire',
+                                            'Administration',]))
+                                            <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}"
+                                                type="button" title="Joindre Acte Signé" class="btn btn-success">
+                                                <i class="bi bi-upload"></i>
+                                            </a>
+                                            @endif
+
+                                            @if (($demande->etat != 'A' && $demande->etat != 'S' && $demande->etat !=
+                                            'R') && in_array($userRole, [ 'Gestionnaire', 'Administration']))
+                                            <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}"
+                                                type="button" title="Rejeter" class="btn btn-danger">
+                                                <i class="bi bi-x-circle"></i>
+                                            </a>
+                                            @endif
+                                            @if (($demande->etat != 'A' && $demande->etat != 'S'&& $demande->etat !=
+                                            'E'&& $demande->etat != 'V'&& $demande->etat != 'R') && in_array($userRole,
+                                            ['Réception']))
+                                            <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}"
+                                                type="button" title="Rejeter" class="btn btn-danger">
+                                                <i class="bi bi-x-circle"></i>
+                                            </a>
+                                            @endif
+                                            @if (($demande->etat != 'A' && $demande->etat != 'S'&& $demande->etat !=
+                                            'V'&& $demande->etat != 'R') && in_array($userRole, ['Etudes']))
+                                            <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}"
+                                                type="button" title="Rejeter" class="btn btn-danger">
+                                                <i class="bi bi-x-circle"></i>
+                                            </a>
+                                            @endif
+
+
+                                            {{-- Model de confirmation de Validation et note detude --}}
+                                            <div class="modal fade" id="valider{{ $demande->uuid }}"
+                                                data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content bgcustom-gradient-light">
+                                                        <div class="modal-header">
+                                                            <img src="{{ asset('backend/assets/img/valide.png') }}"
+                                                                width="60" height="45" class="d-inline-block align-top"
+                                                                alt="">
+                                                            <h5 class="modal-title m-auto"> Confirmation de Validation
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-dismiss="modal"
+                                                                aria-label="btn-close">
+
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="post" enctype="multipart/form-data"
+                                                                action="{{ route('statusChange', ['id' =>$demande->uuid, 'currentStatus' => $demande->etat ,'table'=> 'demande_p0012_s'] ) }}">
+                                                                @csrf
+
+                                                                <div class="form-group">
+                                                                    <div class="text-center">
+                                                                        <label class="col-form-label">Motif de la
+                                                                            validation ?</label>
+                                                                        <input type="text" required name="libelle"
+                                                                            class="form-control border-success">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="text-center">
+                                                                        <label class="col-form-label">Charger la note
+                                                                            d'étude si y'a lieu</label>
+                                                                        <input type="file" name="note_etude_file"
+                                                                            class="form-control border-success">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-warning"
+                                                                        data-dismiss="modal">Non, Annuler</button>
+                                                                    <button type="submit" class="btn btn-success">Oui,
+                                                                        Valider</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- Fin Modal Valider-->
+                                            <!-- Fin Modal Valider-->
 
                                             {{-- Model de Joindre acte signé --}}
                                             <div class="modal fade" id="signer{{ $demande->uuid }}"
@@ -320,8 +400,10 @@
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Charger le fichier scanné</label>
-                                                                            <input type="file" required name="output_file" class="form-control border-success">
+                                                                        <label class="col-form-label">Charger le fichier
+                                                                            scanné</label>
+                                                                        <input type="file" required name="output_file"
+                                                                            class="form-control border-success">
                                                                     </div>
 
                                                                 </div>
@@ -356,7 +438,8 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="post" enctype="multipart/form-data" action="{{ route('assignation', ['model' =>'AffectationP0012', 'idDemande' => $demande->uuid ,'nameDemandeId'=> 'demande_p0012_id', 'tableName'=>'demande_p0012_s'] ) }}">
+                                                            <form method="post" enctype="multipart/form-data"
+                                                                action="{{ route('assignation', ['model' =>'AffectationP0012', 'idDemande' => $demande->uuid ,'nameDemandeId'=> 'demande_p0012_id', 'tableName'=>'demande_p0012_s'] ) }}">
                                                                 @csrf
 
 
@@ -365,19 +448,25 @@
                                                                     <div class="text-center">
                                                                         <h5>Choisir le collaborateur à assigné</h5>
 
-                                                                        <select name="agent_id" id="" class="form-select border-success">
+                                                                        <select name="agent_id" id=""
+                                                                            class="form-select border-success">
                                                                             @foreach ($agents as $agent)
 
-                                                                            @if($agent->service->libelle_court == $demande->procedure->service->libelle_court)
-                                                                            <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
+                                                                            @if($agent->service->libelle_court ==
+                                                                            $demande->procedure->service->libelle_court)
+                                                                            <option value="{{ $agent->uuid }}">{{
+                                                                                $agent->nom.' '.$agent->prenom }}
+                                                                            </option>
                                                                             @endif
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <div class="text-center">
-                                                                            <label class="col-form-label">Commentaires</label>
-                                                                                <textarea required name="commentaire" class="form-control border-success"></textarea>
+                                                                            <label
+                                                                                class="col-form-label">Commentaires</label>
+                                                                            <textarea required name="commentaire"
+                                                                                class="form-control border-success"></textarea>
                                                                         </div>
                                                                     </div>
 
@@ -399,8 +488,8 @@
 
 
                                             {{-- Model de confirmation de rejet --}}
-                                            <div class="modal fade" id="rejetter{{ $demande->uuid }}" data-backdrop="static" tabindex="-1"
-                                                role="dialog" aria-hidden="true">
+                                            <div class="modal fade" id="rejetter{{ $demande->uuid }}"
+                                                data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content bgcustom-gradient-light">
                                                         <div class="modal-header">
@@ -421,8 +510,10 @@
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Motif du rejet ?</label>
-                                                                        <input type="text" required name="libelle" class="form-control border-success">
+                                                                        <label class="col-form-label">Motif du rejet
+                                                                            ?</label>
+                                                                        <input type="text" required name="libelle"
+                                                                            class="form-control border-success">
 
                                                                     </div>
 
@@ -460,7 +551,8 @@
                                                             </div>
                                                             <div class="col-6">
                                                                 <b>Telephone :</b>
-                                                                <span class="text-success">{{ $demande->usager->telephone}}</span>
+                                                                <span class="text-success">{{
+                                                                    $demande->usager->telephone}}</span>
                                                             </div>
                                                         </div><br>
                                                         <div class="row">
@@ -478,7 +570,8 @@
                                                             </div>
 
                                                         </div> <br>
-                                                        <h4>Liste des fichiers Soumis <i class="bi bi-folder text-success"></i></h4>
+                                                        <h4>Liste des fichiers Soumis <i
+                                                                class="bi bi-folder text-success"></i></h4>
                                                         <div class="row">
                                                             <div class="col">
 
@@ -486,7 +579,10 @@
 
 
 
-                                                                <a class="text-success" target="_blank" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
+                                                                <a class="text-success" target="_blank"
+                                                                    href="{{ Storage::url($chemin->chemin) }}"><b><i
+                                                                            class="bi bi-file-earmark-pdf"></i>
+                                                                        {{$chemin->libelle}}</b></a>
                                                                 <br>
                                                                 @endforeach
                                                             </div>
@@ -503,7 +599,8 @@
                                             </div>
                                         </div><!-- End Large Modal-->
                                     </tr>
-                                    
+                                    @endif
+
                                     @endforeach
 
 
@@ -525,7 +622,7 @@
 </section>
 @endsection
 <script>
-        function refresh() {
+    function refresh() {
         location.reload(true);
     }
 </script>

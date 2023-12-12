@@ -1,11 +1,10 @@
-
 @extends('layouts/layoutUsager')
 @section('title')
 
 @endsection
 
 @section('content')
- <section class="section dashboard">
+<section class="section dashboard">
     <div class="row">
 
         <!-- Left side columns -->
@@ -29,7 +28,7 @@
                             </ul>
                         </div>
 
-                        <h2 class="card-title text-center">Liste de mes Démandes  </h2>
+                        <h2 class="card-title text-center">Liste de mes Démandes </h2>
 
                         <div class="card-body">
 
@@ -37,13 +36,13 @@
 
                                 <div class="col-4 offset-md-3">
                                     <label for="">Choisir sa procédure</label>
-                                <select name="procedure" id="procedure" class="form-select border-success" onchange="loadDemandeListe()">
-                                <option class="mb-3" value=""></option>
-                                    @foreach($procedures as $proc)
+                                    <select name="procedure" id="procedure" class="form-select border-success" onchange="loadDemandeListe()">
+                                        <option class="mb-3" value=""></option>
+                                        @foreach($procedures as $proc)
                                         <option class="mb-3" {{($selectedProcedure == $proc->libelle_court ? 'selected': '')}} value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
-                                    @endforeach
-                                </select><br><br>
-                                {{-- <div class="form-inline">
+                                        @endforeach
+                                    </select><br><br>
+                                    {{-- <div class="form-inline">
                                     <label for="">Rechercher par code : </label>
                                     <input type="text" class="form-control border-success"style="width: 200px;"  placeholder="code">
                                 </div> --}}
@@ -52,19 +51,18 @@
                                     <div style="float: right">
                                         {{-- <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
                                                     class="bi bi-arrow-repeat"></i></button> --}}
-                                                    <button  title="Ajouter" type="button" class="btn btn-success"><i
-                                                        class="bi bi-printer"></i> Imprimer</button>
-                                        </div>
+                                        <button title="Ajouter" type="button" class="btn btn-success"><i class="bi bi-printer"></i> Imprimer</button>
+                                    </div>
                                 </div>
                             </div>
-                          <br>
+                            <br>
                             <div class="row">
                                 <div class="col-8 offset-md-2">
-                                     <!-- Table with stripped rows -->
-                            <table class="table datatable table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
+                                    <!-- Table with stripped rows -->
+                                    <table class="table datatable table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
 
                                         <th scope="col">Date Démande</th>
                                         <th scope="col">Réference</th>
@@ -169,43 +167,40 @@
                                                             class="bi bi-pencil-square text-white">Modifier </i> </a>
                                                     @endif
 
-                                                   
+
                                                     @if ($demande->etat == 'S' &&   !is_null($demande->output_file) ||
                                                     $demande->etat == 'A' &&   !is_null($demande->output_file))
 
-                                                    <a class="btn btn-success text-white"
-                                                                    href="{{ Storage::url($demande->output_file) }}" target="_blank"><b><i
-                                                                            class=" bi bi-download"></i>
-                                                                         Télécharger</b></a>
-                                                    @endif
+                                                        <a class="btn btn-success text-white" href="{{ Storage::url($demande->output_file) }}" target="_blank"><b><i class=" bi bi-download"></i>
+                                                                Télécharger</b></a>
+                                                        @endif
 
 
-                                            {{-- <button type="button" title="Annuler" class="btn btn-danger"><i
+                                                        {{-- <button type="button" title="Annuler" class="btn btn-danger"><i
                                                     class="bi bi-x-circle"></i></button> --}}
-                                        </td>
+                                                    </td>
 
-                                        <div class="modal" id="largeModal{{ $demande->uuid }}">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Détail de la Demande</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="col-6">
-                                                                <b>Identite demandeur:</b>
-                                                                <span>{{ $demande->usager->nom.'
+                                                    <div class="modal" id="largeModal{{ $demande->uuid }}">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Détail de la Demande</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <b>Identite demandeur:</b>
+                                                                            <span>{{ $demande->usager->nom.'
                                                                     '.$demande->usager->prenom}}</span>
 
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <b>Telephone :</b>
-                                                                <span>{{ $demande->usager->telephone}}</span>
-                                                            </div>
-                                                        </div><br>
-                                                        {{-- <div class="row">
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <b>Telephone :</b>
+                                                                            <span>{{ $demande->usager->telephone}}</span>
+                                                                        </div>
+                                                                    </div><br>
+                                                                    {{-- <div class="row">
                                                             <div class="col-6">
                                                                 <b>Identite Fournisseur:</b>
                                                                 <span>{{$demande->denomination_sociale_fournisseur}}</span>
@@ -219,7 +214,7 @@
                                                         <div class="row">
                                                             <div class="col-6">
 
-                                                                @foreach ( $demande->demandePiece as $chemin)
+                                                                    @foreach ( $demande->demandePiece as $chemin)
 
                                                                 <a  class="text-success" target="_blank" href="{{ Storage::url($chemin->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$chemin->libelle}}</b></a>
                                                                 <br>
@@ -241,41 +236,41 @@
                                                                     @php
                                                                     $commentaire = $demande->demandeCommentaire->sortBy('created_at')->toArray();
                                                                     @endphp
-                                                                    <span>  {{$commentaire[0]['libelle']}}</span>
-                                                                @endif
+                                                                    <span> {{$commentaire[0]['libelle']}}</span>
+                                                                    @endif
 
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger"
-                                                            data-bs-dismiss="modal">Fermer</button>
-                                                        {{-- <button type="button" class="btn btn-primary">Valider</button> --}}
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+                                                            {{-- <button type="button" class="btn btn-primary">Valider</button> --}}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div><!-- End Large Modal-->
 
-                                    </tr>
-                                    @endforeach
-                                    <?php } ?>
+                    </tr>
+                    @endforeach
+                <?php } ?>
 
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
+                </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
 
 
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div><!-- End Recent Sales -->
-
+                </div>
             </div>
-        </div><!-- End Left side columns -->
+
+        </div>
+
+    </div>
+    </div><!-- End Recent Sales -->
+
+    </div>
+    </div><!-- End Left side columns -->
 
 
 
@@ -286,9 +281,9 @@
 @section('script')
 
 <script>
-    function loadDemandeListe(){
-        let url='/demandes-lists?procedure='+$('#procedure').val();
-        window.location=url;
+    function loadDemandeListe() {
+        let url = '/demandes-lists?procedure=' + $('#procedure').val();
+        window.location = url;
     }
 </script>
 @endsection

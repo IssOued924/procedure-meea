@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
+use App\Models\Commune;
+use App\Models\Province;
 use App\Models\Role;
 use App\Models\Service;
 use App\Models\Structure;
@@ -24,6 +26,8 @@ class AgentController extends Controller
             "structures" => Structure::all(),
             "services" =>Service::all(),
             "roles" => Role::all(),
+            "communes" => Commune::all(),
+            "provinces" => Province::all(),
 
         ];
         return view('backend.utilisateur.agent_list', $data);
@@ -54,7 +58,7 @@ class AgentController extends Controller
     ]);
 
     $agent = Agent::find($uuid);
-    
+
     $agent->update([
         'nom' => $request->input('nom'),
         'prenom' => $request->input('prenom'),

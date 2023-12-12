@@ -12,7 +12,8 @@ class Commune extends Model
     use \Wildside\Userstamps\Userstamps;
     protected $primaryKey = 'uuid';
     public $fillable = ['libelle', 'province_id','statut'];
+
     public function provinces(){
-        return $this->belongsTo(Province::class, 'province_id', 'uuid');
+        return $this->belongsTo(Province::class, "province_id", "uuid");
     }
 }

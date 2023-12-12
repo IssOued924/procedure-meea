@@ -189,6 +189,9 @@ Route::get('/administration/parametre/province', [ProvinceController::class, 'in
 Route::get('/administration/parametre/province/{uuid}', [ProvinceController::class, 'supprimer'])->name('supprimer-province');
 Route::post('/administration/parametre/province', [ProvinceController::class, 'store'])->name('province-store');
 
+Route::get('/get-communes/{province_id}', [ProvinceController::class,  'getCommunesByProvince']);
+
+
 Route::get('/administration/parametre/region', [RegionController::class, 'index'])->name('region-list');
 Route::get('/administration/parametre/region/{uuid}', [RegionController::class, 'supprimer'])->name('supprimer');
 Route::post('/administration/parametre/region', [RegionController::class, 'store'])->name('region-store');

@@ -131,6 +131,10 @@
             </div>
         </div>
 
+        <div>
+            <x-input-label for="ifu" :value="__('Numero IFU')" />
+            <x-text-input id="ifu" name="ifu" type="text" class="mt-1 block w-full" :value="old('ifu', $user->ifu)" required autofocus autocomplete="ifu" />
+            <x-input-error class="mt-2" :messages="$errors->get('ifu')" />
         <div class="row">
             <div class="col">
                 <div>
@@ -147,6 +151,13 @@
                 </div>
             </div>
         </div>
+
+        <div>
+            <x-input-label for="rccm" :value="__('RCCM')" />
+            <x-text-input id="rccm" name="rccm" type="text" class="mt-1 block w-full" :value="old('rccm', $user->rccm)" required autofocus autocomplete="rccm" />
+            <x-input-error class="mt-2" :messages="$errors->get('rccm')" />
+        </div>
+
 
         <div class="row">
             <div class="col">

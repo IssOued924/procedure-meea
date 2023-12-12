@@ -160,7 +160,7 @@
                                     break;
                                     }
                                     @endphp
-                                   
+
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
@@ -197,7 +197,7 @@
 
 
                                                 @php
-    $userRole = Auth::user()->role->libelle; 
+    $userRole = Auth::user()->role->libelle;
 @endphp
 
 <!-- Boutons d'action en fonction de l'état et du rôle -->
@@ -206,7 +206,7 @@
      ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||
      ($demande->etat == 'D' && $demande->last_agent_assign == Auth::user()->agent->uuid  || in_array($userRole, ['Gestionnaire', 'Administration'])) ||
      ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid  && Auth::user()->role->code != "RCT" ||  in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-     ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration']))) 
+     ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration'])))
     <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}" type="button" title="Valider" class="btn btn-success">
         <i class="bi bi-check-circle"></i>
     </a>
@@ -246,7 +246,7 @@
 @if (($demande->etat == 'E' && $demande->last_agent_assign == null) && in_array($userRole, ['Etudes']) ||
 ($demande->etat == 'D' && $demande->last_agent_assign == null) && in_array($userRole, ['Etudes']) ||
 ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid) && in_array($userRole, ['Etudes'])
-) 
+)
 
     <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter"
         class="btn btn-danger">
@@ -378,7 +378,7 @@
                                                                             @if($agent->service->libelle_court == $demande->procedure->service->libelle_court)
                                                                             <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
                                                                             @endif
-                                                                            
+
                                                                             @endforeach
 
                                                                         </select>
@@ -523,7 +523,7 @@
                                             </div>
                                         </div><!-- End Large Modal-->
                                     </tr>
-                                   
+
                                     @endforeach
 
 
