@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Pays;
+use App\Models\Pays;
 use App\Repositories\ProfileRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+
+use function Laravel\Prompts\select;
 
 use function Laravel\Prompts\select;
 
@@ -28,6 +32,7 @@ class ProfileController extends Controller
         $data =  [
             "profiles" => $this->repository->all(),
             "pays" => Pays::all(),
+            "pays" => Pays::all(),
 
         ];
         return view('backend.utilisateur.profile_list', $data);
@@ -43,7 +48,15 @@ class ProfileController extends Controller
      ->where('users.uuid', Auth::user()->uuid)
      ->first();
 
+        // dd(Auth::user()->uuid);
+
+     $user =  DB::table('usagers')->join('users', 'usagers.uuid', '=' ,'users.usager_id')->select('usagers.*' , 'users.name' , 'users.email')
+     ->where('users.uuid', Auth::user()->uuid)
+     ->first();
+
         return view('profile.edit', [
+            'user' => $user,
+            'pays' => Pays::all(),
             'user' => $user,
             'pays' => Pays::all(),
         ]);
@@ -55,6 +68,8 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
+
+
 
 
 

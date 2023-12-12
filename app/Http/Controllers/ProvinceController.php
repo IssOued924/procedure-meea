@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commune;
 use App\Models\Province;
 use App\Models\Region;
 use App\Repositories\ProvinceRepository;
@@ -34,6 +35,16 @@ class ProvinceController extends Controller
         return redirect()->route('province-list')->with('success', 'La Province à été Enregistré avec succès !');
 
     }
+
+    public function getCommunesByProvince($province_id)
+{
+    $communes = Commune::where('province_id', $province_id)->get();
+    return response()->json($communes);
+}
+
+
+
+
             // Supression
  public function supprimer($uuid)
 {

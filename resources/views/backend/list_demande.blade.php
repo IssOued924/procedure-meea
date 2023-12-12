@@ -160,7 +160,7 @@
                                     break;
                                     }
                                     @endphp
-                                   
+
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
@@ -196,14 +196,14 @@
                                                 <i class="bi bi-eye"></i> </button>
 
                                                 @php
-    $userRole = Auth::user()->role->libelle; 
+    $userRole = Auth::user()->role->libelle;
 @endphp
 
 <!-- Boutons d'action en fonction de l'état et du rôle -->
 @if (($demande->etat == 'D' && in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
      ($demande->etat == 'E' && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
      ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-     ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration']))) 
+     ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration'])))
     <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}" type="button" title="Valider" class="btn btn-success">
         <i class="bi bi-check-circle"></i>
     </a>
@@ -372,7 +372,7 @@
                                                                             @if($agent->service->libelle_court == $demande->procedure->service->libelle_court)
                                                                             <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
                                                                             @endif
-                                                                            
+
                                                                             @endforeach
 
                                                                         </select>
@@ -517,7 +517,7 @@
                                             </div>
                                         </div><!-- End Large Modal-->
                                     </tr>
-                                   
+
                                     @endforeach
 
 

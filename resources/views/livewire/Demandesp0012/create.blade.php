@@ -59,23 +59,36 @@
                                             *</span></h4> --}}
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col">
                                                 <label class="nom_societe fw-bold"> <strong>identité</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success" value="{{ $name }}"
                                                     placeholder="Nom et prenom" />
                                             </div>
-                                            <div class="col-6">
-                                                <label class="siege_social fw-bold">Lieu de résidence/siège<span style="color:red">
+                                            <div class="col">
+                                                <label class="siege_social fw-bold">Province de résidence<span style="color:red">
                                                         *</span></label>
 
-                                                <select name="commune_id" id="selectMultiple" class="form-select border-success" required>
+                                                <select name="province_id" id="provinces" class="form-select border-success" required>
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
-                                                    <option value="">Veuillez choisir une ville</option>
-                                                    @foreach ( $communes as  $com)
-                                                     <option value="{{ $com->uuid }}" >{{ $com->libelle }}</option>
+                                                    <option value="">Veuillez choisir une Province</option>
+                                                    @foreach ( $provinces as  $prov)
+                                                     <option value="{{ $prov->uuid }}" >{{ $prov->libelle }}</option>
+
                                                     @endforeach
 
+
+                                                </select>
+
+
+                                            </div>
+
+                                            <div class="col">
+                                                <label class="siege_social fw-bold">Commune de résidence/siège<span style="color:red">
+                                                        *</span></label>
+
+                                                <select name="commune_id"  id="communes" class="form-select border-success" required>
+                                                    {{-- <input type="text" placeholder="filtrer ici"> --}}
 
                                                 </select>
                                             </div>
@@ -219,25 +232,6 @@
                                 </fieldset>
 
 
-                               {{-- <fieldset>
-                                    <div class="form-card">
-                                        <h2 class="fs-title text-center">Validation !</h2>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-3">
-                                                <img src="https://img.icons8.com/color/96/000000/ok--v2.png"
-                                                    class="fit-image">
-                                            </div>
-                                        </div>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-7 text-center">
-                                                <h5>Votre demande est enregistrée avec succès et en cour de traitement!
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>--}}
                             </form>
                         </div>
                     </div>
@@ -248,10 +242,37 @@
 </section><!-- End About Section -->
 
 
+{{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js" ;></script>
 
 <script type="text/javascript">
     $('#selectMultiple').select2();
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#provinces').change(function () {
+            var provinceId = $(this).val();
+            if (provinceId) {
+                $.ajax({
+                    url: '/get-communes/' + provinceId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#communes').empty();
+                        $.each(data, function (key, value) {
+                            $('#communes').append('<option value="' + value.uuid + '">' + value.libelle + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#communes').empty();
+            }
+        });
+    });
 </script>
 
 <script type='text/javascript'>

@@ -41,7 +41,7 @@ class ProcedureController extends Controller
 
     public function update(Request $request, $uuid)
 {
-    
+
     $request->validate([
         'libelle_court' => 'required',
         'libelle_long' => 'required',
@@ -49,13 +49,13 @@ class ProcedureController extends Controller
         'delai' => 'required',
         'tarif' => 'required',
     ]);
-    dd($request->input('libelle_court'));
-    
+    // dd($request->input('libelle_court'));
+
 
     $type = Procedure::find($uuid);
     //dd($request->input('description'));
 
-    
+
     $type->update([
         'libelle_court' => $request->input('libelle_court'),
         'libelle_long' => $request->input('libelle_long'),
@@ -63,7 +63,7 @@ class ProcedureController extends Controller
         'delai' => $request->input('delai'),
         'tarif' => $request->input('tarif'),
         'estperiodique' => ($request->input('estperiodique')) ? 1 : 0,
-        
+
     ]);
 
     return redirect()->route('procedure-list')->with('success', ' Procedure  mis à jour avec succès !');
@@ -73,13 +73,13 @@ class ProcedureController extends Controller
 
     public function sessionUpdate(Request $request, $uuid)
 {
-    
+
     $request->validate([
         'session_debut' => 'required',
         'session_fin' => 'required',
     ]);
 
-    
+
 
     $type = Procedure::find($uuid);
     //dd($request->input('description'));
