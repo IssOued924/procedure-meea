@@ -202,14 +202,17 @@
                                             data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}">
                                             <i class="bi bi-eye"></i> </button>
 
+
                                             @php
     $userRole = Auth::user()->role->libelle; 
 @endphp
 
 <!-- Boutons d'action en fonction de l'état et du rôle -->
-@if (($demande->etat == 'D' && in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
-     ($demande->etat == 'E' && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
+@if (($demande->etat == 'D' && $demande->last_agent_assign == null && in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
+     ($demande->etat == 'E' &&  in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
      ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||
+     ($demande->etat == 'D' && $demande->last_agent_assign == Auth::user()->agent->uuid  || in_array($userRole, ['Gestionnaire', 'Administration'])) ||
+     ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid  && Auth::user()->role->code != "RCT" ||  in_array($userRole, ['Gestionnaire', 'Administration'])) ||
      ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration']))) 
     <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}" type="button" title="Valider" class="btn btn-success">
         <i class="bi bi-check-circle"></i>
@@ -235,7 +238,6 @@
         <i class="bi bi-upload"></i>
     </a>
 @endif
-
 @if (($demande->etat != 'A' && $demande->etat != 'S' && $demande->etat != 'R') && in_array($userRole, [ 'Gestionnaire', 'Administration']))
     <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter"
         class="btn btn-danger">
@@ -248,7 +250,11 @@
         <i class="bi bi-x-circle"></i>
     </a>
 @endif
-@if (($demande->etat != 'A' && $demande->etat != 'S'&& $demande->etat != 'V'&& $demande->etat != 'R') && in_array($userRole, ['Etudes']))
+@if (($demande->etat == 'E' && $demande->last_agent_assign == null) && in_array($userRole, ['Etudes']) ||
+($demande->etat == 'D' && $demande->last_agent_assign == null) && in_array($userRole, ['Etudes']) ||
+($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid) && in_array($userRole, ['Etudes'])
+) 
+
     <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter"
         class="btn btn-danger">
         <i class="bi bi-x-circle"></i>

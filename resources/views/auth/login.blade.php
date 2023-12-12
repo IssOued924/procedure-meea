@@ -40,38 +40,6 @@
 
 
     @livewireStyles
-    <style>
-        @keyframes moveBanner {
-          0% { transform: translateX(-50); }
-          50% { transform: translateX(200px); } /* Adjust the distance you want the banner to move */
-          100% { transform: translateX(0); }
-        }
-    
-        .banner {
-          /* width: 200px; Set the width of your banner */
-          /* height: 100px; Set the height of your banner */
-          background-color: #3498db; /* Set the background color of your banner */
-          color: #ffffff; /* Set the text color */
-          text-align: center;
-          /* line-height: 100px; Center text vertically */
-          font-size: 18px;
-          position: relative;
-          animation: moveBanner 4s linear infinite; /* Adjust the animation duration */
-        }
-      </style>
-      <style>
-        .circle-banner {
-          width: 200px;
-          height: 200px;
-          background-color: #3498db;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          font-size: 24px;
-        }
-      </style>
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> --}}
 </head>
 
@@ -104,7 +72,7 @@
                     </style>
 
                     @if($procedure)
-                    <div class="col-lg-7 box" style="z-index:1">
+                    <div class="col-lg-7 box" >
                         <h5 class="single">
                             {{ $procedure->libelle_long }}
                         </h5>
@@ -229,7 +197,7 @@
 
 
                     {{-- La partie de connexion --}}
-                    <div class="col-lg-5  box" style="z-index:1">
+                    <div class="col-lg-5  box">
                         <h2>Connexion</h2>
                         <!-- Session Status -->
                         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -288,7 +256,7 @@
                     </div>
                     @else
                     {{-- La partie de connexion --}}
-                    <div class="col-lg-6 offset-lg-3  box">
+                    <div class="col-lg-6 offset-lg-3  box" >
                         <h2>Connexion</h2>
                         <!-- Session Status -->
                         <x-auth-session-status class="mb-4" :status="session('status')" />
