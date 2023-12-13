@@ -183,8 +183,8 @@
 
                                                                 <div class="row">
                                                                     <div class="col">
-                                                                        <label class="siege_social fw-bold">Province de résidence<span style="color:red">
-                                                                                *</span></label>
+                                                                        <h5 class="card-title">Province de résidence <span style="color:red">
+                                                                            *</span></h5>
 
                                                                         <select name="province_id" id="provinces" class="form-select border-success" required>
                                                                             {{-- <input type="text" placeholder="filtrer ici"> --}}
@@ -201,8 +201,8 @@
                                                                     </div>
 
                                                                     <div class="col">
-                                                                        <label class="siege_social fw-bold">Commune de résidence/siège<span style="color:red">
-                                                                                *</span></label>
+                                                                        <h5 class="card-title">Commune de résidence <span style="color:red">
+                                                                            *</span></h5>
 
                                                                         <select name="commune_id"  id="communes" class="form-select border-success" required>
                                                                             {{-- <input type="text" placeholder="filtrer ici"> --}}
@@ -397,6 +397,29 @@
 
 
                                                         </div>
+
+
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                  <h5 class="card-title">Province de résidence <span style="color:red">
+                                                                        *</span></h5>
+
+                                                                <select name="province_id" id="provinces" class="form-select border-success" required>
+                                                                    {{-- <input type="text" placeholder="filtrer ici"> --}}
+                                                                    <option value="">Veuillez choisir une Province</option>
+                                                                    @foreach ( $provinces as  $prov)
+                                                                     <option {{ $agent->province_id == $prov->uuid ? 'selected' : '' }} value="{{ $prov->uuid }}" >{{ $prov->libelle }}</option>
+
+                                                                    @endforeach
+
+
+                                                                </select>
+
+
+                                                            </div>
+
+
+                                                    </div>
 
                                                             {{-- <input type="submit" value="Modifier"
                                                                 class="btn btn-primary center"> --}}
