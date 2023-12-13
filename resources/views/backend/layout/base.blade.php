@@ -53,12 +53,23 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
 
-
-
-
+    <link href="{{ asset('backend/assets/css/custom.css') }}" rel="stylesheet">
 
     @yield('css')
     @include('sweetalert::alert')
+
+    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js" type="text/javascript"></script>
+
 </head>
 
 <body>
@@ -166,7 +177,8 @@
                         <li>
                             <a href="{{ route('demandes-list') }}">
                                 <i class="bi bi-circle"></i><span>Procédure Produit Chimique &nbsp;<span
-                                        id="prog_produit_chimique" class="badge bg-warning text-white"> </span> </span>
+                                        id="prog_produit_chimique" class="badge bg-warning text-white"> </span>
+                                </span>
                             </a>
                         </li>
 

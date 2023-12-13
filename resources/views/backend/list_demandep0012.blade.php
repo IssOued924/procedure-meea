@@ -1,40 +1,41 @@
 @extends('backend.layout.base')
 @section('title')
-<div class="pagetitle">
-    <h1>Liste des Demandes de permis d'écotourisme ou de tourisme écologique</h1>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
-            <li class="breadcrumb-item active">Liste</li>
-        </ol>
-    </nav>
-</div><!-- End Page Title -->
+    <div class="pagetitle">
+        <h1>Liste des Demandes de permis d'écotourisme ou de tourisme écologique</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
+                <li class="breadcrumb-item active">Liste</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 @endsection
 
 @section('content')
-<section class="section dashboard">
-    <div class="row">
+    <section class="section dashboard">
+        <div class="row">
 
-        <!-- Left side columns -->
-        <div class="col-lg-12">
-            <div class="row">
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="row">
 
-                <!-- Recent Sales -->
-                <div class="col-12">
-                    <div class="card recent-sales overflow-auto">
+                    <!-- Recent Sales -->
+                    <div class="col-12">
+                        <div class="card recent-sales overflow-auto">
 
-                        <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
-                                </li>
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                        class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>Filter</h6>
+                                    </li>
 
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                        </div>
+                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                </ul>
+                            </div>
 
 
                         <h5 class="card-title">Liste des Demandes <span>| Demandes</span></h5>
@@ -76,7 +77,7 @@
                                 </div>
                                 <div class="col-3">
 
-                                    <div style="float: right">
+                                        <div style="float: right">
 
                                         <button title="Actualiser la Page" type="button" onclick="refresh()" class="btn btn-success"><i class="bi bi-arrow-repeat"></i></button>
                                         <button title="Ajouter" type="button" class="btn btn-success"><i class="bi bi-plus"></i></button>
@@ -165,22 +166,28 @@
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
                                         <td> {{ $demande->usager->nom.' '.$demande->usager->prenom }}</td>
 
-                                        <td>{{ $demande->localite->libelle }}</td>
+                                                <td>{{ $demande->localite->libelle }}</td>
 
-                                        <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
+                                                <td><span class="badge {{ $statutColor }} ">{{ $statut }}</span>
+                                                </td>
+                                                {{-- @if (isset($demande->delai))
+                                                    <td><span class="badge bg-dark">{{ $demande->delai }} </span> Jours
+                                                    </td>
+                                                @else
+                                                    <td><span class="  ">-</span> </td>
+                                                @endif --}}
 
-                                        {{-- partie paiement --}}
-                                        @if ($demande->paiement === 1)
-                                        <td><b><span class="text-success">Payée</span></b></td>
-
-                                        @else
-                                        <td><b><span class="text-warning">Non Payée</span></b></td>
-                                        @endif
+                                                {{-- partie paiement --}}
+                                                @if ($demande->paiement === 1)
+                                                    <td><b><span class="text-success">Payée</span></b></td>
+                                                @else
+                                                    <td><b><span class="text-warning">Non Payée</span></b></td>
+                                                @endif
 
                                         <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours
                                         </td>
 
-                                        <td>{{ $demande->created_at->diffForHumans() }}</td>
+                                                <td>{{ $demande->created_at->diffForHumans() }}</td>
 
                                         @if($demande->last_agent_assign != null)
                                         <td> <span class="badge bg-primary"> {{ $demande->agent->nom. " "
@@ -201,7 +208,7 @@
 ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||
 ($demande->etat == 'D' && $demande->last_agent_assign == Auth::user()->agent->uuid  || in_array($userRole, ['Gestionnaire', 'Administration'])) ||
 ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid  && Auth::user()->role->code != "RCT" ||  in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration']))) 
+($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration'])))
 <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}" type="button" title="Valider" class="btn btn-success">
    <i class="bi bi-check-circle"></i>
 </a>
@@ -241,7 +248,7 @@
 @if (($demande->etat == 'E' && $demande->last_agent_assign == null) && in_array($userRole, ['Etudes']) ||
 ($demande->etat == 'D' && $demande->last_agent_assign == null) && in_array($userRole, ['Etudes']) ||
 ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid) && in_array($userRole, ['Etudes'])
-) 
+)
 
 <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter"
    class="btn btn-danger">
@@ -340,17 +347,18 @@
                                                             </h5>
                                                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="btn-close">
 
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form method="post" enctype="multipart/form-data" action="{{ route('assignation', ['model' =>'AffectationP0012', 'idDemande' => $demande->uuid ,'nameDemandeId'=> 'demande_p0012_id', 'tableName'=>'demande_p0012_s'] ) }}">
-                                                                @csrf
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form method="put"
+                                                                        action="{{ route('statusChange', ['id' => $demande->uuid, 'currentStatus' => $demande->etat, 'table' => 'demande_p0012_s']) }}">
+                                                                        @csrf
+                                                                        @method('GET')
 
 
-
-                                                                <div class="form-group">
-                                                                    <div class="text-center">
-                                                                        <h5>Choisir le collaborateur à assigné</h5>
+                                                                        <div class="form-group">
+                                                                            <div class="text-center">
+                                                                                <h5>Choisir le collaborateur à assigné</h5>
 
                                                                         <select name="agent_id" id="" class="form-select border-success">
                                                                             @foreach ($agents as $agent)
@@ -409,7 +417,7 @@
                                                                             ?</label>
                                                                         <input type="text" required name="libelle" class="form-control border-success">
 
-                                                                    </div>
+                                                                            </div>
 
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -461,10 +469,11 @@
                                                                 @endif
                                                             </div>
 
-                                                        </div> <br>
-                                                        <h4>Liste des fichiers Soumis <i class="bi bi-folder text-success"></i></h4>
-                                                        <div class="row">
-                                                            <div class="col">
+                                                                </div> <br>
+                                                                <h4>Liste des fichiers Soumis <i
+                                                                        class="bi bi-folder text-success"></i></h4>
+                                                                <div class="row">
+                                                                    <div class="col">
 
                                                                 @foreach ( $demande->demandePiece as $chemin)
 
@@ -492,22 +501,22 @@
                                     @endforeach
 
 
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
+                                    </tbody>
+                                </table>
+                                <!-- End Table with stripped rows -->
+
+                            </div>
 
                         </div>
+                    </div><!-- End Recent Sales -->
 
-                    </div>
-                </div><!-- End Recent Sales -->
-
-            </div>
-        </div><!-- End Left side columns -->
+                </div>
+            </div><!-- End Left side columns -->
 
 
 
-    </div>
-</section>
+        </div>
+    </section>
 @endsection
 <script>
     function refresh() {
