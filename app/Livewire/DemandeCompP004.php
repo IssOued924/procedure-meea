@@ -7,6 +7,7 @@ use App\Models\Demande;
 use App\Models\DemandeP004;
 use App\Models\Pays;
 use App\Models\Procedure;
+use App\Models\Province;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -50,6 +51,7 @@ class DemandeCompP004 extends Component
             "demandes" => DemandeP004::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->usager->telephone,
             "communes" => Commune::all(),
+            "provinces" => Province::all(),
             "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
             "pays" => Pays::all(),
         ];

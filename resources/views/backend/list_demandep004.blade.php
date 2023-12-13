@@ -111,6 +111,7 @@
                                 <tbody>
                                     @php
                                     $i = 1;
+                                    $userRole = Auth::user()->role->libelle;
                                     @endphp
                                     @foreach ($demandes as $demande)
                                     @php
@@ -157,7 +158,9 @@
                                             break;
                                     }
                                     @endphp
-                                  
+                                    @if (Auth::user()->agent->province_id == $demande->province_id ||
+                                    in_array($userRole, ['Gestionnaire',
+                                    'Administration',]))
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
@@ -197,9 +200,7 @@
                                             <i class="bi bi-eye"></i> </button>
 
 
-                                            @php
-    $userRole = Auth::user()->role->libelle; 
-@endphp
+                                           
 
 <!-- Boutons d'action en fonction de l'état et du rôle -->
 @if (($demande->etat == 'D' && $demande->last_agent_assign == null && in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
@@ -513,7 +514,7 @@
                                             </div>
                                         </div><!-- End Large Modal-->
                                     </tr>
-                                    
+                                    @endif
                                     @endforeach
 
 
