@@ -171,13 +171,18 @@
 
                       <td>
 
-                        <button type="button" title="Desactiver Utilisateur" class="btn btn-warning"><i
+                        <button type="button" title="Desactiver Utilisateur" class="btn btn-danger"><i
                                 class="bi bi-x-circle"></i></button>
 
                         <button title="Editer" type="button" class="btn btn-info "
                                 data-bs-toggle="modal"
                                 data-bs-target="#basicModalEdit{{ $user->uuid }}"> <i
                                 class="bi bi-pencil-square"></i> </button>
+
+                        <a data-toggle="modal" data-target="#reinitialisation{{ $user->uuid }}" type="button" title="Réinitialiser"
+                            class="btn btn-warning">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </a>        
 
                     </td>
 
@@ -252,6 +257,35 @@
                             </div>
                         </div>
                     </div><!-- End Basic edit Modal-->
+
+                    {{-- Modal de reinitialisation de mot de passe --}}
+                    <div class="modal fade" id="reinitialisation{{ $user->uuid }}" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content bgcustom-gradient-light">
+                                <div class="modal-header">
+                                    <img src="{{ asset('backend/assets/img/delete.svg') }}" width="60" height="45" class="d-inline-block align-top" alt="">
+                                    <h5 class="modal-title m-auto"> Confirmation de Réinitialisation</h5>
+                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="btn-close">
+
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="{{ route('reinitialiser', ['id' =>$user->uuid]) }}">
+                                        @csrf
+                                        @method('POST')
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Non, Annuler</button>
+                                            <button type="submit" class="btn btn-danger">Oui,
+                                                Réinitialiser</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin Modal de reinitialisation de mot de passe -->
 
 
                       </tr>

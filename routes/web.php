@@ -233,6 +233,7 @@ Route::get('/administration/utilisateur/usager', [UsagerController::class, 'inde
 Route::get('/administration/utilisateur/profile', [ProfileController::class, 'index'])->name('profile-list');
 Route::get('/administration/utilisateur/user-update/{uuid}', [RegisteredUserController::class, 'update'])->name('user-update');
 Route::post('/administration/utilisateur/user-store', [RegisteredUserController::class, 'userStore'])->name('user-store');
+Route::post('/administration/utilisateur//resetPassword{id}', [RegisteredUserController::class, 'resetPassword'])->name('reinitialiser');
 
 // Liste des demandes d'un agent
 

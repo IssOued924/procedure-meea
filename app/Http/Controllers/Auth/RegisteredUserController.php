@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\AffectDemandMailable;
 use App\Mail\CreateUserMailable;
+use App\Mail\ResetPasswordMailable;
 use App\Models\Agent;
 use App\Models\Role;
 use App\Models\Service;
@@ -17,6 +18,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
@@ -46,7 +48,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
             'telephone' => ['required', 'String', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
         // dd($request);
@@ -72,8 +74,8 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
         event(new Registered($usager));
 
-            $user->usager_id = $usager->uuid;
-           $user->save();
+        $user->usager_id = $usager->uuid;
+        $user->save();
 
         Auth::login($user);
 
@@ -153,7 +155,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'ifu' => ['required', 'string', 'max:255'],
             'rccm' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'telephone' => ['required', 'String', 'max:255'],
             'siege_social' => ['required', 'string', 'max:255'],
             'boite_postale' => ['required', 'string', 'max:255'],
@@ -214,12 +216,12 @@ class RegisteredUserController extends Controller
             // 'id' => ['required'],
             'agent_id' => ['required', 'string', 'max:255'],
             'role_id' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
         ]);
         // dd($request);
 
         $user = User::create([
-            'name' => $agent->nom.' '.$agent->prenom,
+            'name' => $agent->nom . ' ' . $agent->prenom,
             'agent_id' => $request->agent_id,
             'role_id' => $request->role_id,
             'email' => $request->email,
@@ -229,14 +231,12 @@ class RegisteredUserController extends Controller
         $user->save();
         $demand = array(
             "email"  => $user->email,
-            "name" => $agent->nom.' '.$agent->prenom,
+            "name" => $agent->nom . ' ' . $agent->prenom,
             "password" => "12345678"
         );
-        Mail::to($user->email)->send(new CreateUserMailable( $demand ));
+        Mail::to($user->email)->send(new CreateUserMailable($demand));
 
-       return redirect()->back()->with('success', 'Utilisateur créé avec succès !!');
-
-
+        return redirect()->back()->with('success', 'Utilisateur créé avec succès !!');
     }
 
 
@@ -244,40 +244,54 @@ class RegisteredUserController extends Controller
 
 
     // Liste des utilisateur
-                      // Recuperation de la list des demande concernant p001 Produi chimique
-                      public function listUsers( UserRepository $userRepository,  User $user){
-                        // dd( StatutDemande::where('etat', '=', 'V')->first()->statut);
-                          $data = [
-                              "users" => $userRepository->all(),
+    // Recuperation de la list des demande concernant p001 Produi chimique
+    public function listUsers(UserRepository $userRepository,  User $user)
+    {
+        // dd( StatutDemande::where('etat', '=', 'V')->first()->statut);
+        $data = [
+            "users" => $userRepository->all(),
 
-                              "services" => Service::all(),
-                              "agents" => Agent::all(),
-                              "roles" =>Role::all(),
-                          ];
+            "services" => Service::all(),
+            "agents" => Agent::all(),
+            "roles" => Role::all(),
+        ];
 
-                        //   dd($data['demandes'][0]->demandePiece);
-
-
-                          return view('backend.utilisateur.user_list', $data);
-
-                      }
+        //   dd($data['demandes'][0]->demandePiece);
 
 
-          public function update(Request $request, $uuid)
-                      {
-                          $request->validate([
-                              'name' => 'required',
-                              'role_id' => 'required',
+        return view('backend.utilisateur.user_list', $data);
+    }
 
-                          ]);
 
-                          $agent = User::find($uuid);
-                          $agent->update([
-                              'name' => $request->input('name'),
-                              'role_id' => $request->input('role_id'),
+    public function update(Request $request, $uuid)
+    {
+        $request->validate([
+            'name' => 'required',
+            'role_id' => 'required',
 
-                          ]);
+        ]);
 
-                          return redirect()->route('user-list')->with('success', 'Utilisateur  mis à jour avec succès !');
-                      }
+        $agent = User::find($uuid);
+        $agent->update([
+            'name' => $request->input('name'),
+            'role_id' => $request->input('role_id'),
+
+        ]);
+
+        return redirect()->route('user-list')->with('success', 'Utilisateur  mis à jour avec succès !');
+    }
+
+    public function resetPassword($id, Request $request){
+        //dd(DB::table("Users")->where('uuid', $id));
+        DB::table("Users")->where('uuid', $id)->update(['password' => Hash::make('12345678')]);
+
+        $user = DB::table("Users")->where('uuid', $id)->first();
+        $email = $user->email;
+        $demand = array(
+            "name" => $user->name,
+            "password" => "12345678"
+        );
+        Mail::to($email)->send(new ResetPasswordMailable($demand));
+        return redirect()->back()->with('success', 'Mot de passe réinitialiser avec succès !!');
+    }
 }
