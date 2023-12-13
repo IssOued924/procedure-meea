@@ -41,41 +41,11 @@
                         <h5 class="card-title">Liste des Demandes <span>| Demandes</span></h5>
 
                         <div class="card-body">
-                            <p> @if(session('success'))
-                            <div class="alert alert-success alert-dismissible" role="alert">
-                                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="alert-heading">{{session('success')}}</h4>
 
-                            </div>
-
-                            <script>
-                                setTimeout(function() {
-                                    document.querySelector('.alert.alert-success').style.display = 'none';
-                                }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
-                            </script>
-                            @endif</p>
                             <div class="row">
-                                <div class="col-9">
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="dt-buttons btn-group flex-wrap">
 
-                                            <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>CSV</span></button>
-                                            <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>Excel</span></button>
-                                            <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>PDF</span></button>
-                                            <button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="example1" type="button"><span>Imprimer</span></button>
-                                            {{-- <div class="btn-group">
-                                                <button
-                                                    class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis"
-                                                    tabindex="0" aria-controls="example1" type="button"
-                                                    aria-haspopup="true" aria-expanded="false"><span>Column
-                                                        visibility</span></button>
-                                            </div> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
+
+                                <div class="col-3 offset-9">
 
                                     <div style="float: right">
 
@@ -86,7 +56,7 @@
                             </div><br>
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable table-bordered table-striped">
+                            <table id="example1" class="table datatable table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -158,7 +128,7 @@
                                         <td> {{ $demande->usager->nom.' '.$demande->usager->prenom}}</td>
 
                                         @if (isset($demande->localite))
-                                        <td>{{ $demande->localite->libelle}}</td>
+                                        <td>{{ $demande->localite->libelle }}</td>
                                         @else
                                         <td>-</td>
                                         @endif
@@ -178,7 +148,8 @@
                                         <td>{{ $demande->created_at->diffForHumans() }}</td>
 
                                         @if($demande->last_agent_assign != null)
-                                        <td> <span class="badge bg-primary"> {{ $demande->agent->nom. " " .$demande->agent->prenom}} </span> </td>
+                                        <td> <span class="badge bg-primary"> {{ $demande->agent->nom. " "
+                                                .$demande->agent->prenom}} </span> </td>
                                         @else
                                         <td> <span class="badge bg-danger"> non assigné </span> </td>
                                         @endif
@@ -333,21 +304,26 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="post" enctype="multipart/form-data" action="{{ route('assignation', ['model' =>'AffectationP007', 'idDemande' => $demande->uuid ,'nameDemandeId'=> 'demande_p007_id', 'tableName'=>'demande_p007_s'] ) }}">
+                                                            <form method="put"
+                                                                action="{{ route('statusChange', ['id' => $demande->uuid, 'currentStatus' => $demande->etat, 'table' => 'demande_p007_s']) }}">
                                                                 @csrf
+                                                                @method('GET')
 
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <h5>Choisir le collaborateur à assigné</h5>
+                                                                        <h5>Choisir le collaborateur à assigné
+                                                                        </h5>
 
-                                                                        <select name="agent_id" id="" class="form-select border-success">
+                                                                        <select name="agent_id" id=""
+                                                                            class="form-select border-success">
                                                                             @foreach ($agents as $agent)
-
-                                                                            @if($agent->service->libelle_court == $demande->procedure->service->libelle_court)
-                                                                            <option value="{{ $agent->uuid }}">{{ $agent->nom.' '.$agent->prenom }}</option>
+                                                                            @if ($agent->service->libelle_court ==
+                                                                            $demande->procedure->service->libelle_court)
+                                                                            <option value="{{ $agent->uuid }}">
+                                                                                {{ $agent->nom . ' ' . $agent->prenom }}
+                                                                            </option>
                                                                             @endif
-
                                                                             @endforeach
 
                                                                         </select>
@@ -397,8 +373,10 @@
 
                                                                 <div class="form-group">
                                                                     <div class="text-center">
-                                                                        <label class="col-form-label">Motif du Rejet ?</label>
-                                                                        <input type="text" required name="libelle" class="form-control border-success">
+                                                                        <label class="col-form-label">Motif du
+                                                                            Rejet ?</label>
+                                                                        <input type="text" required name="libelle"
+                                                                            class="form-control border-success">
 
                                                                     </div>
 
@@ -436,12 +414,14 @@
                                                             </div>
                                                             <div class="col-6">
                                                                 <b>Telephone :</b>
-                                                                <span class="text-success">{{ $demande->usager->telephone}}</span>
+                                                                <span class="text-success">{{
+                                                                    $demande->usager->telephone }}</span>
                                                             </div>
                                                         </div><br>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <b> Producteur :</b> <span class="text-success">{{ $demande->nom_producteur }}</span>
+                                                                <b> Producteur :</b> <span class="text-success">{{
+                                                                    $demande->nom_producteur }}</span>
 
                                                             </div>
                                                             <div class="col-6">
@@ -450,7 +430,8 @@
                                                             </div>
 
                                                         </div> <br>
-                                                        <h4>Liste des fichiers Soumis <i class="bi bi-folder text-success"></i></h4>
+                                                        <h4>Liste des fichiers Soumis <i
+                                                                class="bi bi-folder text-success"></i></h4>
                                                         <div class="row">
                                                             <div class="col">
 
@@ -493,12 +474,83 @@
     </div>
 </section>
 @endsection
+@section('script')
 <script>
     function refresh() {
-        location.reload(true);
-    }
+            location.reload(true);
+        }
+
+        $(function() {
+            $(document).ready(function() {
+                $('#example1').DataTable({
+
+                    dom: 'Blfrtip',
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true,
+                    "lengthMenu": [
+                        [5, 10, 50, -1],
+                        ["5", "10", "50", "All"]
+                    ],
+
+
+                    buttons: [{
+                            extend: 'csv',
+                            text: 'CSV',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6]
+                            }
+                        },
+                        {
+                            extend: 'excel',
+                            text: 'Excel',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6]
+                            }
+                        },
+                        {
+                            extend: 'pdf',
+                            text: 'PDF',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6]
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            text: 'Imprimer',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6]
+                            }
+                        },
+                    ],
+                    select: true,
+                    "pagingType": "full_numbers",
+                    language: {
+                        search: "Rechercher&nbsp;:",
+                        lengthMenu: " _MENU_ ",
+                        info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                        infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                        infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                        infoPostFix: "",
+                        loadingRecords: "Chargement en cours...",
+                        zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                        emptyTable: "Aucune donnée disponible dans le tableau",
+                        paginate: {
+                            first: "Premier",
+                            previous: "Pr&eacute;c&eacute;dent",
+                            next: "Suivant",
+                            last: "Dernier"
+                        },
+                        aria: {
+                            sortAscending: ": activer pour trier la colonne par ordre croissant",
+                            sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                        }
+                    }
+                });
+            });
+        });
 </script>
-@section('script')
-
-
 @endsection

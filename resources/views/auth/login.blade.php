@@ -256,7 +256,7 @@
                     </div>
                     @else
                     {{-- La partie de connexion --}}
-                    <div class="col-lg-6 offset-lg-3  box" >
+                    <div class="col-lg-5 offset-lg-3  box" >
                         <h2>Connexion</h2>
                         <!-- Session Status -->
                         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -267,16 +267,16 @@
                             <!-- Email Address -->
                             <div class="row g-3 align-items-center">
                                 <x-input-error :messages="$errors->get('email')" style="margin-left:15%;" class="mt-2 text-danger" />
-                                <x-input-label class="col-4" for="email" :value="__('Email')" />
-                                <x-text-input class="col-7" id="email" class="col-7 block mt-1 form-control " type="email"
+                                <x-input-label class="col-2 offset-2" for="email" :value="__('Email')" />
+                                <x-text-input class="col-7" id="email"     value="{{ old('email') ?? '' }}" class="col-7 block mt-1 form-control @error('email') is-invalid @enderror" type="email"
                                     name="email" :value="old('email')" required autofocus autocomplete="username" />
                             </div>
 
                             <!-- Password -->
                             <div class="row g-3 align-items-center">
-                                <x-input-label class="col-4" for="password" :value="__('Password')" />
+                                <x-input-label class="col-4" for="password" :value="__('Mot de Passe:')" />
 
-                                <x-text-input class="col-7" id="password" class="block mt-1 form-control" type="password"
+                                <x-text-input class="col-7" id="password"  class="block mt-1 form-control  @error('password') is-invalid @enderror" type="password"
                                     name="password" required autocomplete="current-password" />
 
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -294,14 +294,14 @@
                                 </label>
                             </div>
 
-                            <div class="flex items-center justify-end mt-4">
+                            <div class="flex items-center   mt-3 mr-2">
                                 @if (Route::has('password.request'))
                                     <a class="underline text-dark" href="{{ route('password.request') }}">
                                         {{ __('Mot de passe oublié?') }}
                                     </a>
                                 @endif
 
-                                <x-primary-button style="padding: 6px 6px;" class="ml-3">
+                                <x-primary-button style="padding: 6px 6px;"  >
                                     {{ __('Se Connecter') }}
                                 </x-primary-button>
                             </div>

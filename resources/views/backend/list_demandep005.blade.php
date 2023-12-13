@@ -1,79 +1,49 @@
 @extends('backend.layout.base')
 @section('title')
-<div class="pagetitle">
-    <h1>Liste des Demandes de Permis de Circulation de bois et de Charbon de Bois</h1>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
-            <li class="breadcrumb-item active">Liste</li>
-        </ol>
-    </nav>
-</div><!-- End Page Title -->
+    <div class="pagetitle">
+        <h1>Liste des Demandes de Permis de Circulation de bois et de Charbon de Bois</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
+                <li class="breadcrumb-item active">Liste</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 @endsection
 
 @section('content')
-<section class="section dashboard">
-    <div class="row">
+    <section class="section dashboard">
+        <div class="row">
 
-        <!-- Left side columns -->
-        <div class="col-lg-12">
-            <div class="row">
-                <!-- Recent Sales -->
-                <div class="col-12">
-                    <div class="card recent-sales overflow-auto">
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="row">
+                    <!-- Recent Sales -->
+                    <div class="col-12">
+                        <div class="card recent-sales overflow-auto">
 
-                        <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
-                                </li>
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                        class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>Filter</h6>
+                                    </li>
 
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                        </div>
+                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                </ul>
+                            </div>
 
 
                         <h5 class="card-title">Liste des Demandes <span>| Demandes</span></h5>
 
                         <div class="card-body">
-                            <p> @if(session('success'))
-                            <div class="alert alert-success alert-dismissible" role="alert">
-                                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="alert-heading">{{session('success')}}</h4>
 
-                            </div>
-
-                            <script>
-                                setTimeout(function() {
-                                    document.querySelector('.alert.alert-success').style.display = 'none';
-                                }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
-                            </script>
-                            @endif</p>
                             <div class="row">
-                                <div class="col-9">
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="dt-buttons btn-group flex-wrap">
 
-                                            <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>CSV</span></button>
-                                            <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>Excel</span></button>
-                                            <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>PDF</span></button>
-                                            <button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="example1" type="button"><span>Imprimer</span></button>
-                                            {{-- <div class="btn-group">
-                                                <button
-                                                    class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis"
-                                                    tabindex="0" aria-controls="example1" type="button"
-                                                    aria-haspopup="true" aria-expanded="false"><span>Column
-                                                        visibility</span></button>
-                                            </div> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
+                                <div class="col-3 offset-9">
                                     <div style="float: right">
 
                                         <button title="Actualiser la Page" type="button" onclick="refresh()" class="btn btn-success"><i class="bi bi-arrow-repeat"></i></button>
@@ -85,7 +55,7 @@
                         </div><br>
 
                         <!-- Table with stripped rows -->
-                        <table class="table datatable table-bordered table-striped">
+                        <table  id="example1" class="table datatable table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -513,15 +483,86 @@
 
 
 
-    </div>
-</section>
+        </div>
+    </section>
 @endsection
-<script>
-    function refresh() {
-        location.reload(true);
-    }
-</script>
 @section('script')
+    <script>
+        function refresh() {
+            location.reload(true);
+        }
+
+        $(function() {
+            $(document).ready(function() {
+                $('#example1').DataTable({
+
+                    dom: 'Blfrtip',
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true,
+                    "lengthMenu": [
+                        [5, 10, 50, -1],
+                        ["5", "10", "50", "All"]
+                    ],
 
 
+                    buttons: [{
+                            extend: 'csv',
+                            text: 'CSV',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5]
+                            }
+                        },
+                        {
+                            extend: 'excel',
+                            text: 'Excel',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5]
+                            }
+                        },
+                        {
+                            extend: 'pdf',
+                            text: 'PDF',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5]
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            text: 'Imprimer',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5]
+                            }
+                        },
+                    ],
+                    select: true,
+                    "pagingType": "full_numbers",
+                    language: {
+                        search: "Rechercher&nbsp;:",
+                        lengthMenu: " _MENU_ ",
+                        info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                        infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                        infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                        infoPostFix: "",
+                        loadingRecords: "Chargement en cours...",
+                        zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                        emptyTable: "Aucune donnée disponible dans le tableau",
+                        paginate: {
+                            first: "Premier",
+                            previous: "Pr&eacute;c&eacute;dent",
+                            next: "Suivant",
+                            last: "Dernier"
+                        },
+                        aria: {
+                            sortAscending: ": activer pour trier la colonne par ordre croissant",
+                            sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
