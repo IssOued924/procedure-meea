@@ -227,7 +227,6 @@ class RegisteredUserController extends Controller
         ]);
 
         $user->save();
-
         $demand = array(
             "email"  => $user->email,
             "name" => $agent->nom.' '.$agent->prenom,
