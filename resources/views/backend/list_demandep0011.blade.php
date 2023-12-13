@@ -111,6 +111,8 @@
                                 </thead>
                                 <tbody>
                                     @php
+
+                                    $userRole = Auth::user()->role->libelle;
                                     $i = 1;
                                     @endphp
                                     @foreach ($demandes as $demande)
@@ -158,6 +160,10 @@
                                             break;
                                     }
                                     @endphp
+
+                                    @if (Auth::user()->agent->province_id == $demande->province_id ||
+                                    in_array($userRole, ['Gestionnaire',
+                                    'Administration',]))
                                    
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
@@ -516,7 +522,7 @@
                                             </div>
                                         </div><!-- End Large Modal-->
                                     </tr>
-                                    
+                                    @endif
                                     @endforeach
 
 
