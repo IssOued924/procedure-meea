@@ -61,10 +61,8 @@
                                     @endif
                                 </p>
                                 <div class="row">
-                                    <div class="col-9">
 
-                                    </div>
-                                    <div class="col-3">
+                                    <div class="col-3 offset-9">
 
                                         <div style="float: right">
 
@@ -76,7 +74,7 @@
                                 </div><br>
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable table-bordered table-striped">
+                            <table id="example1" class="table datatable table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -84,7 +82,7 @@
                                         <th scope="col">Demandeur</th>
                                         <th scope="col">Résidence</th>
                                         <th scope="col">Etat Demande</th>
-                                        <th scope="col">Paiement</th>*
+                                        <th scope="col">Paiement</th>
                                         <th scope="col">Délai</th>
                                         <th scope="col">Déposé</th>
                                         <th scope="col">Assigné a</th>

@@ -56,29 +56,8 @@
                             </script>
                             @endif</p>
                             <div class="row">
-                                <div class="col-9">
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="dt-buttons btn-group flex-wrap">
 
-                                            <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0"
-                                                aria-controls="example1" type="button"><span>CSV</span></button>
-                                            <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0"
-                                                aria-controls="example1" type="button"><span>Excel</span></button>
-                                            <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0"
-                                                aria-controls="example1" type="button"><span>PDF</span></button>
-                                            <button class="btn btn-secondary buttons-print" tabindex="0"
-                                                aria-controls="example1" type="button"><span>Imprimer</span></button>
-                                            {{-- <div class="btn-group">
-                                                <button
-                                                    class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis"
-                                                    tabindex="0" aria-controls="example1" type="button"
-                                                    aria-haspopup="true" aria-expanded="false"><span>Column
-                                                        visibility</span></button>
-                                            </div> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
+                                <div class="col-3 offset-9">
                                     <div style="float: right">
 
                                         <button title="Actualiser la Page" type="button" onclick="refresh()"
@@ -92,7 +71,7 @@
                         </div><br>
 
                         <!-- Table with stripped rows -->
-                        <table class="table datatable table-bordered table-striped">
+                        <table  id="example1" class="table datatable table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>

@@ -56,29 +56,8 @@
                             </script>
                             @endif</p>
                             <div class="row">
-                                <div class="col-9">
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="dt-buttons btn-group flex-wrap">
 
-                                            <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0"
-                                                aria-controls="example1" type="button"><span>CSV</span></button>
-                                            <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0"
-                                                aria-controls="example1" type="button"><span>Excel</span></button>
-                                            <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0"
-                                                aria-controls="example1" type="button"><span>PDF</span></button>
-                                            <button class="btn btn-secondary buttons-print" tabindex="0"
-                                                aria-controls="example1" type="button"><span>Imprimer</span></button>
-                                            {{-- <div class="btn-group">
-                                                <button
-                                                    class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis"
-                                                    tabindex="0" aria-controls="example1" type="button"
-                                                    aria-haspopup="true" aria-expanded="false"><span>Column
-                                                        visibility</span></button>
-                                            </div> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
+                                <div class="col-3 offset-9">
 
 
                                     <div style="float: right">
@@ -94,7 +73,7 @@
                             </div><br>
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable table-bordered table-striped">
+                            <table id="example1" class="table datatable table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -509,73 +488,91 @@
 @section('script')
 
 <script>
-    function rejetter(){
-
-    var test = document.getElementById('test')
-    test.submit()
-    const swalWithBootstrapButtons = Swal.mixin({
-  customClass: {
-    confirmButton: 'btn btn-success',
-    cancelButton: 'btn btn-danger'
-  },
-  buttonsStyling: false
-})
-
-swalWithBootstrapButtons.fire({
-  title: 'Etes vous sur de vouloir Rejetter cette Demande?',
-  text: "You won't be able to revert this!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonText: 'Je Confirme!',
-  cancelButtonText: 'Annuler!',
-  reverseButtons: true
-}).then((result) => {
-  if (result.isConfirmed) {
-
-    swalWithBootstrapButtons.fire(
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
-    )
-  } else if (
-    /* Read more about handling dismissals below */
-    result.dismiss === Swal.DismissReason.cancel
-  ) {
-    // swalWithBootstrapButtons.fire(
-    //   'Cancelled',
-    //   'Your imaginary file is safe :)',
-    //   'error'
-    // )
-  }
-})
-    }
-
-    //fonction valider statut
-    function valider(me){
-        Swal.fire({
-  title: 'Do you want to save the changes?',
-  showDenyButton: true,
-  showCancelButton: true,
-  confirmButtonText: 'Save',
-  denyButtonText: `Don't save`,
-}).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
-  if (result.isConfirmed) {
-    let url= $(me).attr('data-url');
-    window.location=url;
 
 
 
-    Swal.fire('Saved!', '', 'success')
-  } else if (result.isDenied) {
-    Swal.fire('Changes are not saved', '', 'info')
-  }
-})
-    }
+
+
 
     function refresh() {
         location.reload(true);
     }
+
+    $(function() {
+            $(document).ready(function() {
+                $('#example1').DataTable({
+
+                    dom: 'Blfrtip',
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true,
+                    "lengthMenu": [
+                        [5, 10, 50, -1],
+                        ["5", "10", "50", "All"]
+                    ],
+
+
+                    buttons: [{
+                            extend: 'csv',
+                            text: 'CSV',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                            }
+                        },
+                        {
+                            extend: 'excel',
+                            text: 'Excel',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                            }
+                        },
+                        {
+                            extend: 'pdf',
+                            text: 'PDF',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            text: 'Imprimer',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                            }
+                        },
+                    ],
+                    select: true,
+                    "pagingType": "full_numbers",
+                    language: {
+                        search: "Rechercher&nbsp;:",
+                        lengthMenu: " _MENU_ ",
+                        info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                        infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                        infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                        infoPostFix: "",
+                        loadingRecords: "Chargement en cours...",
+                        zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                        emptyTable: "Aucune donnée disponible dans le tableau",
+                        paginate: {
+                            first: "Premier",
+                            previous: "Pr&eacute;c&eacute;dent",
+                            next: "Suivant",
+                            last: "Dernier"
+                        },
+                        aria: {
+                            sortAscending: ": activer pour trier la colonne par ordre croissant",
+                            sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                        }
+                    }
+                });
+            });
+
+        });
+
+
 </script>
 
 
