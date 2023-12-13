@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AffectDemandMailable;
+use App\Mail\CreateUserMailable;
 use App\Models\Agent;
 use App\Models\Role;
 use App\Models\Service;
@@ -19,6 +21,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Wildside\Userstamps\Listeners\Creating;
 
 class RegisteredUserController extends Controller
 {
@@ -63,7 +67,6 @@ class RegisteredUserController extends Controller
             // 'usager_id' => $usager->uuid,
         ]);
 
-
         // dd($user);
 
         event(new Registered($user));
@@ -92,7 +95,7 @@ class RegisteredUserController extends Controller
     //         'ifu' => ['required', 'string', 'max:255'],
     //         'rccm' => ['required', 'string', 'max:255'],
     //         'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-    //         'telephone' => ['required', 'String', 'max:255'],
+    //        'telephone' => ['required', 'String', 'max:255'],
     //         'siege_social' => ['required', 'string', 'max:255'],
     //         'boite_postale' => ['required', 'string', 'max:255'],
     //         'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -224,6 +227,12 @@ class RegisteredUserController extends Controller
         ]);
 
         $user->save();
+        $demand = array(
+            "email"  => $user->email,
+            "name" => $agent->nom.' '.$agent->prenom,
+            "password" => "12345678"
+        );
+        Mail::to($user->email)->send(new CreateUserMailable( $demand ));
 
        return redirect()->back()->with('success', 'Utilisateur créé avec succès !!');
 
