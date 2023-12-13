@@ -82,7 +82,7 @@
                                 *** Les demandes sont closes pour cette année ***
                              </h6>
                         </marquee>
-                            
+
                         @endif
                         <p style="text-align: justify;text-indent : 10%;">{{ $procedure->description }}</p>
                         <div style=" margin: 18px 0 33px;">
@@ -266,10 +266,10 @@
 
                             <!-- Email Address -->
                             <div class="row g-3 align-items-center">
+                                <x-input-error :messages="$errors->get('email')" style="margin-left:15%;" class="mt-2 text-danger" />
                                 <x-input-label class="col-4" for="email" :value="__('Email')" />
                                 <x-text-input class="col-7" id="email" class="col-7 block mt-1 form-control " type="email"
                                     name="email" :value="old('email')" required autofocus autocomplete="username" />
-                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>
 
                             <!-- Password -->
@@ -326,18 +326,18 @@
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-  
+
                 <div class="card mb-3">
-  
+
                   <div class="card-body">
-  
+
                     <div class="pt-4 pb-2">
                       <h5 class="card-title text-center pb-0 fs-4">Connexion</h5>
                     </div>
-  
+
                     <form method="POST" action="{{ route('login') }}" class="row g-3">
                         @csrf
-  
+
                       <div class="col-12">
                         <label for="youremail" class="form-label">Email</label>
                         <div class="input-group has-validation">
@@ -346,13 +346,13 @@
                           <div class="invalid-feedback">Entrez votre email, SVP.</div>
                         </div>
                       </div>
-  
+
                       <div class="col-12">
                         <label for="yourPassword" class="form-label">Mot de passe</label>
                         <input type="password" name="password" class="form-control" id="yourPassword" required>
                         <div class="invalid-feedback">Entrez votre mot de passe, SVP</div>
                       </div>
-  
+
                       <div class="col-12">
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
@@ -366,16 +366,16 @@
                         <p class="small mb-0"><a href="/register">S'inscrire</a></p>
                       </div>
                     </form>
-  
+
                   </div>
                 </div>
-  
+
               </div>
             </div>
           </div>
-  
+
         </section>
-  
+
     </div> --}}
     <!-- ======= Footer ======= -->
     <x-footer />

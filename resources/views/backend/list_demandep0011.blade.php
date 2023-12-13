@@ -209,11 +209,10 @@
                                             <i class="bi bi-eye"></i> </button>
 
 
-                                            @php
-    $userRole = Auth::user()->role->libelle; 
-@endphp
+                                           
 
 <!-- Boutons d'action en fonction de l'état et du rôle -->
+
 @if (($demande->etat == 'D' && $demande->last_agent_assign == null && in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
      ($demande->etat == 'E' &&  in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
      ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||

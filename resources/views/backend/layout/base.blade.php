@@ -362,14 +362,14 @@
               <i class="bi bi-circle"></i><span>Liste des plaintes</span>
             </a>
           </li>
-          <!-- 
+          <!--
           <li>
             <a href="{{ route('usager-list') }}">
               <i class="bi bi-circle"></i><span>Plainte en cours</span>
             </a>
           </li>
           -->
-          
+
         </ul>
       </li><!-- End Charts Nav -->
       @endif
@@ -382,6 +382,21 @@
 
     <main id="main" class="main">
         @yield('title')
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible" role="alert">
+           <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+           </button>
+           <h4 class="alert-heading">{{session('success')}}</h4>
+        </div>
+   @endif
+
+
+<script>
+   setTimeout(function() {
+       document.querySelector('.alert.alert-success').style.display = 'none';
+   }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+</script>
 
         @yield('content')
 
