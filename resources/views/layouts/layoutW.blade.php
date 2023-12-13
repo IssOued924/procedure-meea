@@ -63,15 +63,15 @@
 
         <div>
             @if ($message = Session::get('success'))
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="alert-heading">{{session('success')}}</h4>
-
+                 <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="alert-heading">{{session('success')}}</h4>
+                 </div>
             @endif
 
-        </div>
+
         <script>
             setTimeout(function() {
                 document.querySelector('.alert.alert-success').style.display = 'none';

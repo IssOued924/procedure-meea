@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
             $checkSession = Carbon::now()->between($startDate, $endDate);
             $checkPeriode = ($procedure->estperiodique && !$checkSession && $procedure->session_debut && $procedure->session_fin) ? 1 : 0;
         }
-        
+
         return view('auth.login', [
             'procedure' => $procedure,
             'checkSession' => $checkPeriode,
@@ -90,9 +90,11 @@ class AuthenticatedSessionController extends Controller
             'must_reset_password' => 0,
             'password' => Hash::make($request->password)
         ]);
-        
-        return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Mot de passe modifie avec succes ');
-        
+
+        return redirect('/administration')->with('success', 'Mot de passe modifié avec succès !');
+        // return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Mot de passe modifié avec succès !');
+
+
     }
 
     /**
