@@ -158,7 +158,6 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
 
     //administration
 
-
 // Route partie administration
 Route::get('/administration', [BackendController::class, 'index'])->name('administration');
 Route::get('/administration/demandes-list', [BackendController::class, 'listDemande'])->name('demandes-list');
