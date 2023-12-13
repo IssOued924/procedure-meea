@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\CommentaireRepository;
+use App\Repositories\CommentaireP006Repository;
 class CommentaireController extends Controller
 {
     public $repository;

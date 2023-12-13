@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Commune;
 use App\Models\Demande;
 use App\Models\Procedure;
+use App\Models\Province;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -54,6 +55,8 @@ class DemandeCompP0011 extends Component
             "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->usager->telephone,
             "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
+            "provinces" => Province::all(),
+          
             "communes" => Commune::all(),
         ];
         

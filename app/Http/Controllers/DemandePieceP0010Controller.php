@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Repositories\DemandePieceRepository;
+use App\Repositories\DemandePieceP0010Repository;
 
 use Illuminate\Http\Request;
 
