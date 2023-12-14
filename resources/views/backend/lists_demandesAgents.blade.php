@@ -63,7 +63,6 @@
                                             <tr>
                                                 <th scope="col">#</th>
 
-<<<<<<< HEAD
                                                 <th scope="col">Date Démande</th>
                                                 <th scope="col">Réference</th>
                                                 <th scope="col">etat de mes Démandes</th>
@@ -137,113 +136,6 @@
                                                     <span class="badge {{ $statutColor }} "> Demande prête</span> </td>
                                                     @else
                                                     <span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
-=======
-                                                    <th scope="col">Date Démande</th>
-                                                    <th scope="col">Réference</th>
-                                                    <th scope="col">etat de mes Démandes</th>
-                                                    <th scope="col">Délai de traitement</th>
-                                                    <th scope="col">Déposé</th>
-                                                    <th scope="col">Paiement</th>
-                                                    <th scope="col">Action</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @php
-                                                    $i = 1;
-                                                @endphp
-                                                <?php if(!is_null($demandes)){ ?>
-                                                @foreach ($demandes as $demande)
-                                                    @php
-                                                        $statut = '';
-                                                        $statutColor = '';
-                                                        switch ($demande->etat) {
-                                                            case 'D':
-                                                                # code...
-                                                                $statut = 'demande deposée';
-                                                                $statutColor = 'bg-primary';
-                                                                break;
-                                                            case 'S':
-                                                                # code...
-                                                                $statut = 'demande signée';
-                                                                $statutColor = 'bg-success';
-                                                                break;
-                                                            case 'A':
-                                                                # code...
-                                                                $statut = 'demande archivée';
-                                                                $statutColor = 'bg-secondary';
-                                                                break;
-                                                            case 'V':
-                                                                # code...
-                                                                $statut = 'demande validée';
-                                                                $statutColor = 'bg-success';
-                                                                break;
-                                                            case 'C':
-                                                                # code...
-                                                                $statut = 'En attente pour complement de dossier';
-                                                                $statutColor = 'bg-warning';
-                                                                break;
-                                                            case 'R':
-                                                                # code...
-                                                                $statut = 'demande rejetée';
-                                                                $statutColor = 'bg-danger';
-                                                                break;
-                                                            case 'E':
-                                                                # code...
-                                                                $statut = 'demande en etude';
-                                                                $statutColor = 'bg-info';
-                                                                break;
-                                                            default:
-                                                                # code...
-                                                                break;
-                                                        }
-                                                    @endphp
-                                                    <tr class="table-bordered">
-                                                        <th scope="row">{{ $i++ }}</th>
-                                                        <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}
-                                                        </td>
-                                                        <td>{{ $demande->reference }}</td>
-                                                        <td>
-                                                            @if ($statut == 'demande en etude')
-                                                                <span class="badge {{ $statutColor }} "> Demande en cours
-                                                                    d'étude</span>
-                                                        </td>
-                                                    @elseif ($statut == 'demande signée')
-                                                        <span class="badge {{ $statutColor }} "> Demande prête</span> </td>
-                                                    @else
-                                                        <span class="badge {{ $statutColor }} ">{{ $statut }}</span>
-                                                        </td>
-                                                @endif
-
-                                            @if($demande->exploitant == "Forestier")
-                                          <td><span class="badge bg-dark"> 10</span> Jours </td>
-                                          @else
-                                          <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
-                                          @endif
-
-                                            <td>{{ $demande->created_at->diffForHumans() }}</td>
-
-                                                {{-- partie paiement --}}
-                                                @if ($demande->paiement === 1)
-                                                    <td><b><span class="text-success">Payée</span></b></td>
-                                                @else
-                                                    <td><b><span class="text-warning">Non Payée</span></b></td>
-                                                @endif
-
-                                                <td>
-                                                    <button title="Voir Détail" type="button" class="btn btn-primary "
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#largeModal{{ $demande->uuid }}"> <i
-                                                            class="bi bi-eye"></i> Voir </button>
-
-                                                    @if ($demande->etat == 'R')
-                                                        <!--button title="Modifier" type="button" class="btn btn-info "
-                                                                                                                                    data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
-                                                                                                                                        class="bi bi-pencil-square text-white">Modifier </i> </button-->
-                                                        <a title="Modifier" class="btn btn-info"
-                                                            href="{{ route('editer-demande', ['id' => $demande->uuid, 'procedure' => $selectedProcedure]) }}">
-                                                            <i class="bi bi-pencil-square text-white">Modifier </i> </a>
->>>>>>> 0bfb4d574ef9b2616b5d184d6b76c9ca13122551
                                                     @endif
 
                                                     @if($demande->exploitant == "Forestier")
@@ -309,7 +201,6 @@
                                                             <div class="col-6">
                                                                 <b>Identite Fournisseur:</b>
                                                                 <span>{{$demande->denomination_sociale_fournisseur}}</span>
-<<<<<<< HEAD
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <b>Addresse:</b>
@@ -319,17 +210,6 @@
                                                             <h4>Liste des fichiers Soumis</h4>
                                                             <div class="row">
                                                                 <div class="col-6">
-=======
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <b>Addresse:</b>
-                                                                <span>{{$demande->adresse_fournisseur}}</span>
-                                                            </div>
-                                                        </div> <br> --}}
-                                                                <h4>Liste des fichiers Soumis</h4>
-                                                                <div class="row">
-                                                                    <div class="col-6">
->>>>>>> 0bfb4d574ef9b2616b5d184d6b76c9ca13122551
 
                                                                     @foreach ( $demande->demandePiece as $chemin)
 

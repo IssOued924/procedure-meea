@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('plaintes', function (Blueprint $table) {
             //
-            $table->string('procedure');
-            $table->string('etat');
+            $table->string('procedure')->nullable();
+            $table->boolean('etat')->nullable();
         });
     }
 
@@ -24,7 +24,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('plaintes', function (Blueprint $table) {
-            //
+            $table->dropColumn('procedure');
+            $table->dropColumn('etat');
         });
     }
 };
