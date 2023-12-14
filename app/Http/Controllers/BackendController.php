@@ -372,7 +372,7 @@ class BackendController extends Controller
     public function assignation( $model,  $idDemande,   $nameDemandeId, $tableName, Request $request) {
         //Creer une affection
         $data = $request->all();
-    
+
         $modele = app("App\Models\\$model");
        // $affectation = new $table();
          $modele::create([
@@ -380,7 +380,7 @@ class BackendController extends Controller
             'agent_id' => $data["agent_id"],
             'commentaire' => $data["commentaire"]
          ]);
-    
+
          DB::table($tableName)->where('uuid', $idDemande)->update(['last_agent_assign' => $data["agent_id"]]);
          DB::table($tableName)->where('uuid', $idDemande)->update(['commentaire' => $data["commentaire"]]);
 
@@ -394,10 +394,10 @@ class BackendController extends Controller
              "commentaire" => $data["commentaire"]
          );
          Mail::to($agent_email)->send(new AffectDemandMailable( $demand ));
-    
+
         Alert::success('Succès', 'demande assignée !');
         return redirect()->back();
-        
+
     }
 
 
@@ -649,7 +649,7 @@ class BackendController extends Controller
             "motif"   => $request->libelle
         );
         Mail::to($user_email)->send(new RejectDemandMailable( $demand ));
-        
+
         return redirect()->back()->with('success', "La Demande a été Rejetter avec succès !");
     }
 
@@ -754,4 +754,40 @@ class BackendController extends Controller
         ];
         return view('backend.lists_demandesAgents', $data);
     }
+
+
+    //profile user-metiers
+
+
+public function show()
+{
+    return view('backend.users-profile', ['user' => auth()->user()]);
+}
+
+public function edit()
+{
+    return view('profile.edit', ['user' => auth()->user()]);
+}
+
+public function update(Request $request)
+{
+    $userData = ['name' => $request->name, 'email' => $request->email];
+    $agentData = [
+                  'matricule' => $request->date_naissance,
+                  'date_affectation' => $request->date_affectation,
+                  'date_prise_service' => $request->date_prise_service,
+                  'date_naissance' => $request->date_naissance,
+                  'telephone' => $request->telephone,
+                  ];
+                //  dd($agentData['date_affectation']);
+
+
+        DB::table('users')->where('uuid', Auth::user()->uuid)->update($userData);
+        DB::table('agents')->where('uuid', $request->uuid)->update($agentData);
+
+      return redirect()->route('users-profile')->with('success', 'Profile Mis à jour avec succès !');
+
+}
+
+
 }
