@@ -292,8 +292,11 @@
         </div>
         <!-- End Contact Section -->
 
-            </main><!-- End #main -->
+            </main>
+            <p>kqbore</p><!-- End #main -->
         </div>
+
+
         <!-- ======= Footer ======= -->
         <x-footer />
         <!-- End Footer -->

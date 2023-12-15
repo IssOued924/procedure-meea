@@ -151,7 +151,7 @@
 }
 
 .cont_info_log_sign_up {
-  position: absolute;
+  position: relative;
   width: 640px;
   height: 280px;
   top: 0px;
@@ -305,7 +305,7 @@ background text
   }
 }
 .cont_form_login {
-  position: absolute;
+  position: relative;
   opacity: 0;
   display: none;
   width: 320px;
