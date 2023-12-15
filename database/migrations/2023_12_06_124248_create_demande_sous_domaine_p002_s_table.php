@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('libelle_long')->nullable();
             
             $table->uuid('demande_domaine_p002_id')->nullable();
-            $table->foreign('demande_domaine_p002_id')->references('uuid')->on('demande_domaine_p002');
+            $table->foreign('demande_domaine_p002_id')->references('uuid')->on('demande_domaine_p002_s');
             
             $table->uuid('demande_categorie_p002_id')->nullable();
-            $table->foreign('demande_categorie_p002_id')->references('uuid')->on('demande_categorie_p002');
+            $table->foreign('demande_categorie_p002_id')->references('uuid')->on('demande_categorie_p002_s');
              $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->string('deleted_by')->nullable();
