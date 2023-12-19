@@ -304,11 +304,11 @@
                                 <i class="bi bi-circle"></i><span>Procedures</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('categorie-list') }}">
                                 <i class="bi bi-circle"></i><span>Categorie</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href=" {{ route('structure-list') }}">
                                 <i class="bi bi-circle"></i><span>Structure</span>

@@ -37,13 +37,19 @@ class AgentController extends Controller
 
     public function store(Request $request, Agent $agent){
 
+        $messages = [
+            'matricule.unique' => 'Cet Matricule existe déjà pour un agent. Veuillez Saisir un autre Matricule !',
+            // ... autres messages personnalisés ...
+        ];
+
+
         $request->validate([
             'nom' => 'required',
             'prenom' => 'required',
             'fonction' => 'required',
             'matricule' => 'unique:agents,matricule',
 
-        ]);
+        ], $messages, );
 
         $data = $request->all();
 

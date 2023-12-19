@@ -1,7 +1,7 @@
 @extends('backend.layout.base')
 @section('title')
 <div class="pagetitle">
-    <h1>Utilisateurs</h1>
+    {{-- <h1>Agents </h1> --}}
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Agents</a></a></li>
@@ -54,6 +54,10 @@
                                                 }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
                                 </script>
                                 @endif
+
+                                @error('matricule')
+                                        <div class="alert alert-danger text-center">{{ $message }}</div>
+                                @enderror
                                 </p>
                                 <div class="col">
 
@@ -87,7 +91,7 @@
 
                                                                     {{-- <label for="libelle">Libelle</label> --}}
 
-                                                                    <input type="text" name="nom"
+                                                                    <input type="text" name="nom" value="{{ old('nom') }}"
                                                                         class="form-control border-success"
                                                                         placeholder="Nom" aria-label="Username"
                                                                         aria-describedby="basic-addon1" required>
@@ -101,7 +105,7 @@
 
                                                                     {{-- <label for="libelle">Libelle</label> --}}
 
-                                                                    <input type="text" name="prenom"
+                                                                    <input type="text" name="prenom" value="{{ old('prenom') }}"
                                                                         class="form-control border-success"
                                                                         placeholder="Prénom" aria-label="Username"
                                                                         aria-describedby="basic-addon1" required>
@@ -119,13 +123,18 @@
 
                                                                     {{-- <label for="libelle">Libelle</label> --}}
 
-                                                                    <input type="text" name="matricule"
+                                                                    <input type="text" name="matricule" value="{{ old('matricule') }}"
                                                                         class="form-control border-success"
                                                                         placeholder="Matricule" aria-label="Username"
                                                                         aria-describedby="basic-addon1" required>
 
                                                                 </div>
-                                                            </div>
+
+                                                                <!-- Afficher le message d'erreur sous le champ -->
+                                                            @if($errors->has('matricule'))
+                                                            <div class="text-danger mt-80" >{{ $errors->first('matricule') }}</div>
+                                                            @endif
+                                                        </div>
 
                                                             <div class="col-6">
                                                                 <h5 class="card-title">Fonction<span class="text-danger">*</span></h5>
@@ -133,7 +142,7 @@
 
                                                                     {{-- <label for="libelle">Libelle</label> --}}
 
-                                                                    <input type="text" name="fonction"
+                                                                    <input type="text" name="fonction" value="{{ old('fonction') }}"
                                                                         class="form-control border-success"
                                                                         placeholder="Fonction" aria-label="Username"
                                                                         aria-describedby="basic-addon1" required>
@@ -150,7 +159,7 @@
                                                                 <h5 class="card-title">Structure<span class="text-danger">*</span></h5>
                                                                 <div class="input-group mb-3">
                                                                     {{-- <label for="libelle">Libelle</label> --}}
-                                                                    <select name="service_id" id="selectMultiple"
+                                                                    <select name="service_id" id="selectMultiple" value="{{ old('service_id') }}"
                                                                         class="form-select border-success" id="" required>
                                                                         <option value="">Veuillez
                                                                             choisir Sa
