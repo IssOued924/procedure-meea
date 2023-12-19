@@ -99,7 +99,7 @@
             </div>
         </div>
 
-        <div class="cont_forms">
+        <div class="cont_forms" >
             {{-- <div class="cont_img_back_">
                 <img src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
                     alt="" />
@@ -112,8 +112,8 @@
                     <h5 class="col-10">Personne physique</h5>
                 </div>
                 <x-guest-layout>
-                <i style="color: red;">Veuillez remplir bien les champs</i>
-                <br/><br/>
+                {{-- <i style="color: red;">Veuillez remplir bien les champs</i> --}}
+
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -145,7 +145,7 @@
                         <div class="row g-3 align-items-center">
                             <x-input-label class="col-4  text-white" for="telephone" :value="__('Telephone')" />
                             <x-text-input class="col-7" id="telephone"  type="number"
-                                name="telephone" required autocomplete="telephone" />
+                            :value="old('telephone')" name="telephone" required autocomplete="telephone" />
                             <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
                         </div><br>
 
@@ -192,8 +192,8 @@
                     <h5 class="col-10">Personne morale</h5>
                 </div>
                 <x-guest-layout>
-                <i style="color: red;">Veuillez remplir bien les champs</i>
-                <br/><br/>
+                {{-- <i style="color: red;">Veuillez remplir bien les champs</i>
+                <br/><br/> --}}
                     <form method="POST" action="{{ route('register-personne-morale') }}">
                         @csrf
 
@@ -292,8 +292,11 @@
         </div>
         <!-- End Contact Section -->
 
-            </main><!-- End #main -->
+            </main>
+
         </div>
+
+
         <!-- ======= Footer ======= -->
         <x-footer />
         <!-- End Footer -->

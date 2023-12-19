@@ -140,8 +140,9 @@
   position: absolute;
   width: 640px;
   height: 280px;
-  top: 0px;
+  top: 20px;
   z-index: 1;
+
 }
 
 .col_md_login {

@@ -38,7 +38,7 @@
                 <li class="dropdown">
                    <a>
                    <i class="bi bi-person"></i><span>
-                        @if (isset(Auth::user()->name))
+                        @if (isset(Auth::user()->agent))
                         <div>{{ Auth::user()->name }}</div>
                         @elseif (isset(Auth::user()->usager))
                             <div>{{ Auth::user()->usager->prenom.' '.Auth::user()->usager->nom }}</div>

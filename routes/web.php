@@ -171,6 +171,8 @@ Route::get('/administration/demandesp0011-list', [BackendController::class, 'lis
 Route::get('/administration/demandesp006-list', [BackendController::class, 'listDemandep006'])->name('demandesp006-list');
 Route::get('/administration/demandesp007-list', [BackendController::class, 'listDemandep007'])->name('demandesp007-list');
 Route::post('/administration/statusChange/{id}/{currentStatus}/{table}', [BackendController::class, 'statutChange'])->name('statusChange');
+Route::get('/administration/user-profile/', [BackendController::class, 'show'])->name('users-profile');
+Route::post('/administration/user-profile/', [BackendController::class, 'update'])->name('update-profile');
 
 Route::post('/administration/assignation/{model}/{idDemande}/{nameDemandeId}/{tableName}', [BackendController::class, 'assignation'])->name('assignation');
 

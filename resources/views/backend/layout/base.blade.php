@@ -104,26 +104,39 @@
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-                            <h6>{{ Auth::user()->agent->service->libelle_court }}</h6>
-
-                        </li>
-
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <hr class="dropdown-divider">
+                          </li>
+
+                          <li>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                              <i class="bi bi-bank"></i>
+                              <span class="badge border-success border-1 text-success"><h6>{{ Auth::user()->agent->service->libelle_long }}</h6> </span>
+                            </a>
+                          </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="bi bi-person"></i>
+                                @if (Auth::user()->agent->role->libelle=="Réception")
+
+                                <span class="text-primary"> <h6>Receptioniste</h6></span>
+                                @else
+                                <span class="text-primary"> <h6>{{ Auth::user()->agent->role->libelle }}</h6></span>
+
+                                @endif
+                            </a>
+                        </li>
+                        <hr class="dropdown-divider">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('users-profile') }}">
                                 <i class="bi bi-person"></i>
                                 <span>Mon Profile</span>
                             </a>
                         </li>
 
 
-                        {{-- <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li> --}}
 
 
                         <li>

@@ -19,7 +19,9 @@ class Agent extends Model
     public function role(){
         return $this->belongsTo(Role::class, 'role_id');
     }
-
+    public function province(){
+        return $this->belongsTo(Province::class, 'province_id');
+    }
 }
 
 
