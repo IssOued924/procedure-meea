@@ -23,7 +23,8 @@
 
 
     <div class="form-group">
-        <label>Plainte lié à la procédure</label>
+        <label>Plainte lié à la procédure</label><span style="color:red">
+                                                        *</span>
         <select name="procedure" id="procedure" class="form-select border-success">
         <option class="mb-3" value=""></option>
             @foreach($procedures as $proc)
@@ -40,9 +41,10 @@
 
 
     <div class="form-group">
-        <label>Objet de la plainte (sujet)</label>
+        <label>Objet de la plainte (sujet) </label><span style="color:red">
+                                                        *</span>
         <input type="text" class="form-control {{ $errors->has('subject') ? 'error' : '' }}" name="subject" value="{{ old('subject') }}"
-            id="subject">
+            id="subject" required>
         @if ($errors->has('subject'))
         <div class="error">
             {{ $errors->first('subject') }}
@@ -51,7 +53,8 @@
     </div>
 
     <div class="form-group">
-        <label>Message</label>
+        <label>Message</label><span style="color:red">
+                                                        *</span>
         <textarea class="form-control {{ $errors->has('message') ? 'error' : '' }}" name="message" id="message" value="{{ old('message') }}"
             rows="4"></textarea>
         @if ($errors->has('message'))
