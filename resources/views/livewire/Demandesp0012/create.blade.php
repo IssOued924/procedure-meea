@@ -96,9 +96,9 @@
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <label class="adresse fw-bold">Adresse Postale<span style="color: red">*</span></label>
+                                                <label class="adresse fw-bold">Adresse Postale<span style="color: red"></span></label>
                                                 <input type="text" class="border-success" name="beneficiaire"
-                                                    placeholder="Adresse postal" required />
+                                                    placeholder="Adresse postale"  />
                                             </div>
                                             <div class="col-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">

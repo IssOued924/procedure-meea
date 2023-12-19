@@ -116,7 +116,7 @@
                                                 <label class="adresse fw-bold">Adresse Postale </label>
                                                 <input type="text" class="border-success"
                                                     name="adresse_postale_demandeur"
-                                                    placeholder="Adresse ou numero de telephone" required />
+                                                    placeholder="Adresse postale"  />
                                             </div>
                                             <div class="col-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">

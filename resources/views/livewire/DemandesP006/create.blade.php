@@ -52,7 +52,7 @@
 
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <label class="nom_societe fw-bold" >Addresse Postal</label>
+                                                    <label class="nom_societe fw-bold" >Addresse Postale</label>
                                                     <input type="text" class="form-control border-success" name="adresse_beneficiaire">
                                                 </div>
                                                 <div class="col-6">

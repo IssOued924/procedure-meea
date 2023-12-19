@@ -58,8 +58,8 @@
                                             </div>
                                             <div class="col-6">
                                                 <label for="boite_postale" class="boite_postale fw-bold">Boite postale<span style="color:red">
-                                                        *</span></label>
-                                                <input type="text" name="boite_postale" class="border-success" placeholder=" " required />
+                                                        </span></label>
+                                                <input type="text" name="boite_postale" class="border-success" placeholder=" "  />
                                             </div>
                                         </div>
                                         <div class="row">

@@ -48,6 +48,7 @@ use App\Models\Procedure;
 use Illuminate\Support\Facades\Route;
 use PharIo\Manifest\Author;
 use App\Livewire\DemandeFontController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,12 +60,27 @@ use App\Livewire\DemandeFontController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::middleware(['mustreset'])->group(function () {
+Route::middleware(['mustreset',])->group(function () {
     Route::get('/', function () {
+        if (Auth::user()){
+        if (Auth::user()->agent_id) {
+            return redirect("/administration");
+        }else {
+
+       
         $procedure=Procedure::all();
         return view('welcome', [
             'procedure' => $procedure
         ]);
+    }
+}else {
+      
+    $procedure=Procedure::all();
+    return view('welcome', [
+        'procedure' => $procedure
+    ]);
+
+}
     });
 
     // routes des tests
@@ -91,6 +107,8 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // Route::get('/P001', [DemandeP001Controller::class, 'create'])->name('demandesp001-create');
+
+    Route::middleware('usager')->group(function () {
     Route::get("/P001", DemandeComp::class)->name("demandes");
     Route::post('/demandesp001-store', [DemandeP001Controller::class, 'store'])->name('demandesp001-store');
     Route::post('/demandesp001-update', [DemandeP001Controller::class, 'update'])->name('demandesp001-update');
@@ -138,11 +156,12 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::post("/demandesp0011-update", [DemandeP0011Controller::class, 'update'])->name("demandesp0011-update");
 
             // eco tourisme
+           // Route::middleware('usager')->group(function () {
     Route::get("/P0012", DemandeCompP0012::class)->name("demandesp0012");
     Route::post("/demandesp0012-store", [DemandeP0012Controller::class, 'store'])->name("demandesp0012-store");
     Route::post("/demandesp0012-update", [DemandeP0012Controller::class, 'update'])->name("demandesp0012-update");
     Route::post("/demandesp0012-payment", [DemandeP0012Controller::class, 'payment'])->name("demandesp0012-payment");
-
+           // });
 
 
     // Permis de chasse
@@ -150,7 +169,7 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::post("/demandesp003-store", [DemandeP003Controller::class, 'store'])->name("demandesp003-store");
     Route::post("/demandesp003-update", [DemandeP003Controller::class, 'update'])->name("demandesp003-update");
 
-
+           });
 
 
 

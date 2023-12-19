@@ -16,17 +16,21 @@ class AdministrationMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-
+        if (Auth::user()) {
+           
         if(is_null(Auth::user()->agent_id))
         {
            // return redirect('/administration');
             // Redirection vers une page d'erreur ou une page d'accueil par exemple
             throw new NotFoundHttpException();//->with('error', 'Accès refusé. Vous n\'avez pas les autorisations nécessaires.');
-        }
+        }else
 
         // L'utilisateur est autorisé à accéder à l'espace d'administration
         return $next($request);
-
+    }else {
+      
+        throw new NotFoundHttpException();
+    }
 
         //return $next($request);
     }
