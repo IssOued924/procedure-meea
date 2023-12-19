@@ -68,11 +68,11 @@ Route::middleware(['mustreset'])->group(function () {
     });
 
     // routes des tests
-    Route::get('/test', [DemandeController::class, 'index']);
+   /* Route::get('/test', [DemandeController::class, 'index']);
     Route::post('/test-store', [DemandeController::class, 'store'])->name('test-route');
 
     Route::get('/testpj', [DemandeController::class, 'testpj']);
-
+*/
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
@@ -159,6 +159,7 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     //administration
 
 // Route partie administration
+Route::middleware('admin')->group(function () {
 Route::get('/administration', [BackendController::class, 'index'])->name('administration');
 Route::get('/administration/demandes-list', [BackendController::class, 'listDemande'])->name('demandes-list');
 Route::get('/administration/demandesp0012-list', [BackendController::class, 'listDemandep0012'])->name('demandesp0012-list');
@@ -188,7 +189,7 @@ Route::get('/administration/parametre/province', [ProvinceController::class, 'in
 Route::get('/administration/parametre/province/{uuid}', [ProvinceController::class, 'supprimer'])->name('supprimer-province');
 Route::post('/administration/parametre/province', [ProvinceController::class, 'store'])->name('province-store');
 
-Route::get('/get-communes/{province_id}', [ProvinceController::class,  'getCommunesByProvince']);
+
 
 
 Route::get('/administration/parametre/region', [RegionController::class, 'index'])->name('region-list');
@@ -234,9 +235,10 @@ Route::get('/administration/utilisateur/profile', [ProfileController::class, 'in
 Route::get('/administration/utilisateur/user-update/{uuid}', [RegisteredUserController::class, 'update'])->name('user-update');
 Route::post('/administration/utilisateur/user-store', [RegisteredUserController::class, 'userStore'])->name('user-store');
 Route::post('/administration/utilisateur//resetPassword{id}', [RegisteredUserController::class, 'resetPassword'])->name('reinitialiser');
-
+Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
+});
 // Liste des demandes d'un agent
-
+Route::get('/get-communes/{province_id}', [ProvinceController::class,  'getCommunesByProvince']);
 Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name('demandes-lists');
 
 
@@ -250,7 +252,7 @@ Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->nam
 
 });
 
-Route::get('/administration/statistique/nombreDemandeEncours', [BackendController::class, 'nombreDemandeByProcedure'])->name('nbdemande-by-procedure');
+
 
 
 Route::get("/procedure/modification/{id}/{procedure}", DemandeFontController::class, 'editerDemande')->name("editer-demande");
