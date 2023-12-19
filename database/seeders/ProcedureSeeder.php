@@ -23,10 +23,10 @@ class ProcedureSeeder extends Seeder
       $str1 =   Structure::create([
             "libelle_court" => "DGEF",
             "libelle_long" =>"Direction Générale des Eaux et Forêts",
-            
+
         ]);
         $str1->save();
-      
+
 
 
 
@@ -34,22 +34,22 @@ class ProcedureSeeder extends Seeder
         $strDSI =   Structure::create([
             "libelle_court" => "DSI",
             "libelle_long" =>"Direction des Services Informatiques",
-            
+
         ]);
         $strDSI->save();
-         
+
         $servDSI = Service::create([
             "libelle_court" => "DSI",
             "libelle_long" =>"Direction des Services Informatiques",
             "structure_id"=> $strDSI->uuid
         ]);
-       
+
         $servDSI->save();
-        
+
        $roleAdmin =  Role::create([
             "libelle" => "Administration",
             "code" =>"ADMIN",
-            
+
         ]);
 
         $roleAdmin->save();
@@ -84,7 +84,7 @@ $agent->save();
         $str2 =   Structure::create([
             "libelle_court" => "DGRE",
             "libelle_long" =>"Direction Générale des Ressources en Eaux",
-           
+
         ]);
         $str2->save();
         $serv2 =  Service::create([
@@ -96,7 +96,7 @@ $agent->save();
         $str3 =   Structure::create([
             "libelle_court" => "DGPE",
             "libelle_long" =>"Direction Générale de la Proctection de L'Environnement",
-          
+
         ]);
         $str3->save();
        $serv3 =  Service::create([
@@ -211,7 +211,7 @@ $agent->save();
             "libelle_court" => "PCBCB",
             "libelle_long" =>"Permis de circulation du bois et charbon de bois",
             "description" => "Permis pour tout transport de bois et charbon de bois en vue de consommation/distribution.",
-            "img" => "img/60.png",
+            "img" => "img/camion.png",
             "code_color" => "#14b522",
             "code" => "P005",
             "service_id"=>$serv1->uuid,
@@ -230,6 +230,6 @@ $agent->save();
             "tarif" => 1500
         ]);
 
-      
+
     }
 }
