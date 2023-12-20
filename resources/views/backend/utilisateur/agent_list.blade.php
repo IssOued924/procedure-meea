@@ -373,7 +373,7 @@
                                                                             <option {{ $agent->service_id == $serv->uuid
                                                                                 ? 'selected' : '' }} value="{{
                                                                                 $serv->uuid }}">{{
-                                                                                $agent->service->libelle_long}}</option>
+                                                                                $serv->libelle_long}}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>

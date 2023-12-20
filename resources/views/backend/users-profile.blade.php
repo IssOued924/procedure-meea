@@ -113,7 +113,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Profil</div>
-                    <div class="col-lg-9 col-md-8">{{ Auth::user()->agent->role->libelle }}</div>
+                    <div class="col-lg-9 col-md-8">{{ Auth::user()->role->libelle }}</div>
                   </div>
 
                   <div class="row">

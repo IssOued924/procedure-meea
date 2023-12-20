@@ -208,7 +208,7 @@ $agent->save();
             "tarif" => 1100
         ]);
         Procedure::create([
-            "libelle_court" => "PCBCB",
+            "libelle_court" => "PCBCB2",
             "libelle_long" =>"Permis de circulation du bois et charbon de bois",
             "description" => "Permis pour tout transport de bois et charbon de bois en vue de consommation/distribution.",
             "img" => "img/camion.png",

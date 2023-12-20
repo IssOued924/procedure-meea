@@ -38,7 +38,7 @@
 
                         <h5 class="card-title">Liste des plaintes   <span>| plaintes</span></h5>
 
-                       
+
 
                         <div class="card-body">
                             <p> @if(session('success'))
@@ -57,29 +57,8 @@
                             </script>
                             @endif</p>
                             <div class="row">
-                                <div class="col-9">
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="dt-buttons btn-group flex-wrap">
 
-                                            <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0"
-                                                aria-controls="example1" type="button"><span>CSV</span></button>
-                                            <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0"
-                                                aria-controls="example1" type="button"><span>Excel</span></button>
-                                            <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0"
-                                                aria-controls="example1" type="button"><span>PDF</span></button>
-                                            <button class="btn btn-secondary buttons-print" tabindex="0"
-                                                aria-controls="example1" type="button"><span>Imprimer</span></button>
-                                            {{-- <div class="btn-group">
-                                                <button
-                                                    class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis"
-                                                    tabindex="0" aria-controls="example1" type="button"
-                                                    aria-haspopup="true" aria-expanded="false"><span>Column
-                                                        visibility</span></button>
-                                            </div> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
+                                <div class="col-3 offset-9">
 
                                     <div style="float: right">
                                     <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
@@ -92,7 +71,7 @@
 
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable table-bordered table-striped">
+                            <table {{ !empty($demandes) ? 'id="example1" ':  'id=""'}} class="table datatable table-bordered table-striped">
                                 <label>Filtrer les plaintes par procédure</label>
                                 <select name="procedure" id="procedure" class="form-select border-success" onchange="changeTypePlainte()">
                                 <option class="mb-3" value="Toutes">Toutes les plaintes</option>
@@ -114,23 +93,23 @@
                                     </tr>
                                 </thead>
 
-                                
+
                                 @php
                                     $i = 1;
                                 @endphp
 
-                                
+
                                 <tbody>
                                     @foreach ($listePlainte as $plainte)
                                     @php
 
-                                        if($plainte->etat== "nouveau")		
+                                        if($plainte->etat== "nouveau")
                                             $statutColor = "bg-primary";
-                                        elseif ($plainte->etat== "en cours") 
+                                        elseif ($plainte->etat== "en cours")
                                             $statutColor = "bg-warning";
                                         else
                                             $statutColor = "bg-success";
-                                        
+
                                     @endphp
 
                                         <tr>
@@ -141,12 +120,12 @@
                                             <td>{{ $plainte->procedure }}</td>
                                             <td><span class="badge {{ $statutColor }} ">{{ $plainte->etat }}</span> </td>
                                             <td>
-                                                <button title="Voir détail de la plainte" type="button" class="btn btn-primary" 
+                                                <button title="Voir détail de la plainte" type="button" class="btn btn-primary"
                                                     data-bs-toggle="modal" data-bs-target="#largeModal{{ $plainte->id }}">
-                                                    <i class="bi bi-eye"></i> 
+                                                    <i class="bi bi-eye"></i>
                                                 </button>
 
-                                            
+
                                                 <a data-toggle="modal" data-target="#signer{{ $plainte->id}}"
                                                     type="button" title="Modifier l'etat de la plainte" class="btn btn-success"><i
                                                         class="bi bi-pencil-square"></i> </a>
@@ -178,7 +157,7 @@
 
 
 
-                                                                <div class="row"> 
+                                                                <div class="row">
                                                                     <div class="col-6">
                                                                         <b>Identite du plaignant : </b>
                                                                         <span class="text-success"> {{ $plainte->usager->nom.' '.$plainte->usager->prenom}} </span>
@@ -192,8 +171,8 @@
                                                                 </div><br>
 
 
-                                                                <div class="row">   
-                                                                    
+                                                                <div class="row">
+
                                                                     <div class="col-6">
                                                                         <b>Procedure :</b>
                                                                         <span class="text-success">{{ $plainte->procedure}}</span>
@@ -217,7 +196,7 @@
                                                                         <span class="text-success"> {{ !empty($plainte->user)? $plainte->user->name:""  }} le {{ $plainte->updated_at }}</span>
                                                                     </div>
                                                                 </div>
-                                                                <br /> 
+                                                                <br />
 
 
                                                             </div>
@@ -238,7 +217,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content bgcustom-gradient-light">
                                                         <div class="modal-header">
-                                                            <img src="{{ asset('backend/assets/img/valide.png') }}" 
+                                                            <img src="{{ asset('backend/assets/img/valide.png') }}"
                                                                 width="60" height="45" class="d-inline-block align-top"
                                                                 alt="">
                                                             <h5 class="modal-title m-auto"> Modifier plainte </h5>
@@ -246,7 +225,7 @@
                                                         </div>
 
                                                         <div class="modal-body">
-                                                            <form method="post" enctype="multipart/form-data" 
+                                                            <form method="post" enctype="multipart/form-data"
                                                             action="{{ route('editPlainte', ['id' =>$plainte->id]) }}"
                                                             >
                                                                 @csrf
@@ -257,14 +236,14 @@
                                                                             <select class="form-select" name="etat" required>
                                                                                 <option class=""> </option>
                                                                                 @if ($plainte->etat == 'nouveau')
-                                                                                    <option value="en cours" @if ($plainte->etat == 'en cours') selected @endif> En cours de traitement</option> 
-                                                                                @endif 
+                                                                                    <option value="en cours" @if ($plainte->etat == 'en cours') selected @endif> En cours de traitement</option>
+                                                                                @endif
 
                                                                                 @if ($plainte->etat == 'en cours')
-                                                                                    <option value="fermer" @if ($plainte->etat == 'fermer') selected @endif> Fermer la plainte (traitée)</option> 
+                                                                                    <option value="fermer" @if ($plainte->etat == 'fermer') selected @endif> Fermer la plainte (traitée)</option>
                                                                                 @endif
                                                                             <select> <br />
-                                                                            
+
                                                                             <label class="col-form-label">Commentaire</label> <br />
                                                                             <textarea class="form-control" name="commentaire"> {{ $plainte->commentaire }}
                                                                             </textarea>
@@ -276,7 +255,7 @@
                                                                         data-dismiss="modal">Non, Annuler</button>
                                                                     <button type="submit" class="btn btn-success">Oui, Modifier</button>
                                                                 </div>
-                                                                
+
                                                             </form>
                                                         </div>
                                                     </div>
@@ -308,7 +287,7 @@
 @section('script')
 
 <script>
-    
+
     function changeTypePlainte() {
         procedureSelect = document.getElementById("procedure").value;
         let url = "{{ route('listePlainte', ['procedure'=>'procedureSelect']) }}";
