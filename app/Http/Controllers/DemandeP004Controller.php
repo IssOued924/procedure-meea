@@ -42,8 +42,8 @@ class DemandeP004Controller extends Controller
         $data =  $request->all();
 
         $validator = Validator::make($request->all(), [
-            'certificat_origine' => 'required|file|max:3072', 
-            'certificat_sanitaire' => 'required|file|max:3072', 
+            'certificat_origine' => 'required|file|max:5120', 
+            'certificat_sanitaire' => 'required|file|max:5120', 
           
           
             // 3072 correspond à 3 Mo (3 * 1024)

@@ -53,7 +53,7 @@ class DemandeCompP003 extends Component
             "telephone" => Auth::user()->usager->telephone,
             "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
             "communes" => Commune::all(),
-            "provinces" => Province::all(),
+            "provinces" => Province::all()->sortBy('libelle'),
 
         ];
         

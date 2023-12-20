@@ -56,9 +56,9 @@ class DemandeP0012Controller extends Controller
 
         $data =  $request->all();
         $validator = Validator::make($request->all(), [
-            'cnib' => 'required|file|max:3072', 
-            'photo' => 'required|file|max:3072',
-            'list_personne' => 'required|file|max:3072',// 3072 correspond à 3 Mo (3 * 1024)
+            'cnib' => 'required|file|max:5120', 
+            'photo' => 'required|file|max:5120',
+            'list_personne' => 'required|file|max:5120',// 3072 correspond à 3 Mo (3 * 1024)
         ]);
     
         if ($validator->fails()) {

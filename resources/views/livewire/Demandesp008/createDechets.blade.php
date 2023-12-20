@@ -249,6 +249,22 @@ $(document).ready(function() {
   });
 });
 </script>
+<script>
+  function testSize() {
+    var isValid = true;
+    $("input[type=file]").each(function () {
+        if (this.files.length > 0 && this.files[0].size > 5 * 1024 * 1024) {
+            isValid = false;
+            // Mettre en surbrillance le champ de fichier si la taille est trop grande
+            $(this).addClass("error");
+        } else {
+            $(this).removeClass("error");
+        }
+    });
+    return isValid;
+}
+
+</script>
 
 <script type='text/javascript'>
     $(document).ready(function(){
@@ -257,6 +273,11 @@ var current_fs, next_fs, previous_fs; //fieldsets
 var opacity;
 
 $(".next").click(function () {
+    if (!testSize()) {
+        // Si la taille du fichier est supérieure à 5 Mo, afficher un message d'erreur
+        alert("Le fichier est trop volumineux. Veuillez sélectionner un fichier de taille inférieure à 5 Mo.");
+        return;
+    }
         current_fs = $(this).parent();
         next_fs = $(this).parent().next();
 

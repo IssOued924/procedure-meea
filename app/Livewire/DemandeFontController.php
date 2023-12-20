@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Commune;
+use App\Models\Province;
 use App\Models\Pays;
 use App\Models\Demande;
 use Carbon\Carbon;
@@ -77,6 +78,7 @@ class DemandeFontController extends Component
                         "documents" =>$documents,
                         "telephone" => Auth::user()->usager->telephone,
                         "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
+                        "provinces" => Province::all()->sortBy("libelle"),
                         "communes" => Commune::all(),
                     ];
                     break;
@@ -98,12 +100,13 @@ class DemandeFontController extends Component
                 case 'ADDMC':
                     $demande = DemandeP003::where(['uuid' => $id])->first();
                     $documents = DemandePieceP003::where(['demande_p003_id' => $id])->get();
-                    $view ='livewire.Demandesp003.edit';
+                    $view ='livewire.DemandesP003.edit';
                     $data = [
                         "demande" =>$demande,
                         "documents" =>$documents,
                         "telephone" => Auth::user()->usager->telephone,
                         "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
+                        "provinces" => Province::all()->sortBy("libelle"),
                         "communes" => Commune::all(),
 
                     ];
@@ -143,6 +146,8 @@ class DemandeFontController extends Component
                         "communes" => Commune::all(),
                         "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
                         "pays" => Pays::all(),
+                        "provinces" => Province::all()->sortBy("libelle"),
+                      
                     ];
                     break;
                 case 'PCBCB':
@@ -154,6 +159,7 @@ class DemandeFontController extends Component
                             "documents" => $documents,
                             "telephone" => Auth::user()->usager->telephone,
                             "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
+                            "provinces" => Province::all()->sortBy("libelle"),
                             "communes" => Commune::all(),
                         ];
                     break;
@@ -161,11 +167,12 @@ class DemandeFontController extends Component
                     case 'PCBCB2':
                         $demande = DemandeP005::where(['uuid' => $id])->first();
                         $documents = DemandePieceP005::where(['demande_p005_id' => $id])->get();
-                        $view ='livewire.Demandep005.edit';
+                        $view ='livewire.DemandeP005.edit';
                         $data = [
                                 "demande" => $demande,
                                 "telephone" => Auth::user()->usager->telephone,
                                 "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
+                                "provinces" => Province::all()->sortBy("libelle"),
                                 "communes" => Commune::all(),
                             ];
                         break;

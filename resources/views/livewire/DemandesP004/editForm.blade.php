@@ -56,14 +56,29 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
-                                                <label class="siege_social fw-bold">Lieu de résidence<span style="color:red">
+                                        <div class="col-6">
+                                            <label class="siege_social fw-bold">Province de résidence<span style="color:red">
                                                         *</span></label>
-                                                <select name="commune_id" id="selectMultiple" class="form-select" required>
-                                                    <option value="">Veuillez choisir une ville</option>
-                                                    @foreach ( $communes as  $com)
-                                                     <option {{ $demande->commune_id == $com->uuid ? 'selected' : '' }} value="{{ $com->uuid }}" >{{ $com->libelle }}</option>
+
+                                                <select name="province_id" id="provinces" class="form-select border-success" required>
+                                                    {{-- <input type="text" placeholder="filtrer ici"> --}}
+                                                    <option value="">Veuillez choisir une Province</option>
+                                                    @foreach ( $provinces as  $prov)
+                                                     <option value="{{ $prov->uuid }}" >{{ $prov->libelle }}</option>
+
                                                     @endforeach
+
+
+                                                </select>
+                                            </div>
+
+                                            <div class="col-6">
+                                            <label class="siege_social fw-bold">Commune de résidence/siège<span style="color:red">
+                                                        *</span></label>
+
+                                                <select name="commune_id"  id="communes" class="form-select border-success" required>
+                                                   
+
                                                 </select>
                                             </div>
                                             {{-- <div class="col-6">
@@ -252,6 +267,30 @@
 
 <script type="text/javascript">
     $('#selectMultiple').select2();
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#provinces').change(function () {
+            var provinceId = $(this).val();
+            if (provinceId) {
+                $.ajax({
+                    url: '/get-communes/' + provinceId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#communes').empty();
+                        $.each(data, function (key, value) {
+                            $('#communes').append('<option value="' + value.uuid + '">' + value.libelle + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#communes').empty();
+            }
+        });
+    });
 </script>
 
 <script type='text/javascript'>

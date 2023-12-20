@@ -146,7 +146,7 @@
                                             <div class="col-6">
                                                 <label for="demande timbre" class="fw-bold">CNIB ou Passport<span style="color:red">
                                                     *</span></label>
-                                                <input type="file"  name="cnib" class="form-control border-success" required>
+                                                <input type="file" id="cnibFile"  name="cnib" class="form-control border-success" required>
                                             </div>
                                             <div class="col-6">
                                                 <label for="demande timbre" class="fw-bold">Photo d'identité<span style="color:red">
@@ -166,7 +166,7 @@
                                     </div>
                                     <input type="button"   class="previous action-button-previous"
                                         value="Retour" />
-                                    <input type="button"   class="next action-button"
+                                    <input  type="button"  id="nextFile" class="next action-button"
                                         value="Suivant" />
                                 </fieldset>
                                 
@@ -305,13 +305,39 @@ $(document).ready(function() {
     });
 </script>
 
+
+<script>
+  function testSize() {
+    var isValid = true;
+    $("input[type=file]").each(function () {
+        if (this.files.length > 0 && this.files[0].size > 5 * 1024 * 1024) {
+            isValid = false;
+            // Mettre en surbrillance le champ de fichier si la taille est trop grande
+            $(this).addClass("error");
+        } else {
+            $(this).removeClass("error");
+        }
+    });
+    return isValid;
+}
+
+</script>
+
+
+
 <script type='text/javascript'>
+   
     $(document).ready(function(){
 
 var current_fs, next_fs, previous_fs; //fieldsets
 var opacity;
 
 $(".next").click(function () {
+    if (!testSize()) {
+        // Si la taille du fichier est supérieure à 5 Mo, afficher un message d'erreur
+        alert("Le fichier est trop volumineux. Veuillez sélectionner un fichier de taille inférieure à 5 Mo.");
+        return;
+    }
         current_fs = $(this).parent();
         next_fs = $(this).parent().next();
 
