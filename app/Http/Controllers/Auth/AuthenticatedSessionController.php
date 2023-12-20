@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\UpdatePWDRequest;
@@ -15,6 +16,8 @@ use Illuminate\View\View;
 use App\Models\Procedure;
 use App\Models\User;
 use Carbon\Carbon;
+
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -54,6 +57,14 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
          $request->authenticate();
+
+         // la vérification de l'état de l'utilisateur
+        if (!auth()->user()->isActive()) {
+            auth()->logout();
+            throw ValidationException::withMessages([
+                'active' => __('Votre Compte est suspendu: Veuillez Contacter l\'Administrateur !'),
+            ])->redirectTo(route('login'));
+        }
 
          $request->session()->regenerate();
 
