@@ -773,7 +773,7 @@ public function update(Request $request)
 {
     $userData = ['name' => $request->name, 'email' => $request->email];
     $agentData = [
-                  'matricule' => $request->date_naissance,
+                  'matricule' => $request->matricule,
                   'date_affectation' => $request->date_affectation,
                   'date_prise_service' => $request->date_prise_service,
                   'date_naissance' => $request->date_naissance,

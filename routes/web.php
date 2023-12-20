@@ -213,6 +213,8 @@ Route::get('/administration/parametre/categorie', [CategorieController::class, '
 Route::get('/administration/parametre/service', [ServiceController::class, 'index'])->name('service-list');
 Route::get('/administration/parametre/service/{uuid}', [ServiceController::class, 'supprimer'])->name('suprimer-service');
 Route::post('/administration/parametre/service/', [ServiceController::class, 'store'])->name('service-store');
+Route::put('/dministration/parametre/service/{uuid}', [ServiceController::class, 'update'])->name('service-update');
+
 Route::get('/administration/parametre/piecejointe/', [PieceJointeController::class, 'index'])->name('piecejointe-list');
 Route::get('/administration/parametre/piecejointe/{uuid}', [PieceJointeController::class, 'supprimer'])->name('suprimer-piecejointe');
 Route::post('/administration/parametre/piecejointe/', [PieceJointeController::class, 'store'])->name('piecejointe-store');
@@ -226,10 +228,11 @@ Route::get('/administration/parametre/role/{uuid}', [RoleController::class, 'sup
 Route::post('/administration/parametre/role', [RoleController::class, 'store'])->name('role-store');
 
 // Route Utilisateur
+Route::post('/administration/utilisateur/user/{id}', [RegisteredUserController::class, 'activate'])->name('active-users');
 Route::get('/administration/utilisateur/user', [RegisteredUserController::class, 'listUsers'])->name('user-list');
 Route::get('/administration/utilisateur/agent', [AgentController::class, 'index'])->name('agent-list');
 Route::post('/administration/utilisateur/agent/', [AgentController::class, 'store'])->name('agent-store');
-Route::put('/7dministration/utilisateur/agent/{uuid}', [AgentController::class, 'update'])->name('agent-update');
+Route::put('/dministration/utilisateur/agent/{uuid}', [AgentController::class, 'update'])->name('agent-update');
 Route::get('/administration/utilisateur/usager', [UsagerController::class, 'index'])->name('usager-list');
 
 Route::get('/administration/utilisateur/profile', [ProfileController::class, 'index'])->name('profile-list');

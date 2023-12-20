@@ -212,12 +212,17 @@ class RegisteredUserController extends Controller
         $agent = Agent::where(['uuid' => $request->agent_id])->first();
         // dd($agent);
 
+        $messages = [
+            'email.unique' => 'Cet email est dejà utilisé. Veuillez Saisir un autre email !',
+            // ... autres messages personnalisés ...
+        ];
+
         $request->validate([
             // 'id' => ['required'],
             'agent_id' => ['required', 'string', 'max:255'],
             'role_id' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
-        ]);
+        ], $messages);
         // dd($request);
 
         $user = User::create([
@@ -234,12 +239,11 @@ class RegisteredUserController extends Controller
             "name" => $agent->nom . ' ' . $agent->prenom,
             "password" => "12345678"
         );
+
         Mail::to($user->email)->send(new CreateUserMailable($demand));
 
-        return redirect()->back()->with('success', 'Utilisateur créé avec succès !!');
+        return redirect()->route('user-list')->with('success', 'Utilisateur créé avec succès !!');
     }
-
-
 
 
 
@@ -292,6 +296,24 @@ class RegisteredUserController extends Controller
             "password" => "12345678"
         );
         Mail::to($email)->send(new ResetPasswordMailable($demand));
-        return redirect()->back()->with('success', 'Mot de passe réinitialiser avec succès !!');
+        return redirect()->back()->with('success', 'Mot de passe réinitialisé avec succès !!');
+    }
+
+    //activer et desactiver un user
+
+    public function activate($id)
+    {
+        $user = User::find($id);
+        ($user->etat == 0) ? $user->etat = 1 : $user->etat = 0;
+        $user->save();
+
+        if ($user->etat) {
+            // Alert::success('Activation Réussie', 'L\'utilisateur a été activé avec succès!');
+        return redirect()->route('user-list')->with('success', 'L\'utilisateur a été activé avec succès!');
+
+        } else {
+            // Alert::success('Desactivation Réussie', 'L\'utilisateur a été desactivé avec succès!');
+            return redirect()->route('user-list')->with('success', 'L\'utilisateur a été desactivé avec succès!');
+        }
     }
 }

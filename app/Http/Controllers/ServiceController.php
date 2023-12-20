@@ -36,7 +36,7 @@ class ServiceController extends Controller
 
     }
 
-    // mise a jour de la base juridique
+    // mise a jour de service juridique
 
     public function update(Request $request, $uuid)
 {
@@ -49,6 +49,7 @@ class ServiceController extends Controller
     $type->update([
         'libelle_court' => $request->input('libelle_court'),
         'libelle_long' => $request->input('libelle_long'),
+        'structure_id' => $request->input('structure_id'),
     ]);
 
     return redirect()->route('service-list')->with('success', 'Service  mis à jour avec succès !');

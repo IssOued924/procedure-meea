@@ -260,6 +260,11 @@
                         <h2>Connexion</h2>
                         <!-- Session Status -->
                         <x-auth-session-status class="mb-4" :status="session('status')" />
+                        @if ($errors->has('active'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ $errors->first('active') }}
+                            </div>
+                        @endif
 
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
