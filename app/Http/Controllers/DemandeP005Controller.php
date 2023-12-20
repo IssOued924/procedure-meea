@@ -9,6 +9,7 @@ use App\Repositories\DemandeP005Repository;
 use App\Repositories\DemandePieceP005Repository;
 use App\Repositories\UserRepository;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
 class DemandeP005Controller extends Controller
@@ -37,6 +38,7 @@ class DemandeP005Controller extends Controller
     {
 
         $data =  $request->all();
+       
      //   $dataFiles = $request->all();
        // $data['usager_id'] = Auth::user()->uuid;
 

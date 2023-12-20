@@ -18,6 +18,20 @@
                         {{ session('success') }}
                     </div>
                     @endif</p>
+
+                    <div class="col-6 offset-3"> @if(session('error'))
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+
+                            <h5 class="alert-heading">{{session('error')}}</h5>
+
+                        </div>
+
+                        <script>
+                            setTimeout(function() {
+                                document.querySelector('.alert.alert-danger').style.display = 'none';
+                            }, 5000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                        </script>
+                    @endif</div>
                     <p>Les champs suivis d'étoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">

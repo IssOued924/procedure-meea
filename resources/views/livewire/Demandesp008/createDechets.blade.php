@@ -14,6 +14,20 @@
                 <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
                     <h5><strong>Demandes d'autorisation de gestion des déchets</strong></h5>
                     {{-- <p>Veuillez remplir tous les champs avant de passer une Etape</p> --}}
+
+                    <div class="col-6 offset-3"> @if(session('error'))
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+
+                            <h5 class="alert-heading">{{session('error')}}</h5>
+
+                        </div>
+
+                        <script>
+                            setTimeout(function() {
+                                document.querySelector('.alert.alert-danger').style.display = 'none';
+                            }, 5000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                        </script>
+                    @endif</div>
                     <div class="row">
                         <div class="col-md-12 mx-0">
                             <form id="msform" method="POST" action="{{ route("demandesp008-store") }}" enctype="multipart/form-data">
@@ -132,7 +146,7 @@
                                     </div>
 
                                     <input type="button" class="previous action-button-previous" value="Retour" />
-                                    <input type="submit" class="next action-button" value="Valider" />
+                                    <input type="button" id="btnEng" disabled class="next action-button btn btn-success" value="Suivant" />
                                 </fieldset>
                                 <!--fieldset>
                                     <div class="form-card">
@@ -221,6 +235,20 @@
         </div>
     </div>
 </section><!-- End About Section -->
+
+
+
+<script>
+$(document).ready(function() {
+  $('#confirmationBox').change(function() {
+    if (this.checked) {
+      $('#btnEng').prop('disabled', false);
+    } else {
+      $('#btnEng').prop('disabled', true);
+    }
+  });
+});
+</script>
 
 <script type='text/javascript'>
     $(document).ready(function(){

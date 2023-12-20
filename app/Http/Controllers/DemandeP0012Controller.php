@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use App\Models\Commune;
 use App\Models\DemandeP0012;
 use App\Models\DemandePieceP001;
@@ -49,7 +50,21 @@ class DemandeP0012Controller extends Controller
      DemandePieceP0012Repository $demandePieceP0012Repository, DemandeP0012 $demande)
     {
 
+
+        
+
+
         $data =  $request->all();
+        $validator = Validator::make($request->all(), [
+            'cnib' => 'required|file|max:3072', 
+            'photo' => 'required|file|max:3072',
+            'list_personne' => 'required|file|max:3072',// 3072 correspond à 3 Mo (3 * 1024)
+        ]);
+    
+        if ($validator->fails()) {
+            session()->flash('error', 'La taille des fichiers ne doivent pas excéder 3 Mo.');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
        // dd($data);
         if ($this->payment($data["numero"], $data["otp"]))
 
@@ -95,6 +110,7 @@ class DemandeP0012Controller extends Controller
         $demandePieceP0012Repository->setChemin($cnib, $demande->uuid, 'CNIB');
         $demandePieceP0012Repository->setChemin($photo, $demande->uuid, 'Photo d\'Identite');
         $demandePieceP0012Repository->setChemin($list_personne, $demande->uuid, 'Liste des Personnes concernées');
+        
 
         return redirect('/demandes-lists?procedure=PETE')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }else {

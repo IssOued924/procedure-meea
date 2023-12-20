@@ -28,6 +28,20 @@
                         }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
                     </script>
                 @endif</p>
+
+                <div class="col-6 offset-3"> @if(session('error'))
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+
+                            <h5 class="alert-heading">{{session('error')}}</h5>
+
+                        </div>
+
+                        <script>
+                            setTimeout(function() {
+                                document.querySelector('.alert.alert-danger').style.display = 'none';
+                            }, 5000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                        </script>
+                    @endif</div>
                     <p>Les champs suivis d'etoile rouge sont obligatoires</p>
 
 
@@ -253,8 +267,8 @@
 
                                     <input type="button"   class="previous action-button-previous"
                                         value="Retour" />
-                                    <input type="submit"   class="next action-button"
-                                        value="Valider" />
+                                    <input type="button" disabled id="btnEng"  class="next action-button btn btn-success"
+                                        value="Suivant" />
                                 </fieldset>
 
 
@@ -357,6 +371,21 @@
         });
     });
 </script>
+
+
+
+<script>
+$(document).ready(function() {
+  $('#confirmationBox').change(function() {
+    if (this.checked) {
+      $('#btnEng').prop('disabled', false);
+    } else {
+      $('#btnEng').prop('disabled', true);
+    }
+  });
+});
+</script>
+
 
 
 <script type='text/javascript'>

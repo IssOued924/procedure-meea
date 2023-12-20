@@ -12,6 +12,7 @@ use App\Repositories\DemandeRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class DemandeP007Controller extends Controller
 {
@@ -38,6 +39,16 @@ class DemandeP007Controller extends Controller
     {
 
         $data =  $request->all();
+        
+        $validator = Validator::make($request->all(), [
+            'certificat_biodegradabilite' => 'required|file|max:3072', 
+          
+            // 3072 correspond à 3 Mo (3 * 1024)
+        ]);
+        if ($validator->fails()) {
+            session()->flash('error', 'La taille des fichiers ne doivent pas excéder 3 Mo.');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $dataFiles = $request->all();
        // $data['usager_id'] = Auth::user()->uuid;
 

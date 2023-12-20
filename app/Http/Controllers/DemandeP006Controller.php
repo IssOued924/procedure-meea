@@ -11,7 +11,7 @@ use App\Repositories\UserRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Validator;
 class DemandeP006Controller extends Controller
 {
     public $repository;
@@ -36,6 +36,19 @@ class DemandeP006Controller extends Controller
     {
 
         $data =  $request->all();
+        $validator = Validator::make($request->all(), [
+            'facture_pro' => 'required|file|max:3072', 
+            'demande_form' => 'required|file|max:3072', 
+            'rccm' => 'required|file|max:3072', 
+            'document_technique' => 'required|file|max:3072', 
+            'registre_tracabilite' => 'required|file|max:3072', 
+          
+            // 3072 correspond à 3 Mo (3 * 1024)
+        ]);
+        if ($validator->fails()) {
+            session()->flash('error', 'La taille des fichiers ne doivent pas excéder 3 Mo.');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $dataFiles = $request->all();
        // $data['usager_id'] = Auth::user()->uuid;
 

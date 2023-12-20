@@ -171,7 +171,7 @@
 
                                     <input type="button"   class="previous action-button-previous"
                                         value="Retour" />
-                                    <input type="submit"   class="next action-button"
+                                    <input type="button" disabled id="btnEng"  class="next action-button btn btn-success"
                                         value="Suivant" />
                                 </fieldset>
 
@@ -265,6 +265,19 @@
             }
         });
     });
+</script>
+
+
+<script>
+$(document).ready(function() {
+  $('#confirmationBox').change(function() {
+    if (this.checked) {
+      $('#btnEng').prop('disabled', false);
+    } else {
+      $('#btnEng').prop('disabled', true);
+    }
+  });
+});
 </script>
 
 <script type='text/javascript'>

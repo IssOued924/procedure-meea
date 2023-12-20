@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class DemandeP001Controller extends Controller
 {
@@ -50,8 +51,26 @@ class DemandeP001Controller extends Controller
 
     public function store(Request $request, UserRepository $userRepository, DemandePieceP001Repository $demandePieceP001Repository, DemandeP001 $demande)
     {
-
+        
         $data =  $request->all();
+
+        $validator = Validator::make($request->all(), [
+            'avis_faisabilite' => 'required|file|max:3072', 
+            'rccm' => 'required|file|max:3072', 
+            'facture_pro_format' => 'required|file|max:3072', 
+            'fiche_securite' => 'required|file|max:3072', 
+            'registre_tracabilite' => 'required|file|max:3072', 
+            'registre_dechet' => 'required|file|max:3072', 
+            'attestation_destination_finale' => 'required|file|max:3072', 
+            'list_produit' => 'required|file|max:3072', 
+          
+            // 3072 correspond à 3 Mo (3 * 1024)
+        ]);
+        if ($validator->fails()) {
+            session()->flash('error', 'La taille des fichiers ne doivent pas excéder 3 Mo.');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         if ($this->payment($data["numero"], $data["otp"])) {
             $dataFiles = $request->all();
 

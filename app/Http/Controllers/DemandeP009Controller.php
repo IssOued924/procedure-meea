@@ -10,7 +10,7 @@ use App\Repositories\DemandePieceP009Repository;
 use GuzzleHttp\Psr7\UploadedFile;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Validator;
 class DemandeP009Controller extends Controller
 {
     public $repository;
@@ -36,6 +36,18 @@ class DemandeP009Controller extends Controller
     {
 
         $data =  $request->all();
+        $validator = Validator::make($request->all(), [
+            'permis_arme' => 'required|file|max:3072', 
+            'photo' => 'required|file|max:3072',
+            
+            'cnib_passport' => 'required|file|max:3072',
+            'document_arme' => 'required|file|max:3072',// 3072 correspond à 3 Mo (3 * 1024)
+        ]);
+    
+        if ($validator->fails()) {
+            session()->flash('error', 'La taille des fichiers ne doivent pas excéder 3 Mo.');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $dataFiles = $request->all();
        // $data['usager_id'] = Auth::user()->uuid;
 

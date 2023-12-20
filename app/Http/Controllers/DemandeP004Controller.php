@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class DemandeP004Controller extends Controller
 {
@@ -39,9 +40,24 @@ class DemandeP004Controller extends Controller
     {
 
         $data =  $request->all();
+
+        $validator = Validator::make($request->all(), [
+            'certificat_origine' => 'required|file|max:3072', 
+            'certificat_sanitaire' => 'required|file|max:3072', 
+          
+          
+            // 3072 correspond à 3 Mo (3 * 1024)
+        ]);
+        if ($validator->fails()) {
+            session()->flash('error', 'La taille des fichiers ne doivent pas excéder 3 Mo.');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $dataFiles = $request->all();
 
         unset($data['telephone']);
+        unset($data['moyen']);
+        unset($data["numero"]);
+        unset($data["otp"]);
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
 

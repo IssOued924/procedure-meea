@@ -5,6 +5,20 @@
     </div>
     @endif
 
+    <div class="col-6 offset-3"> @if(session('error'))
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+
+                            <h5 class="alert-heading">{{session('error')}}</h5>
+
+                        </div>
+
+                        <script>
+                            setTimeout(function() {
+                                document.querySelector('.alert.alert-danger').style.display = 'none';
+                            }, 5000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                        </script>
+                    @endif</div>
+
 
 
     <div class="container-fluid" id="grad1">
@@ -262,7 +276,7 @@
                                 <fieldset>
                                     <div class="form-card">
                                         <h2 class="fs-title">Pièces à fournir</h2>
-
+                                        <Label>La taille de vos fichiers ne doit pas excéder 3Mo</Label>
                                         <div class="row">
                                             <div class="col-6">
                                                 <label class="nom_societe  fw-bold">Une copie de l’avis de faisabilité ou conformite
@@ -454,7 +468,7 @@
                                     </div>
 
                                     <input type="button" class="previous action-button-previous" value="Retour" />
-                                    <input type="submit" class="next action-button" value="Valider" />
+                                    <input type="button" disabled id="btnEng" class="next action-button btn btn-success" value="Suivant" />
                                 </fieldset>
 
                                 <fieldset>
@@ -529,6 +543,22 @@
     $('#selectMultiplePays').select2();
 
 </script>
+
+
+
+
+<script>
+$(document).ready(function() {
+  $('#confirmationBox').change(function() {
+    if (this.checked) {
+      $('#btnEng').prop('disabled', false);
+    } else {
+      $('#btnEng').prop('disabled', true);
+    }
+  });
+});
+</script>
+
 
 <script type='text/javascript'>
     $(document).ready(function(){

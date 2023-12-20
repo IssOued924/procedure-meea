@@ -21,6 +21,21 @@
                             }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
                         </script>
                     @endif</div>
+
+
+                    <div class="col-6 offset-3"> @if(session('error'))
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+
+                            <h5 class="alert-heading">{{session('error')}}</h5>
+
+                        </div>
+
+                        <script>
+                            setTimeout(function() {
+                                document.querySelector('.alert.alert-danger').style.display = 'none';
+                            }, 5000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                        </script>
+                    @endif</div>
                     <p>Les champs suivis d'étoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">
@@ -69,7 +84,7 @@
                                                 <label class="siege_social fw-bold">Province de résidence<span style="color:red">
                                                         *</span></label>
 
-                                                <select name="province_id" id="provinces" class="form-select border-success" required>
+                                                <select name="province_id" id="provinces" class="form-select border-success" required >
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option value="">Veuillez choisir une Province</option>
                                                     @foreach ( $provinces as  $prov)
@@ -125,12 +140,13 @@
                                 <fieldset>
                                     <div class="form-card">
                                         <h2 class="fs-title">Pièces à Fournir</h2>
+                                        <Label>La taille de vos fichiers ne doit pas excéder 3Mo</Label>
                                         <div class="row">
 
                                             <div class="col-6">
                                                 <label for="demande timbre" class="fw-bold">CNIB ou Passport<span style="color:red">
                                                     *</span></label>
-                                                <input type="file" name="cnib" class="form-control border-success" required>
+                                                <input type="file"  name="cnib" class="form-control border-success" required>
                                             </div>
                                             <div class="col-6">
                                                 <label for="demande timbre" class="fw-bold">Photo d'identité<span style="color:red">
@@ -153,7 +169,7 @@
                                     <input type="button"   class="next action-button"
                                         value="Suivant" />
                                 </fieldset>
-
+                                
                                 <fieldset>
 
                                     <div class="form-card">
@@ -172,7 +188,7 @@
 
                                     <input type="button"  class="previous action-button-previous"
                                         value="Retour" />
-                                        <input type="button"  class="next action-button btn btn-success"
+                                        <input id="btnEng" disabled type="button"  class="next action-button btn btn-success"
                                         value="Suivant" />
                                 </fieldset>
 
@@ -250,6 +266,20 @@
 <script type="text/javascript">
     $('#selectMultiple').select2();
 </script>
+
+
+<script>
+$(document).ready(function() {
+  $('#confirmationBox').change(function() {
+    if (this.checked) {
+      $('#btnEng').prop('disabled', false);
+    } else {
+      $('#btnEng').prop('disabled', true);
+    }
+  });
+});
+</script>
+
 
 
 <script>

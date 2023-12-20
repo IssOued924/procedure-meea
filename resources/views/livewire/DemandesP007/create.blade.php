@@ -18,6 +18,20 @@
                         {{ session('success') }}
                     </div>
                 @endif</p>
+
+                <div class="col-6 offset-3"> @if(session('error'))
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+
+                            <h5 class="alert-heading">{{session('error')}}</h5>
+
+                        </div>
+
+                        <script>
+                            setTimeout(function() {
+                                document.querySelector('.alert.alert-danger').style.display = 'none';
+                            }, 5000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                        </script>
+                    @endif</div>
                     <p>Les champs suivis d'etoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">
@@ -306,8 +320,8 @@
 
                                     <input type="button"   class="previous action-button-previous"
                                         value="Retour" />
-                                    <input type="submit"   class="next action-button"
-                                        value="Valider" />
+                                    <input type="button" disabled  id="btnEng" class="next action-button btn btn-success"
+                                        value="Suivant" />
                                 </fieldset>
 
                                 <fieldset>
@@ -374,11 +388,29 @@
 </section><!-- End About Section -->
 
 
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js" ;></script>
 
 <script type="text/javascript">
     $('#selectMultiple').select2();
 </script>
+
+
+
+<script>
+$(document).ready(function() {
+  $('#confirmationBox').change(function() {
+    if (this.checked) {
+      $('#btnEng').prop('disabled', false);
+    } else {
+      $('#btnEng').prop('disabled', true);
+    }
+  });
+});
+</script>
+
+
 
 <script type='text/javascript'>
     $(document).ready(function(){

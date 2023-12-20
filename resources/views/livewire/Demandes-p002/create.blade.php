@@ -307,7 +307,7 @@
                                      <button type="submit" class="action-button" id="btn_send">Valider</button> --}}
                                      <button type="button" name="previous" class="previous action-button-previous"
                                      >Retour</button>
-                                 <button type="button"   name="make_payment" id="next_piece" class="next action-button"
+                                 <button type="button" id="btnEng" disabled   name="make_payment" id="next_piece" class="next action-button btn btn-success"
                                      >Suivant</button>
                                 </fieldset>
 
@@ -397,6 +397,19 @@
         });
      })*/
 
+</script>
+
+
+<script>
+$(document).ready(function() {
+  $('#confirmationBox').change(function() {
+    if (this.checked) {
+      $('#btnEng').prop('disabled', false);
+    } else {
+      $('#btnEng').prop('disabled', true);
+    }
+  });
+});
 </script>
 
 <script type='text/javascript'>

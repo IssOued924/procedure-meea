@@ -9,6 +9,7 @@ use App\Repositories\DemandeP0011Repository;
 use App\Repositories\DemandePieceP0011Repository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
 class DemandeP0011Controller extends Controller
@@ -36,6 +37,22 @@ class DemandeP0011Controller extends Controller
     {
 
         $data =  $request->all();
+          
+        $validator = Validator::make($request->all(), [
+            'cnib' => 'required|file|max:3072', 
+          
+            'protocole_daccord' => 'required|file|max:3072',
+            'agrement' => 'required|file|max:3072',
+            'quitance' =>  'required|file|max:3072',
+            // 3072 correspond à 3 Mo (3 * 1024)
+        ]);
+        
+    
+        if ($validator->fails()) {
+            session()->flash('error', 'La taille des fichiers ne doivent pas excéder 3 Mo.');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $dataFiles = $request->all();
         //dd($data['exploitant']);
         unset($data['telephone']);

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Validator;
 use App\Models\DemandeP008;
 use App\Models\Procedure;
 use App\Repositories\UserRepository;
@@ -32,6 +32,22 @@ class DemandeP008Controller extends Controller
 
     public function store(Request $request, UserRepository $userRepository, UsagerRepository $usagerRepository, DemandePieceP008Repository $demandePieceP008Repository, DemandeP008 $demande ){
         $data =  $request->all();
+
+        $validator = Validator::make($request->all(), [
+            'doc_rccm' => 'required|file|max:3072', 
+            'doc_arrete_faisabilite' => 'required|file|max:3072',
+            
+            'doc_avis_mairie' => 'required|file|max:3072',
+            'doc_desc_technique' => 'required|file|max:3072',
+            'doc_registre_tracabilite'  => 'required|file|max:3072',
+            // 3072 correspond à 3 Mo (3 * 1024)
+        ]);
+    
+        if ($validator->fails()) {
+            session()->flash('error', 'La taille des fichiers ne doivent pas excéder 3 Mo.');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $dataFiles = $request->all();
 
         $data['usager_id'] = Auth::user()->usager_id;
