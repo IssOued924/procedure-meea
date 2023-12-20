@@ -119,13 +119,13 @@
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <i class="bi bi-person"></i>
-                                @if (Auth::user()->agent->role->libelle=="Réception")
+                                {{-- @if (Auth::user()->agent->role->libelle==="Réception")
 
                                 <span class="text-primary"> <h6>Receptioniste</h6></span>
-                                @else
-                                <span class="text-primary"> <h6>{{ Auth::user()->agent->role->libelle }}</h6></span>
+                                @else --}}
+                                <span class="text-primary"> <h6>{{ Auth::user()->role->libelle }}</h6></span>
 
-                                @endif
+                                {{-- @endif --}}
                             </a>
                         </li>
                         <hr class="dropdown-divider">
@@ -304,11 +304,11 @@
                                 <i class="bi bi-circle"></i><span>Procedures</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('categorie-list') }}">
                                 <i class="bi bi-circle"></i><span>Categorie</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href=" {{ route('structure-list') }}">
                                 <i class="bi bi-circle"></i><span>Structure</span>
@@ -407,21 +407,6 @@
 
     <main id="main" class="main">
         @yield('title')
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-dismissible" role="alert">
-           <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-           </button>
-           <h4 class="alert-heading">{{session('success')}}</h4>
-        </div>
-   @endif
-
-
-<script>
-   setTimeout(function() {
-       document.querySelector('.alert.alert-success').style.display = 'none';
-   }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
-</script>
 
         @yield('content')
 
@@ -430,7 +415,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>MEEA</span></strong> 2023
+            &copy; Copyright <strong><span>MEEA</span></strong> {{ date('Y') }}
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->

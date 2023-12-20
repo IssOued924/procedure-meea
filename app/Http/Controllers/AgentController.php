@@ -26,8 +26,8 @@ class AgentController extends Controller
             "structures" => Structure::all(),
             "services" =>Service::all(),
             "roles" => Role::all(),
-            "communes" => Commune::all(),
-            "provinces" => Province::all(),
+            "communes" => Commune::all()->sortBy('libelle'),
+            "provinces" => Province::all()->sortBy('libelle'),
 
         ];
         return view('backend.utilisateur.agent_list', $data);
@@ -36,12 +36,27 @@ class AgentController extends Controller
 
 
     public function store(Request $request, Agent $agent){
+
+        $messages = [
+            'matricule.unique' => 'Cet Matricule existe déjà pour un agent. Veuillez Saisir un autre Matricule !',
+            // ... autres messages personnalisés ...
+        ];
+
+
+        $request->validate([
+            'nom' => 'required',
+            'prenom' => 'required',
+            'fonction' => 'required',
+            'matricule' => 'unique:agents,matricule',
+
+        ], $messages, );
+
         $data = $request->all();
 
         $agent = $this->repository->create($data);
         $agent->save();
 
-        Alert::success('Succès', 'Agent   a été créee avec succès !');
+        // Alert::success('Succès', 'Agent   a été créee avec succès !');
         return redirect()->route('agent-list')->with('success', 'Agent à été Enregistrée avec succès !');
 
     }

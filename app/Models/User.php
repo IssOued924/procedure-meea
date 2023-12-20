@@ -71,4 +71,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Role::class,'uuid','role_id');
     }
+
+    public function isActive()
+    {
+        return $this->etat === 1; // Assurez-vous que le nom de la colonne correspond à votre base de données
+    }
 }

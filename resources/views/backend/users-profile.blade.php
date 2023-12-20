@@ -3,7 +3,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Profile</h1>
+      {{-- <h1>Profile</h1> --}}
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -12,8 +12,6 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
-
-
 
     <section class="section profile">
       <div class="row">
@@ -34,6 +32,39 @@
         <div class="col-xl-12">
 
           <div class="card">
+            <p>
+                @if (session('success'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="alert-heading">{{ session('success') }}</h4>
+
+            </div>
+
+            <script>
+                setTimeout(function() {
+                                document.querySelector('.alert.alert-success').style.display = 'none';
+                            }, 3000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+            </script>
+            @endif
+
+            @if (session('status'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="alert-heading">{{ session('status') }}</h4>
+
+            </div>
+
+            <script>
+                setTimeout(function() {
+                                document.querySelector('.alert.alert-success').style.display = 'none';
+                            }, 3000); // Le message flash disparaîtra après 5 secondes (3000 millisecondes)
+            </script>
+            @endif
+            </p>
             <div class="card-body pt-3">
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered">
@@ -99,8 +130,6 @@
                     <div class="col-lg-9 col-md-8"> {{ Auth::user()->agent->date_naissance }}</div>
                   </div>
 
-
-
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Province de résidence</div>
                     @if (isset(Auth::user()->agent->province))
@@ -111,11 +140,8 @@
 
                     @endif
                   </div>
-
-
-
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Telephone</div>
+                    <div class="col-lg-3 col-md-4 label">Téléphone</div>
                     <div class="col-lg-9 col-md-8">  {{ Auth::user()->agent->telephone }} </div>
                   </div>
 
@@ -130,7 +156,6 @@
 
                   <!-- Profile Edit Form -->
                   <form action="{{ route('update-profile') }}" method="post">
-
                     @csrf
                     <input type="hidden" name="uuid" value="{{ Auth::user()->agent->uuid }}">
                     <div class="row mb-3">
@@ -195,31 +220,29 @@
                   </form><!-- End Profile Edit Form -->
 
                 </div>
-
-
-
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
-                  <form>
-
+                  <form method="post" action="{{ route('password.update') }}">
+                    @csrf
+                    @method('put')
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Mot de Passe actuel</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control border-success" id="currentPassword">
+                        <input name="current_password" type="password" class="form-control border-success" id="currentPassword">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nouveau Mot de Passe</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control border-success" id="newPassword">
+                        <input name="password" type="password" class="form-control border-success" id="newPassword">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label border-success">Confirmer nouveau mot de passe</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control border-success" id="renewPassword">
+                        <input name="password_confirmation" type="password" class="form-control border-success" id="renewPassword">
                       </div>
                     </div>
 
