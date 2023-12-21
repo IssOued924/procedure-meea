@@ -51,7 +51,7 @@ class DemandeCompP004 extends Component
             "demandes" => DemandeP004::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->usager->telephone,
             "communes" => Commune::all(),
-            "provinces" => Province::all(),
+            "provinces" => Province::all()->sortBy('libelle'),
             "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
             "pays" => Pays::all(),
         ];

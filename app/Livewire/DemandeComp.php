@@ -52,7 +52,7 @@ class DemandeComp extends Component
             "procedure" => $procedure,
             "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->usager->telephone,
-            "communes" => Commune::all(),
+            "communes" => Commune::all()->sortBy('libelle'),
             "pays" => Pays::all(),
         ];
         

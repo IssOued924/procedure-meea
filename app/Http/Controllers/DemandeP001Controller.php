@@ -55,14 +55,14 @@ class DemandeP001Controller extends Controller
         $data =  $request->all();
 
         $validator = Validator::make($request->all(), [
-            'avis_faisabilite' => 'required|file|max:3072',
-            'rccm' => 'required|file|max:3072',
-            'facture_pro_format' => 'required|file|max:3072',
-            'fiche_securite' => 'required|file|max:3072',
-            'registre_tracabilite' => 'required|file|max:3072',
-            'registre_dechet' => 'required|file|max:3072',
-            'attestation_destination_finale' => 'required|file|max:3072',
-            'list_produit' => 'required|file|max:3072',
+            'avis_faisabilite' => 'required|file|max:5120',
+            'rccm' => 'required|file|max:5120',
+            'facture_pro_format' => 'required|file|max:5120',
+            'fiche_securite' => 'required|file|max:5120',
+            'registre_tracabilite' => 'required|file|max:5120',
+            'registre_dechet' => 'required|file|max:5120',
+            'attestation_destination_finale' => 'required|file|max:5120',
+            'list_produit' => 'required|file|max:5120',
 
             // 3072 correspond à 3 Mo (3 * 1024)
         ]);

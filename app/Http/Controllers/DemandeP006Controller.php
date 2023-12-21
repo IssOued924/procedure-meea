@@ -37,11 +37,11 @@ class DemandeP006Controller extends Controller
 
         $data =  $request->all();
         $validator = Validator::make($request->all(), [
-            'facture_pro' => 'required|file|max:3072', 
-            'demande_form' => 'required|file|max:3072', 
-            'rccm' => 'required|file|max:3072', 
-            'document_technique' => 'required|file|max:3072', 
-            'registre_tracabilite' => 'required|file|max:3072', 
+            'facture_pro' => 'required|file|max:5120', 
+            'demande_form' => 'required|file|max:5120', 
+            'rccm' => 'required|file|max:5120', 
+            'document_technique' => 'required|file|max:5120', 
+            'registre_tracabilite' => 'required|file|max:5120', 
           
             // 3072 correspond à 3 Mo (3 * 1024)
         ]);

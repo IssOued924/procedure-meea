@@ -15,6 +15,7 @@
         "mailersend/laravel-driver": "^2.3",
         "nesbot/carbon": "^2.71",
         "realrashid/sweet-alert": "^7.1",
+        "swiftmailer/swiftmailer": "^5.4",
         "wildside/userstamps": "^2.3"
     },
     "require-dev": {

@@ -1,6 +1,19 @@
 @extends('backend.layout.base')
 @section('title')
     <div class="pagetitle">
+    <div class="col-6 offset-3"> @if(session('error'))
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+
+                            <h5 class="alert-heading">{{session('error')}}</h5>
+
+                        </div>
+
+                        <script>
+                            setTimeout(function() {
+                                document.querySelector('.alert.alert-danger').style.display = 'none';
+                            }, 5000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
+                        </script>
+                    @endif</div>
         <h1>Liste des Demandes de Permis de Circulation de bois et de Charbon de Bois</h1>
         <nav>
             <ol class="breadcrumb">

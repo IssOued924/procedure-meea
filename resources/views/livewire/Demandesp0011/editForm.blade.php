@@ -64,29 +64,7 @@
                                                     <input  id='radio2' type="radio"  {{ $demande->exploitant == 'Commercial' ? 'checked' : '' }}  value="Commercial"  name="exploitant"/>
                                                 </div>
                                             </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="nom_societe fw-bold"> <strong>identité</strong> <span
-                                                        style="color: red">*</span></label>
-                                                <input type="text" class="form-control border-success" value="{{ $name }}"
-                                                    placeholder="Nom et prenom"  />
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="siege_social fw-bold">Lieu de résidence/siège<span style="color:red">
-                                                        *</span></label>
-
-                                                <select name="commune_id" id="selectMultiple" class="form-select" required>
-                                                    {{-- <input type="text" placeholder="filtrer ici"> --}}
-                                                    <option value="">Veuillez choisir une ville</option>
-                                                    @foreach ( $communes as  $com)
-                                                     <option {{ $demande->commune_id == $com->uuid ? 'selected' : ''  }} value="{{ $com->uuid }}" >{{ $com->libelle }}</option>
-                                                    @endforeach
-
-
-                                                </select>
-                                            </div>
-                                        </div>
-
+                                        
                                         <div class="row">
                                             <div class="col-6">
                                                 <label class="adresse fw-bold">Adresse Postale<span style="color: red">*</span></label>
@@ -97,6 +75,34 @@
                                                 <label class="boite_postale fw-bold">Telephone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" value="{{ $telephone }}" class="form-control border-success"    placeholder="Telephone" value="{{ $telephone}}" />
+                                            </div>
+
+                                            <div class="col">
+                                                <label class="siege_social fw-bold">Province de résidence<span style="color:red">
+                                                        *</span></label>
+
+                                                <select name="province_id" id="provinces" class="form-select border-success" required >
+                                                    {{-- <input type="text" placeholder="filtrer ici"> --}}
+                                                    <option value="">Veuillez choisir une Province</option>
+                                                    @foreach ( $provinces as  $prov)
+                                                     <option value="{{ $prov->uuid }}" >{{ $prov->libelle }}</option>
+
+                                                    @endforeach
+
+
+                                                </select>
+
+
+                                            </div>
+
+                                            <div class="col">
+                                                <label class="siege_social fw-bold">Commune de résidence/siège<span style="color:red">
+                                                        *</span></label>
+
+                                                <select name="commune_id"  id="communes" class="form-select border-success" required>
+                                                    {{-- <input type="text" placeholder="filtrer ici"> --}}
+
+                                                </select>
                                             </div>
                                         </div>
 
@@ -272,6 +278,31 @@
 
 <script type="text/javascript">
     $('#selectMultiple').select2();
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#provinces').change(function () {
+            var provinceId = $(this).val();
+            if (provinceId) {
+                $.ajax({
+                    url: '/get-communes/' + provinceId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#communes').empty();
+                        $.each(data, function (key, value) {
+                            $('#communes').append('<option value="' + value.uuid + '">' + value.libelle + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#communes').empty();
+            }
+        });
+    });
 </script>
 
 <script type='text/javascript'>

@@ -41,7 +41,7 @@ class DemandeP007Controller extends Controller
         $data =  $request->all();
         
         $validator = Validator::make($request->all(), [
-            'certificat_biodegradabilite' => 'required|file|max:3072', 
+            'certificat_biodegradabilite' => 'required|file|max:5120', 
           
             // 3072 correspond à 3 Mo (3 * 1024)
         ]);

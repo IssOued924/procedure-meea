@@ -34,12 +34,12 @@ class DemandeP008Controller extends Controller
         $data =  $request->all();
 
         $validator = Validator::make($request->all(), [
-            'doc_rccm' => 'required|file|max:3072', 
-            'doc_arrete_faisabilite' => 'required|file|max:3072',
+            'doc_rccm' => 'required|file|max:5120', 
+            'doc_arrete_faisabilite' => 'required|file|max:5120',
             
-            'doc_avis_mairie' => 'required|file|max:3072',
-            'doc_desc_technique' => 'required|file|max:3072',
-            'doc_registre_tracabilite'  => 'required|file|max:3072',
+            'doc_avis_mairie' => 'required|file|max:5120',
+            'doc_desc_technique' => 'required|file|max:5120',
+            'doc_registre_tracabilite'  => 'required|file|max:5120',
             // 3072 correspond à 3 Mo (3 * 1024)
         ]);
     

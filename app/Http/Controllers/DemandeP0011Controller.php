@@ -39,11 +39,11 @@ class DemandeP0011Controller extends Controller
         $data =  $request->all();
           
         $validator = Validator::make($request->all(), [
-            'cnib' => 'required|file|max:3072', 
+            'cnib' => 'required|file|max:5120', 
           
-            'protocole_daccord' => 'required|file|max:3072',
-            'agrement' => 'required|file|max:3072',
-            'quitance' =>  'required|file|max:3072',
+            'protocole_daccord' => 'required|file|max:5120',
+            'agrement' => 'required|file|max:5120',
+            'quitance' =>  'required|file|max:5120',
             // 3072 correspond à 3 Mo (3 * 1024)
         ]);
         
