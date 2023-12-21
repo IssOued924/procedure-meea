@@ -69,7 +69,7 @@
                         </div><br>
 
                         <!-- Table with stripped rows -->
-                        <table id="example1" class="table datatable table-bordered table-striped">
+                        <table {{ !empty($demandes) ? 'id="example1" ':  'id=""'}} class="table datatable table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -135,7 +135,7 @@
                                 break;
                                 }
                                 @endphp
-                                @if (Auth::user()->agent->province_id == $demande->province_id ||
+                                @if (Auth::user()->agent->province_id == $demande->province_id || Auth::user()->agent->province->libelle==="Kadiogo" ||
                                 in_array($userRole, ['Gestionnaire',
                                 'Administration',]))
                                 <tr class="table-bordered">
