@@ -1,7 +1,7 @@
 @extends('backend.layout.base')
 @section('title')
 <div class="pagetitle">
-<div class="col-6 offset-3"> @if(session('error'))
+                    <div class="col-6 offset-3"> @if(session('error'))
                         <div class="alert alert-danger alert-dismissible" role="alert">
 
                             <h5 class="alert-heading">{{session('error')}}</h5>
@@ -70,7 +70,7 @@
                             </div><br>
 
                             <!-- Table with stripped rows -->
-                            <table {{ !empty($demandes) ? 'id="example1" ':  'id=""'}} class="table datatable table-bordered table-striped">
+                            <table id="{{ !empty($demandes) ? 'example1' : '' }}" class="table datatable table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>

@@ -13,7 +13,7 @@ class User extends Authenticatable
     use \App\Http\Traits\UsesUuid;
     use \Wildside\Userstamps\Userstamps;
     use HasApiTokens, HasFactory, Notifiable;
-
+    use Notifiable;
 
 
     // protected $keyType = 'string';

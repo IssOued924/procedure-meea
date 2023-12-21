@@ -12,6 +12,7 @@ use App\Models\Service;
 use App\Models\User;
 use App\Models\Usager;
 use App\Models\TypeUsager;
+use App\Notifications\ConfirmationEmail;
 use App\Providers\RouteServiceProvider;
 use App\Repositories\UserRepository;
 use Illuminate\Auth\Events\Registered;
@@ -80,8 +81,11 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         // session()->flash('success', 'Registration successful!');
+        $user->notify(new ConfirmationEmail($user));
 
-        return redirect(RouteServiceProvider::HOME)->with('success', 'Bienvenue !');;
+        // return redirect(RouteServiceProvider::HOME)->with('success', 'Bienvenue !');
+        return redirect()->route('register')->with('success', 'Un Email vous a été envoyé Veuillez clicker pour vous connecter !');
+
     }
 
     /**

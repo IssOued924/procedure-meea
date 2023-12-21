@@ -8,5 +8,8 @@ return [
         ],
     ],
 
-    // ... d'autres traductions de messages d'erreur standard ...
+];
+
+return [
+    'unique' => 'L\'adresse email est déjà utilisée.',
 ];

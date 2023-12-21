@@ -52,6 +52,11 @@
     <!-- ======= Header ======= -->
     <x-header />
     <!-- End Header -->
+    <p>   @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif</p>
 
     <div class="content responsive">
         {{-- La partie de recherche --}}
@@ -76,6 +81,11 @@
             {{ session('message') }}
         </div>
         @endif
+
+
+
+        {{-- <x-input-error :messages="$errors->get('email')" class="mt-2" /> --}}
+
 
         <div class="cont_info_log_sign_up">
             <div class="col_md_login">

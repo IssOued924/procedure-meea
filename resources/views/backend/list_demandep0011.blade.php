@@ -71,7 +71,7 @@
                             </div><br>
 
                             <!-- Table with stripped rows -->
-                            <table {{ !empty($demandes) ? 'id="example1" ':  'id=""'}} class="table datatable table-bordered table-striped">
+                            <table id="{{ !empty($demandes) ? 'example1' : '' }}" class="table datatable table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>

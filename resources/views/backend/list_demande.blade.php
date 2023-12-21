@@ -66,13 +66,11 @@
                                         <button title="Ajouter" type="button" class="btn btn-success"><i
                                                 class="bi bi-plus"></i></button>
                                     </div>
-
-
                                 </div>
                             </div><br>
 
                             <!-- Table with stripped rows -->
-                            <table {{ !empty($demandes) ? 'id="example1" ':  'id=""'}} class="table datatable table-bordered table-striped">
+                            <table  id="{{ !empty($demandes) ? 'example1' : '' }}" class="table datatable table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -85,7 +83,6 @@
                                         <th scope="col">Paiement</th>
                                         <th scope="col">Déposé</th>
                                         <th scope="col">Assigné a</th>
-
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -494,69 +491,7 @@
 @section('script')
 
 <script>
-    function rejetter() {
 
-        var test = document.getElementById('test')
-        test.submit()
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-        })
-
-        swalWithBootstrapButtons.fire({
-            title: 'Etes vous sur de vouloir Rejetter cette Demande?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Je Confirme!',
-            cancelButtonText: 'Annuler!',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-
-                swalWithBootstrapButtons.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
-            } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                // swalWithBootstrapButtons.fire(
-                //   'Cancelled',
-                //   'Your imaginary file is safe :)',
-                //   'error'
-                // )
-            }
-        })
-    }
-
-    //fonction valider statut
-    function valider(me) {
-        Swal.fire({
-            title: 'Do you want to save the changes?',
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: 'Save',
-            denyButtonText: `Don't save`,
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                let url = $(me).attr('data-url');
-                window.location = url;
-
-
-
-                Swal.fire('Saved!', '', 'success')
-            } else if (result.isDenied) {
-                Swal.fire('Changes are not saved', '', 'info')
-            }
-        })
-    }
 
     function refresh() {
         location.reload(true);
@@ -564,10 +499,8 @@
 
 
     $(function() {
-
             $(document).ready(function() {
                 $('#example1').DataTable({
-
                     dom: 'Blfrtip',
                     "paging": true,
                     "lengthChange": true,

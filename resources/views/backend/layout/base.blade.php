@@ -97,8 +97,7 @@
 
                 <li class="nav-item dropdown pe-3">
 
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
-                        data-bs-toggle="dropdown">
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <img src=" {{ asset('backend/assets/img/user.png') }} " alt="Profile" class="rounded-circle">
                         <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
                     </a><!-- End Profile Iamge Icon -->
@@ -107,37 +106,47 @@
 
                         <li>
                             <hr class="dropdown-divider">
-                          </li>
+                        </li>
 
-                          <li>
+                        <li>
                             <a class="dropdown-item d-flex align-items-center" href="#">
-                              <i class="bi bi-bank"></i>
-                              <span class="badge border-success border-1 text-success"><h6>{{ Auth::user()->agent->service->libelle_long }}</h6> </span>
+                                <i class="bi bi-bank"></i>
+                                <span class="badge border-success border-1 text-success">
+                                    <h6>{{ Auth::user()->agent->service->libelle_long }}</h6>
+                                </span>
                             </a>
-                          </li>
+                        </li>
 
-                          <li>
+                        <li>
                             <a class="dropdown-item d-flex align-items-center" href="#">
-                              <i class="bi bi-bank"></i>
-                              @if (isset(Auth::user()->agent->province))
+                                <i class="bi bi-bank"></i>
+                                @if (isset(Auth::user()->agent->province))
 
-                              <span class="badge border-success border-1 text-primary"><h6>{{ Auth::user()->agent->province->libelle }}</h6> </span>
-                              @else
+                                <span class="badge border-success border-1 text-primary">
+                                    <h6>{{ Auth::user()->agent->province->libelle }}</h6>
+                                </span>
+                                @else
 
-                              <span class="badge border-warning border-1 text-warning"><h6>Province inconue</h6> </span>
+                                <span class="badge border-warning border-1 text-warning">
+                                    <h6>Province inconue</h6>
+                                </span>
 
-                              @endif
+                                @endif
                             </a>
-                          </li>
+                        </li>
 
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <i class="bi bi-person"></i>
                                 {{-- @if (Auth::user()->agent->role->libelle==="Réception")
 
-                                <span class="text-primary"> <h6>Receptioniste</h6></span>
+                                <span class="text-primary">
+                                    <h6>Receptioniste</h6>
+                                </span>
                                 @else --}}
-                                <span class="text-primary"> <h6>{{ Auth::user()->role->libelle }}</h6></span>
+                                <span class="text-primary">
+                                    <h6>{{ Auth::user()->role->libelle }}</h6>
+                                </span>
 
                                 {{-- @endif --}}
                             </a>
@@ -150,13 +159,11 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center mt-0" href="#">
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-
-                                    <x-dropdown-link :href="route('logout')" class="text-warning"
-                                        onclick="event.preventDefault();
+                                    <x-dropdown-link :href="route('logout')" class="text-warning" onclick="event.preventDefault();
                                     this.closest('form').submit();">
                                         <i class="bi bi-box-arrow-right"></i> {{ __('Se Deconnecter') }}
                                     </x-dropdown-link>
@@ -195,79 +202,82 @@
 
                 <ul id="demandes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
-                    @if (Auth::user()->agent->service->libelle_court == 'DGPE' || Auth::user()->role->libelle == 'Administration')
-                        <li>
-                            <a href="{{ route('demandes-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Produit Chimique &nbsp;<span
-                                        id="prog_produit_chimique" class="badge bg-warning text-white"> </span>
-                                </span>
-                            </a>
-                        </li>
+                    @if (Auth::user()->agent->service->libelle_court == 'DGPE' || Auth::user()->role->libelle ==
+                    'Administration')
+                    <li>
+                        <a href="{{ route('demandes-list') }}">
+                            <i class="bi bi-circle"></i><span>Procédure Produit Chimique &nbsp;<span
+                                    id="prog_produit_chimique" class="badge bg-warning text-white"> </span>
+                            </span>
+                        </a>
+                    </li>
 
-                        <li>
-                            <a href="{{ route('demandesp008-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Déchets Solide &nbsp;<span
-                                        id="prog_dechet" class="badge bg-warning text-white"> </span> </span>
-                            </a>
-                        </li>
+                    <li>
+                        <a href="{{ route('demandesp008-list') }}">
+                            <i class="bi bi-circle"></i><span>Procédure Déchets Solide &nbsp;<span id="prog_dechet"
+                                    class="badge bg-warning text-white"> </span> </span>
+                        </a>
+                    </li>
 
-                        <li>
-                            <a href="{{ route('demandesp006-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Certificats d'exemptions &nbsp; <span
-                                        id="prog_exemption" class="badge bg-warning text-white"> </span></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('demandesp007-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Homologation &nbsp;<span
-                                        id="prog_homologation" class="badge bg-warning text-white"> </span></span>
-                            </a>
-                        </li>
+                    <li>
+                        <a href="{{ route('demandesp006-list') }}">
+                            <i class="bi bi-circle"></i><span>Procédure Certificats d'exemptions &nbsp; <span
+                                    id="prog_exemption" class="badge bg-warning text-white"> </span></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('demandesp007-list') }}">
+                            <i class="bi bi-circle"></i><span>Procédure Homologation &nbsp;<span id="prog_homologation"
+                                    class="badge bg-warning text-white"> </span></span>
+                        </a>
+                    </li>
                     @endif
 
-                    @if (Auth::user()->agent->service->libelle_court == 'DGEF' || Auth::user()->role->libelle == 'Administration')
-                        <li>
-                            <a href="{{ route('demandesp0012-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure écotourisme &nbsp;<span
-                                        id="prog_ecotourisme" class="badge bg-warning text-white"> </span> </span>
-                            </a>
-                        </li>
+                    @if (Auth::user()->agent->service->libelle_court == 'DGEF' || Auth::user()->role->libelle ==
+                    'Administration')
+                    <li>
+                        <a href="{{ route('demandesp0012-list') }}">
+                            <i class="bi bi-circle"></i><span>Procédure écotourisme &nbsp;<span id="prog_ecotourisme"
+                                    class="badge bg-warning text-white"> </span> </span>
+                        </a>
+                    </li>
 
-                        <li>
-                            <a href="{{ route('demandesp003-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Permis Chasse &nbsp;<span id="prog_chasse"
-                                        class="badge bg-warning text-white"> </span></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('demandesp004-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Détention &nbsp; <span id="prog_detention"
-                                        class="badge bg-warning text-white"> </span></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('demandesp0011-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Permis Coupe &nbsp;<span id="prog_coupe"
-                                        class="badge bg-warning text-white"> </span></span>
-                            </a>
-                        </li>
+                    <li>
+                        <a href="{{ route('demandesp003-list') }}">
+                            <i class="bi bi-circle"></i><span>Procédure Permis Chasse &nbsp;<span id="prog_chasse"
+                                    class="badge bg-warning text-white"> </span></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('demandesp004-list') }}">
+                            <i class="bi bi-circle"></i><span>Procédure Détention &nbsp; <span id="prog_detention"
+                                    class="badge bg-warning text-white"> </span></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('demandesp0011-list') }}">
+                            <i class="bi bi-circle"></i><span>Procédure Permis Coupe &nbsp;<span id="prog_coupe"
+                                    class="badge bg-warning text-white"> </span></span>
+                        </a>
+                    </li>
 
-                        <li>
-                            <a href="{{ route('demandesp005-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Permis de circulation&nbsp;<span
-                                        id="prog_circulation" class="badge bg-warning text-white"> </span></span>
-                            </a>
-                        </li>
+                    <li>
+                        <a href="{{ route('demandesp005-list') }}">
+                            <i class="bi bi-circle"></i><span>Procédure Permis de circulation&nbsp;<span
+                                    id="prog_circulation" class="badge bg-warning text-white"> </span></span>
+                        </a>
+                    </li>
                     @endif
 
-                    @if (Auth::user()->agent->service->libelle_court == 'DGRE' || Auth::user()->role->libelle == 'Administration')
-                        <li>
-                            <a href="{{ route('demandesp002-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Agrement en Eau &nbsp;<span
-                                        id="prog_agrement_technique" class="badge bg-warning text-white">
-                                    </span></span>
-                            </a>
-                        </li>
+                    @if (Auth::user()->agent->service->libelle_court == 'DGRE' || Auth::user()->role->libelle ==
+                    'Administration')
+                    <li>
+                        <a href="{{ route('demandesp002-list') }}">
+                            <i class="bi bi-circle"></i><span>Procédure Agrement en Eau &nbsp;<span
+                                    id="prog_agrement_technique" class="badge bg-warning text-white">
+                                </span></span>
+                        </a>
+                    </li>
                     @endif
 
                 </ul>
@@ -276,127 +286,125 @@
 
 
             @if (Auth::user()->role->libelle == 'Administration')
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse"
-                        href="#">
-                        <i class="bi bi-person"></i><span>Utilisateur</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('agent-list') }}">
-                                <i class="bi bi-circle"></i><span>Agents</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('usager-list') }}">
-                                <i class="bi bi-circle"></i><span>Usagers</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('user-list') }}">
-                                <i class="bi bi-circle"></i><span>Utilisateurs</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li><!-- End Charts Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-person"></i><span>Utilisateur</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ route('agent-list') }}">
+                            <i class="bi bi-circle"></i><span>Agents</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('usager-list') }}">
+                            <i class="bi bi-circle"></i><span>Usagers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user-list') }}">
+                            <i class="bi bi-circle"></i><span>Utilisateurs</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Charts Nav -->
 
 
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse"
-                        href="#">
-                        <i class="bi bi-gear"></i><span>Paramètre</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('procedure-list') }}">
-                                <i class="bi bi-circle"></i><span>Procedures</span>
-                            </a>
-                        </li>
-                        {{-- <li>
-                            <a href="{{ route('categorie-list') }}">
-                                <i class="bi bi-circle"></i><span>Categorie</span>
-                            </a>
-                        </li> --}}
-                        <li>
-                            <a href=" {{ route('structure-list') }}">
-                                <i class="bi bi-circle"></i><span>Structure</span>
-                            </a>
-                        </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-gear"></i><span>Paramètre</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ route('procedure-list') }}">
+                            <i class="bi bi-circle"></i><span>Procedures</span>
+                        </a>
+                    </li>
+                    {{-- <li>
+                        <a href="{{ route('categorie-list') }}">
+                            <i class="bi bi-circle"></i><span>Categorie</span>
+                        </a>
+                    </li> --}}
+                    <li>
+                        <a href=" {{ route('structure-list') }}">
+                            <i class="bi bi-circle"></i><span>Structure</span>
+                        </a>
+                    </li>
 
-                        <li>
-                            <a href=" {{ route('service-list') }}">
-                                <i class="bi bi-circle"></i><span>Service</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('piecejointe-list') }}">
-                                <i class="bi bi-circle"></i><span>Pieces Jointes</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('typeUsager-list') }}">
-                                <i class="bi bi-circle"></i><span>Type Usager</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('role-list') }}">
-                                <i class="bi bi-circle"></i><span>Role</span>
-                            </a>
-                        </li>
+                    <li>
+                        <a href=" {{ route('service-list') }}">
+                            <i class="bi bi-circle"></i><span>Service</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('piecejointe-list') }}">
+                            <i class="bi bi-circle"></i><span>Pieces Jointes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('typeUsager-list') }}">
+                            <i class="bi bi-circle"></i><span>Type Usager</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('role-list') }}">
+                            <i class="bi bi-circle"></i><span>Role</span>
+                        </a>
+                    </li>
 
-                        {{-- <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Piece-Justificative</span>
-            </a>
-          </li> --}}
-                        <li>
-                            <a href=" {{ route('basejuridique-list') }}">
-                                <i class="bi bi-circle"></i><span>Base Juridique</span>
-                            </a>
-                        </li>
-                        {{-- <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Tarif</span>
-            </a>
-          </li> --}}
-                        <li>
-                            <a href=" {{ route('commune-list') }}">
-                                <i class="bi bi-circle"></i><span>Commune</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('province-list') }}">
-                                <i class="bi bi-circle"></i><span>Province</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('region-list') }}">
-                                <i class="bi bi-circle"></i><span>Région</span>
-                            </a>
-                        </li>
+                    {{-- <li>
+                        <a href="icons-boxicons.html">
+                            <i class="bi bi-circle"></i><span>Piece-Justificative</span>
+                        </a>
+                    </li> --}}
+                    <li>
+                        <a href=" {{ route('basejuridique-list') }}">
+                            <i class="bi bi-circle"></i><span>Base Juridique</span>
+                        </a>
+                    </li>
+                    {{-- <li>
+                        <a href="icons-boxicons.html">
+                            <i class="bi bi-circle"></i><span>Tarif</span>
+                        </a>
+                    </li> --}}
+                    <li>
+                        <a href=" {{ route('commune-list') }}">
+                            <i class="bi bi-circle"></i><span>Commune</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('province-list') }}">
+                            <i class="bi bi-circle"></i><span>Province</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('region-list') }}">
+                            <i class="bi bi-circle"></i><span>Région</span>
+                        </a>
+                    </li>
 
 
-        </ul>
-      </li><!-- End Icons Nav -->
-
+                </ul>
+            </li><!-- End Icons Nav -->
 
 
 
 
 
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#plainte-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-pencil-square"></i> <span>Plaintes</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="plainte-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{ route('listePlainte', ['procedure'=>'Toutes']) }}">
-              <i class="bi bi-circle"></i><span>Liste des plaintes</span>
-            </a>
-          </li>
-          <!--
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#plainte-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-pencil-square"></i> <span>Plaintes</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="plainte-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ route('listePlainte', ['procedure'=>'Toutes']) }}">
+                            <i class="bi bi-circle"></i><span>Liste des plaintes</span>
+                        </a>
+                    </li>
+                    <!--
           <li>
             <a href="{{ route('usager-list') }}">
               <i class="bi bi-circle"></i><span>Plainte en cours</span>
@@ -404,9 +412,9 @@
           </li>
           -->
 
-        </ul>
-      </li><!-- End Charts Nav -->
-      @endif
+                </ul>
+            </li><!-- End Charts Nav -->
+            @endif
 
 
 
