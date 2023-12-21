@@ -70,7 +70,7 @@
                             </div><br>
 
                             <!-- Table with stripped rows -->
-                            <table {{ !empty($demandes) ? 'id="example1" ':  'id=""'}} id=" " class="table datatable table-bordered table-striped">
+                            <table {{ !empty($demandes) ? 'id="example1"':  'id=""'}} id=" " class="table datatable table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>

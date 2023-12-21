@@ -67,7 +67,7 @@ class DemandeP001Controller extends Controller
             // 3072 correspond à 3 Mo (3 * 1024)
         ]);
         if ($validator->fails()) {
-            session()->flash('error', 'La taille des fichiers ne doivent pas excéder 3 Mo.');
+            session()->flash('error', 'La taille des fichiers ne doivent pas excéder 5 Mo.');
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
@@ -129,7 +129,7 @@ class DemandeP001Controller extends Controller
             $demandePieceP001Repository->setChemin($cheminFicheSecurite, $demande->uuid, 'Fiche Securite');
             $demandePieceP001Repository->setChemin($registre_tracabilite, $demande->uuid, 'Registre de Tracabilite');
             $demandePieceP001Repository->setChemin($registre_dechet, $demande->uuid, 'Registre Dechet');
-            if(isset($data['attestation_destination_finale'])){
+            if(isset($dataFiles['attestation_destination_finale'])){
 
                 $demandePieceP001Repository->setChemin($attestation_destination_finale, $demande->uuid, 'Attestation destination Finale');
             }

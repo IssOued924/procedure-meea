@@ -14,23 +14,23 @@
         <nav id="navbar" class="navbar">
             <ul>
                 @guest
-                <li><a class="active" href="/">Accueil</a></li>
+                <li><a class="{{ request()->is('/') ? 'active' : ''}}"  href="/">Accueil</a></li>
                 {{-- <li><a href="#">FAQ</a></li> --}}
-                <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Déposer une plainte</a></li>
+                <li><a class="{{ request()->is('plainte') ? 'active' : ''}}" href="{{ route('plainte.form') }}" title="Déposer une plainte">Déposer une plainte</a></li>
 
-                <li><a href="contact">Contact</a></li>
-                <li><a href="faq">FAQ</a></li>
-                <li><a href="{{ route('login') }}">Compte</a></li>
+                <li><a class="{{ request()->is('contact') ? 'active' : ''}}" href="contact">Contact</a></li>
+                <li><a class="{{ request()->is('faq') ? 'active' : ''}}" href="faq">FAQ</a></li>
+                <li><a class="{{ request()->is('login') ? 'active' : ''}}" href="{{ route('login') }}">Compte</a></li>
 
                 @else
-                <li><a class="active" href="/">Accueil</a></li>
+                <li><a class="{{ request()->is('/') ? 'active' : ''}}" href="/">Accueil</a></li>
                 {{-- <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Plainte</a></li> --}}
 
-                <li><a href="{{ route('demandes-lists') }}">Mes demandes</a></li>
-                <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Déposer une plainte</a></li>
+                <li><a class="{{ request()->is('demandes-lists') ? 'active' : ''}}" href="{{ route('demandes-lists') }}">Mes demandes</a></li>
+                <li><a class="{{ request()->is('plainte') ? 'active' : ''}}" href="{{ route('plainte.form') }}" title="Déposer une plainte">Déposer une plainte</a></li>
 
-                <li><a href="contact">Contact</a></li>
-                <li><a href="faq">FAQ</a></li>
+                <li><a class="{{ request()->is('contact') ? 'active' : ''}}" href="contact">Contact</a></li>
+                <li><a class="{{ request()->is('faq') ? 'active' : ''}}" href="faq">FAQ</a></li>
 
                 {{-- <li><a href="#">FAQ</a></li>
                 <li><a href="#">Contact</a></li> --}}
@@ -70,4 +70,11 @@
         </nav><!-- .navbar -->
 
     </div>
+    {{-- <script>
+        $('ul li a').on('click', function() {
+        $('ul li').removeClass('active'); // Supprimer la classe active de tous les éléments du menu
+        $(this).parent('li').addClass('active'); // Ajouter la classe active à l'élément du menu actuel
+    });
+    </script> --}}
 </header>
+
