@@ -116,6 +116,20 @@
                             </a>
                           </li>
 
+                          <li>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                              <i class="bi bi-bank"></i>
+                              @if (isset(Auth::user()->agent->province))
+
+                              <span class="badge border-success border-1 text-primary"><h6>{{ Auth::user()->agent->province->libelle }}</h6> </span>
+                              @else
+
+                              <span class="badge border-warning border-1 text-warning"><h6>Province inconue</h6> </span>
+
+                              @endif
+                            </a>
+                          </li>
+
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <i class="bi bi-person"></i>
@@ -135,10 +149,6 @@
                                 <span>Mon Profile</span>
                             </a>
                         </li>
-
-
-
-
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="#">
 
@@ -181,7 +191,6 @@
                     <i class="bi bi-menu-button-wide"></i><span>Démandes</span><i
                         class="bi bi-chevron-down   ms-auto"></i>
                 </a>
-
 
 
                 <ul id="demandes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">

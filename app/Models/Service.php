@@ -14,7 +14,7 @@ class Service extends Model
     protected $guarded = [];
 
     public function structure(){
-        return $this->belongsTo(Structure::class, 'structure_id','uuid',);
+        return $this->belongsTo(Structure::class, 'structure_id');
     }
 
 

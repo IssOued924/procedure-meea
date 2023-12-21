@@ -51,19 +51,19 @@ class DemandeP001Controller extends Controller
 
     public function store(Request $request, UserRepository $userRepository, DemandePieceP001Repository $demandePieceP001Repository, DemandeP001 $demande)
     {
-        
+
         $data =  $request->all();
 
         $validator = Validator::make($request->all(), [
-            'avis_faisabilite' => 'required|file|max:3072', 
-            'rccm' => 'required|file|max:3072', 
-            'facture_pro_format' => 'required|file|max:3072', 
-            'fiche_securite' => 'required|file|max:3072', 
-            'registre_tracabilite' => 'required|file|max:3072', 
-            'registre_dechet' => 'required|file|max:3072', 
-            'attestation_destination_finale' => 'required|file|max:3072', 
-            'list_produit' => 'required|file|max:3072', 
-          
+            'avis_faisabilite' => 'required|file|max:3072',
+            'rccm' => 'required|file|max:3072',
+            'facture_pro_format' => 'required|file|max:3072',
+            'fiche_securite' => 'required|file|max:3072',
+            'registre_tracabilite' => 'required|file|max:3072',
+            'registre_dechet' => 'required|file|max:3072',
+            'attestation_destination_finale' => 'required|file|max:3072',
+            'list_produit' => 'required|file|max:3072',
+
             // 3072 correspond à 3 Mo (3 * 1024)
         ]);
         if ($validator->fails()) {
@@ -129,7 +129,10 @@ class DemandeP001Controller extends Controller
             $demandePieceP001Repository->setChemin($cheminFicheSecurite, $demande->uuid, 'Fiche Securite');
             $demandePieceP001Repository->setChemin($registre_tracabilite, $demande->uuid, 'Registre de Tracabilite');
             $demandePieceP001Repository->setChemin($registre_dechet, $demande->uuid, 'Registre Dechet');
-            $demandePieceP001Repository->setChemin($attestation_destination_finale, $demande->uuid, 'Attestation destination Finale');
+            if(isset($data['attestation_destination_finale'])){
+
+                $demandePieceP001Repository->setChemin($attestation_destination_finale, $demande->uuid, 'Attestation destination Finale');
+            }
             $demandePieceP001Repository->setChemin($list_produit, $demande->uuid, 'Liste des poduits');
 
             return redirect('/demandes-lists?procedure=DATIPC')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');

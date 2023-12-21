@@ -120,7 +120,6 @@
                                                     <option value="{{ $com->uuid }}">{{ $com->libelle }}</option>
                                                     @endforeach
 
-
                                                 </select>
                                             </div>
                                         </div>
@@ -332,7 +331,7 @@
                                                     pour le cas spécifique du cyanure <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="border-success form-control"
-                                                    name="attestation_destination_finale" required/>
+                                                    name="attestation_destination_finale"/>
                                             </div>
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold">Liste des produits <span

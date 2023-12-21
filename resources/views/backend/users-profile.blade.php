@@ -228,21 +228,21 @@
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Mot de Passe actuel</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="current_password" type="password" class="form-control border-success" id="currentPassword">
+                        <input name="current_password" type="password" class="form-control border-success" id="currentPassword" required>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nouveau Mot de Passe</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control border-success" id="newPassword">
+                        <input name="password" type="password" class="form-control border-success" id="newPassword" required>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label border-success">Confirmer nouveau mot de passe</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password_confirmation" type="password" class="form-control border-success" id="renewPassword">
+                        <input name="password_confirmation" type="password" class="form-control border-success" id="renewPassword" required>
                       </div>
                     </div>
 

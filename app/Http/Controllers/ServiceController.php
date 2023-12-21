@@ -43,7 +43,11 @@ class ServiceController extends Controller
     $request->validate([
         'libelle_court' => 'required',
         'libelle_long' => 'required',
+        'structure_id' => 'required',
+
     ]);
+
+        // dd($request->structure_id);
 
     $type = Service::find($uuid);
     $type->update([

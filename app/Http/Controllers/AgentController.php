@@ -22,7 +22,7 @@ class AgentController extends Controller
     public function index(){
 
         $data =  [
-            "agents" => Agent::all(),//$this->repository->all(),
+            "agents" => Agent::all()->sortByDesc('created_at',),//$this->repository->all(),
             "structures" => Structure::all(),
             "services" =>Service::all(),
             "roles" => Role::all(),
@@ -70,6 +70,7 @@ class AgentController extends Controller
         'prenom' => 'required',
         'matricule' => 'required',
         'fonction' => 'required',
+
     ]);
 
     $agent = Agent::find($uuid);
@@ -81,6 +82,8 @@ class AgentController extends Controller
         'fonction' => $request->input('fonction'),
         'service_id' => $request->input('service_id'),
         'role_id' => $request->input('role_id'),
+        'province_id' => $request->input('province_id'),
+        'commune_id' => $request->input('commune_id'),
     ]);
 
     return redirect()->route('agent-list')->with('success', 'Agent  mis à jour avec succès !');
