@@ -61,7 +61,7 @@ class DemandeP001Controller extends Controller
             'fiche_securite' => 'required|file|max:5120', 
             'registre_tracabilite' => 'required|file|max:5120', 
             'registre_dechet' => 'required|file|max:5120', 
-            'attestation_destination_finale' => 'required|file|max:5120', 
+           
             'list_produit' => 'required|file|max:5120', 
           
             // 3072 correspond à 3 Mo (3 * 1024)

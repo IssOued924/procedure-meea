@@ -43,6 +43,9 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        
+   $typeUsager = TypeUsager::where('libelle_court', 'PP')->first();
+        
         $request->validate([
             // 'id' => ['required'],
             'name' => ['required', 'string', 'max:255'],
@@ -50,8 +53,11 @@ class RegisteredUserController extends Controller
             'telephone' => ['required', 'String', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+           
         ]);
-        // dd($request);
+       
+
+     
         // creation de usager
         $usager = Usager::create([
             //'id' => Str::uuid(), // Génération d'un UUID pour l'utilisateur
@@ -59,6 +65,8 @@ class RegisteredUserController extends Controller
             'prenom' => $request->prenom,
             'email' => $request->email,
             'telephone' => $request->telephone,
+         
+            
         ]);
 
         $user = User::create([
@@ -70,13 +78,17 @@ class RegisteredUserController extends Controller
         ]);
 
         // dd($user);
-
+       //  $usager->nom_entreprise  =  $typeUsager->uuid;
         event(new Registered($user));
         event(new Registered($usager));
+        event(new Registered($typeUsager));
 
         $user->usager_id = $usager->uuid;
-        $user->save();
+       $usager->type_usager_id = $typeUsager->uuid;
 
+       
+        $user->save();
+        $usager->save();
         Auth::login($user);
 
         // session()->flash('success', 'Registration successful!');
