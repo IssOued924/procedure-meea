@@ -19,7 +19,9 @@
     <div class="col-lg-12">
       <div class="row">
 
-        @if (Auth::user()->agent->service->libelle_court =='DGEF' || Auth::user()->role->libelle == "Administration")
+        @if (Auth::user()->agent->service->libelle_court =='DGEF' ||
+         (Auth::user()->agent->province->libelle == 'Kadiogo') ||
+          (Auth::user()->role->libelle == "Administration"))
              <!-- Sales Card -->
         <div class="col-xxl-3 col-md-6">
             <div class="card info-card sales-card">

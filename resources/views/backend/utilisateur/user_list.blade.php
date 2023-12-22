@@ -99,8 +99,14 @@
                                                                                 @foreach ($agents as $agent)
                                                                                 <option value="{{ $agent->uuid }}">{{
                                                                                     $agent->nom.' '.$agent->prenom }}
+                                                                                    @if (isset($agent->province))
+                                                                                    <b>{{ $agent->service->libelle_court.' '.$agent->province->libelle
+                                                                                    }}</b>
+                                                                                    @else
                                                                                     <b>{{ $agent->service->libelle_court
-                                                                                        }}</b></option>
+                                                                                        }}</b>
+                                                                                @endif
+                                                                                    </option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>

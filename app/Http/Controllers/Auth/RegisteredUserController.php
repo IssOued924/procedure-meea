@@ -78,7 +78,7 @@ class RegisteredUserController extends Controller
         $user->usager_id = $usager->uuid;
         $user->save();
 
-        Auth::login($user);
+        // Auth::login($user);
 
         // session()->flash('success', 'Registration successful!');
         $user->notify(new ConfirmationEmail($user));
@@ -257,10 +257,10 @@ class RegisteredUserController extends Controller
     {
         // dd( StatutDemande::where('etat', '=', 'V')->first()->statut);
         $data = [
-            "users" => $userRepository->all(),
+            "users" => $userRepository->all()->sortByDesc('created_at'),
 
             "services" => Service::all(),
-            "agents" => Agent::all(),
+            "agents" => Agent::all()->sortByDesc('created_at'),
             "roles" => Role::all(),
         ];
 

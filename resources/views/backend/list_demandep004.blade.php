@@ -70,13 +70,13 @@
                             </div><br>
 
                             <!-- Table with stripped rows -->
-                            <table id="{{ !empty($demandes) ? 'example1' : '' }}" class="table datatable table-bordered table-striped">
+                            <table   @if(!empty($demandes)) id="example1" @else id="" @endif class="table  @if (!empty($demandes)) 'datatable' @endif table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Date Demande</th>
                                         <th scope="col">Demandeur</th>
-                                        <th scope="col">Résidence</th>
+                                        <th scope="col">Province</th>
                                         <th scope="col">Etat Demande</th>
                                         <th scope="col">Paiement</th>
                                         <th scope="col">Délai</th>
@@ -144,11 +144,11 @@
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
                                         <td> {{ $demande->usager->nom.' '.$demande->usager->prenom}}</td>
 
-                                        @if (isset($demande->localite))
-                                        <td>{{ $demande->localite->libelle}}</td>
+                                        @if ($demande->localite)
+                                        <td>{{ $demande->localite->provinces->libelle }}</td>
                                         @else
                                         <td>-</td>
-                                        @endif
+                                    @endif
 
                                         <td><span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
 

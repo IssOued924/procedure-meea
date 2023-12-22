@@ -70,7 +70,7 @@
                             </div><br>
 
                             <!-- Table with stripped rows -->
-                            <table id="{{ !empty($demandes) ? 'example1' : '' }}" class="table datatable table-bordered table-striped">
+                            <table @if(!empty($demandes)) id="example1" @else id="" @endif class="table  @if (!empty($demandes)) 'datatable' @endif table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>

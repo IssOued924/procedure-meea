@@ -51,6 +51,7 @@ use App\Models\User;
 use App\Mail\AffectDemandMailable;
 use App\Mail\ValidateDemandMailable;
 use App\Mail\RejectDemandMailable;
+use App\Models\Province;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Swift_TransportException;
@@ -180,6 +181,7 @@ class BackendController extends Controller
             "demandeEnCours" => $demandeP0012Repository->nombre('demande_p0012_s', array('etat' => 'en cours')),
             "demandeEtat" => $demandep0012->statut(),
             "agents" => Agent::all(),
+            "provinces" => Province::all()->sortBy('libelle'),
         ];
         //   dd($data['demandes'][0]->demandePiece);
         // dd($data['demandeEtat']);
@@ -395,7 +397,7 @@ class BackendController extends Controller
              "commentaire" => $data["commentaire"]
          );
 
-        
+
          Mail::to($agent_email)->send(new AffectDemandMailable( $demand ));
 
         Alert::success('Succès', 'demande assignée !');
@@ -546,12 +548,12 @@ class BackendController extends Controller
             Mail::to($user_email)->send(new ValidateDemandMailable( $demand ));
 
         }catch (\Exception $e) {
-           
+
             session()->flash('error',"Erreur d'envoie de mail à l'usager; Vérifier votre connexion internet");
            // Log::error("Erreur d'envoie du mail: vérifier votre connexion internet: ". $e->getMessage());
 
         }
-     
+
 
         return redirect()->back()->with('success', "Opération éffectuée avec succès !");
     }
