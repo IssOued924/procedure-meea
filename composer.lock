@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1250876f82a8be429a8374bd08e8a27c",
+    "content-hash": "5f957cbfabafd986d40a1bf8b4872be7",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -3772,6 +3772,46 @@
                 }
             ],
             "time": "2023-11-12T21:59:55+00:00"
+        },
+        {
+            "name": "pooldevmtdpce/payment",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squale97/paymentlib.git",
+                "reference": "cb5055efee04a71bbdb3500a78d4e260ce57043b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squale97/paymentlib/zipball/cb5055efee04a71bbdb3500a78d4e260ce57043b",
+                "reference": "cb5055efee04a71bbdb3500a78d4e260ce57043b",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.8"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Pooldevmtdpce\\Payment\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "PooldevMTDPCEBurkina"
+                }
+            ],
+            "description": "Brique de payement",
+            "support": {
+                "issues": "https://github.com/squale97/paymentlib/issues",
+                "source": "https://github.com/squale97/paymentlib/tree/v1.0.1"
+            },
+            "time": "2024-01-19T14:55:19+00:00"
         },
         {
             "name": "psr/cache",
@@ -8832,12 +8872,14 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "pooldevmtdpce/payment": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
