@@ -22,6 +22,7 @@ use App\Http\Controllers\PieceJointeController;
 use App\Http\Controllers\PlainteController;
 use App\Http\Controllers\ProcedureController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PaiementController;
 
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\RegionController;
@@ -170,6 +171,9 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::post("/demandesp003-store", [DemandeP003Controller::class, 'store'])->name("demandesp003-store");
     Route::post("/demandesp003-update", [DemandeP003Controller::class, 'update'])->name("demandesp003-update");
 
+
+    // Paiement
+    Route::post('/payOM', [PaiementController::class, 'payOM']);
            });
 
 
@@ -265,6 +269,8 @@ Route::get('/administration/statistique/nombreDemandeEncours', [BackendControlle
 // Liste des demandes d'un agent
 Route::get('/get-communes/{province_id}', [ProvinceController::class,  'getCommunesByProvince']);
 Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name('demandes-lists');
+
+
 
 
 

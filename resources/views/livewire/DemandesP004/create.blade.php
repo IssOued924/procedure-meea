@@ -269,19 +269,27 @@
                                                 <label >  La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
 
                                             </div>
-                                        <div class="col-6">
-                                                <label class="boite_postale fw-bold">Téléphone<span style="color:red">
-                                                        *</span></label>
-                                                <input type="number" name="numero" style="width: 50%;" class="border-success form-control"   placeholder="Telephone" required />
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="boite_postale fw-bold">OTP<span style="color:red">
-                                                        *</span></label>
-                                                <input type="number" name="otp"   style="width: 50%;" class="border-success form-control"   placeholder="otp" required />
+                                            <div class="row" id="payField">
+                                                <form id="frmPay" role="form" enctype="multipart/form-data">
+                                                    @csrf
+                                                
+                                                    <div class="col-5" >
+                                                        <label class="boite_postale fw-bold">Téléphone<span style="color:red">
+                                                                    *</span></label>
+                                                        <input type="number" id="numero" name="numero" style="width: 50%;" class="border-success form-control"   placeholder="Telephone" required />
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <label class="boite_postale fw-bold">OTP<span style="color:red">
+                                                                *</span></label>
+                                                        <input type="number" id="otp" name="otp"   style="width: 50%;" class="border-success form-control"   placeholder="otp" required />
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <br>
+                                                        <input id="pay" type="button" class="action-button" value="Payer"/>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
-
-
 
                                     </div>
 
@@ -331,6 +339,42 @@
                 });
             } else {
                 $('#communes').empty();
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#pay').click(function () {
+            $.ajaxSetup({
+            headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+         });
+        
+            var numero = document.getElementById('numero').value;
+            var otp = document.getElementById('otp').value;
+
+            var formData = {numero: numero,otp: otp};
+            if (numero != null && otp != null) {
+                $.ajax({
+                    url: '/payOM',
+                    type: "POST",
+                    data: {
+                        'numero': numero,
+                        'otp': otp
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown){
+                        console.log(jqXHR);
+                    }
+                });
+            } else {
+                console.log("Champ obligatoire");
             }
         });
     });
@@ -465,11 +509,14 @@ $(".submit").click(function(){
 })
 
 $("div#moyenP1").hide();
-		$("div#moyenP2").hide();
+$("div#moyenP2").hide();
+$("div#payField").hide();
+
 
 jQuery('input[name=moyen]:radio').click(function(){
 		$("div#moyenP1").hide();
 		$("div#moyenP2").hide();
+        $("div#payField").show();
 		var divId = jQuery(this).val();
         if(divId * 1 == 1){
             $("div#moyenP1").show()
