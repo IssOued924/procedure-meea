@@ -54,7 +54,7 @@
                                             <div class="col-6">
                                                 <label for="siege_social" class="siege_social">Siège social
                                                     <span style="color:red">*</span></label>
-                                                <select name="commune_id" id="" class="form-select border-success">
+                                                <select name="commune_id" id="" class="form-select border-success" required>
                                                     <option value="">Veuillez choisir le siege</option>
                                                     @foreach ($communes as $com)
                                                     <option value="{{ $com->uuid }}">{{ $com->libelle }}</option>
@@ -168,64 +168,113 @@
                                     </div>
                                 </fieldset-->
                                 <fieldset>
-                                    <form action="">
                                     <div class="form-card">
                                         <h4 class="fs-title">Paiement <span style="color:red">
                                             *</span></h4>
                                             <label for="demande timbre" class="fw-bold">Moyens de Paiement<span style="color:red">
                                                     *</span></label>
-                                        <div class="row">
-                                            <div class="col-3">
-                                                <label class="nom_societe fw-bold" >ORANGE</label>
-                                                <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
-                                            </div>
-                                            <div class="col-3">
-                                                <label class="siege_social fw-bold ">MOOV</label>
-                                                <input id="radio2" type="radio" value="0"  name="moyen"/>
-                                            </div>
-
-
-                                        </div>
+                                                    <div class="row">
+                                                        <div class="col-3"></div>
+                                                        <div class="col-3" class="text-center">
+                                                            {{-- <label class="nom_societe fw-bold" >ORANGE</label> --}}
+                                                            <img src="{{ asset('img/paiement/orange.png') }}" width="80" height="80" class="d-inline-block align-top" alt="">
+                                                            <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
+                                                        </div>
+                                                        <div class="col-3" class="text-center">
+                                                            {{-- <label class="siege_social fw-bold ">MOOV</label> --}}
+                                                            <img src="{{ asset('img/paiement/moov.png') }}" width="80" height="80" class="d-inline-block align-top" alt="">
+                                                            <input id="radio2" type="radio" value="2"  name="moyen"/>
+                                                        </div>
+                                                        <div class="col-3"></div>
+                                                    </div>
                                         <br>
 
-
                                         <div class="row">
-                                            <div id="moyenP1">
-                                                <label >  La somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
-
+                                            <input type="hidden" id="payResponse" name="payResponse" required />
+                                            <input type="hidden" id="telephone" name="telephone" required />
+                                            <input type="hidden" id="code_otp" name="code_otp" required />
+                                            <div id="moyenP1" class="text-center">
+                                                <label> La somme à payer est de {{$procedure->tarif}}F Cfa: Taper *144*4*6{{$procedure->tarif}} pour obtenir le OTP </label>
                                             </div>
-                                            <div id="moyenP2">
-                                                <label >  La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
-
+                                            <div id="moyenP2" class="text-center">
+                                                <label> La somme à payer est de {{$procedure->tarif}}F Cfa: Taper *555*4*6{{$procedure->tarif}} pour obtenir le OTP </label>
                                             </div>
-                                        <div class="col-6">
-                                                <label class="boite_postale fw-bold">Téléphone<span style="color:red">
-                                                        *</span></label>
-                                                <input type="number" name="numero" style="width: 50%;" class="border-success form-control"   placeholder="Telephone" required />
+                                            
+                                            <div id="frmPay">
+                                                <div id="payField">
+                                                    <div class="row">
+                                                        <div class="col-4"></div>                            
+                                                        <div class="col-4" >
+                                                            <label class="boite_postale fw-bold">Téléphone<span style="color:red">
+                                                                        *</span></label>
+                                                            <input type="number" min="0" id="numero" name="numero" class="border-success form-control"   placeholder="Telephone" required />
+                                                        </div>
+                                                        <div class="col-4"></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-4"></div>
+                                                        <div class="col-4">
+                                                            <label class="boite_postale fw-bold">OTP<span style="color:red">
+                                                                    *</span></label>
+                                                            <input type="number" min="0" id="otp" name="otp" class="border-success form-control" placeholder="Code OTP" required />
+                                                            <div id="errorMessage" style="display:none; color:red;">Numéro et code OTP obligatoires</div>
+                                                        </div>
+                                                        <div class="col-4"></div>
+                                                    </div>
+                                                    <div id="loader" class="row" style="display:none; text-align: center;">
+                                                        <div class="col-5"></div>
+                                                        <div class="col-2">
+                                                            <div class="loader"></div>
+                                                        </div>
+                                                        <div class="col-5"></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-5"></div>
+                                                        <div class="col-2" style="text-align: center;">
+                                                            <div id="payNotOK" style="display:none;">
+                                                                <span style="color:red">Paiement échoué</span>                        
+                                                            </div>
+                                                            {{-- <input id="pay" type="button" class="action-button" value="Payer"/> --}}
+                                                            <div id="payOkImg" style="display:none;">
+                                                                <img  src="{{asset('img/loader/okPay.png')}}" width="40%"/>
+                                                                <br>
+                                                                <span>Paiement réussi</span>                        
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-5"></div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-6">
-                                                <label class="boite_postale fw-bold">OTP<span style="color:red">
-                                                        *</span></label>
-                                                <input type="number" name="otp"   style="width: 50%;" class="border-success form-control"   placeholder="otp" required />
-                                            </div>
+                                            
                                         </div>
-
-
 
                                     </div>
 
-
                                     <input type="button"  class="previous action-button-previous"
                                         value="Retour" />
-                                    <input type="submit"   class="next action-button"
-                                        value="Valider" />
-                                    <!-- Ajoutez ceci dans la première étape du formulaire -->
+                                    <input id="btnAllEng" type="submit" class="next action-button" value="Valider" />
                                     <div class="error-message" style="color: red;"></div>
-                                    </form>
+                                    
                                 </fieldset>
 
-
-
+                                <fieldset>
+                                    <div class="form-card">
+                                        <h2 class="fs-title text-center">Validation !</h2>
+                                        <br>
+                                        <div class="row justify-content-center">
+                                            <div class="col-3">
+                                                <img src="{{asset('img/loader/processing.gif')}}"
+                                                    class="fit-image"/>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row justify-content-center">
+                                            <div class="col-7 text-center">
+                                                <h5>Votre demande est en cour d'enregistrement! </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
 
                             </form>
                         </div>
@@ -266,6 +315,66 @@ $(document).ready(function() {
 
 </script>
 
+<script>
+    $(document).ready(function () {
+        $('#btnAllEng').click(function () {
+            $.ajaxSetup({
+            headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+         });
+        
+            
+            var numero = document.getElementById('numero').value;
+            var otp = document.getElementById('otp').value;
+
+            var formData = {numero: numero,otp: otp};
+            if (numero != '' && otp != '') {
+                $("#loader").show();
+                $('#payNotOK').hide();
+                $('#numero').prop('disabled', true);
+                $('#otp').prop('disabled', true);
+                $("#errorMessage").hide();
+                $.ajax({
+                    url: '/payOM',
+                    type: "POST",
+                    data: {
+                        'numero': numero,
+                        'otp': otp,
+                        'proc': 'P008'
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data.status);
+                        console.log(data.data);
+                        console.log(data.data.infos);
+
+                        if (data.data.status == true) {
+                            $('#telephone').val(numero);
+                            $('#code_otp').val(otp);
+                            $('#payResponse').val(data.data.infos);
+                            $("#loader").hide();
+                            $("#payOkImg").show();                            
+                            $("#errorMessage").hide();
+                            $("#msform").submit();
+                        } else {
+                            $('#numero').prop('disabled', false);
+                            $('#otp').prop('disabled', false);
+                            $("#loader").hide();
+                            $('#payNotOK').show();
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown){
+                        console.log(jqXHR);
+                    }
+                });
+            } else {
+                $("#errorMessage").show();
+            }
+        });
+    });
+</script>
+
 <script type='text/javascript'>
     $(document).ready(function(){
 
@@ -284,6 +393,16 @@ $(".next").click(function () {
         // Vérifiez si tous les champs obligatoires dans le formulaire actuel sont remplis
         var isValid = true;
         current_fs.find('input[required]').each(function () {
+            //if ($(this).val() === "") {
+            if (!$(this).val().trim()) {
+                isValid = false;
+                $(this).addClass("error");
+            } else {
+                $(this).removeClass("error");
+            }
+        });
+
+        current_fs.find('select[required]').each(function () {
             //if ($(this).val() === "") {
             if (!$(this).val().trim()) {
                 isValid = false;
@@ -364,11 +483,14 @@ $(".submit").click(function(){
 })
 
 $("div#moyenP1").hide();
-		$("div#moyenP2").hide();
+$("div#moyenP2").hide();
+$("div#payField").hide();
+
 
 jQuery('input[name=moyen]:radio').click(function(){
 		$("div#moyenP1").hide();
 		$("div#moyenP2").hide();
+        $("div#payField").show();
 		var divId = jQuery(this).val();
         if(divId * 1 == 1){
             $("div#moyenP1").show()

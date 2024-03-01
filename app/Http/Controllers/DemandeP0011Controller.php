@@ -7,6 +7,7 @@ use App\Models\Procedure;
 use Illuminate\Http\Request;
 use App\Repositories\DemandeP0011Repository;
 use App\Repositories\DemandePieceP0011Repository;
+use App\Repositories\PaiementRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -33,7 +34,7 @@ class DemandeP0011Controller extends Controller
         return view('livewire.Demandesp0011.create');
     }
 
-    public function store(Request $request, UserRepository $userRepository, DemandePieceP0011Repository $demandePieceP0011Repository, DemandeP0011 $demande)
+    public function store(Request $request, UserRepository $userRepository, DemandePieceP0011Repository $demandePieceP0011Repository, DemandeP0011 $demande, PaiementRepository $paiementRepository)
     {
 
         $data =  $request->all();
@@ -55,7 +56,18 @@ class DemandeP0011Controller extends Controller
 
         $dataFiles = $request->all();
         //dd($data['exploitant']);
+        $pay_moyen = $data['moyen'];
+        $payResponse = $data['payResponse'];
+
+        $numero = $data["telephone"];
+        $code_otp = $data["code_otp"];
+
+        unset($data['payResponse']);
         unset($data['telephone']);
+        unset($data['telephone']);
+        unset($data["numero"]);
+        unset($data["moyen"]);
+        unset($data["code_otp"]);
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
 
@@ -89,6 +101,27 @@ class DemandeP0011Controller extends Controller
 
         $demande = $this->repository->create($data);
         $demande->save();
+
+        $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
+        
+        if ($pay_moyen == 1)
+            $type_paiement = "OrangeMoney";
+        if ($pay_moyen == 2)
+            $type_paiement = "MoovMoney";
+        
+
+        $pay = [
+            'numero' => $numero,
+            'code_otp' => $code_otp,
+            'ref_paiement'=>$resp_data->transID,
+            'date_paiement'=>now(),
+            'code_procedure'=> 'P004',
+            'demande_id'=>$demande->uuid,
+            'type_paiement'=>$type_paiement,
+            'message'=>$payResponse,
+            ];
+        $paiement = $paiementRepository->create($pay);
+        $paiement->save();
         //    dd($demande->uuid);
 
         //    $this->repository->uuid();

@@ -10,6 +10,7 @@ use App\Models\Usager;
 use Illuminate\Http\Request;
 use App\Repositories\DemandeP004Repository;
 use App\Repositories\DemandePieceP004Repository;
+use App\Repositories\PaiementRepository;
 use App\Repositories\UserRepository;
 use Carbon\Carbon;
 use GuzzleHttp\Psr7\UploadedFile;
@@ -36,15 +37,16 @@ class DemandeP004Controller extends Controller
         return view('livewire.DemandesP004.create');
     }
 
-    public function store(Request $request, UserRepository $userRepository, DemandePieceP004Repository $demandePieceP004Repository, DemandeP004 $demande)
+    public function store(Request $request, UserRepository $userRepository, DemandePieceP004Repository $demandePieceP004Repository, DemandeP004 $demande, PaiementRepository $paiementRepository)
     {
 
         $data =  $request->all();
+        //$resp_data = json_decode(json_encode(simplexml_load_string("<response>".$data['payResponse']."</response>")));
+        //dd($data, $resp_data);
 
         $validator = Validator::make($request->all(), [
             'certificat_origine' => 'required|file|max:5120', 
             'certificat_sanitaire' => 'required|file|max:5120', 
-          
           
             // 3072 correspond à 3 Mo (3 * 1024)
         ]);
@@ -54,10 +56,17 @@ class DemandeP004Controller extends Controller
         }
         $dataFiles = $request->all();
 
+        $pay_moyen = $data['moyen'];
+        $payResponse = $data['payResponse'];
+
+        $numero = $data["telephone"];
+        $code_otp = $data["code_otp"];
+
+        unset($data['payResponse']);
         unset($data['telephone']);
-        unset($data['moyen']);
         unset($data["numero"]);
-        unset($data["otp"]);
+        unset($data["moyen"]);
+        unset($data["code_otp"]);
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
 
@@ -73,6 +82,27 @@ class DemandeP004Controller extends Controller
 
         $demande = $this->repository->create($data);
         $demande->save();
+
+        $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
+        
+        if ($pay_moyen == 1)
+            $type_paiement = "OrangeMoney";
+        if ($pay_moyen == 2)
+            $type_paiement = "MoovMoney";
+        
+
+        $pay = [
+            'numero' => $numero,
+            'code_otp' => $code_otp,
+            'ref_paiement'=>$resp_data->transID,
+            'date_paiement'=>now(),
+            'code_procedure'=> 'P004',
+            'demande_id'=>$demande->uuid,
+            'type_paiement'=>$type_paiement,
+            'message'=>$payResponse,
+            ];
+        $paiement = $paiementRepository->create($pay);
+        $paiement->save();
         //    dd($demande->uuid);
 
         //    $this->repository->uuid();

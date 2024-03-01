@@ -14,7 +14,7 @@
                             }, 5000); // Le message flash disparaîtra après 5 secondes (5000 millisecondes)
                         </script>
                     @endif</div>
-    <h1>Liste des Démandes d'agréement technique en Eau </h1>
+    <h1>Liste des demandes d'agréement technique en Eau </h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Demandes</a></li>
@@ -68,6 +68,8 @@
 
                                 </div>
                             </div><br>
+
+                            @include('backend.components.select_dossier_status')
 
                             <!-- Table with stripped rows -->
                             <table {{ !empty($demandes) ? 'id="example1" ':  'id=""'}} class="table datatable table-bordered table-striped">
@@ -168,61 +170,10 @@
 
 
                                         <td>
-                                            <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}">
-                                                <i class="bi bi-eye"></i> </button>
-
-                                                @php
-                                                $userRole = Auth::user()->role->libelle;
-                                                @endphp
-
-
-                                               <!-- Boutons d'action en fonction de l'état et du rôle -->
-                                               @if (($demande->etat == 'D' && $demande->last_agent_assign == null && in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
-                                               ($demande->etat == 'E' && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
-                                               ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-                                               ($demande->etat == 'D' && $demande->last_agent_assign == Auth::user()->agent->uuid || in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-                                               ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid && Auth::user()->role->code != "RCT" || in_array($userRole, ['Gestionnaire', 'Administration'])) ||
-                                               ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration'])))
-                                               <a data-toggle="modal" data-target="#valider{{ $demande->uuid }}" type="button" title="Valider" class="btn btn-success">
-                                                   <i class="bi bi-check-circle"></i>
-                                               </a>
-                                               @endif
-
-                                               @if ($demande->etat == 'D' && in_array($userRole, ['Gestionnaire', 'Administration']))
-                                               <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur" class="btn btn-primary">
-                                                   <i class="bi bi-folder-symlink"></i>
-                                               </button>
-                                               @endif
-                                               @if ($demande->etat == 'E' && in_array($userRole, ['Gestionnaire', 'Administration']))
-                                               <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur" class="btn btn-primary">
-                                                   <i class="bi bi-folder-symlink"></i>
-                                               </button>
-                                               @endif
-
-                                               @if ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration',]))
-                                               <a data-toggle="modal" data-target="#signer{{ $demande->uuid }}" type="button" title="Joindre Acte Signé" class="btn btn-success">
-                                                   <i class="bi bi-upload"></i>
-                                               </a>
-                                               @endif
-                                               @if (($demande->etat != 'A' && $demande->etat != 'S' && $demande->etat != 'R') && in_array($userRole, [ 'Gestionnaire', 'Administration']))
-                                               <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter" class="btn btn-danger">
-                                                   <i class="bi bi-x-circle"></i>
-                                               </a>
-                                               @endif
-                                               @if (($demande->etat != 'A' && $demande->etat != 'S'&& $demande->etat != 'E'&& $demande->etat != 'V'&& $demande->etat != 'R') && in_array($userRole, ['Réception']))
-                                               <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter" class="btn btn-danger">
-                                                   <i class="bi bi-x-circle"></i>
-                                               </a>
-                                               @endif
-                                               @if (($demande->etat == 'E' && $demande->last_agent_assign == null) && in_array($userRole, ['Etudes']) ||
-                                               ($demande->etat == 'D' && $demande->last_agent_assign == null) && in_array($userRole, ['Etudes']) ||
-                                               ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid) && in_array($userRole, ['Etudes'])
-                                               )
-
-                                               <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter" class="btn btn-danger">
-                                                   <i class="bi bi-x-circle"></i>
-                                               </a>
-                                               @endif
+                                            {{-- <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}">
+                                                <i class="bi bi-eye"></i> </button> --}}
+                                            <a title="Voir Détail" href="{{ route('detail-demande', ['process' => 'P002', 'id_demande' => $demande->uuid]) }}" class="btn btn-primary ">
+                                                    <i class="bi bi-eye"></i> </a>
 
                                                {{-- Model de confirmation de Validation et note detude --}}
                                                <div class="modal fade" id="valider{{ $demande->uuid }}" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
@@ -574,6 +525,12 @@
         });
 
 
+</script>
+<script>
+    function loadDemandeListeByStatus() {
+        let url = '/dossiers-by-status?procedure=P002&etat=' + $('#etat').val();
+        window.location = url;
+    }
 </script>
 
 

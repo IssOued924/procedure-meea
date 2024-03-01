@@ -10,6 +10,7 @@ use App\Models\Procedure;
 use App\Repositories\DemandeP0012Repository;
 use Illuminate\Http\Request;
 use App\Repositories\DemandePieceP0012Repository;
+use App\Repositories\PaiementRepository;
 use App\Repositories\UserRepository;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -47,12 +48,8 @@ class DemandeP0012Controller extends Controller
     }
 
     public function store(Request $request, UserRepository $userRepository,
-     DemandePieceP0012Repository $demandePieceP0012Repository, DemandeP0012 $demande)
+     DemandePieceP0012Repository $demandePieceP0012Repository, DemandeP0012 $demande, PaiementRepository $paiementRepository)
     {
-
-
-        
-
 
         $data =  $request->all();
         $validator = Validator::make($request->all(), [
@@ -66,11 +63,21 @@ class DemandeP0012Controller extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
        // dd($data);
-        if ($this->payment($data["numero"], $data["otp"]))
 
-        {
-           // dd($data);
         $dataFiles = $request->all();
+        $pay_moyen = $data['moyen'];
+        $payResponse = $data['payResponse'];
+
+        $numero = $data["telephone"];
+        $code_otp = $data["code_otp"];
+
+        unset($data['payResponse']);
+        unset($data['telephone']);
+        unset($data['telephone']);
+        unset($data["numero"]);
+        unset($data["moyen"]);
+        unset($data["code_otp"]);
+
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
         $data['reference'] = $this->repository->generateReference('P0012');
@@ -106,6 +113,27 @@ class DemandeP0012Controller extends Controller
         $demande = $this->repository->create($data);
         $demande->save();
 
+        $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
+        
+        if ($pay_moyen == 1)
+            $type_paiement = "OrangeMoney";
+        if ($pay_moyen == 2)
+            $type_paiement = "MoovMoney";
+        
+
+        $pay = [
+            'numero' => $numero,
+            'code_otp' => $code_otp,
+            'ref_paiement'=>$resp_data->transID,
+            'date_paiement'=>now(),
+            'code_procedure'=> 'P004',
+            'demande_id'=>$demande->uuid,
+            'type_paiement'=>$type_paiement,
+            'message'=>$payResponse,
+            ];
+        $paiement = $paiementRepository->create($pay);
+        $paiement->save();
+
         //    $this->repository->uuid();
         $demandePieceP0012Repository->setChemin($cnib, $demande->uuid, 'CNIB');
         $demandePieceP0012Repository->setChemin($photo, $demande->uuid, 'Photo d\'Identite');
@@ -113,9 +141,7 @@ class DemandeP0012Controller extends Controller
         
 
         return redirect('/demandes-lists?procedure=PETE')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
-    }else {
 
-    }
     }
 
     public function update(Request $request, UserRepository $userRepository,

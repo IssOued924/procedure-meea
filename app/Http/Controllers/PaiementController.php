@@ -31,7 +31,8 @@ class PaiementController extends Controller
 
         $payRepository = new PaiementRepository();
 
-        $paiementOrange = $payRepository->paiementOrange_('100', $_POST['numero'], $_POST['otp']);
+        // $paiementOrange = $payRepository->paiementOrange_('1500', $_POST['numero'], $_POST['otp']);
+        $paiementOrange = $payRepository->paiementOrange_($_POST['proc'], $_POST['numero'], $_POST['otp']);
 
         return json_encode(array('status' => 'success', 'data' => $paiementOrange));
 

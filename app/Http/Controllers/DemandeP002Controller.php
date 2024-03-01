@@ -9,6 +9,7 @@ use App\Models\Procedure;
 use App\Models\Usager;
 use Illuminate\Http\Request;
 use App\Repositories\DemandePieceP002Repository;
+use App\Repositories\PaiementRepository;
 use App\Repositories\UserRepository;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,22 @@ class DemandeP002Controller extends Controller {
 
     public function store(StoreDemandeP002Request $request,
             DemandePieceP002Repository $demandePieceP002Repository,
-            DemandeP002 $demande) {
+            DemandeP002 $demande, PaiementRepository $paiementRepository) {
+
+                $data =  $request->all();
+                $pay_moyen = $data['moyen'];
+                $payResponse = $data['payResponse'];
+
+                $numero = $data["telephone"];
+                $code_otp = $data["code_otp"];
+
+                unset($data['payResponse']);
+                unset($data['telephone']);
+                unset($data['telephone']);
+                unset($data["numero"]);
+                unset($data["moyen"]);
+                unset($data["code_otp"]);
+
         $dataDemande = ['etat' => 'D',
             'date_demande' => Carbon::parse(Carbon::now())->format('Ymd'),
             'identite' => $request->identite,
@@ -56,6 +72,28 @@ class DemandeP002Controller extends Controller {
 
         $demande = $this->repository->create($dataDemande);
         $demande->save();
+
+        $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
+        
+        if ($pay_moyen == 1)
+            $type_paiement = "OrangeMoney";
+        if ($pay_moyen == 2)
+            $type_paiement = "MoovMoney";
+        
+
+        $pay = [
+            'numero' => $numero,
+            'code_otp' => $code_otp,
+            'ref_paiement'=>$resp_data->transID,
+            'date_paiement'=>now(),
+            'code_procedure'=> 'P004',
+            'demande_id'=>$demande->uuid,
+            'type_paiement'=>$type_paiement,
+            'message'=>$payResponse,
+            ];
+        $paiement = $paiementRepository->create($pay);
+        $paiement->save();
+
         //Recuperation du chemin des fichiers joint
             $cheminRecuAchat = $this->repository->uploadFile($request->file('recu_achat_dossier'));
             $cheminifu = $this->repository->uploadFile($request->file('ifu'));

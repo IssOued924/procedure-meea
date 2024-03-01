@@ -31,6 +31,14 @@ class DemandeP0012 extends Demande
         return $this->belongsTo(Usager::class, 'usager_id', 'uuid');
     }
 
+    public function province(){
+        return $this->belongsTo(Province::class, 'province_id', 'uuid');
+    }
+
+    public function commune(){
+        return $this->belongsTo(Commune::class, 'commune_id', 'uuid');
+    }
+
       //   Function recuperation des status demandes
       public function statut()
       {

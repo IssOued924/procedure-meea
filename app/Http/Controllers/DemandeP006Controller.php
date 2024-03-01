@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Repositories\DemandeP006Repository;
 use App\Repositories\DemandePieceP006Repository;
 use App\Repositories\UserRepository;
+use App\Repositories\PaiementRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,7 @@ class DemandeP006Controller extends Controller
     }
 
     public function store(Request $request, UserRepository $userRepository,
-     DemandePieceP006Repository $demandePieceP006Repository, DemandeP006 $demande)
+     DemandePieceP006Repository $demandePieceP006Repository, DemandeP006 $demande, PaiementRepository $paiementRepository)
     {
 
         $data =  $request->all();
@@ -41,7 +42,7 @@ class DemandeP006Controller extends Controller
             'demande_form' => 'required|file|max:5120', 
             'rccm' => 'required|file|max:5120', 
             'document_technique' => 'required|file|max:5120', 
-            'registre_tracabilite' => 'required|file|max:5120', 
+            // 'registre_tracabilite' => 'required|file|max:5120', 
           
             // 3072 correspond à 3 Mo (3 * 1024)
         ]);
@@ -52,10 +53,18 @@ class DemandeP006Controller extends Controller
         $dataFiles = $request->all();
        // $data['usager_id'] = Auth::user()->uuid;
 
-        unset($data['telephone']);
-        unset($data['moyen']);
-        unset($data["numero"]);
-        unset($data["otp"]);
+       $pay_moyen = $data['moyen'];
+       $payResponse = $data['payResponse'];
+
+       $numero = $data["telephone"];
+       $code_otp = $data["code_otp"];
+
+       unset($data['payResponse']);
+       unset($data['telephone']);
+       unset($data["numero"]);
+       unset($data["moyen"]);
+       unset($data["code_otp"]);
+       unset($data["otp"]);
 
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
@@ -88,6 +97,27 @@ class DemandeP006Controller extends Controller
 
         $demande = $this->repository->create($data);
         $demande->save();
+
+        $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
+        
+        if ($pay_moyen == 1)
+            $type_paiement = "OrangeMoney";
+        if ($pay_moyen == 2)
+            $type_paiement = "MoovMoney";
+        
+
+        $pay = [
+            'numero' => $numero,
+            'code_otp' => $code_otp,
+            'ref_paiement'=>$resp_data->transID,
+            'date_paiement'=>now(),
+            'code_procedure'=> 'P004',
+            'demande_id'=>$demande->uuid,
+            'type_paiement'=>$type_paiement,
+            'message'=>$payResponse,
+            ];
+        $paiement = $paiementRepository->create($pay);
+        $paiement->save();
 
         //    $this->repository->uuid();
         $demandePieceP006Repository->setChemin($facture_pro_format, $demande->uuid, 'Facture Pro Format');

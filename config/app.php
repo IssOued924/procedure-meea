@@ -187,7 +187,18 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         // manipulation des images
+        'Helpers' => App\Helpers\Helpers::class,
         'Image' => Intervention\Image\Facades\Image::class,
     ])->toArray(),
+
+    /**
+     * Parametres Orange Money
+	*/
+    'username' =>env("OM_USERNAME"),//Nom d’utilisateur du partenaire pour l’API fourni par Orange
+    'password' =>env("OM_PASSWORD"), //Mot de passe du partenaire pour l’API fourni par Orange
+    'referencenumber' =>env("OM_REFERNCE_NUMBER"), // Information supplémentaire que le partenaire/Accepteur pourra envoyer.
+    'exttxtid' =>env("OM_REFERENCE_TRANSACTION"),//Reference de transaction du partenaire/Accepteur
+    'numberReceiver' =>env("OM_NUMBER_RECEIVER"),//Numero marchant
+    'url' => env("OM_URL"),
 
 ];

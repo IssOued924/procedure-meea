@@ -76,6 +76,11 @@ class DemandeP001 extends Demande
     public function usager(){
         return $this->belongsTo(Usager::class, 'usager_id', 'uuid');
     }
+
+    public function commune(){
+        return $this->belongsTo(Commune::class, 'commune_id', 'uuid');
+    }
+    
     public function demandePiece()
     {
         return $this->hasMany(DemandePieceP001::class, 'demande_p001_id');

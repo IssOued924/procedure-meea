@@ -44,7 +44,7 @@
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Identité du demandeur</strong> <span
                                                         style="color: red">*</span></label>
-                                                <input type="text" class="form-control border-success" value="{{ $name }}"  name="identite"
+                                                <input type="text" class="form-control border-success" name="identite" value="{{ $name }}"  name="identite"
                                                     placeholder="Identité du demandeur" />
                                             </div>
                                             <div class="col">

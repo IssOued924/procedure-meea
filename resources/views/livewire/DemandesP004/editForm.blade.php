@@ -13,11 +13,11 @@
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
                 <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
                     <h5><strong>Demande de permis de détention d'un animal sauvage</strong></h5>
-                   <!-- <p> @if(session('success'))
+                   {{-- <p> @if(session('success'))
                     <div class="alert alert-success">
-                        {{ session('success') }}-->
+                        {{ session('success') }} 
                     </div>
-                @endif</p>
+                @endif</p> --}}
                     <p>Les champs suivis d'etoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">
@@ -44,7 +44,7 @@
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Nom & Prenom</strong> <span
                                                         style="color: red">*</span></label>
-                                                <input type="text"   name="nom"
+                                                <input type="text"   name="beneficiaire"
                                                     placeholder="Votre nom" class="border-success form-control" value="{{ $name}}" />
                                             </div>
                                             <div class="col-6">

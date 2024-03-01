@@ -21,4 +21,9 @@ class Province extends Model
     {
         return $this->hasMany(Commune::class, 'province_id', 'uuid');
     }
+
+    public function demande()
+    {
+        return $this->hasMany(DemandeP001::class, 'demande_p001_id');
+    }
 }

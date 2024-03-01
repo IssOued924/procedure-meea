@@ -27,7 +27,7 @@
                                 </ul>
                             </div>
 
-                        <h2 class="card-title text-center">Liste de mes Démandes </h2>
+                        <h2 class="card-title text-center">Liste de mes demandes </h2>
 
                             <div class="card-body">
 
@@ -56,16 +56,16 @@
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-8 offset-md-2">
+                                <div class="col-10 offset-md-1">
                                     <!-- Table with stripped rows -->
                                     <table class="table datatable table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
 
-                                                <th scope="col">Date Démande</th>
+                                                <th scope="col">Date demande</th>
                                                 <th scope="col">Réference</th>
-                                                <th scope="col">etat de mes Démandes</th>
+                                                <th scope="col">Etat de mes demandes</th>
                                                 <th scope="col">Délai de traitement</th>
                                                 <th scope="col">Déposé</th>
                                                 <th scope="col">Paiement</th>
@@ -155,7 +155,7 @@
                                                     @endif
 
                                                     <td>
-                                                        <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i class="bi bi-eye"></i> Voir </button>
+                                                        <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i class="bi bi-eye"></i></button>
 
                                                         @if ($demande->etat =='R')
                                                         <!--button title="Modifier" type="button" class="btn btn-info "
@@ -168,8 +168,7 @@
                                                         @if ($demande->etat == 'S' && !is_null($demande->output_file) ||
                                                         $demande->etat == 'A' && !is_null($demande->output_file))
 
-                                                        <a class="btn btn-success text-white" href="{{ Storage::url($demande->output_file) }}" target="_blank"><b><i class=" bi bi-download"></i>
-                                                                Télécharger</b></a>
+                                                        <a title="Télécharger" class="btn btn-success text-white" href="{{ Storage::url($demande->output_file) }}" target="_blank"><b><i class=" bi bi-download"></i></b></a>
                                                         @endif
 
 

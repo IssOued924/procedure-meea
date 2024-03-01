@@ -1,50 +1,65 @@
 <?php
 
 use Illuminate\Support\Str;
+use App\Models\Pays;
 
 define("PAGELIST", "liste");
 define("PAGECREATEFORM", "create");
 define("PAGEEDITFORM", "edit");
 define("DEFAULTPASSWORD", "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi");
 
-function userFullName(){
-    return auth()->user()->prenom . " " . auth()->user()->nom;
-}
+// function userFullName(){
+//     return auth()->user()->prenom . " " . auth()->user()->nom;
+// }
 
-function getRolesName(){
-    $rolesName = "";
-    $i = 0;
-    foreach(auth()->user()->roles as $role){
-        $rolesName .= $role->nom;
+// function getRolesName(){
+//     $rolesName = "";
+//     $i = 0;
+//     foreach(auth()->user()->roles as $role){
+//         $rolesName .= $role->nom;
 
-        if($i < sizeof(auth()->user()->roles) - 1){
-            $rolesName .= ",";
-        }
-        $i++;
-    }
+//         if($i < sizeof(auth()->user()->roles) - 1){
+//             $rolesName .= ",";
+//         }
+//         $i++;
+//     }
 
-    return $rolesName;
+//     return $rolesName;
     
-}
+// }
 
-function setMenuClasse($route, $classe){
-    $routeActuel = request()->route()->getName();
+// function setMenuClasse($route, $classe){
+//     $routeActuel = request()->route()->getName();
 
-    if( contains($routeActuel, $route) ){
-        return $classe;
-    }
-    return "";
-}
+//     if( contains($routeActuel, $route) ){
+//         return $classe;
+//     }
+//     return "";
+// }
 
-function setMenuActive($route){
-    $routeActuel = request()->route()->getName();
+// function setMenuActive($route){
+//     $routeActuel = request()->route()->getName();
 
-    if( $routeActuel === $route) {
-        return 'active';
-    }
-    return "";
-}
+//     if( $routeActuel === $route) {
+//         return 'active';
+//     }
+//     return "";
+// }
 
-function contains($container, $contenu){
-    return Str::contains($container, $contenu);
+// function contains($container, $contenu){
+//     return Str::contains($container, $contenu);
+// }
+
+class Helpers
+{
+public static function paysNom($uuid)
+    {
+
+    $pays = Pays::find($uuid);
+            if ($pays) {
+                return $pays->libelle;
+            }else{
+                return "Néant";
+            };
+        } 
 }

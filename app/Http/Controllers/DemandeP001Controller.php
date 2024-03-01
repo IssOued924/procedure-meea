@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Repositories\DemandeP001Repository;
 use App\Repositories\DemandePieceP001Repository;
 use App\Repositories\UserRepository;
+use App\Repositories\PaiementRepository;
 use Carbon\Carbon;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -39,17 +40,17 @@ class DemandeP001Controller extends Controller
         return view('livewire.Demandes.create');
     }
 
-    public function payment($numero, $otp)
-    {
-        if ($numero && $otp) {
-            return true;
-        } else {
-            return false;
-        }
-        //return view('livewire.Demandesp0012.create');
-    }
+    // public function payment($numero, $otp)
+    // {
+    //     if ($numero && $otp) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    //     //return view('livewire.Demandesp0012.create');
+    // }
 
-    public function store(Request $request, UserRepository $userRepository, DemandePieceP001Repository $demandePieceP001Repository, DemandeP001 $demande)
+    public function store(Request $request, UserRepository $userRepository, DemandePieceP001Repository $demandePieceP001Repository, DemandeP001 $demande, PaiementRepository $paiementRepository)
     {
         
         $data =  $request->all();
@@ -71,13 +72,21 @@ class DemandeP001Controller extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        if ($this->payment($data["numero"], $data["otp"])) {
+        //if ($this->payment($data["numero"], $data["otp"])) {
             $dataFiles = $request->all();
 
-            unset($data['telephone']);
-            unset($data['moyen']);
-            unset($data["numero"]);
-            unset($data["otp"]);
+            $pay_moyen = $data['moyen'];
+            $payResponse = $data['payResponse'];
+
+            $numero = $data["telephone"];
+            $code_otp = $data["code_otp"];
+
+                unset($data['payResponse']);
+                unset($data['telephone']);
+                unset($data['telephone']);
+                unset($data["numero"]);
+                unset($data["moyen"]);
+                unset($data["code_otp"]);
 
             $data['usager_id'] = Auth::user()->usager_id;
             $data['etat'] = 'D'; //code de procedure demande deposee
@@ -120,6 +129,27 @@ class DemandeP001Controller extends Controller
 
             $demande = $this->repository->create($data);
             $demande->save();
+
+            $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
+        
+            if ($pay_moyen == 1)
+                $type_paiement = "OrangeMoney";
+            if ($pay_moyen == 2)
+                $type_paiement = "MoovMoney";
+            
+
+            $pay = [
+                'numero' => $numero,
+                'code_otp' => $code_otp,
+                'ref_paiement'=>$resp_data->transID,
+                'date_paiement'=>now(),
+                'code_procedure'=> 'P004',
+                'demande_id'=>$demande->uuid,
+                'type_paiement'=>$type_paiement,
+                'message'=>$payResponse,
+                ];
+            $paiement = $paiementRepository->create($pay);
+            $paiement->save();
             //    dd($demande->uuid);
 
             //    $this->repository->uuid();
@@ -133,8 +163,8 @@ class DemandeP001Controller extends Controller
             $demandePieceP001Repository->setChemin($list_produit, $demande->uuid, 'Liste des poduits');
 
             return redirect('/demandes-lists?procedure=DATIPC')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
-        } else {
-        }
+        // } else {
+        // }
     }
 
 

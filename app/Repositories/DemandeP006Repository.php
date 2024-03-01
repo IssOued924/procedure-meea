@@ -25,23 +25,26 @@ class DemandeP006Repository extends AppRepository
 
         $this->unsetClauses();
 
-    $de = new DemandeP006();
-    $tt = $de->genererRandomString(4);
+        if ( isset($data[$name]) ){
+            $demande = new demandeP006();
 
-       $fileName = time().$tt.'.'.$data[$name]->getClientOriginalExtension();
+            /* DEBUT algorithme de renommage du fichier */
+            $tt = $demande->genererRandomString(4);
+            $fileName = time().$tt.'.'.$data[$name]->getClientOriginalExtension();
+            /* FIN algorithme de renommage du fichier */
 
+            /* DEBUT algorithme de détermination du repertoire parent du fichier */
+            $libelle = 'demandeP006';
+            $url = 'public/'.$libelle;
+            Storage::makeDirectory($url);
+            /* FIN algorithme de détermination du repertoire parent du fichier */
 
-        // $libelle = $data['libelle_court'];
-        $libelle = 'demandeP006';
-        echo $libelle;
-        $url = 'public/'.$libelle;
-        Storage::makeDirectory($url);
+            // Stockage éffective du document avec le chemin et le nom de fichier déterminé ci-dessus
+            $path = $data[$name]->storeAs('public/'.$libelle, $fileName);
 
-
-
-        $path = $data[$name]->storeAs('public/'.$libelle, $fileName);
-
-        return $path;
+            return $path;
+        }
+        return '';
     }
 
     public function all($filtre = array())

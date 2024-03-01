@@ -57,11 +57,11 @@
                                             <div class="row">
                                                 <div class="col-3">
                                                     <label class="nom_societe fw-bold" >Exploitant Forestier</label>
-                                                    <input id='radio1' type="radio" {{ $demande->exploitant == 'Forestier' ? 'checked' : '' }}  value="Forestier" class="checkbox"  name="exploitant" />
+                                                    <input id='radio1' type="radio" {{ $demande->exploitant == 'Forestier' ? 'checked' : '' }}  value="1" class="checkbox"  name="exploitant" />
                                                 </div>
                                                 <div class="col-3">
                                                     <label class="siege_social fw-bold ">Exploitant Commercial</label>
-                                                    <input  id='radio2' type="radio"  {{ $demande->exploitant == 'Commercial' ? 'checked' : '' }}  value="Commercial"  name="exploitant"/>
+                                                    <input  id='radio2' type="radio"  {{ $demande->exploitant == 'Commercial' ? 'checked' : '' }}  value="2"  name="exploitant"/>
                                                 </div>
                                             </div>
                                         

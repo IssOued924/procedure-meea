@@ -13,9 +13,9 @@
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
                 <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
                     <h5><strong>Demande de permis de détention d'un animal sauvage</strong></h5>
-                   <!-- <p> @if(session('success'))
+                   <p> @if(session('success'))
                     <div class="alert alert-success">
-                        {{ session('success') }}-->
+                        {{ session('success') }}
                     </div>
                 @endif</p>
 
@@ -35,8 +35,8 @@
                     <p>Les champs suivis d'etoile rouge sont obligatoires</p>
                     <div class="row">
                         <div class="col-md-12 mx-0">
-                                    <form id="msform" method="POST" action="{{route("demandesp004-store")}}" enctype="multipart/form-data" >
-                                        @csrf
+                            <form id="msform" method="POST" action="{{route("demandesp004-store")}}" enctype="multipart/form-data" >
+                                @csrf
 
                                 <!-- progressbar -->
                                 <ul id="progressbar">
@@ -48,6 +48,8 @@
                                     <li id="confirm"><strong>Validation</strong></li>
                                 </ul>
                                 <!-- fieldsets -->
+
+
                                 <fieldset>
                                     <div class="form-card">
                                         <h4 class="fs-title">Identité du demandeur <span style="color:red">
@@ -57,7 +59,7 @@
                                             <div class="col-6">
                                                 <label class="nom_societe fw-bold"> <strong>Nom & Prenom</strong> <span
                                                         style="color: red">*</span></label>
-                                                <input type="text"   name="nom"
+                                                <input type="text"   name="beneficiaire"
                                                     placeholder="Votre nom" class="border-success form-control" value="{{ $name}}" />
                                             </div>
                                             <div class="col-6">
@@ -139,8 +141,8 @@
 
                                                 <select name="sexe_animal" id="" class="border-success form-select" required>
                                                     <option value="">Veuillez choisir le sexe de l'animal</option>
-                                                    <option value="">Mâle</option>
-                                                    <option value="">Femelle</option>
+                                                    <option value="M">Mâle</option>
+                                                    <option value="F">Femelle</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -151,7 +153,7 @@
                                                 <label class="nom_societe fw-bold">Lieu de provenance<span
                                                         style="color: red">*</span></label>
 
-                                                    <select name="lieu_provenance" id="selectMultiple" class="form-select" required>
+                                                    <select name="lieu_provenance" id="selectMultipl" class="border-success form-select" required>
                                                         <option value="">Veuillez choisir un pays</option>
                                                         @foreach ( $pays as  $pay)
                                                          <option value="{{ $pay->uuid }}" >{{ $pay->libelle }}</option>
@@ -203,7 +205,6 @@
                                             </div>
                                         </div>
 
-
                                     </div>
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Retour" />
@@ -232,80 +233,116 @@
                                     <input id="btnEng" type="button" name="" disabled class="next action-button btn btn-success"
                                         value="Suivant" />
                                 </fieldset>
-                                 
-
-                              
-                                </fieldset>
-
 
                                 <fieldset>
-                                    <form action="">
                                     <div class="form-card">
                                         <h4 class="fs-title">Paiement <span style="color:red">
                                             *</span></h4>
                                             <label for="demande timbre" class="fw-bold">Moyens de Paiement<span style="color:red">
                                                     *</span></label>
                                         <div class="row">
-                                            <div class="col-3">
-                                                <label class="nom_societe fw-bold" >ORANGE</label>
+                                            <div class="col-3"></div>
+                                            <div class="col-3" class="text-center">
+                                                {{-- <label class="nom_societe fw-bold" >ORANGE</label> --}}
+                                                <img src="{{ asset('img/paiement/orange.png') }}" width="80" height="80" class="d-inline-block align-top" alt="">
                                                 <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
                                             </div>
-                                            <div class="col-3">
-                                                <label class="siege_social fw-bold ">MOOV</label>
-                                                <input id="radio2" type="radio" value="0"  name="moyen"/>
+                                            <div class="col-3" class="text-center">
+                                                {{-- <label class="siege_social fw-bold ">MOOV</label> --}}
+                                                <img src="{{ asset('img/paiement/moov.png') }}" width="80" height="80" class="d-inline-block align-top" alt="">
+                                                <input id="radio2" type="radio" value="2"  name="moyen"/>
                                             </div>
-
-
+                                            <div class="col-3"></div>
                                         </div>
                                         <br>
 
-
                                         <div class="row">
-                                            <div id="moyenP1">
-                                                <label >  La somme à payer est de 1500Frs: Taper *144*4*6*1500# pour obtenir le OTP </label>
-
+                                            <input type="hidden" id="payResponse" name="payResponse" required />
+                                            <input type="hidden" id="telephone" name="telephone" required />
+                                            <input type="hidden" id="code_otp" name="code_otp" required />
+                                            <div id="moyenP1" class="text-center">
+                                                <label> La somme à payer est de {{$procedure->tarif}}F Cfa: Taper *144*4*6*{{$procedure->tarif}}# pour obtenir le OTP </label>
                                             </div>
-                                            <div id="moyenP2">
-                                                <label >  La somme à payer est de 1500Frs: Taper *555*4*6*1500# pour obtenir le OTP </label>
-
+                                            <div id="moyenP2" class="text-center">
+                                                <label> La somme à payer est de {{$procedure->tarif}}F Cfa: Taper *555*4*6*{{$procedure->tarif}}# pour obtenir le OTP </label>
                                             </div>
-                                            <div class="row" id="payField">
-                                                <form id="frmPay" role="form" enctype="multipart/form-data">
-                                                    @csrf
-                                                
-                                                    <div class="col-5" >
-                                                        <label class="boite_postale fw-bold">Téléphone<span style="color:red">
+                                            
+                                            <div id="frmPay">
+                                                <div id="payField">
+                                                    <div class="row">
+                                                        <div class="col-4"></div>                            
+                                                        <div class="col-4" >
+                                                            <label class="boite_postale fw-bold">Téléphone<span style="color:red">
+                                                                        *</span></label>
+                                                            <input type="number" min="0" id="numero" name="numero" class="border-success form-control"   placeholder="Telephone" required />
+                                                        </div>
+                                                        <div class="col-4"></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-4"></div>
+                                                        <div class="col-4">
+                                                            <label class="boite_postale fw-bold">OTP<span style="color:red">
                                                                     *</span></label>
-                                                        <input type="number" id="numero" name="numero" style="width: 50%;" class="border-success form-control"   placeholder="Telephone" required />
+                                                            <input type="number" min="0" id="otp" name="otp" class="border-success form-control" placeholder="Code OTP" required />
+                                                            <div id="errorMessage" style="display:none; color:red;">Numéro et code OTP obligatoires</div>
+                                                        </div>
+                                                        <div class="col-4"></div>
                                                     </div>
-                                                    <div class="col-5">
-                                                        <label class="boite_postale fw-bold">OTP<span style="color:red">
-                                                                *</span></label>
-                                                        <input type="number" id="otp" name="otp"   style="width: 50%;" class="border-success form-control"   placeholder="otp" required />
+                                                    <div id="loader" class="row" style="display:none; text-align: center;">
+                                                        <div class="col-5"></div>
+                                                        <div class="col-2">
+                                                            <div class="loader"></div>
+                                                        </div>
+                                                        <div class="col-5"></div>
                                                     </div>
-                                                    <div class="col-2">
-                                                        <br>
-                                                        <input id="pay" type="button" class="action-button" value="Payer"/>
+                                                    <div class="row">
+                                                        <div class="col-5"></div>
+                                                        <div class="col-2" style="text-align: center;">
+                                                            <div id="payNotOK" style="display:none;">
+                                                                <span style="color:red">Paiement échoué</span>                        
+                                                            </div>
+                                                            {{-- <input id="pay" type="button" class="action-button" value="Payer"/> --}}
+                                                            <div id="payOkImg" style="display:none;">
+                                                                <img  src="{{asset('img/loader/okPay.png')}}" width="40%"/>
+                                                                <br>
+                                                                <span>Paiement réussi</span>                        
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-5"></div>
                                                     </div>
-                                                </form>
+                                                </div>
                                             </div>
+                                            
                                         </div>
 
                                     </div>
 
-
                                     <input type="button"  class="previous action-button-previous"
                                         value="Retour" />
-                                    <input type="submit"   class="next action-button"
-                                        value="Valider" />
-                                    <!-- Ajoutez ceci dans la première étape du formulaire -->
+                                    <input id="btnAllEng" type="button" class="next action-button" value="Valider" />
                                     <div class="error-message" style="color: red;"></div>
-                                    </form>
+                                    
                                 </fieldset>
 
+                                <fieldset>
+                                    <div class="form-card">
+                                        <h2 class="fs-title text-center">Validation !</h2>
+                                        <br>
+                                        <div class="row justify-content-center">
+                                            <div class="col-3">
+                                                <img src="{{asset('img/loader/processing.gif')}}"
+                                                    class="fit-image"/>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row justify-content-center">
+                                            <div class="col-7 text-center">
+                                                <h5>Votre demande est en cour d'enregistrement! </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
 
-
-                               
                             </form>
                         </div>
                     </div>
@@ -346,35 +383,60 @@
 
 <script>
     $(document).ready(function () {
-        $('#pay').click(function () {
+        $('#btnAllEng').click(function () {
             $.ajaxSetup({
             headers: {
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
          });
         
+            
             var numero = document.getElementById('numero').value;
             var otp = document.getElementById('otp').value;
 
             var formData = {numero: numero,otp: otp};
-            if (numero != null && otp != null) {
+            if (numero != '' && otp != '') {
+                $("#loader").show();
+                $('#payNotOK').hide();
+                $('#numero').prop('disabled', true);
+                $('#otp').prop('disabled', true);
+                $("#errorMessage").hide();
                 $.ajax({
                     url: '/payOM',
                     type: "POST",
                     data: {
                         'numero': numero,
-                        'otp': otp
+                        'otp': otp,
+                        'proc': 'P004'
                     },
                     dataType: "json",
                     success: function (data) {
                         console.log(data);
+                        console.log(data.status);
+                        console.log(data.data);
+                        console.log(data.data.infos);
+
+                        if (data.data.status == true) {
+                            $('#telephone').val(numero);
+                            $('#code_otp').val(otp);
+                            $('#payResponse').val(data.data.infos);
+                            $("#loader").hide();
+                            $("#payOkImg").show();                            
+                            $("#errorMessage").hide();
+                            $("#msform").submit();
+                        } else {
+                            $('#numero').prop('disabled', false);
+                            $('#otp').prop('disabled', false);
+                            $("#loader").hide();
+                            $('#payNotOK').show();
+                        }
                     },
                     error: function (jqXHR, textStatus, errorThrown){
                         console.log(jqXHR);
                     }
                 });
             } else {
-                console.log("Champ obligatoire");
+                $("#errorMessage").show();
             }
         });
     });
@@ -429,6 +491,28 @@ $(".next").click(function () {
         // Vérifiez si tous les champs obligatoires dans le formulaire actuel sont remplis
         var isValid = true;
         current_fs.find('input[required]').each(function () {
+            //if ($(this).val() === "") {
+            if (!$(this).val().trim()) {
+                isValid = false;
+                $(this).addClass("error");
+            } else {
+                $(this).removeClass("error");
+            }
+        });
+
+
+        current_fs.find('select[required]').each(function () {
+            //if ($(this).val() === "") {
+            if (!$(this).val().trim()) {
+                isValid = false;
+                $(this).addClass("error");
+            } else {
+                $(this).removeClass("error");
+            }
+        });
+
+
+        current_fs.find('textarea[required]').each(function () {
             //if ($(this).val() === "") {
             if (!$(this).val().trim()) {
                 isValid = false;
@@ -511,7 +595,6 @@ $(".submit").click(function(){
 $("div#moyenP1").hide();
 $("div#moyenP2").hide();
 $("div#payField").hide();
-
 
 jQuery('input[name=moyen]:radio').click(function(){
 		$("div#moyenP1").hide();

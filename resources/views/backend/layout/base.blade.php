@@ -178,7 +178,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#demandes-nav" data-bs-toggle="collapse"
                     href="{{ route('demandes-list') }}">
-                    <i class="bi bi-menu-button-wide"></i><span>Démandes</span><i
+                    <i class="bi bi-menu-button-wide"></i><span>Demandes</span><i
                         class="bi bi-chevron-down   ms-auto"></i>
                 </a>
 

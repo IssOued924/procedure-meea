@@ -9,6 +9,7 @@ use App\Models\DemandeP008;
 use App\Models\Procedure;
 use App\Repositories\UserRepository;
 use App\Repositories\UsagerRepository;
+use App\Repositories\PaiementRepository;
 use App\Repositories\DemandeP008Repository;
 use App\Repositories\DemandePieceP008Repository;
 use Illuminate\Support\Facades\DB;
@@ -30,16 +31,15 @@ class DemandeP008Controller extends Controller
         return view('livewire.Demandesp008.createDechets');
     }
 
-    public function store(Request $request, UserRepository $userRepository, UsagerRepository $usagerRepository, DemandePieceP008Repository $demandePieceP008Repository, DemandeP008 $demande ){
+    public function store(Request $request, UserRepository $userRepository, UsagerRepository $usagerRepository, DemandePieceP008Repository $demandePieceP008Repository, DemandeP008 $demande, PaiementRepository $paiementRepository ){
         $data =  $request->all();
 
         $validator = Validator::make($request->all(), [
             'doc_rccm' => 'required|file|max:5120', 
             'doc_arrete_faisabilite' => 'required|file|max:5120',
-            
             'doc_avis_mairie' => 'required|file|max:5120',
             'doc_desc_technique' => 'required|file|max:5120',
-            'doc_registre_tracabilite'  => 'required|file|max:5120',
+            // 'doc_registre_tracabilite'  => 'required|file|max:5120',
             // 3072 correspond à 3 Mo (3 * 1024)
         ]);
     
@@ -57,10 +57,18 @@ class DemandeP008Controller extends Controller
         $data['paiement'] =1;
         $data['procedure_id'] = Procedure::where(['code' => 'P008'])->first('uuid')->uuid;
 
-        unset($data['telephone']);
-        unset($data['moyen']);
-        unset($data["numero"]);
-        unset($data["otp"]);
+       $pay_moyen = $data['moyen'];
+       $payResponse = $data['payResponse'];
+
+       $numero = $data["telephone"];
+       $code_otp = $data["code_otp"];
+
+       unset($data['payResponse']);
+       unset($data['telephone']);
+       unset($data["numero"]);
+       unset($data["moyen"]);
+       unset($data["code_otp"]);
+       unset($data["otp"]);
 
         /* DEBUT Mise-à-jour des infos pro de la société demandeuse */
         // $user = $userRepository->getById(Auth::user()->uuid);
@@ -98,6 +106,27 @@ class DemandeP008Controller extends Controller
         $demande = $this->repository->create($data);
         // $demande->usager_id = $user->usager_id;
         $demande->save();
+
+        $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
+        
+        if ($pay_moyen == 1)
+            $type_paiement = "OrangeMoney";
+        if ($pay_moyen == 2)
+            $type_paiement = "MoovMoney";
+        
+
+        $pay = [
+            'numero' => $numero,
+            'code_otp' => $code_otp,
+            'ref_paiement'=>$resp_data->transID,
+            'date_paiement'=>now(),
+            'code_procedure'=> 'P004',
+            'demande_id'=>$demande->uuid,
+            'type_paiement'=>$type_paiement,
+            'message'=>$payResponse,
+            ];
+        $paiement = $paiementRepository->create($pay);
+        $paiement->save();
 
         /* DEBUT Mise-à-jour des pièce-jointes de sorte à retrouver la demande associée */
         $demandePieceP008Repository->setChemin ($chemin_rccm, $demande->uuid, 'RCCM');

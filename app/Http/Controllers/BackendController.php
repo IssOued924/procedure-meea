@@ -369,6 +369,313 @@ class BackendController extends Controller
         return view('backend.list_demandep007', $data);
     }
 
+
+    //   liste des demandes de permis de detention dun animal p004
+
+    public function detailDemande($process, $id_demande)
+    {
+
+        //dd($process, $id_demande);
+
+        $statutDepose = StatutDemande::where('etat', '=', 'D')->first()->statut;
+        $statutArchive = StatutDemande::where('etat', '=', 'A')->first()->statut;
+        $statutRejete = StatutDemande::where('etat', '=', 'R')->first()->statut;
+        $statutEtude = StatutDemande::where('etat', '=', 'E')->first()->statut;
+        $statutComplement = StatutDemande::where('etat', '=', 'C')->first()->statut;
+        $statutSigne = StatutDemande::where('etat', '=', 'S')->first()->statut;
+        $statutValide = StatutDemande::where('etat', '=', 'V')->first()->statut;
+        $agents = Agent::all();
+
+        switch ($process) {
+            case 'P001':
+                $demandeP001Repository = new DemandeP001Repository;
+                $demandep001 = new DemandeP001;
+                $demande = DemandeP001::find($id_demande);
+                $demandeEnCours = $demandeP001Repository->nombre('demande_p001_s', array('etat' => 'en cours'));
+                $demandeEtat = $demandep001->statut();
+                $data = [
+                    "demande" => $demande,
+                    "statutDepose" => $statutDepose,
+                    "statutArchive" => $statutArchive,
+                    "statutRejete" => $statutRejete,
+                    "statutEtude" => $statutEtude,
+                    "statutComplement" => $statutComplement,
+                    "statutSigne" => $statutSigne,
+                    "statutValide" => $statutValide, 
+                    "demandeEnCours" => $demandeEnCours,
+                    "demandeEtat" => $demandeEtat,
+                    "agents" => $agents,
+                ];
+                
+        
+                return view('backend.detail_demande.detail_demande', $data);
+                break;
+            case 'P002':
+                $demandeP002Repository = new DemandeP002Repository;
+                $demandep002 = new DemandeP002;
+                $demande = DemandeP002::find($id_demande);
+                //dd($demande);
+                //dd($demande->pays);
+                $demandeEnCours = $demandeP002Repository->nombre('demande_p002_s', array('etat' => 'en cours'));
+                $demandeEtat = $demandep002->statut();
+                $data = [
+                    "demande" => $demande,
+                    "statutDepose" => $statutDepose,
+                    "statutArchive" => $statutArchive,
+                    "statutRejete" => $statutRejete,
+                    "statutEtude" => $statutEtude,
+                    "statutComplement" => $statutComplement,
+                    "statutSigne" => $statutSigne,
+                    "statutValide" => $statutValide, 
+                    "demandeEnCours" => $demandeEnCours,
+                    "demandeEtat" => $demandeEtat,
+                    "agents" => $agents,
+                ];
+                
+        
+                return view('backend.detail_demande.detail_demandep002', $data);
+                break;
+            case 'P003':
+                $demandeP003Repository = new DemandeP003Repository;
+                $demandep003 = new DemandeP003;
+                $demande = DemandeP003::find($id_demande);
+                
+                $demandeEnCours = $demandeP003Repository->nombre('demande_p003_s', array('etat' => 'en cours'));
+                $demandeEtat = $demandep003->statut();
+                $data = [
+                    "demande" => $demande,
+                    "statutDepose" => $statutDepose,
+                    "statutArchive" => $statutArchive,
+                    "statutRejete" => $statutRejete,
+                    "statutEtude" => $statutEtude,
+                    "statutComplement" => $statutComplement,
+                    "statutSigne" => $statutSigne,
+                    "statutValide" => $statutValide, 
+                    "demandeEnCours" => $demandeEnCours,
+                    "demandeEtat" => $demandeEtat,
+                    "agents" => $agents,
+                ];
+                
+        
+                return view('backend.detail_demande.detail_demandep003', $data);
+                break;
+            case 'P004':
+                $demandeP004Repository = new DemandeP004Repository;
+                $demandep004 = new DemandeP004;
+                $demande = DemandeP004::find($id_demande);                
+                $demandeEnCours = $demandeP004Repository->nombre('demande_p004_s', array('etat' => 'en cours'));
+                $demandeEtat = $demandep004->statut();
+                $data = [
+                    "demande" => $demande,
+                    "statutDepose" => $statutDepose,
+                    "statutArchive" => $statutArchive,
+                    "statutRejete" => $statutRejete,
+                    "statutEtude" => $statutEtude,
+                    "statutComplement" => $statutComplement,
+                    "statutSigne" => $statutSigne,
+                    "statutValide" => $statutValide, 
+                    "demandeEnCours" => $demandeEnCours,
+                    "demandeEtat" => $demandeEtat,
+                    "agents" => $agents,
+                ];                
+        
+                return view('backend.detail_demande.detail_demandep004', $data);
+                break;
+            case 'P005':
+                $demandeP005Repository = new DemandeP005Repository;
+                $demandep005 = new DemandeP005;
+                $demande = DemandeP005::find($id_demande);
+                $demandeEnCours = $demandeP005Repository->nombre('demande_p005_s', array('etat' => 'en cours'));
+                $demandeEtat = $demandep005->statut();
+                $data = [
+                    "demande" => $demande,
+                    "statutDepose" => $statutDepose,
+                    "statutArchive" => $statutArchive,
+                    "statutRejete" => $statutRejete,
+                    "statutEtude" => $statutEtude,
+                    "statutComplement" => $statutComplement,
+                    "statutSigne" => $statutSigne,
+                    "statutValide" => $statutValide, 
+                    "demandeEnCours" => $demandeEnCours,
+                    "demandeEtat" => $demandeEtat,
+                    "agents" => $agents,
+                ];
+                
+        
+                return view('backend.detail_demande.detail_demandep005', $data);
+                break;
+            case 'P006':
+                $demandeP006Repository = new DemandeP006Repository;
+                $demandep006 = new DemandeP006;
+                $demande = DemandeP006::find($id_demande);
+                $demandeEnCours = $demandeP006Repository->nombre('demande_p006_s', array('etat' => 'en cours'));
+                $demandeEtat = $demandep006->statut();
+                $data = [
+                    "demande" => $demande,
+                    "statutDepose" => $statutDepose,
+                    "statutArchive" => $statutArchive,
+                    "statutRejete" => $statutRejete,
+                    "statutEtude" => $statutEtude,
+                    "statutComplement" => $statutComplement,
+                    "statutSigne" => $statutSigne,
+                    "statutValide" => $statutValide, 
+                    "demandeEnCours" => $demandeEnCours,
+                    "demandeEtat" => $demandeEtat,
+                    "agents" => $agents,
+                ];
+                
+        
+                return view('backend.detail_demande.detail_demandep006', $data);
+                break;
+            case 'P007':
+                $demandeP007Repository = new DemandeP007Repository;
+                $demandep007 = new DemandeP007;
+                $demande = DemandeP007::find($id_demande);
+               
+                $demandeEnCours = $demandeP007Repository->nombre('demande_p007_s', array('etat' => 'en cours'));
+                $demandeEtat = $demandep007->statut();
+                $data = [
+                    "demande" => $demande,
+                    "statutDepose" => $statutDepose,
+                    "statutArchive" => $statutArchive,
+                    "statutRejete" => $statutRejete,
+                    "statutEtude" => $statutEtude,
+                    "statutComplement" => $statutComplement,
+                    "statutSigne" => $statutSigne,
+                    "statutValide" => $statutValide, 
+                    "demandeEnCours" => $demandeEnCours,
+                    "demandeEtat" => $demandeEtat,
+                    "agents" => $agents,
+                ];
+                
+        
+                return view('backend.detail_demande.detail_demandep007', $data);
+                break;
+            case 'P008':
+                $demandeP008Repository = new DemandeP008Repository;
+                $demandep008 = new DemandeP008;
+                $demande = DemandeP008::find($id_demande);
+                
+                $demandeEnCours = $demandeP008Repository->nombre('demande_p008_s', array('etat' => 'en cours'));
+                $demandeEtat = $demandep008->statut();
+                $data = [
+                    "demande" => $demande,
+                    "statutDepose" => $statutDepose,
+                    "statutArchive" => $statutArchive,
+                    "statutRejete" => $statutRejete,
+                    "statutEtude" => $statutEtude,
+                    "statutComplement" => $statutComplement,
+                    "statutSigne" => $statutSigne,
+                    "statutValide" => $statutValide, 
+                    "demandeEnCours" => $demandeEnCours,
+                    "demandeEtat" => $demandeEtat,
+                    "agents" => $agents,
+                ];
+                
+        
+                return view('backend.detail_demande.detail_demandep008', $data);
+                break;
+            case 'P009':
+                $demandeP009Repository = new DemandeP009Repository;
+                $demandep009 = new DemandeP009;
+                $demande = DemandeP009::find($id_demande);
+                $demandeEnCours = $demandeP009Repository->nombre('demande_p009_s', array('etat' => 'en cours'));
+                $demandeEtat = $demandep009->statut();
+                $data = [
+                    "demande" => $demande,
+                    "statutDepose" => $statutDepose,
+                    "statutArchive" => $statutArchive,
+                    "statutRejete" => $statutRejete,
+                    "statutEtude" => $statutEtude,
+                    "statutComplement" => $statutComplement,
+                    "statutSigne" => $statutSigne,
+                    "statutValide" => $statutValide, 
+                    "demandeEnCours" => $demandeEnCours,
+                    "demandeEtat" => $demandeEtat,
+                    "agents" => $agents,
+                ];
+                
+        
+                return view('backend.detail_demande.detail_demandep009', $data);
+                break;
+            case 'P0010':
+                $demandeP0010Repository = new DemandeP0010Repository;
+                $demandep0010 = new DemandeP0010;
+                $demande = DemandeP0010::find($id_demande);
+                $demandeEnCours = $demandeP0010Repository->nombre('demande_p0010_s', array('etat' => 'en cours'));
+                $demandeEtat = $demandep0010->statut();
+                $data = [
+                    "demande" => $demande,
+                    "statutDepose" => $statutDepose,
+                    "statutArchive" => $statutArchive,
+                    "statutRejete" => $statutRejete,
+                    "statutEtude" => $statutEtude,
+                    "statutComplement" => $statutComplement,
+                    "statutSigne" => $statutSigne,
+                    "statutValide" => $statutValide, 
+                    "demandeEnCours" => $demandeEnCours,
+                    "demandeEtat" => $demandeEtat,
+                    "agents" => $agents,
+                ];
+                
+        
+                return view('backend.detail_demande.detail_demandep0010', $data);
+                break;
+            case 'P0011':
+                $demandeP0011Repository = new DemandeP0011Repository;
+                $demandep0011 = new DemandeP0011;
+                $demande = DemandeP0011::find($id_demande);
+                
+                $demandeEnCours = $demandeP0011Repository->nombre('demande_p0011_s', array('etat' => 'en cours'));
+                $demandeEtat = $demandep0011->statut();
+                $data = [
+                    "demande" => $demande,
+                    "statutDepose" => $statutDepose,
+                    "statutArchive" => $statutArchive,
+                    "statutRejete" => $statutRejete,
+                    "statutEtude" => $statutEtude,
+                    "statutComplement" => $statutComplement,
+                    "statutSigne" => $statutSigne,
+                    "statutValide" => $statutValide, 
+                    "demandeEnCours" => $demandeEnCours,
+                    "demandeEtat" => $demandeEtat,
+                    "agents" => $agents,
+                ];
+                
+        
+                return view('backend.detail_demande.detail_demandep0011', $data);
+                break;
+            case 'P0012':
+                $demandeP0012Repository = new DemandeP0012Repository;
+                $demandep0012 = new DemandeP0012;
+                $demande = DemandeP0012::find($id_demande);
+                
+                $demandeEnCours = $demandeP0012Repository->nombre('demande_p0012_s', array('etat' => 'en cours'));
+                $demandeEtat = $demandep0012->statut();
+                $data = [
+                    "demande" => $demande,
+                    "statutDepose" => $statutDepose,
+                    "statutArchive" => $statutArchive,
+                    "statutRejete" => $statutRejete,
+                    "statutEtude" => $statutEtude,
+                    "statutComplement" => $statutComplement,
+                    "statutSigne" => $statutSigne,
+                    "statutValide" => $statutValide, 
+                    "demandeEnCours" => $demandeEnCours,
+                    "demandeEtat" => $demandeEtat,
+                    "agents" => $agents,
+                ];
+                
+        
+                return view('backend.detail_demande.detail_demandep0012', $data);
+                break;
+            default:
+                return redirect()->back();
+                break;
+        }
+    }
+
+
     // fonction d'assignation d'un collaborateur a un dossier
     public function assignation( $model,  $idDemande,   $nameDemandeId, $tableName, Request $request) {
         //Creer une affection
@@ -765,6 +1072,115 @@ class BackendController extends Controller
 
         ];
         return view('backend.lists_demandesAgents', $data);
+    }
+
+
+    public function dossierByStatus(
+        DemandeP001Repository $demandeP001Repository,
+        DemandeP002Repository $demandeP002Repository,
+        DemandeP003Repository $demandeP003Repository,
+        DemandeP004Repository $demandeP004Repository,
+        DemandeP005Repository $demandeP005Repository,
+        DemandeP006Repository $demandeP006Repository,
+        DemandeP007Repository $demandeP007Repository,
+        DemandeP008Repository $demandeP008Repository,
+        DemandeP0011Repository $demandeP0011Repository,
+        DemandeP0012Repository $demandeP0012Repository,
+        Request $request
+    ) {
+
+
+        //dd($demandes);
+        $demandes = null;
+        $data = [];
+        if (isset($request->procedure) && strlen($request->procedure) > 0) {
+            $proc = $request->procedure;
+            $etat = $request->etat;
+            switch ($proc) {
+                case 'P0012':
+                    if($request->etat != 'All')
+                        $demandes = $demandeP0012Repository->all(['etat' => $etat])->sortByDesc('created_at');
+                    else
+                        $demandes = $demandeP0012Repository->all()->sortByDesc('created_at');
+                    break;
+                case 'P001':
+                    if($request->etat != 'All')
+                        $demandes = $demandeP001Repository->all(['etat' => $etat])->sortByDesc('created_at');
+                    else
+                        $demandes = $demandeP001Repository->all()->sortByDesc('created_at');
+                    break;
+                case 'P003':
+                    if($request->etat != 'All')
+                        $demandes = $demandeP003Repository->all(['etat' => $etat])->sortByDesc('created_at');
+                    else
+                        $demandes = $demandeP003Repository->all()->sortByDesc('created_at');
+                    break;
+                case 'P008':
+                    if($request->etat != 'All')
+                        $demandes = $demandeP008Repository->all(['etat' => $etat])->sortByDesc('created_at');
+                    else
+                        $demandes = $demandeP008Repository->all()->sortByDesc('created_at');
+                    break;
+                case 'P006':
+                    if($request->etat != 'All')
+                        $demandes = $demandeP006Repository->all(['etat' => $etat])->sortByDesc('created_at');
+                    else
+                        $demandes = $demandeP006Repository->all()->sortByDesc('created_at');
+                    break;
+                case 'P004':
+                    if($request->etat != 'All')
+                        $demandes = $demandeP004Repository->all(['etat' => $etat])->sortByDesc('created_at');
+                    else
+                        $demandes = $demandeP004Repository->all()->sortByDesc('created_at');
+                    break;
+                case 'P005':
+                    if($request->etat != 'All')
+                        $demandes = $demandeP005Repository->all(['etat' => $etat])->sortByDesc('created_at');
+                    else
+                        $demandes = $demandeP005Repository->all()->sortByDesc('created_at');
+                    break;
+
+                case 'P0011':
+                    if($request->etat != 'All')
+                        $demandes = $demandeP0011Repository->all(['etat' => $etat])->sortByDesc('created_at');
+                    else
+                        $demandes = $demandeP0011Repository->all()->sortByDesc('created_at');
+                    break;
+                case 'P002':
+                    if($request->etat != 'All')
+                        $demandes = $demandeP002Repository->all(['etat' => $etat])->sortByDesc('created_at');
+                    else
+                        $demandes = $demandeP002Repository->all()->sortByDesc('created_at');
+                    break;
+                case 'P007':
+                    if($request->etat != 'All')
+                        $demandes = $demandeP007Repository->all(['etat' => $etat])->sortByDesc('created_at');
+                    else
+                        $demandes = $demandeP007Repository->all()->sortByDesc('created_at');
+                    break;
+
+                default:
+                    # code...
+                    break;
+            }
+        }
+        //dd($demandes);
+
+        $data = [
+            "demandes" => $demandes,
+            //"proc" => Procedure::all(),
+            "selectedEtat" => $request->etat,
+            "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
+            "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
+            "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
+            "statutEtude" => StatutDemande::where('etat', '=', 'E')->first()->statut,
+            "statutComplement" => StatutDemande::where('etat', '=', 'C')->first()->statut,
+            "statutSigne" => StatutDemande::where('etat', '=', 'S')->first()->statut,
+            "statutValide" => StatutDemande::where('etat', '=', 'V')->first()->statut,
+            "agents" => Agent::all(),
+        ];
+        return view('backend.list_demande'. strtolower($proc), $data);
+
     }
 
 
