@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
         $admin = User::create([
             'name' => 'SORO Halilou',
             'email' => 'ingitsoro@gmail.com',
-            'password' => Hash::make('123'),
+            'password' => Hash::make('password!'),
             'agent_id' => $agent->uuid,
            // 'role_id' => 'ingitsoro@gmail.com',
         ]);
@@ -43,15 +43,16 @@ class UsersTableSeeder extends Seeder
         $user_usager = User::create([
             'name' => 'Pro SARL',
             'email' => 'usager@usager.com',
-            'password' => Hash::make('123'),
+            'password' => Hash::make('password!'),
             'usager_id' => $usager->uuid
         ]);
         $admin = User::create([
             'name' => 'Admin Admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('123'),
+            'email' => 'admin@meea.com',
+            'password' => Hash::make('password!'),
             'agent_id' => 'd13d6f91-780c-49ae-8397-c471fac7b2',
-           'role_id' => '5298df89-26e0-4a6f-a677-dfc70d833419',
+            'role_id' => '5298df89-26e0-4a6f-a677-dfc70d833419',
+            'must_reset_password' => 0,
         ]);
     }
 }
