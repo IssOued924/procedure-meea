@@ -83,7 +83,7 @@
        @if (Auth::user()->usager->typeUsager->libelle_court == "PP")
         <h3>Mes informations</h3>
         
-        <form  method="POST" action="{{route('profile.update')}}" enctype="multipart/form-data"  >
+        <form  method="POST" action="{{route('profileP.update')}}" enctype="multipart/form-data"  >
             @csrf
 
           <div class="form-group">
@@ -102,7 +102,7 @@
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input name="email" class="form-control" type="text" value="{{Auth::user()->email}}">
+              <input name="email" class="form-control" disabled type="text" value="{{Auth::user()->email}}">
             </div>
           </div>
          
@@ -118,14 +118,14 @@
             <div class="col-md-8">
               <input type="submit" class="btn btn-primary" value="Enregistrer">
               <span></span>
-              <input type="reset" class="btn btn-default" value="Retour">
+              <a class="btn btn-default" href="javascript:history.back()">Retour</a>
             </div>
           </div>
         </form>
 
         @else 
 
-        <form  method="POST" action="{{route('profileMorale.update')}}" enctype="multipart/form-data"  >
+        <form  method="POST" action="{{route('profileM.update')}}" enctype="multipart/form-data"  >
             @csrf
 
           <div class="form-group">
@@ -151,7 +151,7 @@
           <div class="form-group">
             <label class="col-md-3 control-label">Email:</label>
             <div class="col-md-8">
-              <input name="email" class="form-control" type="text" value="{{Auth::user()->email}}">
+              <input name="email" class="form-control" disabled type="text" value="{{Auth::user()->email}}">
             </div>
           </div>
 
@@ -179,7 +179,7 @@
             <div class="col-md-8">
               <input type="submit" class="btn btn-primary" value="Enregistrer">
               <span></span>
-              <input type="reset" class="btn btn-default" value="Retour">
+              <a class="btn btn-default" href="javascript:history.back()">Retour</a>
             </div>
           </div>
         </form>

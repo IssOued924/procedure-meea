@@ -19,7 +19,7 @@
                     </div>
                 @endif</p>
 
-                <div class="col-6 offset-3"> @if(session('error'))
+                <div class="col-sm-12 col-lg-6 offset-3"> @if(session('error'))
                         <div class="alert alert-danger alert-dismissible" role="alert">
 
                             <h5 class="alert-heading">{{session('error')}}</h5>
@@ -56,13 +56,13 @@
                                             *</span></h4>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Nom & Prenom</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text"   name="beneficiaire"
                                                     placeholder="Votre nom" class="border-success form-control" value="{{ $name}}" />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Téléphone</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text"   name="telephone"
@@ -71,7 +71,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                             <label class="siege_social fw-bold">Province de résidence<span style="color:red">
                                                         *</span></label>
 
@@ -86,7 +86,7 @@
 
                                                 </select>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                             <label class="siege_social fw-bold">Commune de résidence/siège<span style="color:red">
                                                         *</span></label>
 
@@ -95,7 +95,7 @@
 
                                                 </select>
                                             </div>
-                                            {{-- <div class="col-6">
+                                            {{-- <div class="col-sm-12 col-lg-6">
                                                 <label class="siege_social fw-bold">Nationalite<span style="color:red">
                                                         *</span></label>
                                                  <input type="text" class="form-control border-success" placeholder="pays">
@@ -115,13 +115,13 @@
                                         <h2 class="fs-title">Identité Animal Detenu</h2>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Nom commun<span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="nom_commun"
                                                     placeholder="Nom Commun" required/>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Nom scientifique<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="nom_scientifique" class="border-success form-control" placeholder="Nom scientifique" required />
@@ -129,13 +129,13 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Classe d'age<span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="classe_age_animal"
                                                     placeholder="Classe d'age" required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Sexe animal<span style="color:red">
                                                         *</span></label>
 
@@ -149,7 +149,7 @@
 
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Lieu de provenance<span
                                                         style="color: red">*</span></label>
 
@@ -160,14 +160,14 @@
                                                         @endforeach
                                                     </select>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Conditions d'acquisition<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="condition_acquisition" class="border-success form-control" placeholder="Conditions d'acquisition" required/>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Motif de la détention<span
                                                         style="color: red">*</span></label>
                                                 <textarea type="text" class="border-success" name="motif_detention"
@@ -189,7 +189,7 @@
 
                                         <div class="row">
 
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Fichier certificat d'origine<span style="color:red">
                                                         *</span></label>
 
@@ -197,7 +197,7 @@
                                                 <input type="file" name="certificat_origine" class="form-control border-success" required/>
                                             </div>
 
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Fichier certificat sanitaire<span style="color:red">
                                                         *</span></label>
                                                         <br/>
@@ -400,6 +400,7 @@
                 $('#payNotOK').hide();
                 $('#numero').prop('disabled', true);
                 $('#otp').prop('disabled', true);
+                $('#btnAllEng').prop('disabled', true);
                 $("#errorMessage").hide();
                 $.ajax({
                     url: '/payOM',
@@ -427,6 +428,7 @@
                         } else {
                             $('#numero').prop('disabled', false);
                             $('#otp').prop('disabled', false);
+                            $('#btnAllEng').prop('disabled', false);
                             $("#loader").hide();
                             $('#payNotOK').show();
                         }

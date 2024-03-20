@@ -19,7 +19,7 @@
                     </div>
                 @endif</p>
 
-                <div class="col-6 offset-3"> @if(session('error'))
+                <div class="col-sm-12 col-lg-6 offset-3"> @if(session('error'))
                         <div class="alert alert-danger alert-dismissible" role="alert">
 
                             <h5 class="alert-heading">{{session('error')}}</h5>
@@ -71,13 +71,13 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Dénomination Sociale</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input class="border-success" type="text"   name="beneficiaire"
                                                     placeholder="Dénomination Sociale" required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="siege_social fw-bold">Lieu de résidence/siège<span style="color:red">
                                                         *</span></label>
 
@@ -94,11 +94,11 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Adresse Postale<span style="color: red"></span></label>
                                                 <input type="text" class="border-success"  name="adresse_beneficiaire" placeholder="Adresse ou numero de telephone" />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="boite_postale fw-bold">Telephone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" disabled disabled placeholder="Telephone" value="{{ $telephone}}" />
@@ -125,7 +125,7 @@
 
                                         <div class="row">
 
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_producteur fw-bold">Pays de production<span style="color:red">
                                                         *</span></label>
                                                         <select name="pays_producteur" id="selectMultiple" required class="form-select border-success">
@@ -136,7 +136,7 @@
                                                             @endforeach
                                                         </select>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_producteur fw-bold">Nom du producteur<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="nom_producteur" placeholder="Nom du producteur" required/>
@@ -145,7 +145,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse_producteur fw-bold">Adresse du producteur<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="adresse_producteur" placeholder="Adresse du producteur"  required/>
@@ -153,12 +153,12 @@
                                         </div>
 
                                         {{-- <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Adresse<span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="adresse_fournisseur"
                                                     placeholder="Adresse ou numero de telephone" />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="boite_postale">Telephone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" placeholder="Telephone" />
@@ -176,7 +176,7 @@
                                         <h2 class="fs-title">Caractéristiques de l'emballage ou du sachet plastique</h2>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="delai  fw-bold">Délai de biodégradabilité en nombre de mois<span
                                                         style="color: red">*</span></label>
                                                         <select name="delai" class="form-select border-success" id="" required>
@@ -190,7 +190,7 @@
                                                         </select>
 
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="micronage fw-bold">Micronage<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" class="border-success form-control" name="micronage" placeholder="Micronage" required/>
@@ -198,25 +198,25 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="poids fw-bold">Poids unitaire du produit</label><span style="color:red">
                                                     *</span>
                                                 <input type="text" class="border-success" name="poids" placeholder="Poids unitaire du produit" required/>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="description_physique fw-bold">Autres Caractéristiques physicochimiques </label>
                                                 <input type="text" class="border-success form-control" name="description_physique" placeholder="Autres Caractéristiques physicochimiques" />
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="quantite_annuel fw-bold">Quantité annuelle de production ou d'importation<span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success form-control" name="quantite_annuel"
                                                     placeholder="Quantité annuelle de production ou d'importation" required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Certificat de biodégradabilité<span style="color:red">
                                                         *</span></label>
                                                 <input type="file" class="form-control border-success" name="certificat_biodegradabilite" placeholder="Certificat de biodégradabilité" required/>
@@ -257,14 +257,14 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Autre à préciser</label>
                                                 <input type="text" class="border-success" name="type_local_stockage_autre"
                                                     placeholder="Autre à préciser " />
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Capacité Totale des locaux de stockage</label>
                                                 <input type="text" class="border-success" name="capacite_stockage"
                                                     placeholder="Capacité Totale des locaux de stockage" />
@@ -504,6 +504,7 @@ $(document).ready(function() {
                 $('#payNotOK').hide();
                 $('#numero').prop('disabled', true);
                 $('#otp').prop('disabled', true);
+                $('#btnAllEng').prop('disabled', true);
                 $("#errorMessage").hide();
                 $.ajax({
                     url: '/payOM',
@@ -530,6 +531,7 @@ $(document).ready(function() {
                         } else {
                             $('#numero').prop('disabled', false);
                             $('#otp').prop('disabled', false);
+                            $('#btnAllEng').prop('disabled', false);
                             $("#loader").hide();
                             $('#payNotOK').show();
                         }

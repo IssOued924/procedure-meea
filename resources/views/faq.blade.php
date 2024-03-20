@@ -10,11 +10,8 @@
       <div class="accordion-content">
         <p>Pour obtenir un permis d'écotourisme, suivez les étapes suivantes... [Informations spécifiques aux permis d'écotourisme.]</p>
         <ol>
-            <li>il Faut disposer des ces pieces</li>
+            <li>il Faut disposer des ses pieces</li>
             <li>Avoir le momtant (1500 F CFA) pour payer</li>
-            <li>il Faut disposer des ces pieces</li>
-            <li>il Faut disposer des ces pieces</li>
-            <li>il Faut disposer des ces pieces</li>
         </ol>
       </div>
     </div>

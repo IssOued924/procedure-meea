@@ -105,8 +105,8 @@ Route::middleware(['mustreset',])->group(function () {
 
 Route::middleware(['auth', 'mustreset'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/profile', [ProfileController::class, 'updateUsager'])->name('profile.update');
-    Route::post('/profile', [ProfileController::class, 'updateUsagerMorale'])->name('profileMorale.update');
+    Route::post('/profileP', [ProfileController::class, 'updateUsager'])->name('profileP.update');
+    Route::post('/profileM', [ProfileController::class, 'updateUsagerMorale'])->name('profileM.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // Route::get('/P001', [DemandeP001Controller::class, 'create'])->name('demandesp001-create');
 

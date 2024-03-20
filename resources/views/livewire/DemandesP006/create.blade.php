@@ -19,7 +19,7 @@
                     </div>
                 @endif</p>
 
-                <div class="col-6 offset-3"> @if(session('error'))
+                <div class="col-sm-12 col-lg-6 offset-3"> @if(session('error'))
                         <div class="alert alert-danger alert-dismissible" role="alert">
 
                             <h5 class="alert-heading">{{session('error')}}</h5>
@@ -54,22 +54,22 @@
                                         <h4 class="fs-title">Identité<span style="color:red">*</span></h4>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Identité</strong> <span style="color: red">*</span></label> <br />
                                                 <input type="text" class="border-success form-control" value="{{ $name }}"   name="libelle_court"  placeholder="nom prenom"  /> <br />
                                             </div>
 
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Téléphone</strong> <span style="color: red">*</span></label> <br />
                                                 <input type="text" class="border-success form-control" value="{{ $telephone }}"    name="libelle_long"  placeholder="Prenom"  /> <br />
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-sm-12 col-lg-6">
                                                     <label class="nom_societe fw-bold" >Addresse Postale</label>
                                                     <input type="text" class="form-control border-success" name="adresse_beneficiaire">
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-sm-12 col-lg-6">
                                                     <label class="nom_societe fw-bold" >Choisir Localite<span style="color:red">*</span></label>
                                                     <select name="commune_id" id="" class="form-select border-success" required>
                                                         <option value="">Veuillez Choisir la localite</option>
@@ -91,7 +91,7 @@
                                                     <label class="siege_social fw-bold ">Autre Personne</label>
                                                     <input type="radio" value="1"  name="beneficiaire"/>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-sm-12 col-lg-6">
                                                     <span id="errorRadio" style="display:none; color:red">Svp! Choississez le Beneficiaire</span>
                                                 </div>
                                             </div>
@@ -109,21 +109,21 @@
                                     <div class="form-card">
                                         <div class="row">
                                             <h2 class="fs-title">Pièces à fournir</h2>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Facture pro-format</strong> <span style="color: red">*</span></label> <br />
                                                 <input type="file" name="facture_pro"  class="form-control border-success " required/> <br />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="siege_social fw-bold">Importez le formulaire de demande d’exemption <span style="color:red">*</span></label> <br />
                                                     <input type="file" name="demande_form"    class="form-control border-success " required/> <br />
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                             <label class="siege_social fw-bold">Importez le Registre de commerce (RCCM) <span style="color:red">*</span></label> <br />
                                                     <input type="file" name="rccm"  class="form-control border-success" required/>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                         <label class="siege_social fw-bold">Document technique justifiant l’utilisation <span style="color:red">*</span></label> <br />
                                                         <input type="file" name="document_technique" class="form-control border-success" required/> <br />
 
@@ -132,7 +132,7 @@
 
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="siege_social fw-bold">Registre de traçabilité </label> <br />
                                                 <input type="file"  name="registre_tracabilite" class="form-control  border-success"/>
 
@@ -346,6 +346,7 @@ $(document).ready(function() {
                 $('#payNotOK').hide();
                 $('#numero').prop('disabled', true);
                 $('#otp').prop('disabled', true);
+                $('#btnAllEng').prop('disabled', true);
                 $("#errorMessage").hide();
                 $.ajax({
                     url: '/payOM',
@@ -372,6 +373,7 @@ $(document).ready(function() {
                         } else {
                             $('#numero').prop('disabled', false);
                             $('#otp').prop('disabled', false);
+                            $('#btnAllEng').prop('disabled', false);
                             $("#loader").hide();
                             $('#payNotOK').show();
                         }

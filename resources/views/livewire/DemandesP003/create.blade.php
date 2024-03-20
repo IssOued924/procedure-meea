@@ -18,7 +18,7 @@
                         {{ session('success') }}
                     </div>
                     @endif</p>
-                    <div class="col-6 offset-3"> @if(session('error'))
+                    <div class="col-sm-12 col-lg-6 offset-3"> @if(session('error'))
                         <div class="alert alert-danger alert-dismissible" role="alert">
 
                             <h5 class="alert-heading">{{session('error')}}</h5>
@@ -54,7 +54,7 @@
                                                 *</span></h4>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>identité</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success form-control"
@@ -91,14 +91,14 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Adresse Postale<span
                                                         style="color: red"></span></label>
                                                 <input type="text" class="border-success form-input"
                                                     name="adresse_beneficiaire"
-                                                    placeholder="Adresse postale"  />
+                                                    placeholder="Adresse postale" value="{{ $boite_postale}}" />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" class="form-control border-success"
@@ -125,13 +125,13 @@
                                     <div class="form-card">
                                         <h2 class="fs-title">Pièces à Fournir</h2>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">Permis de port d'arme <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success"
                                                     name="permis_arme" required>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">Photo d'identité <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success" name="photo" required>
@@ -141,13 +141,13 @@
                                         </div><br>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">CNIB ou passeport <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success"
                                                     name="cnib_passport" required>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">Document de l'arme <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success"
@@ -363,6 +363,7 @@ $(document).ready(function() {
                 $('#payNotOK').hide();
                 $('#numero').prop('disabled', true);
                 $('#otp').prop('disabled', true);
+                $('#btnAllEng').prop('disabled', true);
                 $("#errorMessage").hide();
                 $.ajax({
                     url: '/payOM',
@@ -391,6 +392,8 @@ $(document).ready(function() {
                             $('#otp').prop('disabled', false);
                             $("#loader").hide();
                             $('#payNotOK').show();
+                            $('#btnAllEng').prop('disabled', false);
+
                         }
                     },
                     error: function (jqXHR, textStatus, errorThrown){

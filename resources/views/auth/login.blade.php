@@ -11,7 +11,7 @@
 
     <!-- Favicons -->
     <link href="{{asset('img/armoirie.png')}}" rel="icon">
-    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{asset('img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
     <!-- Vendor CSS Files -->
     <link href="{{asset('vendor/animate.css/animate.min.css')}}" rel="stylesheet">
@@ -23,7 +23,7 @@
 
     <!-- Template Main CSS File -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-    <link href="./style.css" rel="stylesheet">
+    <link href="{{asset('style.css')}}" rel="stylesheet">
 
     <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" /> -->
     <link href="{{asset('css/google-font1')}}" rel="stylesheet" />
@@ -178,7 +178,7 @@
                                             <ul class="list-group list-group-flush ">
                                                 <li class="list-group-item">
                                                     <i class="bi bi-file-earmark-pdf me-1 text-success"> </i>   {{$ppj->libelle }}
-                                            </li>
+                                                </li>
                                         </ul>
                                         @endforeach
                                         </div>
@@ -209,7 +209,7 @@
                             <div>
                                 <x-input-label class="col-4" for="email" :value="__('Email')" />
                                 <x-text-input id="email" class="col-7 block mt-1 form-control " type="email"
-                                    name="email" :value="old('email')" required autofocus autocomplete="username" />
+                                    name="email" :value="old('email')" required autofocus autocomplete="off" />
                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>
 
@@ -274,7 +274,7 @@
                                 <x-input-error :messages="$errors->get('email')" style="margin-left:15%;" class="mt-2 text-danger" />
                                 <x-input-label class="col-2 offset-2" for="email" :value="__('Email')" />
                                 <x-text-input class="col-7" id="email"     value="{{ old('email') ?? '' }}" class="col-7 block mt-1 form-control @error('email') is-invalid @enderror" type="email"
-                                    name="email" :value="old('email')" required autofocus autocomplete="username" />
+                                    name="email" :value="old('email')" required autofocus autocomplete="off" />
                             </div>
 
                             <!-- Password -->

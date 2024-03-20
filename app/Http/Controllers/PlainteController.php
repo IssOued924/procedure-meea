@@ -51,9 +51,23 @@ class PlainteController extends Controller
     public function listePlainte(Request $request, $procedure="Toutes"){
 
         if($procedure == "Toutes"){
-            $listePlainte = Plainte::all()->sortByDesc("etat");
+            $listePlainte = Plainte::all()->sortByDesc("created_at");
         }else{
-            $listePlainte = Plainte::all()->where('procedure', "$procedure")->sortByDesc("etat");
+            //dd(Auth::user()->agent->service->libelle_court);
+            switch (Auth::user()->agent->service->libelle_court) {
+                case 'DGEF':
+
+                    $listePlainte = Plainte::all()->where('procedure', "$procedure")->sortByDesc("created_at");
+                    break;
+                case 'DGPE':
+                    $listePlainte = Plainte::all()->where('procedure', "$procedure")->sortByDesc("created_at");
+                    break;
+                case 'DGRE':
+                    $listePlainte = Plainte::all()->where('procedure', "$procedure")->sortByDesc("created_at");
+                    break;
+            }
+            
+            //$listePlainte = Plainte::all()->where('procedure', "$procedure")->sortByDesc("etat");
         }
 
         $procedures = Procedure::all();

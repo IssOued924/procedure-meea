@@ -74,10 +74,21 @@
                             <table {{ !empty($demandes) ? 'id="example1" ':  'id=""'}} class="table datatable table-bordered table-striped">
                                 <label>Filtrer les plaintes par procédure</label>
                                 <select name="procedure" id="procedure" class="form-select border-success" onchange="changeTypePlainte()">
-                                <option class="mb-3" value="Toutes">Toutes les plaintes</option>
-                                    @foreach($procedures as $proc)
+                                    {{-- @foreach($procedures as $proc)
                                         <option class="mb-3" {{($selectedProcedure == $proc->libelle_court ? 'selected': '')}} value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
-                                    @endforeach
+                                    @endforeach --}}
+                                    @if (Auth::user()->role->libelle == "Administration")
+                                        <option class="mb-3" value="Toutes">Toutes les plaintes</option>
+                                        @foreach($procedures as $proc)
+                                            <option class="mb-3" {{($selectedProcedure == $proc->libelle_court ? 'selected': '')}} value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach($procedures as $proc)
+                                            @if (Auth::user()->agent->service->libelle_court == $proc->service->libelle_court && Auth::user()->role->libelle == "Gestionnaire")
+                                                <option class="mb-3" {{($selectedProcedure == $proc->libelle_court ? 'selected': '')}} value="{{$proc->libelle_court}}">{{$proc->libelle_long." ".Auth::user()->agent->service->libelle_court}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </select><br><br>
 
                                 <thead>

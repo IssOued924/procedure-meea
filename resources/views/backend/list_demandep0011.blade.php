@@ -149,7 +149,7 @@
                                     <tr class="table-bordered">
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
-                                        <td> {{ $demande->usager->nom.' '.$demande->usager->prenom}}</td>
+                                        <td> {{ $demande->beneficiaire}}</td>
                                         <td>{{ $demande->exploitant }}</td>
                                         @if (isset($demande->localite))
                                         <td>{{ $demande->localite->libelle}}</td>

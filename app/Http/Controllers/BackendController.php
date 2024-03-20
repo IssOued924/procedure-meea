@@ -702,8 +702,13 @@ class BackendController extends Controller
              "commentaire" => $data["commentaire"]
          );
 
-        
+        try{
          Mail::to($agent_email)->send(new AffectDemandMailable( $demand ));
+        }catch (\Exception $e) {
+           
+            session()->flash('error',"Erreur d'envoie de mail; Vérifier votre connexion internet");
+
+        }
 
         Alert::success('Succès', 'demande assignée !');
         return redirect()->back();
@@ -967,7 +972,13 @@ class BackendController extends Controller
             "etat"   => StatutDemande::where('etat', $currentStatus)->first()->statut,
             "motif"   => $request->libelle
         );
+        try{
         Mail::to($user_email)->send(new RejectDemandMailable( $demand ));
+        }catch (\Exception $e) {
+            
+            session()->flash('error',"Erreur d'envoie de mail; Vérifier votre connexion internet");
+
+        }
 
         return redirect()->back()->with('success', "La Demande a été Rejetter avec succès !");
     }

@@ -5,7 +5,7 @@
     </div>
     @endif
 
-    <div class="col-6 offset-3"> @if(session('error'))
+    <div class="col-sm-12 col-lg-6 offset-3"> @if(session('error'))
                         <div class="alert alert-danger alert-dismissible" role="alert">
 
                             <h5 class="alert-heading">{{session('error')}}</h5>
@@ -99,14 +99,14 @@
 
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Dénomination
                                                         Sociale</strong> <span style="color: red">*</span></label>
                                                 <input type="text" class="border-success"
                                                     name="denomination_sociale_demandeur"
                                                     placeholder="Dénomination Sociale" required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="siege_social fw-bold">Lieu de résidence/siège<span
                                                         style="color:red">
                                                         *</span></label>
@@ -126,13 +126,13 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Adresse Postale </label>
                                                 <input type="text" class="border-success"
                                                     name="adresse_postale_demandeur"
                                                     placeholder="Adresse postale"  />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" class="border-success"
@@ -142,7 +142,7 @@
 
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Quantité totale à importer en KG<span style="color:red">
                                                     *</span></label>
                                                 <input type="number" min="0" class="form-control border-success" name="quantite"
@@ -206,7 +206,7 @@
                                      <br>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Autre à préciser</label>
                                                 <input type="text" class="border-success" name="autre_danger"
                                                     placeholder="Autre à préciser " />
@@ -249,13 +249,13 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Adresse<span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="adresse_fournisseur"
                                                     placeholder="Adresse ou numero de telephone" required />
                                             </div>
-                                            {{-- <div class="col-6">
+                                            {{-- <div class="col-sm-12 col-lg-6">
                                                 <label class="boite_postale">Telephone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" placeholder="Telephone" />
@@ -271,13 +271,13 @@
                                         <h2 class="fs-title">Pièces à fournir</h2>
                                         <Label>La taille de vos fichiers ne doit pas excéder 3Mo</Label>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe  fw-bold">Une copie de l’avis de faisabilité ou conformite
                                                     <span style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success"
                                                     name="avis_faisabilite" required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Une copie de RCCM<span
                                                         style="color:red">
                                                         *</span></label>
@@ -286,14 +286,14 @@
                                         </div><br>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Une facture pro-forma datant de moins
                                                     de six (06) mois<span style="color:red">
                                                         *</span> </label>
                                                 <input type="file" class="border-success form-control"
                                                     name="facture_pro_format" required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Une fiche de données de sécurité
                                                     ou fiche technique de chaque produit<span style="color:red">
                                                         *</span></label>
@@ -303,14 +303,14 @@
                                         </div><br>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Un registre de traçabilité des
                                                     produits ou substances chimiques <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="border-success form-control"
                                                     name="registre_tracabilite" required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Un registre des déchets issus de
                                                     leur utilisation <span style="color:red">
                                                         *</span></label>
@@ -320,14 +320,14 @@
                                         </div><br>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Une attestation de destination finale
                                                     pour le cas spécifique du cyanure <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="border-success form-control"
                                                     name="attestation_destination_finale" required/>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Liste des produits <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="border-success form-control"
@@ -374,18 +374,18 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-3"></div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <span id="errorRadioZone" style="display:none; color:red">Svp! Chochez au moins une case</span>
                                             </div>
                                             <div class="col-3"></div>
                                         </div><br>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Autre à préciser</label>
                                                 <input type="text" class="border-success"
                                                     name="type_local_stockage_autre" placeholder="Autre à préciser " />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Capacité Totale des locaux de stockage
                                                     <span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="capacite_stockage"
@@ -394,7 +394,7 @@
 
                                         </div><br>
                                         <div class="row">
-                                            {{-- <div class="col-6">
+                                            {{-- <div class="col-sm-12 col-lg-6">
                                                 <label class="boite_postale">Telephone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" placeholder="Telephone" />
@@ -413,7 +413,7 @@
                                             </div>
                                         </div> --}}
                                         <div class="row col">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label>Choisir le système de transport <span
                                                         style="color: red">*</span></label>
                                                 <div class="row">
@@ -434,7 +434,7 @@
                                             </div>
 
 
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label>Choisir agrèment<span style="color: red">*</span></label>
                                                 <div class="row">
                                                     <div class="col">
@@ -655,6 +655,7 @@ function testSize() {
                 $('#payNotOK').hide();
                 $('#numero').prop('disabled', true);
                 $('#otp').prop('disabled', true);
+                $('#btnAllEng').prop('disabled', true);
                 $("#errorMessage").hide();
                 $.ajax({
                     url: '/payOM',
@@ -681,6 +682,7 @@ function testSize() {
                         } else {
                             $('#numero').prop('disabled', false);
                             $('#otp').prop('disabled', false);
+                            $('#btnAllEng').prop('disabled', false);
                             $("#loader").hide();
                             $('#payNotOK').show();
                         }

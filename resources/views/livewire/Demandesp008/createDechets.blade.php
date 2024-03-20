@@ -15,7 +15,7 @@
                     <h5><strong>Demandes d'autorisation de gestion des déchets</strong></h5>
                     {{-- <p>Veuillez remplir tous les champs avant de passer une Etape</p> --}}
 
-                    <div class="col-6 offset-3"> @if(session('error'))
+                    <div class="col-sm-12 col-lg-6 offset-3"> @if(session('error'))
                         <div class="alert alert-danger alert-dismissible" role="alert">
 
                             <h5 class="alert-heading">{{session('error')}}</h5>
@@ -45,13 +45,13 @@
                                     <div class="form-card">
                                         <h2 class="fs-title">Information sur l'entreprise</h2>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="beneficiaire" class="nom_societe">Dénomination de la société
                                                     <span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="beneficiaire"
                                                     placeholder=" " required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="siege_social" class="siege_social">Siège social
                                                     <span style="color:red">*</span></label>
                                                 <select name="commune_id" id="" class="form-select border-success" required>
@@ -64,20 +64,20 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="adresse_beneficiaire" class="adresse fw-bold">Adresse
                                                     <span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="adresse_beneficiaire"
                                                     placeholder=" " required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="boite_postale" class="boite_postale fw-bold">Boite postale<span style="color:red">
                                                         </span></label>
                                                 <input type="text" name="boite_postale" class="border-success" placeholder=" "  />
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="activite fw-bold">Activités ménées
                                                     <!--span style="color: red">*</span--></label>
                                                 <input type="text" class="border-success" name="activite_menes"
@@ -95,12 +95,12 @@
                                         <h2 class="fs-title">Documents à fournir</h2>
 
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-sm-12 col-lg-6">
                                                     <label for="doc_rccm" class="nom_societe fw-bold">RCCM
                                                         <span style="color: red">*</span></label>
                                                     <input type="file" class="border-success  form-control" name="doc_rccm" required/>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-sm-12 col-lg-6">
                                                     <label for="doc_arrete_faisabilite" class="nom_societe fw-bold">Arrete de faisabilité
                                                         <span style="color: red">*</span></label>
                                                     <input type="file" class="border-success  form-control" name="doc_arrete_faisabilite" required/>
@@ -108,12 +108,12 @@
                                             </div><br>
 
                                            <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-sm-12 col-lg-6">
                                                     <label for="doc_avis_mairie" class="nom_societe fw-bold">Avis favorable de mairie
                                                         <span style="color: red">*</span></label>
                                                     <input type="file" class="border-success  form-control" name="doc_avis_mairie" required/>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-sm-12 col-lg-6">
                                                     <label for="doc_desc_technique" class="nom_societe fw-bold">Document technique descriptif
                                                         <span style="color: red">*</span></label>
                                                     <input type="file" class="border-success  form-control" name="doc_desc_technique" required/>
@@ -121,7 +121,7 @@
                                             </div><br>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="doc_registre_tracabilite" class="activite fw-bold">Registre de traçabilité </label>
                                                 <input type="file" class="border-success  form-control" name="doc_registre_tracabilite"/>
                                             </div>
@@ -334,6 +334,7 @@ $(document).ready(function() {
                 $('#payNotOK').hide();
                 $('#numero').prop('disabled', true);
                 $('#otp').prop('disabled', true);
+                $('#btnAllEng').prop('disabled', true);
                 $("#errorMessage").hide();
                 $.ajax({
                     url: '/payOM',
@@ -360,6 +361,7 @@ $(document).ready(function() {
                         } else {
                             $('#numero').prop('disabled', false);
                             $('#otp').prop('disabled', false);
+                            $('#btnAllEng').prop('disabled', false);
                             $("#loader").hide();
                             $('#payNotOK').show();
                         }

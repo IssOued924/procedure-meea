@@ -52,7 +52,7 @@
                                         <h4 class="fs-title">Identité du demandeur <span style="color:red">
                                             *</span></h4>
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-sm-12 col-lg-6">
                                                     <label class="nom_societe fw-bold">Identité <span
                                                             style="color: red">*</span></label>
                                                     <input type="text" class="border-success" name="identite" required placeholder="identité" value="{{ $identite }}" /><br /><br />
@@ -61,7 +61,7 @@
                                                     @endif
 
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-sm-12 col-lg-6">
                                                     <label class="pays_residence fw-bold">Commune de Residence<span style="color:red">
                                                             *</span></label>
                                                     <select name="commune_id" id="commune_id" class="border-success form-control" required>
@@ -87,7 +87,7 @@
                                                     <label class="siege_social fw-bold ">Autre Personne</label>
                                                     <input type="radio" value="Autre personne" name="beneficiaire"/>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-sm-12 col-lg-6">
                                                     <span id="errorRadio" style="display:none; color:red">Svp! Choississez le Beneficiaire</span>
                                                 </div>
                                                   @if($errors->has('beneficiaire'))
@@ -107,35 +107,35 @@
                                         <h2 class="fs-title">Pièces Administratives à fournir </h2>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Reçu d’achat du dossier de demande <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="border-success form-control" required name="recu_achat_dossier" />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Certificat IFU<span style="color: red">*</span></label>
                                                 <input type="file" class="border-success form-control" required name="ifu" />
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                             <div class="col-6">
+                                             <div class="col-sm-12 col-lg-6">
                                                 <label class="boite_postale">Attestation RCCM<span style="color:red">
                                                         *</span></label>
                                                 <input type="file" name="rccm"  class="border-success form-control" required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Attestation employeur CNSS<span style="color: red">*</span></label>
                                                 <input type="file" class="border-success form-control" required name="cnss"/>
                                             </div>
                                         </div>
                                         <div class="row">
-                                             <div class="col-6">
+                                             <div class="col-sm-12 col-lg-6">
                                                 <label class="boite_postale">Fiche Renseignement<span style="color:red">
                                                         *</span></label>
                                                 <input type="file" name="fiche_renseignement" required class="border-success form-control" />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Déclaration sur l’honneur de l’exactitude des informationsr<span style="color: red">*</span></label>
                                                 <input type="file" class="border-success form-control" required name="declaration_honneur"
                                                       />
@@ -152,7 +152,7 @@
                                     <div class="form-card">
                                         <h2 class="fs-title">Domaine et Catégorie</h2>
                                         <div class="row">
-                                            <div class="col-4">
+                                            <div class="col-sm-12 col-lg-4">
                                                 <label for="domaine" class="siege_social">Domaine
                                                     <span style="color:red">*</span></label>
                                                 <select name="domaine" id="domaine" onchange="getSousDomaine()" class="form-select border-success" required>
@@ -166,7 +166,7 @@
                                                  @endif
 
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-sm-12 col-lg-4">
                                                <label for="categorie" class="siege_social">Catégorie
                                                     <span style="color:red">*</span></label>
                                                 <select name="categorie" id="categorie" onchange="getSousDomaine()" class="form-select border-success" required>
@@ -179,7 +179,7 @@
                                                         <p class="alert alert-danger">{{ $errors->first('categorie') }}</p>
                                                  @endif
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-sm-12 col-lg-4">
                                                <label for="sousdomaine" class="nom_societe">Sous domaine
                                                     <span style="color: red">*</span></label>
                                                 <!--input type="text" class="border-success" name="sous_domaine" id="sousdomaine" required /-->
@@ -501,6 +501,7 @@ function testSize() {
                 $('#payNotOK').hide();
                 $('#numero').prop('disabled', true);
                 $('#otp').prop('disabled', true);
+                $('#btnAllEng').prop('disabled', true);
                 $("#errorMessage").hide();
                 $.ajax({
                     url: '/payOM',
@@ -527,6 +528,7 @@ function testSize() {
                         } else {
                             $('#numero').prop('disabled', false);
                             $('#otp').prop('disabled', false);
+                            $('#btnAllEng').prop('disabled', false);
                             $("#loader").hide();
                             $('#payNotOK').show();
                         }

@@ -167,7 +167,7 @@
                     <div>
                         <x-input-label for="email" :value="__('Email')" />
                         <x-text-input id="email" class="block mt-1 form-control " type="email" name="email"
-                            :value="old('email')" required autofocus autocomplete="username" />
+                            :value="old('email')" required autofocus autocomplete="off" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
@@ -230,7 +230,7 @@
                                         <div>
                                             <x-input-label for="email" :value="__('Email')" />
                                             <x-text-input id="email" class="block mt-1 form-control " type="email" name="email"
-                                                :value="old('email')" required autofocus autocomplete="username" />
+                                                :value="old('email')" required autofocus autocomplete="off" />
                                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
 
@@ -298,13 +298,13 @@
         });
     </script>
     <!-- Vendor JS Files -->
-    <script src="vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="vendor/php-email-form/validate.js"></script>
+    <script src="{{ asset('vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="{{ asset('vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="{{ asset('vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="{{ asset('vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="{{ asset('vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
     <script src="js/main.js"></script>

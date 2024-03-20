@@ -55,6 +55,7 @@ class DemandeCompP0011 extends Component
             "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->usager->telephone,
             "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
+            "boite_postale" => Auth::user()->usager->boite_postale,
             "provinces" => Province::all()->sortBy('libelle'),
           
             "communes" => Commune::all(),

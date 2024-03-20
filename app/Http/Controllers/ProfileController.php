@@ -79,7 +79,7 @@ public function updateUsager(Request $request) {
     $user->usager->prenom = $data["prenom"];
     $user->usager->telephone = $data["telephone"];
 
-    $user->email = $data["email"];
+    //$user->email = $data["email"];
 
 
    
@@ -108,7 +108,7 @@ public function updateUsagerMorale(Request $request) {
     $user->usager->boite_postale = $data["boite_postale"];
     $user->usager->ifu = $data["ifu"];
 
-    $user->email = $data["email"];
+    //$user->email = $data["email"];
 
 
    

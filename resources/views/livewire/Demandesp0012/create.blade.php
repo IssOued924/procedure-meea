@@ -8,7 +8,7 @@
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
                 <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
                     <h5><strong>Demande de permis d'écotourisme ou tourisme écologique</strong></h5>
-                    <div class="col-6 offset-3"> @if(session('success'))
+                    <div class="col-sm-12 col-lg-6 offset-3"> @if(session('success'))
                         <div class="alert alert-success alert-dismissible" role="alert">
 
                             <h5 class="alert-heading">{{session('success')}}</h5>
@@ -23,7 +23,7 @@
                     @endif</div>
 
 
-                    <div class="col-6 offset-3"> @if(session('error'))
+                    <div class="col-sm-12 col-lg-6 offset-3"> @if(session('error'))
                         <div class="alert alert-danger alert-dismissible" role="alert">
 
                             <h5 class="alert-heading">{{session('error')}}</h5>
@@ -111,12 +111,12 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Adresse Postale<span style="color: red"></span></label>
-                                                <input type="text" class="border-success" value=""
+                                                <input type="text" class="border-success" value="{{ $boite_postale}}"
                                                     placeholder="Adresse postale"  />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone"  disabled class="border-success"   placeholder="Telephone" value="{{ $telephone}}" />
@@ -144,12 +144,12 @@
                                         <Label>La taille de vos fichiers ne doit pas excéder 3Mo</Label>
                                         <div class="row">
 
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">CNIB ou Passport<span style="color:red">
                                                     *</span></label>
                                                 <input type="file" id="cnibFile"  name="cnib" class="form-control border-success" required>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">Photo d'identité<span style="color:red">
                                                     *</span></label>
                                                 <input type="file" name="photo" class="form-control border-success" required>
@@ -157,7 +157,7 @@
                                         </div><br>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">Liste des personnes concernées<span style="color:red">
                                                     *</span></label>
                                                 <input type="file" name="list_personne" class="form-control border-success" required>
@@ -379,6 +379,7 @@ $(document).ready(function() {
                 $('#payNotOK').hide();
                 $('#numero').prop('disabled', true);
                 $('#otp').prop('disabled', true);
+                $('#btnAllEng').prop('disabled', true);
                 $("#errorMessage").hide();
                 $.ajax({
                     url: '/payOM',
@@ -405,6 +406,7 @@ $(document).ready(function() {
                         } else {
                             $('#numero').prop('disabled', false);
                             $('#otp').prop('disabled', false);
+                            $('#btnAllEng').prop('disabled', false);
                             $("#loader").hide();
                             $('#payNotOK').show();
                         }

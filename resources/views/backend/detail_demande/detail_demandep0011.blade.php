@@ -134,7 +134,7 @@
                                     <div class="col-3">
                                         <span class="checkbox payment-radio">
                                         <label for="wish_payment_type_1"  class="fw-bold">
-                                            <input class="checkbox check_boxes required" type="checkbox" value="1" @if($demande->exploitant == 1) checked @endif>Exploitant Forestier
+                                            <input class="checkbox check_boxes required" type="checkbox" value="1" @if($demande->exploitant == 'Forestier') checked @endif>Exploitant Forestier
                                         </label>
                                         </span>
                                     </div>
@@ -143,7 +143,7 @@
 
                                         <span class="checkbox payment-radio">
                                         <label for="wish_payment_type_2" class="fw-bold">
-                                            <input class="checkbox check_boxes required" type="checkbox" value="1" @if($demande->exploitant == 2) checked @endif>Exploitant Commercial 
+                                            <input class="checkbox check_boxes required" type="checkbox" value="1" @if($demande->exploitant == 'Commercial') checked @endif>Exploitant Commercial 
                                         </label>
                                         </span>
                                     </div>
@@ -361,7 +361,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form method="post" enctype="multipart/form-data"
-                                                action="{{ route('assignation', ['model' =>'AffectationP004', 'idDemande' => $demande->uuid ,'nameDemandeId'=> 'demande_p004_id', 'tableName'=>'demande_p0011_s'] ) }}">
+                                                action="{{ route('assignation', ['model' =>'AffectationP0011', 'idDemande' => $demande->uuid ,'nameDemandeId'=> 'demande_p0011_id', 'tableName'=>'demande_p0011_s'] ) }}">
                                                 @csrf
 
 

@@ -44,7 +44,7 @@ class DemandeP0011Controller extends Controller
           
             'protocole_daccord' => 'required|file|max:5120',
             'agrement' => 'required|file|max:5120',
-            'quitance' =>  'required|file|max:5120',
+            //'quitance' =>  'required|file|max:5120',
             // 3072 correspond à 3 Mo (3 * 1024)
         ]);
         
@@ -85,7 +85,7 @@ class DemandeP0011Controller extends Controller
 
         $protocole_daccord =  $this->repository->uploadFile($dataFiles, 'protocole_daccord');
         $agrement =  $this->repository->uploadFile($dataFiles, 'agrement');
-        $quitance =  $this->repository->uploadFile($dataFiles, 'quitance');
+        //$quitance =  $this->repository->uploadFile($dataFiles, 'quitance');
 
         //    dd($cheminFaisabilite, $cheminRccm, $facture_pro_format);
         unset($data['cnib']);
@@ -93,7 +93,7 @@ class DemandeP0011Controller extends Controller
         unset($data['rccm']);}
         unset($data['protocole_daccord']);
         unset($data['agrement']);
-        unset($data['quitance']);
+        //unset($data['quitance']);
 
         unset($data['moyen']);
         unset($data["numero"]);
@@ -130,7 +130,7 @@ class DemandeP0011Controller extends Controller
         $demandePieceP0011Repository->setChemin($cheminRccm, $demande->uuid, 'RCCM');}
         $demandePieceP0011Repository->setChemin($protocole_daccord, $demande->uuid, 'Protocole d\'accord');
         $demandePieceP0011Repository->setChemin($agrement, $demande->uuid, 'Agrement');
-        $demandePieceP0011Repository->setChemin($quitance, $demande->uuid, 'Quittance');
+        //$demandePieceP0011Repository->setChemin($quitance, $demande->uuid, 'Quittance');
 
         return redirect('/demandes-lists?procedure=PCBCB')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
     }
@@ -158,8 +158,8 @@ class DemandeP0011Controller extends Controller
     unset($data['current_rccm']);
     unset($data['protocole_daccord']);
         unset($data['agrement']);
-        unset($data['quitance']);
-        unset($data['current_quitance']);
+        // unset($data['quitance']);
+        // unset($data['current_quitance']);
         unset($data['current_agrement']);
 
         unset($data['current_protocole_daccord']);
@@ -199,12 +199,12 @@ class DemandeP0011Controller extends Controller
              @unlink($request->current_agrement);
          }
 
-         if ($request->file('quitance')) {
-            $quitance =  $this->repository->uploadFile($dataFiles, 'quitance');
-            $demandePieceP0011Repository->setChemin($quitance, $demande->uuid, 'Quittance');
-             DB::table('demande_piece_p0011_s')->where('chemin',  $request->current_quitance)->delete();
-             @unlink($request->current_quitance);
-         }
+        //  if ($request->file('quitance')) {
+        //     $quitance =  $this->repository->uploadFile($dataFiles, 'quitance');
+        //     $demandePieceP0011Repository->setChemin($quitance, $demande->uuid, 'Quittance');
+        //      DB::table('demande_piece_p0011_s')->where('chemin',  $request->current_quitance)->delete();
+        //      @unlink($request->current_quitance);
+        //  }
 
 
         return redirect('/demandes-lists?procedure=PCBCB')->with('success', 'Votre Demande à bien été Modifiée et en cours de traitement !!');

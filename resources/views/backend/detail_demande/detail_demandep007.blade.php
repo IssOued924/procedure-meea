@@ -390,7 +390,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form method="post" enctype="multipart/form-data"
-                                                action="{{ route('assignation', ['model' =>'AffectationP004', 'idDemande' => $demande->uuid ,'nameDemandeId'=> 'demande_p004_id', 'tableName'=>'demande_p007_s'] ) }}">
+                                                action="{{ route('assignation', ['model' =>'AffectationP007', 'idDemande' => $demande->uuid ,'nameDemandeId'=> 'demande_p007_id', 'tableName'=>'demande_p007_s'] ) }}">
                                                 @csrf
 
 

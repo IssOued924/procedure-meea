@@ -154,7 +154,7 @@
                                                     placeholder="superficie" />
                                             </div>
                                             <div class="col-6">
-                                                <label class="nom_societe fw-bold"> <strong>Quota/Quantite</strong> <span
+                                                <label class="nom_societe fw-bold"> <strong>Quota/Quantite(Stère)</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input id='quota' type="number" class="form-control border-success"  value="{{ $demande->quantite }}"   name="quantite"
                                                     placeholder="Quota/Quantite" />
@@ -190,8 +190,8 @@
                                                 $pathPa = $doc->chemin;
                                             if($doc->libelle =="Agrement")
                                                 $pathAgrement = $doc->chemin;
-                                            if($doc->libelle =="Quittance")
-                                                $pathQuitance = $doc->chemin;
+                                            // if($doc->libelle =="Quittance")
+                                            //     $pathQuitance = $doc->chemin;
                                                       ?>
                                                     <a  class="text-success" target="_blank" href="{{ Storage::url($doc->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$doc->libelle}}</b></a>
                                                     <br>
@@ -224,11 +224,11 @@
                                         </div><br>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            {{-- <div class="col-6">
                                                 <label for="demande timbre" class="fw-bold">Quittance </label>
                                                 <input type="file" class="form-control border-success" name="quitance">
                                                 <input type="hidden" class="form-control border-success" value="{{ $pathQuitance }}" name="current_quitance">
-                                            </div>
+                                            </div> --}}
 
 
                                         </div>

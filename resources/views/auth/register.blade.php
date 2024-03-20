@@ -137,7 +137,7 @@
                         <div class="row g-3 align-items-center">
                             <x-input-label class="col-4  text-white" for="email" :value="__('Email')" />
                             <x-text-input class="col-7" id="email"  type="email" name="email"
-                                :value="old('email')" required autocomplete="username" />
+                                :value="old('email')" required autocomplete="off" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div><br>
 
@@ -225,7 +225,7 @@
                         <div class="row g-3 align-items-center">
                             <x-input-label class="col-4  text-white" for="email" :value="__('Email')" />
                             <x-text-input class="col-7" id="email"  type="email" name="email"
-                                :value="old('email')" required autocomplete="username" />
+                                :value="old('email')" required autocomplete="off" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
 

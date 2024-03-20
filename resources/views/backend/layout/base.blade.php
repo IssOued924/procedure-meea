@@ -371,11 +371,9 @@
         </ul>
       </li><!-- End Icons Nav -->
 
+      @endif
 
-
-
-
-
+      @if (Auth::user()->role->libelle == 'Administration' || Auth::user()->role->libelle == 'Gestionnaire')
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#plainte-nav" data-bs-toggle="collapse" href="#">

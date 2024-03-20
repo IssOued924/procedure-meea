@@ -15,7 +15,7 @@
 
                     <img src="{{ asset('img/logo_meea.jpg') }}" width="50px" height="70px" />
                     <h1 class="mt-4" style="margin-left: 8%; display:inline">
-                        <a href="/">Portail des demandes des services en ligne du MEEA</a>
+                        <a href="/" style="font-size:15px !important;">Portail des demandes de service en ligne du MEEA</a>
                     </h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->

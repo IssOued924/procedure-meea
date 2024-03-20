@@ -252,7 +252,13 @@ class RegisteredUserController extends Controller
             "password" => "12345678"
         );
 
+        try{
         Mail::to($user->email)->send(new CreateUserMailable($demand));
+        }catch (\Exception $e) {
+                
+            session()->flash('error',"Erreur d'envoie de mail; Vérifier votre connexion internet");
+
+        }
 
         return redirect()->route('user-list')->with('success', 'Utilisateur créé avec succès !!');
     }
@@ -307,7 +313,13 @@ class RegisteredUserController extends Controller
             "name" => $user->name,
             "password" => "12345678"
         );
+        try{
         Mail::to($email)->send(new ResetPasswordMailable($demand));
+        }catch (\Exception $e) {
+                    
+            session()->flash('error',"Erreur d'envoie de mail; Vérifier votre connexion internet");
+
+        }
         return redirect()->back()->with('success', 'Mot de passe réinitialisé avec succès !!');
     }
 

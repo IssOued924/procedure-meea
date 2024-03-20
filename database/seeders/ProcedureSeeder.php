@@ -108,7 +108,7 @@ $agent->save();
 
 
 
-        Procedure::create([
+        $prc1 = Procedure::create([
             "libelle_court" => "AGDS",
             "libelle_long" =>"Autorisation de gestion des déchets Solide",
             "description" => "A propos de ce service La Demande d'autorisation de gestion des dechets est une autorisation officielle officiel qui certifie le lieu de résidence d'une personne au moment de la demande. Le dossier est traité par les autorités de l'Administration Locale au niveau du Secteur.",
@@ -119,9 +119,10 @@ $agent->save();
             "delai"=> "32",
             "tarif" => 1500
         ]);
+        $prc1->save();
 
 
-        Procedure::create([
+        $prc2 = Procedure::create([
             "libelle_court" => "DATIPC",
             "libelle_long" =>"Délivrance d'avis technique d'importation de produits chimiques ",
             "description" => "Description de produit chimique",
@@ -132,7 +133,10 @@ $agent->save();
             "delai"=> "32",
             "tarif" => 1600
         ]);
-        Procedure::create([
+        $prc2->save();
+
+
+        $prc3 = Procedure::create([
             "libelle_court" => "CEESPNB",
             "libelle_long" =>"Certificat d'exemption des emballages et sachets plastiques non biodégradables",
             "description" => "Description des exemptions",
@@ -143,7 +147,10 @@ $agent->save();
             "delai"=> "32",
             "tarif" => 1700
         ]);
-        Procedure::create([
+        $prc3->save();
+
+
+        $prc4 = Procedure::create([
             "libelle_court" => "CHESPB",
             "libelle_long" =>"Certificat d'Homologation des emballages et sachets plastiques biodégradables",
             "description" => "Description des homologations",
@@ -154,7 +161,11 @@ $agent->save();
             "delai"=> "32",
             "tarif" => 1800
         ]);
-        Procedure::create([
+        $prc4->save();
+
+
+
+        $prc5 = Procedure::create([
             "libelle_court" => "OATEA",
             "libelle_long" =>"Octroit d'agrément technique eau et assainissement",
             "description" => "L’exercice des entreprises et bureaux d’études dans le domaine de
@@ -167,7 +178,11 @@ $agent->save();
             "delai"=> "75",
             "tarif" => 1400
         ]);
-        Procedure::create([
+        $prc5->save();
+
+
+
+        $prc6 = Procedure::create([
             "libelle_court" => "PETE",
             "libelle_long" =>"Permis d'écotourisme ou de tourisme écologique",
             "description" => "Document administratif autorisant une personne physique à pénétrer
@@ -181,7 +196,11 @@ $agent->save();
             "delai"=> "7",
             "tarif" => 1300
         ]);
-        Procedure::create([
+        $prc6->save();
+
+
+
+        $prc7 = Procedure::create([
             "libelle_court" => "CDAS",
             "libelle_long" =>"Certificat de détention d'un animal sauvage",
             "description" => "Acte administratif autorisant une personne physique ou morale nationale,
@@ -195,7 +214,11 @@ $agent->save();
             "delai"=> "40",
             "tarif" => 1200
         ]);
-        Procedure::create([
+        $prc7->save();
+
+
+
+        $prc8 = Procedure::create([
             "libelle_court" => "ADDMC",
             "libelle_long" =>"Autorisation donnant droit à mener la chasse",
             "description" => "Acte administratif autorisant une tierce personne à effectuer la chasse
@@ -207,7 +230,9 @@ $agent->save();
             "delai"=> "7",
             "tarif" => 1100
         ]);
-        Procedure::create([
+        $prc8->save();
+
+        $prc9 = Procedure::create([
             "libelle_court" => "PCBCB2",
             "libelle_long" =>"Permis de circulation du bois et charbon de bois",
             "description" => "Permis pour tout transport de bois et charbon de bois en vue de consommation/distribution.",
@@ -218,7 +243,9 @@ $agent->save();
             "delai"=> "8",
             "tarif" => 1000
         ]);
-        Procedure::create([
+        $prc9->save();
+
+        $prc10 = Procedure::create([
             "libelle_court" => "PCBCB",
             "libelle_long" =>"Permis de coupe du bois et charbon de bois",
             "description" => "Description de la coupe du bois",
@@ -229,6 +256,7 @@ $agent->save();
             "delai"=> "8",
             "tarif" => 1500
         ]);
+        $prc10->save();
 
 
     }

@@ -29,7 +29,7 @@
                     </script>
                 @endif</p>
 
-                <div class="col-6 offset-3"> @if(session('error'))
+                <div class="col-sm-12 col-lg-6 offset-3"> @if(session('error'))
                         <div class="alert alert-danger alert-dismissible" role="alert">
 
                             <h5 class="alert-heading">{{session('error')}}</h5>
@@ -70,18 +70,18 @@
                                             <div class="row">
                                                 <div class="col-3">
                                                     <label class="nom_societe fw-bold" >Exploitant Forestier</label>
-                                                    <input id='radio1Forestier' type="radio" class="border-success" value="1" name="exploitant"/>
+                                                    <input id='radio1Forestier' type="radio" class="border-success" value="Forestier" name="exploitant"/>
                                                 </div>
                                                 <div class="col-3">
                                                     <label class="siege_social fw-bold ">Exploitant Commercial</label>
-                                                    <input  id='radio2Commercial' type="radio" class="border-success" value="2"  name="exploitant"/>
+                                                    <input  id='radio2Commercial' type="radio" class="border-success" value="Commercial"  name="exploitant"/>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-sm-12 col-lg-6">
                                                     <span id="errorRadio" style="display:none; color:red">Svp! Choississez un type d'exploitant</span>
                                                 </div>
                                             </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Identité</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="form-control border-success" value="{{ $name }}"
@@ -105,7 +105,7 @@
 
 
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="siege_social fw-bold">Commune de résidence/siège<span style="color:red">
                                                         *</span></label>
 
@@ -119,12 +119,12 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Adresse Postale<span style="color: red"></span></label>
                                                 <input type="text"class="form-control border-success"  name="adresse_beneficiaire"
-                                                    placeholder="Adresse ou numero de telephone" />
+                                                    placeholder="Adresse ou numero de telephone" value="{{ $boite_postale}}" />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="boite_postale fw-bold">Telephone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" value="{{ $telephone }}" class="form-control border-success" placeholder="Telephone" value="{{ $telephone}}" required/>
@@ -145,46 +145,46 @@
                                             *</span></h4>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Statut de la zone</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input id='statut' type="text"  class="form-control border-success"   name="statut"
                                                     placeholder="statut"  required/>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Espèce Concerné</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input id='espece' type="text" class="form-control border-success"    name="espece_coupe"
                                                     placeholder="espèce" required/>
                                             </div>
 
-                                            <div id='superficie' class="col-6">
-                                                <label class="nom_societe fw-bold"> <strong>Superficie</strong> <span
+                                            <div id='superficie' class="col-sm-12 col-lg-6">
+                                                <label class="nom_societe fw-bold"> <strong>Superficie (ha)</strong> <span
                                                         style="color: red">*</span></label>
-                                                <input  type="number" class="form-control border-success"    name="superficie"
+                                                <input  type="number"  min="0" class="form-control border-success"    name="superficie"
                                                     placeholder="superficie"  required/>
                                             </div>
 
-                                            <div id='depot' class="col-6">
+                                            <div id='depot' class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Depot</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input  type="text" class="form-control border-success" name="depot"
                                                     placeholder="depot"  required />
                                             </div>
 
-                                            <div id='nature' class="col-6">
+                                            <div id='nature_produit' class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Nature du produit</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input  type="text" class="form-control border-success" name="nature_produit"
                                                     placeholder="superficie" required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Quota/Quantite</strong> <span
                                                         style="color: red">*</span></label>
-                                                <input id='quota' type="number" class="form-control border-success"    name="quantite"
+                                                <input id='quota' type="number" min="0" class="form-control border-success"    name="quantite"
                                                     placeholder="Quota/Quantite" required />
                                             </div>
-                                            {{-- <div class="col-6">
+                                            {{-- <div class="col-sm-12 col-lg-6">
                                                 <label class="siege_social fw-bold">Espece Concernés<span style="color:red">
                                                         *</span></label>
 
@@ -214,22 +214,22 @@
                                     <div class="form-card">
                                         <h2 class="fs-title">Pièce à Fournir</h2>
                                         <div class="row mb-3">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">CNIB/Passeport<span style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success" name="cnib" required />
                                             </div>
-                                            <div  id='rccm' class="col-6">
+                                            <div  id='rccm' class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">RCCM <span style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success" name="rccm"  required />
                                             </div>
                                         </div><br>
                                         <div class="row">
 
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">Protocole d’accord<span style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success" name="protocole_daccord" required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">Agrement<span style="color: red">*</span></label>
                                                 <input id='agrement' type="file" class="form-control border-success" name="agrement" required />
                                             </div>
@@ -237,10 +237,10 @@
                                         </div><br>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            {{-- <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">Quittance </label>
                                                 <input type="file" class="form-control border-success" name="quitance" required />
-                                            </div>
+                                            </div> --}}
 
 
                                         </div>
@@ -443,6 +443,7 @@
                 $('#payNotOK').hide();
                 $('#numero').prop('disabled', true);
                 $('#otp').prop('disabled', true);
+                $('#btnAllEng').prop('disabled', true);
                 $("#errorMessage").hide();
                 $.ajax({
                     url: '/payOM',
@@ -469,6 +470,7 @@
                         } else {
                             $('#numero').prop('disabled', false);
                             $('#otp').prop('disabled', false);
+                            $('#btnAllEng').prop('disabled', false);
                             $("#loader").hide();
                             $('#payNotOK').show();
                         }
@@ -670,21 +672,21 @@ jQuery('input[name=moyen]:radio').click(function(){
         if(divId == 'Forestier'){
             $("#superficie").show();
             $('input[name=superficie]').attr('required', true);
-            $("#nature").hide();
+            $("#nature_produit").hide();
             $("#depot").hide();
             $("#rccm").hide();
 
-            $('input[name=nature]').attr('required', false); 
+            $('input[name=nature_produit]').attr('required', false); 
             $('input[name=depot]').attr('required', false); 
             $('input[name=rccm]').attr('required', false); 
 
         }else if(divId == 'Commercial'){
             $("#superficie").hide();
             $('input[name=superficie]').attr('required', false);
-            $("#nature").show();
+            $("#nature_produit").show();
             $("#depot").show();
             $("#rccm").show();
-            $('input[name=nature]').attr('required', true); 
+            $('input[name=nature_produit]').attr('required', true); 
             $('input[name=depot]').attr('required', true); 
             $('input[name=rccm]').attr('required', true); 
         }

@@ -189,6 +189,8 @@
                                                                             <b>Identite demandeur:</b>
                                                                             <span>{{ $demande->usager->nom.'
                                                                     '.$demande->usager->prenom}}</span>
+                                                                    {{-- <span>{{ $demande->beneficiaire}}</span> --}}
+                                                                    
 
                                                                         </div>
                                                                         <div class="col-6">

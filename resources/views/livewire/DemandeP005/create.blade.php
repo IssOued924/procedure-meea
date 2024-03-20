@@ -40,13 +40,13 @@
                                         <h4 class="fs-title">Identité du demandeur <span style="color:red">*</span></h4>
 
                                         <div class="row">
-                                            <div class="col">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>Identité du demandeur</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="form-control border-success" value="{{ $name }}"  name="identite"
                                                     placeholder="Identité du demandeur" />
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="siege_social fw-bold">Province de résidence<span style="color:red">
                                                         *</span></label>
 
@@ -64,7 +64,7 @@
 
                                             </div>
 
-                                            <div class="col">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="siege_social fw-bold">Commune de résidence/siège<span style="color:red">
                                                         *</span></label>
 
@@ -86,12 +86,12 @@
                                         <h2 class="fs-title">Information sur le produit</h2>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Nature du produit<span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="form-control border-success" name="nature_produit" placeholder="Nature du produit" required/>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Quantité du produit<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" class="form-control border-success" name="quantite_produit" placeholder="Quantite du produit" required/>
@@ -99,12 +99,12 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Origine du produit<span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="form-control border-success" name="origine_produit" placeholder="Origine du produit" required/>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Destination du produit<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" class="form-control border-success" name="destination_produit" placeholder="Destination du produit" required/>
@@ -123,12 +123,12 @@
                                         <h2 class="fs-title">Informations relatives au transport</h2>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe  fw-bold">Moyen de transport<span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="form-control border-success" name="moyen_transport" placeholder="Moyen de transport" required/>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Immatriculation<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="immatriculation" class="form-control border-success" placeholder="Immantriculation du vehicule" required/>
@@ -136,11 +136,11 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Duree du transport</label>
                                                 <input type="text" class="form-control border-success" name="duree_parcours" placeholder="Duree du transport" />
                                             </div>
-                                            <div class="col-6"></div>
+                                            <div class="col-sm-12 col-lg-6"></div>
                                         </div>
 
                                     </div>
@@ -338,6 +338,7 @@
                 $('#payNotOK').hide();
                 $('#numero').prop('disabled', true);
                 $('#otp').prop('disabled', true);
+                $('#btnAllEng').prop('disabled', true);
                 $("#errorMessage").hide();
                 $.ajax({
                     url: '/payOM',
@@ -364,6 +365,7 @@
                         } else {
                             $('#numero').prop('disabled', false);
                             $('#otp').prop('disabled', false);
+                            $('#btnAllEng').prop('disabled', false);
                             $("#loader").hide();
                             $('#payNotOK').show();
                         }

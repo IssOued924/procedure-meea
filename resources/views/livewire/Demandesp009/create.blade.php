@@ -19,7 +19,7 @@
                     </div>
                     @endif</p>
 
-                    <div class="col-6 offset-3"> @if(session('error'))
+                    <div class="col-sm-12 col-lg-6 offset-3"> @if(session('error'))
                         <div class="alert alert-danger alert-dismissible" role="alert">
 
                             <h5 class="alert-heading">{{session('error')}}</h5>
@@ -54,14 +54,14 @@
                                                 *</span></h4>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold"> <strong>identité</strong> <span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success form-control"
                                                     value="{{ $name }}" name="identite" placeholder="Nom et prenom"
                                                     required />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="siege_social fw-bold">Lieu de résidence/siège<span
                                                         style="color:red">
                                                         *</span></label>
@@ -80,14 +80,14 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Adresse Postale<span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success form-input"
                                                     name="adresse_beneficiaire"
                                                     placeholder="Adresse ou numero de telephone" />
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" name="telephone" class="form-control border-success"
@@ -114,13 +114,13 @@
                                     <div class="form-card">
                                         <h2 class="fs-title">Pièces à Fournir</h2>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">Permis de port d'arme <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success"
                                                     name="permis_arme">
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">Photo d'identité <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success" name="photo">
@@ -130,13 +130,13 @@
                                         </div><br>
 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">CNIB ou passeport <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success"
                                                     name="cnib_passport">
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-sm-12 col-lg-6">
                                                 <label for="demande timbre" class="fw-bold">Document de l'arme <span
                                                         style="color: red">*</span></label>
                                                 <input type="file" class="form-control border-success"
@@ -315,6 +315,7 @@
                 $('#payNotOK').hide();
                 $('#numero').prop('disabled', true);
                 $('#otp').prop('disabled', true);
+                $('#btnAllEng').prop('disabled', true);
                 $("#errorMessage").hide();
                 $.ajax({
                     url: '/payOM',
@@ -341,6 +342,7 @@
                         } else {
                             $('#numero').prop('disabled', false);
                             $('#otp').prop('disabled', false);
+                            $('#btnAllEng').prop('disabled', false);
                             $("#loader").hide();
                             $('#payNotOK').show();
                         }
