@@ -2,8 +2,7 @@
     border: 0;
     margin-top: 0px;
     border-radius: 50px;
-    padding: 10px 24px;
-    margin-left: 40%;
+    
     color: #fff;
     transition: 0.4s;']) }}>
     {{ $slot }}

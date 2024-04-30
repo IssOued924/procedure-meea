@@ -171,7 +171,7 @@
                 <a class="nav-link " href="{{ route('administration') }}">
                     <i class="bi bi-grid"></i>
 
-                    <span>Tableaau de Bord</span>
+                    <span>Tableau de Bord</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
@@ -267,6 +267,12 @@
 
 
             @if (Auth::user()->role->libelle == 'Administration')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('paiements-list') }}">
+                    <i class="bi bi-cash"></i><span>Paiements</span>
+                </a>
+            </li>
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse"
                         href="#">

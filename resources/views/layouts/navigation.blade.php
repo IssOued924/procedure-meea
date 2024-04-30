@@ -14,7 +14,7 @@
                 <div class="container  d-flex float-start logo">
 
                     <img src="{{ asset('img/logo_meea.jpg') }}" width="50px" height="70px" />
-                    <h1 class="mt-4" style="margin-left: 8%; display:inline">
+                    <h1>
                         <a href="/" style="font-size:15px !important;">Portail des demandes de service en ligne du MEEA</a>
                     </h1>
                     <!-- Uncomment below if you prefer to use an image logo -->

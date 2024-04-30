@@ -64,8 +64,7 @@
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option value="">Veuillez choisir une Province</option>
                                                     @foreach ( $provinces as  $prov)
-                                                     <option value="{{ $prov->uuid }}" >{{ $prov->libelle }}</option>
-
+                                                        <option value="{{ $prov->uuid }}" {{ $demande->province_id == $prov->uuid ? 'selected' : ''}}>{{ $prov->libelle }}</option>
                                                     @endforeach
 
 
@@ -77,7 +76,9 @@
                                                         *</span></label>
 
                                                 <select name="commune_id"  id="communes" class="form-select border-success" required>
-                                                   
+                                                    @foreach ( $communes as  $comm)
+                                                        <option {{ $comm->uuid == $demande->commune_id ? 'selected' : ''}} value="{{ $comm->uuid }}" >{{ $comm->libelle }}</option>
+                                                    @endforeach
 
                                                 </select>
                                             </div>
@@ -126,9 +127,9 @@
                                                         *</span></label>
 
                                                 <select name="sexe_animal" id="" class="border-success form-select" required>
-                                                    <option value="{{ $demande->sexe_animal == 'Mâle' ? 'Femelle' : '' }}"  >Veuillez choisir le sexe de l'animal</option>
-                                                    <option value="">Mâle</option>
-                                                    <option value="">Femelle</option>
+                                                    <option value=""  >Veuillez choisir le sexe de l'animal</option>
+                                                    <option value="{{ $demande->sexe_animal }}" {{ $demande->sexe_animal == 'M' ? 'selected' : ''}} >Mâle</option>
+                                                    <option value="{{ $demande->sexe_animal }}" {{ $demande->sexe_animal == 'F' ? 'selected' : ''}} >Femelle</option>
                                                 </select>
                                             </div>
                                         </div>

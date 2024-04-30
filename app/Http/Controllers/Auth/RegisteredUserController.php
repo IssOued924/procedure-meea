@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\AffectDemandMailable;
 use App\Mail\CreateUserMailable;
+use App\Mail\PortailMEEAMailable;
 use App\Mail\ResetPasswordMailable;
 use App\Models\Agent;
 use App\Models\Role;
@@ -55,7 +56,6 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
            
         ]);
-       
 
      
         // creation de usager
@@ -89,11 +89,38 @@ class RegisteredUserController extends Controller
        
         $user->save();
         $usager->save();
-        Auth::login($user);
+
+        // $token = encrypt($user->uuid);
+
+        // $url = URL::to("/")."/activ"."/".$token;
+
+        // $mailInfos = [
+        //     "view" => "inscription",
+        //     "title" => "Activation de compte",
+        //     "salutation"  => "Chèr(e) abonné(e)!",
+        //     "text1"  => "Félicitation pour la création de votre compte.",
+        //     "text2"  => "Veuillez cliquer sur le bouton ci-dessous pour vérifier votre adresse e-mail.",
+        //     "url" => $url,
+        //     "text3" => "Si vous n'avez pas créé de compte, aucune action supplémentaire n'est nécessaire. \n Si vous avez des difficultés à cliquer sur le bouton \"Vérifier l\'adresse e-mail\", copiez et collez l'URL ci-dessous dans votre navigateur web.:",
+            
+        // ];
+
+        // $demand = array(
+        //     "email"  => $user->email,
+        //     "name" => $usager->nom . ' ' . $usager->prenom,
+        // );
+
+        // try{
+        //     Mail::to($user->email)->send(new PortailMEEAMailable($mailInfos));
+        // }catch (\Exception $e) {
+                    
+        //     session()->flash('error',"Erreur d'envoie de mail; Vérifier votre connexion internet");
+        // }
+        //Auth::login($user);
 
         // session()->flash('success', 'Registration successful!');
 
-        return redirect(RouteServiceProvider::HOME)->with('success', 'Bienvenue !');;
+        return redirect(RouteServiceProvider::LOGIN)->with('success', 'Bienvenue !');;
     }
 
     /**

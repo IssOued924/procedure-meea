@@ -76,13 +76,13 @@
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <label class="adresse fw-bold">Adresse Postale<span style="color: red">*</span></label>
-                                                <input type="text" class="border-success" required name="adresse_beneficiaire" value="{{ $demande->adresse_beneficiaire }}" placeholder="Adresse ou numero de telephone" />
+                                                <label class="adresse fw-bold">Adresse Postale</label>
+                                                <input type="text" class="border-success" name="adresse_beneficiaire" value="{{ $demande->adresse_beneficiaire }}" placeholder="Adresse ou numero de telephone" />
                                             </div>
                                             <div class="col-6">
                                                 <label class="boite_postale fw-bold">Telephone<span style="color:red">
                                                         *</span></label>
-                                                <input type="text" name="telephone" disabled disabled placeholder="Telephone" value="{{ $telephone}}" />
+                                                <input type="text" name="telephone" placeholder="Telephone" value="{{ $telephone}}" />
                                             </div>
                                         </div>
 

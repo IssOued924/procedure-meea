@@ -83,8 +83,8 @@
                                         <th scope="col">Quantite/Kg</th>
                                         <th scope="col">Résidence</th>
                                         <th scope="col">etat Demande</th>
-                                        <th scope="col">Délai</th>
                                         <th scope="col">Paiement</th>
+                                        <th scope="col">Délai</th>
                                         <th scope="col">Déposé</th>
                                         <th scope="col">Assigné a</th>
 

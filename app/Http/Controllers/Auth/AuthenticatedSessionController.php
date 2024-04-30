@@ -77,14 +77,22 @@ class AuthenticatedSessionController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            if(!is_null(Auth::user()->agent_id))
-            {
-                return redirect('/administration');
-            }else{
-                return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Bienvenue ');
-        //  return  redirect('/');
-             }
+            //dd(Auth::user()->email_verified_at != NULL);
+            //if (Auth::user()->email_verified_at != NULL) {
+                $request->session()->regenerate();
+                if(!is_null(Auth::user()->agent_id))
+                {
+                    return redirect('/administration');
+                }else{
+                    return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Bienvenue ');
+            //  return  redirect('/');
+                }
+            // }else{
+            //     Auth::logout();
+            //     return redirect('/verify-email');
+
+            // }
+            
         }
         return back()->withErrors([
             'email' => 'email incorrects',

@@ -58,8 +58,7 @@
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option value="">Veuillez choisir une Province</option>
                                                     @foreach ( $provinces as  $prov)
-                                                     <option value="{{ $prov->uuid }}" >{{ $prov->libelle }}</option>
-
+                                                        <option value="{{ $prov->uuid }}" {{ $demande->province_id == $prov->uuid ? 'selected' : ''}}>{{ $prov->libelle }}</option>
                                                     @endforeach
 
 
@@ -74,7 +73,9 @@
                                                         *</span></label>
 
                                                 <select name="commune_id"  id="communes" class="form-select border-success" required>
-                                                    {{-- <input type="text" placeholder="filtrer ici"> --}}
+                                                    @foreach ( $communes as  $comm)
+                                                        <option {{ $comm->uuid == $demande->commune_id ? 'selected' : ''}} value="{{ $comm->uuid }}" >{{ $comm->libelle }}</option>
+                                                    @endforeach
 
                                                 </select>
                                             </div>

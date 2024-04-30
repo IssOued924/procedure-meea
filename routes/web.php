@@ -61,6 +61,7 @@ use Illuminate\Support\Facades\Auth;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::middleware(['mustreset',])->group(function () {
     Route::get('/', function () {
         if (Auth::user()){
@@ -74,14 +75,14 @@ Route::middleware(['mustreset',])->group(function () {
             'procedure' => $procedure
         ]);
     }
-}else {
-      
-    $procedure=Procedure::all();
-    return view('welcome', [
-        'procedure' => $procedure
-    ]);
+    }else {
+        
+        $procedure=Procedure::all();
+        return view('welcome', [
+            'procedure' => $procedure
+        ]);
 
-}
+    }
     });
 
     // routes des tests
@@ -89,21 +90,20 @@ Route::middleware(['mustreset',])->group(function () {
     Route::post('/test-store', [DemandeController::class, 'store'])->name('test-route');
 
     Route::get('/testpj', [DemandeController::class, 'testpj']);
-*/
+    */
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
-    Route::get('/faq', function () {
-        return view('faq');
-    })->name('faq');
-
-    Route::get('/contact', [ContactUsFormController::class, 'createForm']);
-    Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
-
 });
 
-Route::middleware(['auth', 'mustreset'])->group(function () {
+Route::get('/faq', function () { return view('faq');})->name('faq');
+
+
+Route::get('/contact', [ContactUsFormController::class, 'createForm'])->name('contact');
+Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
+
+Route::middleware(['auth', 'mustreset', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profileP', [ProfileController::class, 'updateUsager'])->name('profileP.update');
     Route::post('/profileM', [ProfileController::class, 'updateUsagerMorale'])->name('profileM.update');
@@ -174,6 +174,9 @@ Route::middleware(['auth', 'mustreset'])->group(function () {
 
     // Paiement
     Route::post('/payOM', [PaiementController::class, 'payOM']);
+
+    Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
+    Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
            });
 
 
@@ -194,6 +197,8 @@ Route::get('/administration/demandesp007-list', [BackendController::class, 'list
 Route::get('/administration/demandesp002-list', [BackendController::class, 'listDemandep002'])->name('demandesp002-list');
 
 Route::get('/administration/detail-demandes/{process}/{id_demande}', [BackendController::class, 'detailDemande'])->name('detail-demande');
+
+Route::get('/paiements', [BackendController::class, 'paiements'])->name('paiements-list');;
 
 
 
@@ -272,6 +277,7 @@ Route::get('/administration/statistique/nombreDemandeEncours', [BackendControlle
 Route::get('/get-communes/{province_id}', [ProvinceController::class,  'getCommunesByProvince']);
 Route::get('/demandes-lists', [BackendController::class, 'listsDemande'])->name('demandes-lists');
 Route::get('/dossiers-by-status', [BackendController::class, 'dossierByStatus'])->name('dossiersByStatus');
+Route::get('/paiements-by-options', [BackendController::class, 'paiementByOptions'])->name('paiementByOptions');
 
 
 
@@ -279,8 +285,6 @@ Route::get('/dossiers-by-status', [BackendController::class, 'dossierByStatus'])
 
 
 // plainte
-Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
-Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
 Route::get('/listePlainte/{procedure}', [PlainteController::class, 'listePlainte'])->name('listePlainte');
 Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
 

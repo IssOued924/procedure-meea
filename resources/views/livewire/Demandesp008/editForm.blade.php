@@ -58,9 +58,8 @@
                                                     placeholder=" " required />
                                             </div>
                                             <div class="col-6">
-                                                <label for="boite_postale" class="boite_postale fw-bold">Boite postale<span style="color:red">
-                                                        *</span></label>
-                                                <input type="text" value="{{ $demande->boite_postale }}" name="boite_postale" class="border-success" placeholder=" " required />
+                                                <label for="boite_postale" class="boite_postale fw-bold">Boite postale</label>
+                                                <input type="text" value="{{ $demande->boite_postale }}" name="boite_postale" class="border-success" placeholder="Boite postale" />
                                             </div>
                                         </div>
                                         <div class="row">
@@ -135,13 +134,13 @@
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <label for="doc_registre_tracabilite" class="activite fw-bold">Registre de traçabilité </label>
+                                                <label for="doc_registre_tracabilite" class="activite fw-bold">Registre de traçabilité <span style="color:red">*</span></label>
                                                 <input type="file" class="border-success  form-control" name="doc_registre_tracabilite"/>
                                                 <input type="hidden" class="border-success  form-control" value="{{ $pathTracabilite }}" name="current_doc_registre_tracabilite"/>
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="button" class="previous action-button-previous" value="Retour" />
+                                    <input type="button" class="previous action-button-previous" value="Retour"/>
                                     <input type="button" class="next action-button" value="Suivant" />
                                 </fieldset>
                                 <fieldset>

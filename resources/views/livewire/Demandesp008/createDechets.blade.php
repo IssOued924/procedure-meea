@@ -122,8 +122,8 @@
 
                                         <div class="row">
                                             <div class="col-sm-12 col-lg-6">
-                                                <label for="doc_registre_tracabilite" class="activite fw-bold">Registre de traçabilité </label>
-                                                <input type="file" class="border-success  form-control" name="doc_registre_tracabilite"/>
+                                                <label for="doc_registre_tracabilite" class="activite fw-bold">Registre de traçabilité <span style="color:red">*</span></label>
+                                                <input type="file" class="border-success  form-control" name="doc_registre_tracabilite" required/>
                                             </div>
                                         </div>
                                     </div>

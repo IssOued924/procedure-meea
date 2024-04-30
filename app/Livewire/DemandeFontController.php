@@ -125,7 +125,7 @@ class DemandeFontController extends Component
                 case 'CEESPNB':
                     $demande = DemandeP006::where(['uuid' => $id])->first();
                     $documents = DemandePieceP006::where(['demande_p006_id' => $id])->get();
-                    $view ='livewire.Demandesp006.edit';
+                    $view ='livewire.DemandesP006.edit';
                     $data = [
                         "demande" => $demande,
                         "documents" => $documents,
@@ -149,6 +149,7 @@ class DemandeFontController extends Component
                         "provinces" => Province::all()->sortBy("libelle"),
                       
                     ];
+
                     break;
                 case 'PCBCB':
                     $demande = DemandeP0011::where(['uuid' => $id])->first();

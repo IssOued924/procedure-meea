@@ -51,12 +51,19 @@
 
 <x-header/>
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Avez vous oubliez votre mot de passe? Pas de panique. Entrer juste votre email pour redefinir un nouveau mot de passe.') }}
+    <div class="row">
+        <div class="col-3 mb-4 text-sm text-gray-600 dark:text-gray-400"></div>
+        <div class="col-6 mb-4 text-sm text-gray-600 dark:text-gray-400">
+            {{ __('Avez vous oubliez votre mot de passe?') }} </br>
+            {{ __('Pas de panique. Entrer juste votre email pour redefinir un nouveau mot de passe.') }}
+            <x-auth-session-status class="mb-4" :status="session('status')" />
+        </div>
+        <div class="col-3 mb-4 text-sm text-gray-600 dark:text-gray-400"></div>
     </div>
+    
 
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+   
 
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
@@ -68,11 +75,19 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6 flex items-center justify-end mt-4 text-sm text-gray-600 dark:text-gray-400">
+                <button type="submit" class="btn btn-primary"> {{ __('Recuperer par email') }}</button>
+            </div>
+            <div class="col-3"></div>
+        </div>
+
+        {{-- <div class="flex items-center justify-end mt-4">
             <x-primary-button>
                 {{ __('Recuperer par email') }}
             </x-primary-button>
-        </div>
+        </div> --}}
     </form>
 </x-guest-layout>
 

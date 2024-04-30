@@ -117,7 +117,7 @@
                                                 <label class="adresse fw-bold">Adresse Postale </label>
                                                 <input type="text" class="border-success"
                                                     name="adresse_postale_demandeur"
-                                                    placeholder="Adresse ou numero de telephone" value="{{ $demande->adresse_postale_demandeur }}" required />
+                                                    placeholder="Adresse ou numero de telephone" value="{{ $demande->adresse_postale_demandeur }}" />
                                             </div>
                                             <div class="col-6">
                                                 <label class="boite_postale fw-bold">Téléphone<span style="color:red">
@@ -341,11 +341,8 @@
                                                 <label class="nom_societe fw-bold">Un registre de traçabilité des
                                                     produits ou substances chimiques <span
                                                         style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control"
-                                                    name="registre_tracabilite"   />
-
-                                                    <input type="hidden" value="{{ $pathTracabilite  }}" class="border-success form-control"
-                                                    name="current_registre_tracabilite"   />
+                                                <input type="file" class="border-success form-control" name="registre_tracabilite" />
+                                                <input type="hidden" value="{{ $pathTracabilite  }}" class="border-success form-control" name="current_registre_tracabilite"  />
                                             </div>
                                             <div class="col-6">
                                                 <label class="pays_residence fw-bold">Un registre des déchets issus de

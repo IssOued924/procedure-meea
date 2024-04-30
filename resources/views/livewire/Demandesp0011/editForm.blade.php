@@ -67,9 +67,17 @@
                                         
                                         <div class="row">
                                             <div class="col-6">
-                                                <label class="adresse fw-bold">Adresse Postale<span style="color: red">*</span></label>
+                                                <label class="nom_societe fw-bold"> <strong>identité</strong> <span
+                                                        style="color: red">*</span></label>
+                                                <input type="text" class="border-success form-control"
+                                                    value="{{ $name }}" name="identite" placeholder="Nom et prenom"
+                                                    required  />
+                                            </div>
+
+                                            <div class="col-6">
+                                                <label class="adresse fw-bold">Adresse Postale</label>
                                                 <input type="text"class="form-control border-success" value="{{ $demande->adresse_beneficiaire }}" name="adresse_beneficiaire"
-                                                    placeholder="Adresse ou numero de telephone" required />
+                                                    placeholder="Adresse ou numero de telephone" />
                                             </div>
                                             <div class="col-6">
                                                 <label class="boite_postale fw-bold">Telephone<span style="color:red">
@@ -85,8 +93,7 @@
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option value="">Veuillez choisir une Province</option>
                                                     @foreach ( $provinces as  $prov)
-                                                     <option value="{{ $prov->uuid }}" >{{ $prov->libelle }}</option>
-
+                                                        <option value="{{ $prov->uuid }}" {{ $demande->province_id == $prov->uuid ? 'selected' : ''}}>{{ $prov->libelle }}</option>
                                                     @endforeach
 
 
@@ -100,7 +107,9 @@
                                                         *</span></label>
 
                                                 <select name="commune_id"  id="communes" class="form-select border-success" required>
-                                                    {{-- <input type="text" placeholder="filtrer ici"> --}}
+                                                    @foreach ( $communes as  $comm)
+                                                        <option {{ $comm->uuid == $demande->commune_id ? 'selected' : ''}} value="{{ $comm->uuid }}" >{{ $comm->libelle }}</option>
+                                                    @endforeach
 
                                                 </select>
                                             </div>

@@ -21,6 +21,7 @@ use App\Models\DemandeP003;
 use App\Models\DemandeP006;
 use App\Models\DemandeP007;
 use App\Models\DemandeP008;
+use App\Models\Paiement;
 use App\Models\DemandePieceP001;
 use App\Models\Procedure;
 use App\Models\StatutDemande;
@@ -676,6 +677,20 @@ class BackendController extends Controller
     }
 
 
+    public function paiements()
+    {
+        $data = [
+            'paiements' => Paiement::all(),
+        ];
+
+        
+
+        return view('backend.paiements', $data);
+
+
+    }
+
+
     // fonction d'assignation d'un collaborateur a un dossier
     public function assignation( $model,  $idDemande,   $nameDemandeId, $tableName, Request $request) {
         //Creer une affection
@@ -1194,6 +1209,28 @@ class BackendController extends Controller
 
     }
 
+
+    public function paiementByOptions(Request $request) {
+
+        $paiements = null;
+        $data = [];
+        if (isset($request->option) && strlen($request->option) > 0) {
+            $option = $request->option;
+
+            if($option != 'All')
+                $paiements = Paiement::where('type_paiement', $option.'Money')->get();//->sortByDesc('created_at');
+            else
+                $paiements = Paiement::all();
+
+        }
+
+        $data = [
+            "paiements" => $paiements,
+            "selectedOption" => $option,
+        ];
+        return view('backend.paiements', $data);
+
+    }
 
     //profile user-metiers
 

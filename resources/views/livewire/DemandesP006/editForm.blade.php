@@ -65,7 +65,7 @@
                                                 </div>
                                             </div>
 
-                                            <h4 class="fs-title">Beneficiaire <span style="color:red">
+                                            {{-- <h4 class="fs-title">Beneficiaire <span style="color:red">
                                                 *</span></h4>
                                             <div class="row">
                                                 <div class="col-3">
@@ -76,7 +76,7 @@
                                                     <label class="siege_social fw-bold ">Autre Personne</label>
                                                     <input type="radio" {{ intval($demande->beneficiaire==1) ? 'checked' : '' }}  value="1"  name="beneficiaire"/>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
 
                                     </div>
@@ -141,7 +141,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <label class="siege_social fw-bold">Registre de traçabilité </label> <br />
+                                                <label class="siege_social fw-bold">Registre de traçabilité <span style="color:red">*</span></label> <br />
                                                 <input type="file"  name="registre_tracabilite" class="form-control  border-success"/>
                                                 <input type="hidden"  value="{{ $pathTracabilite }}" name="registre_tracabilite" class="form-control  border-success"/>
                                             </div>

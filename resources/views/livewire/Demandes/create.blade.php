@@ -307,8 +307,7 @@
                                                 <label class="nom_societe fw-bold">Un registre de traçabilité des
                                                     produits ou substances chimiques <span
                                                         style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-control"
-                                                    name="registre_tracabilite" required />
+                                                <input type="file" class="border-success form-control" name="registre_tracabilite" required />
                                             </div>
                                             <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_residence fw-bold">Un registre des déchets issus de

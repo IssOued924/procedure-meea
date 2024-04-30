@@ -80,7 +80,7 @@
                                                 </div>
                                             </div>
 
-                                            <h4 class="fs-title">Beneficiaire <span style="color:red">
+                                            {{-- <h4 class="fs-title">Beneficiaire <span style="color:red">
                                                 *</span></h4>
                                             <div class="row">
                                                 <div class="col-3">
@@ -94,7 +94,7 @@
                                                 <div class="col-sm-12 col-lg-6">
                                                     <span id="errorRadio" style="display:none; color:red">Svp! Choississez le Beneficiaire</span>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
 
                                     </div>
@@ -133,8 +133,8 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="siege_social fw-bold">Registre de traçabilité </label> <br />
-                                                <input type="file"  name="registre_tracabilite" class="form-control  border-success"/>
+                                                <label class="siege_social fw-bold">Registre de traçabilité <span style="color:red">*</span> </label> <br />
+                                                <input type="file"  name="registre_tracabilite" class="form-control  border-success" required/>
 
                                             </div>
                                         </div>

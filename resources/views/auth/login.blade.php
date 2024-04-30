@@ -206,7 +206,7 @@
                             @csrf
 
                             <!-- Email Address -->
-                            <div>
+                            <div class="mt-4">
                                 <x-input-label class="col-4" for="email" :value="__('Email')" />
                                 <x-text-input id="email" class="col-7 block mt-1 form-control " type="email"
                                     name="email" :value="old('email')" required autofocus autocomplete="off" />
@@ -215,16 +215,21 @@
 
                             <!-- Password -->
                             <div class="mt-4">
-                                <x-input-label class="col-4" for="password" :value="__('Password')" />
+                                <x-input-label class="col-4" for="password" :value="__('Mot de Passe')" />
+                                @if (Route::has('password.request'))
+                                    <a style="float: right" class="underline text-dark" href="{{ route('password.request') }}">
+                                        {{ __('Mot de passe oublié?') }}
+                                    </a>
+                                @endif
 
-                                <x-text-input id="password" class="col-7 block mt-1 form-control" type="password"
+                                <x-password-input id="password" class="col-7 block mt-1 form-control" type="password"
                                     name="password" required autocomplete="current-password" />
 
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
                             </div>
 
                             <!-- Remember Me -->
-                            <div class="block mt-4">
+                            {{-- <div class="block mt-4">
                                 <label for="remember_me" class="inline-flex items-center">
                                     <input id="remember_me" type="checkbox"
                                         class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
@@ -233,23 +238,26 @@
                                         class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Se
                                                                         souvenir de moi') }}</span>
                                 </label>
-                            </div>
+                            </div> --}}
 
-                            <div class="flex items-center justify-end mt-4">
+                            {{-- <div class="mt-4">
                                 @if (Route::has('password.request'))
-                                    <a class="underline text-dark" href="{{ route('password.request') }}">
+                                    <a style="float: right" class="underline text-dark" href="{{ route('password.request') }}">
                                         {{ __('Mot de passe oublié?') }}
                                     </a>
                                 @endif
-
-                                <x-primary-button style="padding: 6px 6px;" class="ml-3">
-                                    {{ __('Se Connecter') }}
-                                </x-primary-button>
-                            </div>
+                            </div> --}}
+                            <div class="flex items-center justify-end mt-4">
+                            <button type="submit" class="btn btn-primary"> {{ __('Se connecter') }}</button>
                             <a class="mt-5 underline fw-bold text-primary dark:hover:text-gray-100   dark:focus:ring-offset-gray-800"
                                 href="/register">
                                 {{ __("S'inscrire") }}
                             </a>
+                                {{-- <x-primary-button style="padding: 6px 6px; items-center">
+                                    {{ __('Se Connecter') }}
+                                </x-primary-button> --}}
+                            </div>
+                            
                         </form>
 
 
@@ -270,25 +278,30 @@
                             @csrf
 
                             <!-- Email Address -->
-                            <div class="row g-3 align-items-center">
+                            <div class="mt-4">
                                 <x-input-error :messages="$errors->get('email')" style="margin-left:15%;" class="mt-2 text-danger" />
-                                <x-input-label class="col-2 offset-2" for="email" :value="__('Email')" />
-                                <x-text-input class="col-7" id="email"     value="{{ old('email') ?? '' }}" class="col-7 block mt-1 form-control @error('email') is-invalid @enderror" type="email"
+                                <x-input-label class="col-4" for="email" :value="__('Email')" />
+                                <x-text-input class="col-7" id="email"     value="{{ old('email') ?? '' }}" class="col-7 block mt-1 form-control" type="email"
                                     name="email" :value="old('email')" required autofocus autocomplete="off" />
                             </div>
 
                             <!-- Password -->
-                            <div class="row g-3 align-items-center">
+                            <div class="mt-4">
                                 <x-input-label class="col-4" for="password" :value="__('Mot de Passe:')" />
+                                @if (Route::has('password.request'))
+                                    <a style="float: right" class="underline text-dark" href="{{ route('password.request') }}">
+                                        {{ __('Mot de passe oublié?') }}
+                                    </a>
+                                @endif
 
-                                <x-text-input class="col-7" id="password"  class="block mt-1 form-control  @error('password') is-invalid @enderror" type="password"
-                                    name="password" required autocomplete="current-password" />
+                                <x-password-input id="password" class="col-7" id="password"  class="block mt-1 form-control" type="password"
+                                    name="password" required autocomplete="current-password" />                                    
 
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
                             </div>
 
                             <!-- Remember Me -->
-                            <div class="block mt-4">
+                            {{-- <div class="block mt-4">
                                 <label for="remember_me" class="inline-flex items-center">
                                     <input id="remember_me" type="checkbox"
                                         class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
@@ -297,23 +310,15 @@
                                         class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Se
                                                                         souvenir de moi') }}</span>
                                 </label>
-                            </div>
+                            </div> --}}
 
-                            <div class="flex items-center   mt-3 mr-2">
-                                @if (Route::has('password.request'))
-                                    <a class="underline text-dark" href="{{ route('password.request') }}">
-                                        {{ __('Mot de passe oublié?') }}
-                                    </a>
-                                @endif
-
-                                <x-primary-button style="padding: 6px 6px;"  >
-                                    {{ __('Se Connecter') }}
-                                </x-primary-button>
+                            <div class="flex items-center justify-end mt-4">
+                                <button type="submit" class="btn btn-primary"> {{ __('Se connecter') }}</button>
+                                <a class="mt-5 underline fw-bold text-primary dark:hover:text-gray-100   dark:focus:ring-offset-gray-800"
+                                    href="/register">
+                                    {{ __("S'inscrire") }}
+                                </a>
                             </div>
-                            <a class="mt-5 underline fw-bold text-primary dark:hover:text-gray-100   dark:focus:ring-offset-gray-800"
-                                href="/register">
-                                {{ __("S'inscrire") }}
-                            </a>
                         </form>
 
 
@@ -385,6 +390,32 @@
     <!-- ======= Footer ======= -->
     <x-footer />
     <!-- End Footer -->
+
+    <script>
+        const togglePassword =
+              document.querySelector('#togglePassword');
+ 
+        const password = 
+              document.querySelector('#password');
+ 
+        togglePassword.
+        addEventListener('click', function (e) {
+ 
+            // Toggle the type attribute 
+            const type = password.getAttribute(
+                'type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            eye = '{{ URL::asset('img/eye.png') }}';
+            eyeslash = '{{ URL::asset('img/eyeslash.png') }}';
+ 
+            // Toggle the eye slash icon 
+            if (togglePassword.src.match(eyeslash)) {
+                togglePassword.src =eye;
+            } else {
+                togglePassword.src =eyeslash;
+            }
+        }); 
+    </script>
 
 
     <script>
