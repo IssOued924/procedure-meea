@@ -53,7 +53,7 @@
           <div class="card info-card sales-card">
 
 
-
+            <a href="{{ route('dossiersByStatus', ['procedure' => $procedure->code, 'etat' => 'D']) }}">
             <div class="card-body">
               <h5 class="card-title">Demandes <span>| <b>déposées</b></span></h5>
 
@@ -68,6 +68,7 @@
                 </div>
               </div>
             </div>
+            </a>
 
           </div>
         </div><!-- End Sales Card -->
@@ -75,6 +76,8 @@
         <!-- Revenue Card -->
         <div class="col-xxl-3 col-md-6">
           <div class="card info-card revenue-card">
+
+            <a href="{{ route('dossiersByStatus', ['procedure' => $procedure->code, 'etat' => 'V']) }}">
             <div class="card-body">
               <h5 class="card-title">Demandes <span>| <b>Validées</b></span></h5>
 
@@ -89,12 +92,15 @@
                 </div>
               </div>
             </div>
+            </a>
 
           </div>
         </div><!-- End Revenue Card -->
 
         <div class="col-xxl-3 col-md-6">
             <div class="card info-card revenue-card">
+            <a href="{{ route('dossiersByStatus', ['procedure' => $procedure->code, 'etat' => 'S']) }}">
+
               <div class="card-body">
                 <h5 class="card-title">Demandes <span>| <b>Signées</b></span></h5>
 
@@ -109,12 +115,13 @@
                   </div>
                 </div>
               </div>
+              </a>
 
             </div>
           </div><!-- End Revenue Card -->
 
         <!-- Customers Card -->
-        <div class="col-xxl-3 col-xl-12">
+        <div class="col-xxl-3 col-md-6">
 
           <div class="card info-card customers-card">
             <div class="card-body">
@@ -135,7 +142,7 @@
           </div>
         </div><!-- End Customers Card -->
 
-        <div class="col-xxl-3 col-xl-12">
+        <div class="col-xxl-3 col-md-6">
 
             <div class="card info-card customers-card">
               <div class="card-body">
@@ -155,9 +162,11 @@
               </div>
             </div>
           </div><!-- End Customers Card -->
-          <div class="col-xxl-3 col-xl-12">
+          <div class="col-xxl-3 col-md-6">
 
             <div class="card info-card customers-card">
+            <a href="{{ route('dossiersByStatus', ['procedure' => $procedure->code, 'etat' => 'E']) }}">
+
               <div class="card-body">
                 <h5 class="card-title">Demandes <span>| <b>En Etudes</b></span></h5>
 
@@ -173,13 +182,17 @@
                 </div>
 
               </div>
+              </a>
+
             </div>
           </div>
 
 
 
-          <div class="col-xxl-3 col-xl-12">
+          <div class="col-xxl-3 col-md-6">
             <div class="card info-card customers-card">
+            <a href="{{ route('dossiersByStatus', ['procedure' => $procedure->code, 'etat' => 'A']) }}">
+
               <div class="card-body">
                 <h5 class="card-title">Demandes <span>|  <b>Archivées</b></span></h5>
 
@@ -195,6 +208,7 @@
                 </div>
 
               </div>
+              </a>
             </div>
           </div><!-- End Customers Card -->
 

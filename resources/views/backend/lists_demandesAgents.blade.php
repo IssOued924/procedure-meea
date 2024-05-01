@@ -68,7 +68,7 @@
                                                 <th scope="col">Etat de mes demandes</th>
                                                 <th scope="col">Délai de traitement</th>
                                                 <th scope="col">Déposé</th>
-                                                <th scope="col">Paiement</th>
+                                                {{-- <th scope="col">Paiement</th> --}}
                                                 <th scope="col">Action</th>
 
                                             </tr>
@@ -147,12 +147,12 @@
                                                     <td>{{ $demande->created_at->diffForHumans() }}</td>
 
                                                     {{-- partie paiement --}}
-                                                    @if ($demande->paiement === 1)
+                                                    {{-- @if ($demande->paiement === 1)
                                                     <td><b><span class="text-success">Payée</span></b></td>
 
                                                     @else
                                                     <td><b><span class="text-warning">Non Payée</span></b></td>
-                                                    @endif
+                                                    @endif --}}
 
                                                     <td>
                                                         <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i class="bi bi-eye"></i></button>

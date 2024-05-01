@@ -189,7 +189,7 @@
                     @if (Auth::user()->agent->service->libelle_court == 'DGPE' || Auth::user()->role->libelle == 'Administration')
                         <li>
                             <a href="{{ route('demandes-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Produit Chimique &nbsp;<span
+                                <i class="bi bi-circle"></i><span>Produit Chimique &nbsp;<span
                                         id="prog_produit_chimique" class="badge bg-warning text-white"> </span>
                                 </span>
                             </a>
@@ -197,20 +197,20 @@
 
                         <li>
                             <a href="{{ route('demandesp008-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Déchets Solide &nbsp;<span
+                                <i class="bi bi-circle"></i><span>Déchets Solide &nbsp;<span
                                         id="prog_dechet" class="badge bg-warning text-white"> </span> </span>
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ route('demandesp006-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Certificats d'exemptions &nbsp; <span
+                                <i class="bi bi-circle"></i><span>Certificats d'exemptions &nbsp; <span
                                         id="prog_exemption" class="badge bg-warning text-white"> </span></span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('demandesp007-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Homologation &nbsp;<span
+                                <i class="bi bi-circle"></i><span>Homologation &nbsp;<span
                                         id="prog_homologation" class="badge bg-warning text-white"> </span></span>
                             </a>
                         </li>
@@ -219,33 +219,33 @@
                     @if (Auth::user()->agent->service->libelle_court == 'DGEF' || Auth::user()->role->libelle == 'Administration')
                         <li>
                             <a href="{{ route('demandesp0012-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure écotourisme &nbsp;<span
+                                <i class="bi bi-circle"></i><span>Ecotourisme &nbsp;<span
                                         id="prog_ecotourisme" class="badge bg-warning text-white"> </span> </span>
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ route('demandesp003-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Permis Chasse &nbsp;<span id="prog_chasse"
+                                <i class="bi bi-circle"></i><span>Permis Chasse &nbsp;<span id="prog_chasse"
                                         class="badge bg-warning text-white"> </span></span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('demandesp004-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Détention &nbsp; <span id="prog_detention"
+                                <i class="bi bi-circle"></i><span>Détention d'animal &nbsp; <span id="prog_detention"
                                         class="badge bg-warning text-white"> </span></span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('demandesp0011-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Permis Coupe &nbsp;<span id="prog_coupe"
+                                <i class="bi bi-circle"></i><span>Permis Coupe &nbsp;<span id="prog_coupe"
                                         class="badge bg-warning text-white"> </span></span>
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ route('demandesp005-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Permis de circulation&nbsp;<span
+                                <i class="bi bi-circle"></i><span>Permis de circulation&nbsp;<span
                                         id="prog_circulation" class="badge bg-warning text-white"> </span></span>
                             </a>
                         </li>
@@ -254,7 +254,7 @@
                     @if (Auth::user()->agent->service->libelle_court == 'DGRE' || Auth::user()->role->libelle == 'Administration')
                         <li>
                             <a href="{{ route('demandesp002-list') }}">
-                                <i class="bi bi-circle"></i><span>Procédure Agrement en Eau &nbsp;<span
+                                <i class="bi bi-circle"></i><span>Agrement en Eau &nbsp;<span
                                         id="prog_agrement_technique" class="badge bg-warning text-white">
                                     </span></span>
                             </a>
@@ -267,11 +267,11 @@
 
 
             @if (Auth::user()->role->libelle == 'Administration')
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('paiements-list') }}">
                     <i class="bi bi-cash"></i><span>Paiements</span>
                 </a>
-            </li>
+            </li> --}}
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse"

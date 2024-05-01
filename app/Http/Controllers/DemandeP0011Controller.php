@@ -56,18 +56,20 @@ class DemandeP0011Controller extends Controller
 
         $dataFiles = $request->all();
         //dd($data['exploitant']);
-        $pay_moyen = $data['moyen'];
-        $payResponse = $data['payResponse'];
+        // $pay_moyen = $data['moyen'];
+        // $payResponse = $data['payResponse'];
 
-        $numero = $data["telephone"];
-        $code_otp = $data["code_otp"];
+        // $numero = $data["telephone"];
+        // $code_otp = $data["code_otp"];
 
-        unset($data['payResponse']);
+        // unset($data['payResponse']);
         unset($data['telephone']);
-        unset($data['telephone']);
-        unset($data["numero"]);
-        unset($data["moyen"]);
-        unset($data["code_otp"]);
+        // unset($data['telephone']);
+        // unset($data["numero"]);
+        // unset($data["moyen"]);
+        // unset($data["code_otp"]);
+
+
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
 
@@ -95,30 +97,37 @@ class DemandeP0011Controller extends Controller
         unset($data['agrement']);
         //unset($data['quitance']);
 
-        unset($data['moyen']);
-        unset($data["numero"]);
-        unset($data["otp"]);
-
         $demande = $this->repository->create($data);
         $demande->save();
 
-        $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
+        // $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
         
-        if ($pay_moyen == 1)
-            $type_paiement = "OrangeMoney";
-        if ($pay_moyen == 2)
-            $type_paiement = "MoovMoney";
+        // if ($pay_moyen == 1)
+        //     $type_paiement = "OrangeMoney";
+        // if ($pay_moyen == 2)
+        //     $type_paiement = "MoovMoney";
         
 
+        // $pay = [
+        //     'numero' => $numero,
+        //     'code_otp' => $code_otp,
+        //     'ref_paiement'=>$resp_data->transID,
+        //     'date_paiement'=>now(),
+        //     'code_procedure'=> 'P004',
+        //     'demande_id'=>$demande->uuid,
+        //     'type_paiement'=>$type_paiement,
+        //     'message'=>$payResponse,
+        //     ];
+
         $pay = [
-            'numero' => $numero,
-            'code_otp' => $code_otp,
-            'ref_paiement'=>$resp_data->transID,
+            'numero' => "",
+            'code_otp' => "",
+            'ref_paiement'=> "",
             'date_paiement'=>now(),
-            'code_procedure'=> 'P004',
+            'code_procedure'=> 'P0011',
             'demande_id'=>$demande->uuid,
-            'type_paiement'=>$type_paiement,
-            'message'=>$payResponse,
+            'type_paiement'=> "Espèce",
+            'message'=> "",
             ];
         $paiement = $paiementRepository->create($pay);
         $paiement->save();

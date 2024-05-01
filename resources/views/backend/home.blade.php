@@ -66,7 +66,7 @@
         <!-- Customers Card dechets solides -->
 
          {{-- //coupe de bois --}}
-         <div class="col-xxl-3 col-xl-12">
+         <div class="col-xxl-3 col-md-6">
 
             <div class="card info-card revenue-card">
               <div class="card-body">
@@ -89,7 +89,7 @@
 
 
             {{-- detention animal sauvage --}}
-            <div class="col-xxl-3 col-xl-12">
+            <div class="col-xxl-3 col-md-6">
                 <div class="card info-card revenue-card">
                   <div class="card-body">
                     <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p004_s', 'procedureName' => 'Detention animal sauvage']) }}">Procédure</a> <span>| <b>Détention Animal sauvage</b></span></h5>
@@ -110,7 +110,7 @@
               </div><!-- End Customers Card -->
 
                {{-- //circulation --}}
-          <div class="col-xxl-3 col-xl-12">
+          <div class="col-xxl-3 col-md-6">
             <div class="card info-card revenue-card">
               <div class="card-body">
                 <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p005_s', 'procedureName' => 'Circulation de bois']) }}">Procédure</a> <span>| <b>Circulation de bois</b></span></h5>
@@ -156,7 +156,7 @@
           </div><!-- End Revenue Card -->
 
 
-          <div class="col-xxl-3 col-xl-12">
+          <div class="col-xxl-3 col-md-6">
 
             <div class="card info-card revenue-card">
               <div class="card-body">
@@ -178,7 +178,7 @@
           </div><!-- End Customers Card -->
 
 
-          <div class="col-xxl-3 col-xl-12">
+          <div class="col-xxl-3 col-md-6">
                   {{-- exemption --}}
               <div class="card info-card revenue-card">
                 <div class="card-body">
@@ -205,7 +205,7 @@
 
 
               {{-- homologation --}}
-            <div class="col-xxl-3 col-xl-12">
+            <div class="col-xxl-3 col-md-6">
               <div class="card info-card revenue-card">
                 <div class="card-body">
                   <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p007_s', 'procedureName' => 'Homologation sachet plastique']) }}">Procédure</a> <span>| <b>Homologation</b></span></h5>
@@ -231,7 +231,7 @@
             @if (Auth::user()->agent->service->libelle_court =='DGRE' || Auth::user()->role->libelle == "Administration")
 
              {{-- agrement eau --}}
-          <div class="col-xxl-3 col-xl-12">
+          <div class="col-xxl-3 col-md-6">
             <div class="card info-card revenue-card">
               <div class="card-body">
                 <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p002_s', 'procedureName' => 'Agrement en Eau']) }}">Procédure</a> <span>| <b>Agrèment en Eau</b></span></h5>

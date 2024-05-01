@@ -63,8 +63,8 @@
                                         @php
                                             $userRole = Auth::user()->role->libelle;
                                         @endphp
-                                        <button title="Retour" type="button" onclick="history.back()"
-                                        class="btn btn-primary"><i class="bi bi-arrow-left"></i></button>
+                                        <a href="{{ route('demandesp003-list')}}" title="Retour" type="button" class="btn btn-primary"><i class="bi bi-arrow-left"></i></a>
+                                        
                                         <!-- Boutons d'action en fonction de l'état et du rôle -->
                                         @if (($demande->etat == 'D' && $demande->last_agent_assign == null && in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
                                         ($demande->etat == 'E' && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||

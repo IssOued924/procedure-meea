@@ -63,8 +63,8 @@
 
                                         <button title="Actualiser la Page" type="button" onclick="refresh()"
                                             class="btn btn-success"><i class="bi bi-arrow-repeat"></i></button>
-                                        <button title="Ajouter" type="button" class="btn btn-success"><i
-                                                class="bi bi-plus"></i></button>
+                                        {{-- <button title="Ajouter" type="button" class="btn btn-success"><i
+                                                class="bi bi-plus"></i></button> --}}
                                     </div>
                                 </div>
                             </div><br>
