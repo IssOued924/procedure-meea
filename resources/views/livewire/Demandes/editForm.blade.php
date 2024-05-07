@@ -99,7 +99,7 @@
                                                         *</span></label>
 
                                                 <select name="commune_id" required id="selectMultiple"
-                                                    class="form-select border-success">
+                                                    class="form-select select2 border-success"  style="width: 100%;">
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option class="border-success" value="">Veuillez choisir une ville
                                                     </option>
@@ -231,7 +231,7 @@
                                                         style="color:red">
                                                         *</span></label>
                                                         <select name="pays_fournisseur" required id="selectMultiplePays"
-                                                    class="form-select border-success ">
+                                                    class="form-select select2 border-success "  style="width: 100%;">
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option class="border-success" value="">Veuillez choisir un Pays
                                                     </option>

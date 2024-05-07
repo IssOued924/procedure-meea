@@ -53,7 +53,10 @@ class DemandeCompP004 extends Component
             "communes" => Commune::all(),
             "provinces" => Province::all()->sortBy('libelle'),
             "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
-            "pays" => Pays::all(),
+            // "pays" => Pays::all(),
+            "pays" => Pays::select('*')
+            ->orderBy('libelle', 'asc')
+            ->get(),
         ];
 
         

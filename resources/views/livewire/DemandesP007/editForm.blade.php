@@ -63,7 +63,7 @@
                                                 <label class="siege_social fw-bold">Lieu de résidence/siège<span style="color:red">
                                                         *</span></label>
 
-                                                <select name="commune_id" id="selectMultiple" class="form-select">
+                                                <select name="commune_id" id="selectMultiple" class="form-select select2"  style="width: 100%;">
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option value="">Veuillez choisir une ville</option>
                                                     @foreach ( $communes as  $com)
@@ -102,7 +102,7 @@
                                             <div class="col-6">
                                                 <label class="pays_producteur fw-bold">Pays de production<span style="color:red">
                                                         *</span></label>
-                                                        <select name="pays_producteur" id="selectMultiple" required class="form-select">
+                                                        <select name="pays_producteur" id="selectMultiple" required class="form-select select2"  style="width: 100%;">
                                                             {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                             <option value="">Veuillez choisir un Pays</option>
                                                             @foreach ( $pays as  $pay)
@@ -142,7 +142,7 @@
                                             <div class="col-6">
                                                 <label class="delai  fw-bold">Délai de biodégradabilité en nombre de mois<span
                                                         style="color: red">*</span></label>
-                                                        <select name="delai_traitement"    class="form-select" id="">
+                                                        <select name="delai_traitement"    class="form-select select2" id="">
                                                             <option {{ $demande->delai == '1 mois' ? 'selected': '' }} value="1 mois">1 mois</option>
                                                             <option {{ $demande->delai == '2 mois' ? 'selected': '' }} value="2 mois">2 mois</option>
                                                             <option  {{ $demande->delai == '3 mois' ? 'selected': '' }} value="3 mois">3 mois</option>

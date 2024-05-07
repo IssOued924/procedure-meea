@@ -94,7 +94,10 @@ class DemandeFontController extends Component
                         "communes" => Commune::all(),
                         "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
                         "default_pays" => Auth::user()->usager->pays,
-                        "pays" => Pays::all(),
+                        // "pays" => Pays::all(),
+                        "pays" => Pays::select('*')
+                                ->orderBy('libelle', 'asc')
+                                ->get(),
                     ];
                     break;
                 case 'ADDMC':
@@ -145,7 +148,10 @@ class DemandeFontController extends Component
                         "telephone" => Auth::user()->usager->telephone,
                         "communes" => Commune::all(),
                         "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
-                        "pays" => Pays::all(),
+                        // "pays" => Pays::all(),
+                        "pays" => Pays::select('*')
+                                ->orderBy('libelle', 'asc')
+                                ->get(),
                         "provinces" => Province::all()->sortBy("libelle"),
                       
                     ];
@@ -202,7 +208,10 @@ class DemandeFontController extends Component
                         "telephone" => Auth::user()->usager->telephone,
                         "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
                         "communes" => Commune::all(),
-                        "pays" => Pays::all(),
+                        // "pays" => Pays::all(),
+                        "pays" => Pays::select('*')
+                                ->orderBy('libelle', 'asc')
+                                ->get(),
                     ];
                     break;
 

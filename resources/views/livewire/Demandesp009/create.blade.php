@@ -66,7 +66,7 @@
                                                         style="color:red">
                                                         *</span></label>
 
-                                                <select name="commune_id" id="selectMultiple" class="form-select"
+                                                <select name="commune_id" id="selectMultiple" class="form-select select2"  style="width: 100%;"
                                                     required>
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option value="">Veuillez choisir une ville</option>

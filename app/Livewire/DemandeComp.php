@@ -53,7 +53,10 @@ class DemandeComp extends Component
             "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->usager->telephone,
             "communes" => Commune::all()->sortBy('libelle'),
-            "pays" => Pays::all(),
+            // "pays" => Pays::all(),
+            "pays" => Pays::select('*')
+            ->orderBy('libelle', 'asc')
+            ->get(),
         ];
         
         $startDate = Carbon::parse($procedure->session_debut);

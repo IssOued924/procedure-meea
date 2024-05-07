@@ -53,7 +53,10 @@ class DemandeP007Comp extends Component
             "telephone" => Auth::user()->usager->telephone,
             "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
             "communes" => Commune::all(),
-            "pays" => Pays::all(),
+            // "pays" => Pays::all(),
+            "pays" => Pays::select('*')
+                                ->orderBy('libelle', 'asc')
+                                ->get(),
         ];
         
         $startDate = Carbon::parse($procedure->session_debut);

@@ -9,7 +9,7 @@
                 {{Session::get('success')}}
             </div>
         @endif
-    <h1 style="text-align: center; font-size: 24px; color: #1A33FF;">Déposez une plainte</h1>
+    <h1 style="text-align: center; font-size: 24px; color: #1A33FF;">Déposer une plainte</h1>
     <form method="post" action="{{ route('plainte.store') }}" style="border: 1px solid #1A33FF; background: #ecf5fc; padding: 40px 50px 45px;">
     @csrf    
 
@@ -23,7 +23,7 @@
 
 
     <div class="form-group">
-        <label>Plainte lié à la procédure</label><span style="color:red">
+        <label>Plainte liée à la procédure</label><span style="color:red">
                                                         *</span>
         <select name="procedure" id="procedure" class="form-select border-success">
         <option class="mb-3" value=""></option>

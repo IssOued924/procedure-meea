@@ -7,6 +7,7 @@ use App\Mail\AffectDemandMailable;
 use App\Mail\CreateUserMailable;
 use App\Mail\PortailMEEAMailable;
 use App\Mail\ResetPasswordMailable;
+use Carbon\Carbon;
 use App\Models\Agent;
 use App\Models\Role;
 use App\Models\Service;
@@ -273,11 +274,15 @@ class RegisteredUserController extends Controller
         ]);
 
         $user->save();
+
         $demand = array(
             "email"  => $user->email,
             "name" => $agent->nom . ' ' . $agent->prenom,
             "password" => "12345678"
         );
+
+        $data['email_verified_at'] = Carbon::parse(Carbon::now())->format('Ymd');
+        DB::table('users')->where('uuid', $user->uuid)->update($data);
 
         try{
         Mail::to($user->email)->send(new CreateUserMailable($demand));

@@ -55,7 +55,10 @@ class DemandeP005Comp extends Component
             "name" => Auth::user()->usager->nom.' '.Auth::user()->usager->prenom,
             "provinces" => Province::all(),
             "communes" => Commune::all(),
-            "pays" => Pays::all(),
+            // "pays" => Pays::all(),
+            "pays" => Pays::select('*')
+                                ->orderBy('libelle', 'asc')
+                                ->get(),
         ];
 
 

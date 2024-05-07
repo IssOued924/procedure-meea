@@ -41,7 +41,7 @@
                                             <div class="col-6">
                                                 <label for="siege_social" class="siege_social">Siège social
                                                     <span style="color:red">*</span></label>
-                                                <select name="commune_id" id="" class="form-select border-success">
+                                                <select name="commune_id" id="" class="form-select select2 border-success">
                                                     <option value="">Veuillez choisir le siege</option>
                                                     @foreach ($communes as $com)
                                                     <option  {{ $demande->commune_id== $com->uuid ? 'selected' : ''}} value="{{ $com->uuid }}">{{ $com->libelle }}</option>

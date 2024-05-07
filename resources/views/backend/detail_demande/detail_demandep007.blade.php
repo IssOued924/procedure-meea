@@ -93,12 +93,12 @@
                                             <i class="bi bi-upload"></i>
                                         </a>
                                         @endif
-                                        @if (($demande->etat != 'A' && $demande->etat != 'S' && $demande->etat != 'R') && in_array($userRole, [ 'Gestionnaire', 'Administration']))
+                                        @if (($demande->etat == 'D') && in_array($userRole, [ 'Gestionnaire', 'Administration']))
                                         <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter" class="btn btn-danger">
                                             <i class="bi bi-x-circle"></i>
                                         </a>
                                         @endif
-                                        @if (($demande->etat != 'A' && $demande->etat != 'S'&& $demande->etat != 'E'&& $demande->etat != 'V'&& $demande->etat != 'R') && in_array($userRole, ['Réception']))
+                                        @if (($demande->etat == 'D') && in_array($userRole, ['Réception']))
                                         <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter" class="btn btn-danger">
                                             <i class="bi bi-x-circle"></i>
                                         </a>
@@ -108,9 +108,9 @@
                                         ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid) && in_array($userRole, ['Etudes'])
                                         )
 
-                                        <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter" class="btn btn-danger">
+                                        {{-- <a data-toggle="modal" data-target="#rejetter{{ $demande->uuid }}" type="button" title="Rejeter" class="btn btn-danger">
                                             <i class="bi bi-x-circle"></i>
-                                        </a>
+                                        </a> --}}
                                         @endif
 
                                         <button title="Actualiser la Page" type="button" onclick="refresh()"

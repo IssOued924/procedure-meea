@@ -72,7 +72,7 @@
                     </style>
 
                 <div class="col-lg-5 offset-lg-3  box" >
-                    <h2>Reinistalisation de mot de passe</h2>
+                    <h2>Confirmation d'email</h2>
                     <!-- Session Status -->
                     <x-auth-session-status class="mb-4" :status="session('status')" />
                     @if ($errors->has('active'))

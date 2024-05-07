@@ -91,13 +91,13 @@
                                                 <div class="col-6">
                                                     <label class="nom_societe fw-bold">Avis favorable de mairie<span
                                                             style="color: red">*</span></label>
-                                                    <input type="file" class="border-success form-select form-control" name="nom_societe"
+                                                    <input type="file" class="border-success form-select  form-control" name="nom_societe"
                                                          />
                                                 </div>
                                                 <div class="col-6">
                                                     <label class="nom_societe fw-bold">Document technique descriptif<span
                                                             style="color: red">*</span></label>
-                                                    <input type="file" class="border-success form-select form-control" name="nom_societe"
+                                                    <input type="file" class="border-success form-select  form-control" name="nom_societe"
                                                         />
                                                 </div>
                                             </div><br>
@@ -106,7 +106,7 @@
                                             <div class="col-12">
                                                 <label class="activite fw-bold">Registre de traçabilité<span
                                                         style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-select form-control" name="nom_societe"
+                                                <input type="file" class="border-success form-select  form-control" name="nom_societe"
                                                     />
                                             </div>
                                         </div>
@@ -163,7 +163,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <label class=" fw-bold">Avis favorable de mairie*</label>
-                                                <input type="file" class="border-success form-select" name="avis_mairie"
+                                                <input type="file" class="border-success form-select " name="avis_mairie"
                                                     placeholder="Avis_mairie" />
                                             </div>
                                         </div>
@@ -171,12 +171,12 @@
                                             <div class="col-6">
                                                 <label class=" fw-bold">Document technique descriptif<span
                                                         style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-select" name="document_technique"
+                                                <input type="file" class="border-success form-select " name="document_technique"
                                                     placeholder="document_technique" />
                                             </div>
                                             <div class="col-6">
                                                 <label class=" fw-bold">RCCM<span style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-select" name="rccm"
+                                                <input type="file" class="border-success form-select " name="rccm"
                                                     placeholder="RCCM" />
                                             </div>
                                         </div>
@@ -185,7 +185,7 @@
                                             <div class="col-6">
                                                 <label class=" fw-bold">Registre de traçabilité<span
                                                         style="color: red">*</span></label>
-                                                <input type="file" class="border-success form-select" name="registre_tracable"
+                                                <input type="file" class="border-success form-select " name="registre_tracable"
                                                     placeholder="Registre de traçabilité" />
                                             </div>
                                             <div class="col-3"></div>

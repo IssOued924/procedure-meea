@@ -34,7 +34,7 @@
                                 <div class="row">
 
                                 <div class="col-4 offset-md-3">
-                                    <label for="">Choisir sa procédure</label>
+                                    <label for="">Choisir une procédure</label>
                                     <select name="procedure" id="procedure" class="form-select border-success" onchange="loadDemandeListe()">
                                         <option class="mb-3" value=""></option>
                                         @foreach($procedures as $proc)
@@ -68,7 +68,7 @@
                                                 <th scope="col">Etat de mes demandes</th>
                                                 <th scope="col">Délai de traitement</th>
                                                 <th scope="col">Déposé</th>
-                                                {{-- <th scope="col">Paiement</th> --}}
+                                                <th scope="col">Paiement</th>
                                                 <th scope="col">Action</th>
 
                                             </tr>
@@ -147,12 +147,12 @@
                                                     <td>{{ $demande->created_at->diffForHumans() }}</td>
 
                                                     {{-- partie paiement --}}
-                                                    {{-- @if ($demande->paiement === 1)
+                                                    @if ($demande->paiement === 1)
                                                     <td><b><span class="text-success">Payée</span></b></td>
 
                                                     @else
                                                     <td><b><span class="text-warning">Non Payée</span></b></td>
-                                                    @endif --}}
+                                                    @endif
 
                                                     <td>
                                                         <button title="Voir Détail" type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i class="bi bi-eye"></i></button>
@@ -218,10 +218,10 @@
                                                                     <br>
                                                                     @endforeach
                                                                 </div>
-                                                                <h4>La note d'étude</h4>
+                                                                {{-- <h4>La note d'étude</h4>
                                                                 <div class="col-6">
                                                                     <a class="text-success" target="_blank" href="{{ Storage::url($demande->note_etude_file) }}"> Note D'étude</a>
-                                                                </div>
+                                                                </div> --}}
                                                             </div>
                                                             <br>
                                                             <h4>Etat de la demande</h4>

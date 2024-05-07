@@ -55,7 +55,10 @@ class DemandeCompP002 extends Component
             "demandes" => Demande::where("libelle_court", "like", $searchCriteria)->latest()->paginate(5),
             "telephone" => Auth::user()->telephone,
             "communes" => Commune::all()->sortBy("libelle"),
-            "pays" => Pays::all(),
+            // "pays" => Pays::all(),
+            "pays" => Pays::select('*')
+            ->orderBy('libelle', 'asc')
+            ->get(),
             "identite" => Auth::user()->usager->nom. ' '.  Auth::user()->usager->prenom,
            // "default_pays" => Auth::user()->usager->pays,
             "domaines" => DemandeDomaineP002::all(),

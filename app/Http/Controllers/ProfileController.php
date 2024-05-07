@@ -31,8 +31,10 @@ class ProfileController extends Controller
 
         $data =  [
             "profiles" => $this->repository->all(),
-            "pays" => Pays::all(),
-            "pays" => Pays::all(),
+            // "pays" => Pays::all(),
+            "pays" => Pays::select('*')
+            ->orderBy('libelle', 'asc')
+            ->get(),
 
         ];
         return view('backend.utilisateur.profile_list', $data);

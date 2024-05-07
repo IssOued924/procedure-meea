@@ -24,6 +24,8 @@
     <link href="{{ asset('vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/select2/css/select2.min.css') }}" rel="stylesheet">
+
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -114,6 +116,7 @@
     <!-- Vendor JS Files -->
     <script src="{{ asset('vendor/purecounter/purecounter_vanilla.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('vendor/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
@@ -128,6 +131,13 @@
     <script>
         new TomSelect('select[multiple]', {plugins: {remove_button: {title: 'Supprimer'}}})
     </script>
+    <script>
+      $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2();
+  
+      });
+  </script>
 </body>
 
 </html>

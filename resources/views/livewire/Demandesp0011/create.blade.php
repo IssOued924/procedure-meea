@@ -92,7 +92,7 @@
                                                 <label class="siege_social fw-bold">Province de résidence<span style="color:red">
                                                         *</span></label>
 
-                                                <select name="province_id" id="provinces" class="form-select border-success" required>
+                                                <select name="province_id" id="provinces" class="form-select border-success select2"  style="width: 100%;" required>
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option value="">Veuillez choisir une Province</option>
                                                     @foreach ( $provinces as  $prov)
@@ -106,10 +106,10 @@
 
                                             </div>
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="siege_social fw-bold">Commune de résidence/siège<span style="color:red">
+                                                <label class="siege_social fw-bold">Commune de résidence<span style="color:red">
                                                         *</span></label>
 
-                                                <select name="commune_id" id="communes" class="form-select" required>
+                                                <select name="commune_id" id="communes" class="form-select select2"  style="width: 100%;" required>
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                    
 

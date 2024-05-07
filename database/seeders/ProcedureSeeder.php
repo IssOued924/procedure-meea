@@ -8,6 +8,7 @@ use App\Models\Structure;
 use App\Models\Service;
 use App\Models\Procedure;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -68,7 +69,8 @@ $agent->save();
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123456789'),
             'agent_id' => $agent->uuid,
-            'role_id'=>$roleAdmin->uuid
+            'role_id'=>$roleAdmin->uuid,
+            'email_verified_at'=> Carbon::parse(Carbon::now())->format('Ymd')
         ]);
 
 
@@ -117,6 +119,7 @@ $agent->save();
             "code" => "P008",
             "service_id"=>$serv3->uuid,
             "delai"=> "32",
+            "rang"=> "4",
             "tarif" => 1500
         ]);
         $prc1->save();
@@ -131,6 +134,7 @@ $agent->save();
             "code" => "P001",
             "service_id"=>$serv3->uuid,
             "delai"=> "32",
+            "rang"=> "1",
             "tarif" => 1600
         ]);
         $prc2->save();
@@ -145,6 +149,7 @@ $agent->save();
             "code" => "P006",
             "service_id"=>$serv3->uuid,
             "delai"=> "32",
+            "rang"=> "3",
             "tarif" => 1700
         ]);
         $prc3->save();
@@ -159,6 +164,7 @@ $agent->save();
             "code" => "P007",
             "service_id"=>$serv3->uuid,
             "delai"=> "32",
+            "rang"=> "2",
             "tarif" => 1800
         ]);
         $prc4->save();
@@ -167,7 +173,7 @@ $agent->save();
 
         $prc5 = Procedure::create([
             "libelle_court" => "OATEA",
-            "libelle_long" =>"Octroit d'agrément technique eau et assainissement",
+            "libelle_long" =>"Agrément technique eau et assainissement",
             "description" => "L’exercice des entreprises et bureaux d’études dans le domaine de
                 l’eau et de l’assainissement est soumis à la possession d’un agrément
                 technique échelonné en catégories pour les différents types de prestations.",
@@ -176,6 +182,7 @@ $agent->save();
             "code" => "P002",
             "service_id"=>$serv2->uuid,
             "delai"=> "75",
+            "rang"=> "5",
             "tarif" => 1400
         ]);
         $prc5->save();
@@ -194,6 +201,7 @@ $agent->save();
             "code" => "P0012",
             "service_id"=>$serv1->uuid,
             "delai"=> "7",
+            "rang"=> "6",
             "tarif" => 1300
         ]);
         $prc6->save();
@@ -212,6 +220,7 @@ $agent->save();
             "code" => "P004",
             "service_id"=>$serv1->uuid,
             "delai"=> "40",
+            "rang"=> "8",
             "tarif" => 1200
         ]);
         $prc7->save();
@@ -228,6 +237,7 @@ $agent->save();
             "code" => "P003",
             "service_id"=>$serv1->uuid,
             "delai"=> "7",
+            "rang"=> "7",
             "tarif" => 1100
         ]);
         $prc8->save();
@@ -241,6 +251,7 @@ $agent->save();
             "code" => "P005",
             "service_id"=>$serv1->uuid,
             "delai"=> "8",
+            "rang"=> "10",
             "tarif" => 1000
         ]);
         $prc9->save();
@@ -254,6 +265,7 @@ $agent->save();
             "code" => "P0011",
             "service_id"=>$serv1->uuid,
             "delai"=> "8",
+            "rang"=> "9",
             "tarif" => 1500
         ]);
         $prc10->save();

@@ -70,14 +70,20 @@ Route::middleware(['mustreset',])->group(function () {
         }else {
 
        
-        $procedure=Procedure::all();
+        //$procedure=Procedure::all();
+        $procedure=Procedure::select('*')
+                   ->orderBy('rang', 'asc')
+                   ->get();
         return view('welcome', [
             'procedure' => $procedure
         ]);
     }
     }else {
         
-        $procedure=Procedure::all();
+        //$procedure=Procedure::all();
+        $procedure=Procedure::select('*')
+                   ->orderBy('rang', 'asc')
+                   ->get();
         return view('welcome', [
             'procedure' => $procedure
         ]);

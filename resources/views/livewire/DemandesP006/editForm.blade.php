@@ -56,7 +56,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <label class="nom_societe fw-bold" >Choisir Localite</label>
-                                                    <select name="commune_id" id="" class="form-select border-success" required>
+                                                    <select name="commune_id" id="" class="form-select select2 border-success"  style="width: 100%;" required>
                                                         <option value="">Veuillez Choisir la localite</option>
                                                         @foreach ($communes as  $com)
                                                         <option {{ $demande->commune_id ==  $com->uuid ? 'selected' : '' }} value="{{ $com->uuid }}">{{ $com->libelle }}</option>

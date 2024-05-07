@@ -63,7 +63,7 @@
                                                 <div class="col-6">
                                                     <label class="pays_residence fw-bold">Commune de résidence<span style="color:red">
                                                             *</span></label>
-                                                    <select name="commune_id" id="commune_id" class="form-select boerder-success">
+                                                    <select name="commune_id" id="commune_id" class="form-select select2 boerder-success"  style="width: 100%;">
                                                     <option >Veuillez choisir la commune</option>
                                                     @foreach($communes as $com)
                                                         <option {{ ($com->uuid == $demande->commune_id ? 'selected' : '' )}} value="{{$com->uuid}}">{{ $com->libelle }}</option>
@@ -184,7 +184,7 @@
                                             <div class="col-4">
                                                 <label for="domaine" class="siege_social">Domaine
                                                     <span style="color:red">*</span></label>
-                                                <select name="domaine" id="domaine" onchange="getSousDomaine()" class="form-select border-success">
+                                                <select name="domaine" id="domaine" onchange="getSousDomaine()" class="form-select select2 border-success"  style="width: 100%;">
                                                     <option value="">Veuillez choisir le domaine</option>
                                                     @foreach($domaines as $dom)
                                                     <option {{ ($dom->libelle_long == $demande->domaine ? 'selected' : '' )}} value="{{ $dom->uuid}}">{{  $dom->libelle_long }}</option>
@@ -198,7 +198,7 @@
                                             <div class="col-4">
                                                <label for="categorie" class="siege_social">Catégorie
                                                     <span style="color:red">*</span></label>
-                                                <select name="categorie" id="categorie" onchange="getSousDomaine()" class="form-select border-success">
+                                                <select name="categorie" id="categorie" onchange="getSousDomaine()" class="form-select select2 border-success"  style="width: 100%;">
                                                     <option value="">Veuillez choisir la catégorie</option>
                                                      @foreach($categories as $cat)
                                                         <option {{ ($cat->libelle_long == $demande->categorie ? 'selected' : '' )}} value="{{  $cat->uuid}}">{{  $cat->libelle_long }}</option>
@@ -212,7 +212,7 @@
                                                <label for="sousdomaine" class="nom_societe">Sous domaine
                                                     <span style="color: red">*</span></label>
                                                     <input type="text" class="border-success" readonly name="sous_domaine_old" value='{{$demande->sous_domaine}}' id="sousdomaine_old" required />
-                                                 <select name="sous_domaine[]" id="sousdomaine" class="form-select border-success"></select>
+                                                 <select name="sous_domaine[]" id="sousdomaine" class="form-select select2 border-success"  style="width: 100%;"></select>
                                                  @if($errors->has('sous_domaine'))
                                                         <p class="alert alert-danger">{{ $errors->first('sous_domaine') }}</p>
                                                     @endif
@@ -544,7 +544,7 @@ function addRowAutreDocument() {
         $("#dt_autre_documents").append([
             '<tr class="">',
             '<td class="rs">'+
-               ' <select name="libelle_document[]" class="form-select border-success requis">' + options+
+               ' <select name="libelle_document[]" class="form-select select2 border-success requis">' + options+
                   
                + '</select>'+
              '</td>',
@@ -621,7 +621,7 @@ function addRowAutreDocument() {
         $("#dt_materiel_roulant").append([
             '<tr class="">',
             '<td class="rs">'+
-               ' <select name="libelle_document_roulant[]" class="form-select border-success requis">' + options+
+               ' <select name="libelle_document_roulant[]" class="form-select select2 border-success requis">' + options+
                   
                + '</select>'+
              '</td>',
@@ -696,7 +696,7 @@ function addRowAutreDocument() {
         $("#dt_materiel_non_roulant").append([
             '<tr class="">',
             '<td class="rs">'+
-               ' <select name="libelle_document_non_roulant[]" class="form-select border-success requis">' + options+
+               ' <select name="libelle_document_non_roulant[]" class="form-select select2 border-success requis">' + options+
                   
                + '</select>'+
              '</td>',

@@ -75,7 +75,7 @@
                                             <label class="siege_social fw-bold">Province de résidence<span style="color:red">
                                                         *</span></label>
 
-                                                <select name="province_id" id="provinces" class="form-select border-success" required>
+                                                <select name="province_id" id="provinces" class="form-select border-success select2"  style="width: 100%;" required>
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option value="">Veuillez choisir une Province</option>
                                                     @foreach ( $provinces as  $prov)
@@ -87,10 +87,10 @@
                                                 </select>
                                             </div>
                                             <div class="col-sm-12 col-lg-6">
-                                            <label class="siege_social fw-bold">Commune de résidence/siège<span style="color:red">
+                                            <label class="siege_social fw-bold">Commune de résidence<span style="color:red">
                                                         *</span></label>
 
-                                                <select name="commune_id"  id="communes" class="form-select border-success" required>
+                                                <select name="commune_id"  id="communes" class="form-select border-success select2"  style="width: 100%;" required>
                                                    
 
                                                 </select>
@@ -139,7 +139,7 @@
                                                 <label class="pays_residence fw-bold">Sexe animal<span style="color:red">
                                                         *</span></label>
 
-                                                <select name="sexe_animal" id="" class="border-success form-select" required>
+                                                <select name="sexe_animal" id="" class="border-success form-select select2"  style="width: 100%;" required>
                                                     <option value="">Veuillez choisir le sexe de l'animal</option>
                                                     <option value="M">Mâle</option>
                                                     <option value="F">Femelle</option>
@@ -153,7 +153,7 @@
                                                 <label class="nom_societe fw-bold">Lieu de provenance<span
                                                         style="color: red">*</span></label>
 
-                                                    <select name="lieu_provenance" id="selectMultipl" class="border-success form-select" required>
+                                                    <select name="lieu_provenance" id="selectMultipl" class="border-success form-select select2"  style="width: 100%;" required>
                                                         <option value="">Veuillez choisir un pays</option>
                                                         @foreach ( $pays as  $pay)
                                                          <option value="{{ $pay->uuid }}" >{{ $pay->libelle }}</option>

@@ -6,7 +6,7 @@
     @endif
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
 
     <div class="container-fluid" id="grad1">
         <div class="row justify-content-center mt-0">
@@ -78,10 +78,10 @@
                                                     placeholder="Dénomination Sociale" required />
                                             </div>
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="siege_social fw-bold">Lieu de résidence/siège<span style="color:red">
+                                                <label class="siege_social fw-bold">Lieu de résidence<span style="color:red">
                                                         *</span></label>
 
-                                                <select name="commune_id" id="selectMultiple" class="form-select border-success" required>
+                                                <select name="commune_id" id="selectMultiples" class="form-select border-success select2"  style="width: 100%;" required>
                                                     {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                     <option value="">Veuillez choisir une ville</option>
                                                     @foreach ( $communes as  $com)
@@ -128,7 +128,7 @@
                                             <div class="col-sm-12 col-lg-6">
                                                 <label class="pays_producteur fw-bold">Pays de production<span style="color:red">
                                                         *</span></label>
-                                                        <select name="pays_producteur" id="selectMultiple" required class="form-select border-success">
+                                                        <select name="pays_producteur" id="selectMultiple" required class="form-select border-success select2"  style="width: 100%;">
                                                             {{-- <input type="text" placeholder="filtrer ici"> --}}
                                                             <option value="">Veuillez choisir un Pays</option>
                                                             @foreach ( $pays as  $pay)
@@ -179,7 +179,7 @@
                                             <div class="col-sm-12 col-lg-6">
                                                 <label class="delai  fw-bold">Délai de biodégradabilité en nombre de mois<span
                                                         style="color: red">*</span></label>
-                                                        <select name="delai" class="form-select border-success" id="" required>
+                                                        <select name="delai" class="form-select border-success select2"  style="width: 100%;" id="" required>
                                                             <option value="">Selection du délai</option>
                                                             <option value="1M">1 mois</option>
                                                             <option value="2M">2 mois</option>
@@ -449,7 +449,7 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js" ;></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js" ;></script> --}}
 
 <script type="text/javascript">
     $('#selectMultiple').select2();

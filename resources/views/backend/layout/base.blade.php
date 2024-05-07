@@ -267,11 +267,11 @@
 
 
             @if (Auth::user()->role->libelle == 'Administration')
-            {{-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('paiements-list') }}">
                     <i class="bi bi-cash"></i><span>Paiements</span>
                 </a>
-            </li> --}}
+            </li>
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse"
