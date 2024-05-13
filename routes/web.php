@@ -295,6 +295,14 @@ Route::get('/listePlainte/{procedure}', [PlainteController::class, 'listePlainte
 Route::post('/editPlainte/{id}', [PlainteController::class, 'editPlainte'])->name('editPlainte');
 
 
+/* Routes paiement */
+Route::get('/paiement/liste-demandes', [App\Http\Controllers\FacturationController::class, 'facturation'])->name('paiement.list-demande');
+Route::get('/paiement/demande/detail/{process}/{id_demande}', [App\Http\Controllers\FacturationController::class, 'detailDemande'])->name('paiement.demande.detail');
+Route::post('/paiement/save', [App\Http\Controllers\FacturationController::class, 'savePaiement'])->name('paiement.save');
+Route::get('/paiement/demande/annuler', [App\Http\Controllers\FacturationController::class, 'annulerPaiement'])->name('paiement.demande.annuler');
+Route::get('/paiement/demande/dossiers-by-procedure', [App\Http\Controllers\FacturationController::class, 'dossierByProcedure'])->name('paiement.demande.dossiers-by-procedure');
+Route::get('/paiement/statistique', [App\Http\Controllers\FacturationController::class, 'situationPaiement'])->name('paiement.statistique');
+
 });
 
 

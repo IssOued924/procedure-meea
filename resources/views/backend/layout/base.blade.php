@@ -264,14 +264,28 @@
                 </ul>
 
             </li><!-- End Components Nav -->
-
+            <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#paiement-nav" data-bs-toggle="collapse"
+                        href="#">
+                        <i class="bi bi-cash"></i><span>Paiements</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="paiement-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('paiement.list-demande') }}">
+                                <i class="bi bi-circle"></i><span>Paiements</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('paiement.statistique') }}">
+                                <i class="bi bi-circle"></i><span>Statistiques</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
             @if (Auth::user()->role->libelle == 'Administration')
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('paiements-list') }}">
-                    <i class="bi bi-cash"></i><span>Paiements</span>
-                </a>
-            </li>
+            
+            
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse"
