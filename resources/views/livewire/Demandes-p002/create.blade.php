@@ -24,7 +24,7 @@
         <div class="row justify-content-center mt-0">
             <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
                 <div class="cardd px-0 pt-4 pb-0 mt-3 mb-3">
-                    <h5><strong>Octroie d'agrement techniques en Eau et Assainissement</strong></h5>
+                    <h5><strong>Agrement techniques en Eau et Assainissement</strong></h5>
                    <p> @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -49,8 +49,7 @@
 
                                 <fieldset>
                                     <div class="form-card">
-                                        <h4 class="fs-title">Identité du demandeur <span style="color:red">
-                                            *</span></h4>
+                                        <h4 class="fs-title">Identité du demandeur</h4>
                                             <div class="row">
                                                 <div class="col-sm-12 col-lg-6">
                                                     <label class="nom_societe fw-bold">Identité <span
@@ -76,7 +75,7 @@
                                                 </div>
                                             </div>
 
-                                            <h4 class="fs-title">Beneficiaire <span style="color:red">
+                                            {{-- <h4 class="fs-title">Beneficiaire <span style="color:red">
                                                 *</span></h4>
                                             <div class="row">
                                                 <div class="col-3">
@@ -93,7 +92,7 @@
                                                   @if($errors->has('beneficiaire'))
                                                       <p class="alert alert-danger">{{ $errors->first('beneficiaire') }}</p>
                                                   @endif
-                                            </div>
+                                            </div> --}}
 
                                     </div>
                                     <button type="button" name="next" class="next action-button btn btn-success"
@@ -310,12 +309,13 @@
                                      <button type="submit" class="action-button" id="btn_send">Valider</button> --}}
                                      <button type="button" name="previous" class="previous action-button-previous"
                                      >Retour</button>
-                                 <button type="button" id="btnEng" disabled   name="make_payment" id="next_piece" class="next action-button btn btn-success"
-                                     >Suivant</button>
+                                 {{-- <button type="button" id="btnEng" disabled   name="make_payment" id="next_piece" class="next action-button btn btn-success"
+                                     >Suivant</button> --}}
+                                     <input type="submit" class="next action-button" value="Valider" />
                                 </fieldset>
 
 
-                                <fieldset>
+                                {{-- <fieldset>
                                     <div class="form-card">
                                         <h4 class="fs-title">Paiement <span style="color:red">
                                             *</span></h4>
@@ -324,12 +324,10 @@
                                                     <div class="row">
                                                         <div class="col-3"></div>
                                                         <div class="col-3" class="text-center">
-                                                            {{-- <label class="nom_societe fw-bold" >ORANGE</label> --}}
                                                             <img src="{{ asset('img/paiement/orange.png') }}" width="80" height="80" class="d-inline-block align-top" alt="">
                                                             <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
                                                         </div>
                                                         <div class="col-3" class="text-center">
-                                                            {{-- <label class="siege_social fw-bold ">MOOV</label> --}}
                                                             <img src="{{ asset('img/paiement/moov.png') }}" width="80" height="80" class="d-inline-block align-top" alt="">
                                                             <input id="radio2" type="radio" value="2"  name="moyen"/>
                                                         </div>
@@ -382,7 +380,6 @@
                                                             <div id="payNotOK" style="display:none;">
                                                                 <span style="color:red">Paiement échoué</span>                        
                                                             </div>
-                                                            {{-- <input id="pay" type="button" class="action-button" value="Payer"/> --}}
                                                             <div id="payOkImg" style="display:none;">
                                                                 <img  src="{{asset('img/loader/okPay.png')}}" width="40%"/>
                                                                 <br>
@@ -403,7 +400,7 @@
                                     <input id="btnAllEng" type="submit" class="next action-button" value="Valider" />
                                     <div class="error-message" style="color: red;"></div>
                                     
-                                </fieldset>
+                                </fieldset> --}}
 
                                 <fieldset>
                                     <div class="form-card">

@@ -25,7 +25,7 @@ class StoreDemandeP002Request extends FormRequest
         $baseRules = [
            'identite' => 'required',
             'commune_id' => 'required',
-            'beneficiaire' => 'required',
+            // 'beneficiaire' => 'required',
             'recu_achat_dossier' => 'required',
             'ifu' => 'required',
             'rccm' => 'required',
@@ -44,7 +44,7 @@ class StoreDemandeP002Request extends FormRequest
       $message = [
         'identite.required' =>'Identité : est obligtoire',
         'commune_id.required' =>'Lieu de Residence : est obligatoire',
-        'beneficiaire.required' => 'Bénéficiaire : est obligatoire',
+        // 'beneficiaire.required' => 'Bénéficiaire : est obligatoire',
         'recu_achat_dossier.required' => 'Reçu d’achat du dossier de demande : est obligatoire',
         'ifu.required'=>'Certificat IFU : est requis',
         'rccm.required' =>'Attestation RCCM : est obligatoire',

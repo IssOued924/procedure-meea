@@ -33,16 +33,16 @@
                                     <li id="stockage"><strong>Information relative au stockage</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
                                     {{-- <li id="paiement"><strong>Paiement </strong></li> --}}
-                                    {{-- <li id="confirm"><strong>Validation</strong></li> --}}
+                                    <li id="confirm"><strong>Validation</strong></li>
                                 </ul>
                                 <!-- fieldsets -->
                                 <fieldset>
                                     <div class="form-card ">
-                                        <h4 class="fs-title">Identité du demandeur <span style="color:red">
-                                                *</span></h4>
+                                        <h4 class="fs-title">Identité du demandeur</h4>
 
                                                 <div class="wish_payment_type">
                                                     <div class="row">
+                                                        <label class="nom_societe fw-bold"> <strong>Qualité du demandeur</strong> <span style="color: red">*</span></label>
                                                         <div class="col-3">
                                                             <span class="checkbox payment-radio">
                                                             <label for="wish_payment_type_1"  class="fw-bold">

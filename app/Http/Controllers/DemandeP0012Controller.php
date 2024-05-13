@@ -65,17 +65,18 @@ class DemandeP0012Controller extends Controller
        // dd($data);
 
         $dataFiles = $request->all();
-        $pay_moyen = $data['moyen'];
-        $payResponse = $data['payResponse'];
 
-        $numero = $data["telephone"];
-        $code_otp = $data["code_otp"];
+        // $pay_moyen = $data['moyen'];
+        // $payResponse = $data['payResponse'];
 
-        unset($data['payResponse']);
+        // $numero = $data["telephone"];
+        // $code_otp = $data["code_otp"];
+
+        // unset($data['payResponse']);
         unset($data['telephone']);
-        unset($data["numero"]);
-        unset($data["moyen"]);
-        unset($data["code_otp"]);
+        // unset($data["numero"]);
+        // unset($data["moyen"]);
+        // unset($data["code_otp"]);
 
         $data['usager_id'] = Auth::user()->usager_id;
         $data['etat'] = 'D'; //code de procedure demande deposee
@@ -86,13 +87,10 @@ class DemandeP0012Controller extends Controller
 
         $data['procedure_id'] = Procedure::where(['code' => 'P0012'])->first('uuid')->uuid;
             //paiement
-        $data['paiement'] = 1;
+        $data['paiement'] = 0;
+        $data['code']= "P0012";
 
       //  dd($data['procedure_id']);
-        unset($data['telephone']);
-        unset($data['moyen']);
-        unset($data["numero"]);
-        unset($data["otp"]);
 
         // $user->save();
         //  dd($request->telephone);
@@ -112,26 +110,26 @@ class DemandeP0012Controller extends Controller
         $demande = $this->repository->create($data);
         $demande->save();
 
-        $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
+        // $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
         
-        if ($pay_moyen == 1)
-            $type_paiement = "OrangeMoney";
-        if ($pay_moyen == 2)
-            $type_paiement = "MoovMoney";
+        // if ($pay_moyen == 1)
+        //     $type_paiement = "OrangeMoney";
+        // if ($pay_moyen == 2)
+        //     $type_paiement = "MoovMoney";
         
 
-        $pay = [
-            'numero' => $numero,
-            'code_otp' => $code_otp,
-            'ref_paiement'=>$resp_data->transID,
-            'date_paiement'=>now(),
-            'code_procedure'=> 'P004',
-            'demande_id'=>$demande->uuid,
-            'type_paiement'=>$type_paiement,
-            'message'=>$payResponse,
-            ];
-        $paiement = $paiementRepository->create($pay);
-        $paiement->save();
+        // $pay = [
+        //     'numero' => $numero,
+        //     'code_otp' => $code_otp,
+        //     'ref_paiement'=>$resp_data->transID,
+        //     'date_paiement'=>now(),
+        //     'code_procedure'=> 'P004',
+        //     'demande_id'=>$demande->uuid,
+        //     'type_paiement'=>$type_paiement,
+        //     'message'=>$payResponse,
+        //     ];
+        // $paiement = $paiementRepository->create($pay);
+        // $paiement->save();
 
         //    $this->repository->uuid();
         $demandePieceP0012Repository->setChemin($cnib, $demande->uuid, 'CNIB');

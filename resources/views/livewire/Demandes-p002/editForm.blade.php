@@ -75,7 +75,7 @@
                                                 </div>
                                             </div>
 
-                                            <h4 class="fs-title">Beneficiaire <span style="color:red">
+                                            {{-- <h4 class="fs-title">Beneficiaire <span style="color:red">
                                                 *</span></h4>
                                             <div class="row">
                                                 <div class="col-3">
@@ -89,7 +89,7 @@
                                                   @if($errors->has('beneficiaire'))
                                                       <p class="alert alert-danger">{{ $errors->first('beneficiaire') }}</p>
                                                   @endif
-                                            </div>
+                                            </div> --}}
 
                                     </div>
                                     <button type="button" name="next" class="next action-button btn btn-success"

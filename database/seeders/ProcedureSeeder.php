@@ -124,6 +124,20 @@ $agent->save();
         ]);
         $prc1->save();
 
+        $prc1 = BaseJuridiques::create([
+            "libelle_court" => "AGDS",
+            "libelle_long" =>"Autorisation de gestion des déchets Solide",
+            "description" => "A propos de ce service La Demande d'autorisation de gestion des dechets est une autorisation officielle officiel qui certifie le lieu de résidence d'une personne au moment de la demande. Le dossier est traité par les autorités de l'Administration Locale au niveau du Secteur.",
+            "img" => "img/dechet.png",
+            "code_color" => "#359b27",
+            "code" => "P008",
+            "service_id"=>$serv3->uuid,
+            "delai"=> "32",
+            "rang"=> "4",
+            "tarif" => 1500
+        ]);
+        $prc1->save();
+
 
         $prc2 = Procedure::create([
             "libelle_court" => "DATIPC",

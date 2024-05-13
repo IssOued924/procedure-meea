@@ -32,29 +32,23 @@
                             <div class="card-body">
 
                                 <div class="row">
+                                    <div class="col-3"></div>
 
-                                <div class="col-4 offset-md-3">
-                                    <label for="">Choisir une procédure</label>
-                                    <select name="procedure" id="procedure" class="form-select border-success" onchange="loadDemandeListe()">
-                                        <option class="mb-3" value=""></option>
-                                        @foreach($procedures as $proc)
-                                        <option class="mb-3" {{($selectedProcedure == $proc->libelle_court ? 'selected': '')}} value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
-                                        @endforeach
-                                    </select><br><br>
-                                    {{-- <div class="form-inline">
-                                    <label for="">Rechercher par code : </label>
-                                    <input type="text" class="form-control border-success"style="width: 200px;"  placeholder="code">
-                                </div> --}}
-                                </div>
-                                <div class="col-3">
-                                    <div style="float: right">
-                                        {{-- <button title="Actualiser la Page"   type="button" onclick="refresh()" class="btn btn-success"><i
-                                                    class="bi bi-arrow-repeat"></i></button> --}}
-                                     {{--<button title="Ajouter" type="button" class="btn btn-success"><i class="bi bi-printer"></i> Imprimer</button>--}}   
+                                    <div class="col-6">
+                                        <label for="">Choisir une procédure</label>
+                                        <select name="procedure" id="procedure" class="form-select border-success" onchange="loadDemandeListe()">
+                                            <option class="mb-3" value="All">Toutes mes demandes</option>
+                                            @foreach($procedures as $proc)
+                                            <option class="mb-3" {{($selectedProcedure == $proc->libelle_court ? 'selected': '')}} value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
+                                            @endforeach
+                                        </select><br><br>
+                                        {{-- <div class="form-inline">
+                                        <label for="">Rechercher par code : </label>
+                                        <input type="text" class="form-control border-success"style="width: 200px;"  placeholder="code">
+                                    </div> --}}
                                     </div>
+                                    <div class="col-3"></div>
                                 </div>
-                            </div>
-                            <br>
                             <div class="row">
                                 <div class="col-10 offset-md-1">
                                     <!-- Table with stripped rows -->
@@ -62,7 +56,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-
+                                                <th scope="col">Procédure</th>
                                                 <th scope="col">Date demande</th>
                                                 <th scope="col">Réference</th>
                                                 <th scope="col">Etat de mes demandes</th>
@@ -125,6 +119,7 @@
                                                 @endphp
                                                 <tr class="table-bordered">
                                                     <th scope="row">{{ $i++ }}</th>
+                                                    <td title="{{ Helpers::getProcedure($demande->code) }}">{{ mb_strimwidth(Helpers::getProcedure($demande->code), 0, 20, "...") }}</td>
                                                     <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
                                                     <td>{{ $demande->reference }}</td>
                                                     <td>

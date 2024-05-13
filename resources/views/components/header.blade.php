@@ -26,7 +26,7 @@
                 <li><a class="active" href="/">Accueil</a></li>
                 {{-- <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Plainte</a></li> --}}
 
-                <li><a href="{{ route('demandes-lists') }}">Mes demandes</a></li>
+                <li><a href="{{ route('demandes-lists') }}?procedure=All">Mes demandes</a></li>
                 <li><a href="{{ route('plainte.form') }}" title="Déposer une plainte">Déposer une plainte</a></li>
 
                 <li><a href="contact">Contact</a></li>

@@ -52,9 +52,10 @@
                                 <fieldset>
 
                                     <div class="form-card">
-                                        <h4 class="fs-title">Identité du demandeur <span style="color:red">
-                                            *</span></h4>
+                                        <h4 class="fs-title">Identité du demandeur</h4>
                                             <div class="row">
+                                                <label class="nom_societe fw-bold"> <strong>Qualité du demandeur</strong> <span style="color: red">*</span></label>
+
                                                 <div class="col-3">
                                                     <label class="nom_societe fw-bold" >Exploitant Forestier</label>
                                                     <input id='radio1' type="radio" {{ $demande->exploitant == 'Forestier' ? 'checked' : '' }}  value="1" class="checkbox"  name="exploitant" />

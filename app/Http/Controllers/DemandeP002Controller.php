@@ -33,17 +33,17 @@ class DemandeP002Controller extends Controller {
             DemandeP002 $demande, PaiementRepository $paiementRepository) {
 
                 $data =  $request->all();
-                $pay_moyen = $data['moyen'];
-                $payResponse = $data['payResponse'];
+                // $pay_moyen = $data['moyen'];
+                // $payResponse = $data['payResponse'];
 
-                $numero = $data["telephone"];
-                $code_otp = $data["code_otp"];
+                // $numero = $data["telephone"];
+                // $code_otp = $data["code_otp"];
 
-                unset($data['payResponse']);
-                unset($data['telephone']);
-                unset($data["numero"]);
-                unset($data["moyen"]);
-                unset($data["code_otp"]);
+                // unset($data['payResponse']);
+                // unset($data['telephone']);
+                // unset($data["numero"]);
+                // unset($data["moyen"]);
+                // unset($data["code_otp"]);
 
         $dataDemande = ['etat' => 'D',
             'date_demande' => Carbon::parse(Carbon::now())->format('Ymd'),
@@ -52,7 +52,8 @@ class DemandeP002Controller extends Controller {
             'beneficiaire' => $request->beneficiaire,
             'procedure_id' => Procedure::where(['code' => 'P002'])->first('uuid')->uuid,
             'delai' => Procedure::where(['code' => 'P002'])->first('delai')->delai,
-            'paiement' => 1,
+            'paiement' => 0,
+            'code'=> "P002",
             'date_certif' => Carbon::parse(Carbon::now())->format('Ymd'),
             'usager_id' => Auth::user()->usager_id,
             'last_modified_by' => Auth::user()->usager_id,
@@ -72,26 +73,26 @@ class DemandeP002Controller extends Controller {
         $demande = $this->repository->create($dataDemande);
         $demande->save();
 
-        $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
+        // $resp_data = json_decode(json_encode(simplexml_load_string("<response>".$payResponse."</response>")));
         
-        if ($pay_moyen == 1)
-            $type_paiement = "OrangeMoney";
-        if ($pay_moyen == 2)
-            $type_paiement = "MoovMoney";
+        // if ($pay_moyen == 1)
+        //     $type_paiement = "OrangeMoney";
+        // if ($pay_moyen == 2)
+        //     $type_paiement = "MoovMoney";
         
 
-        $pay = [
-            'numero' => $numero,
-            'code_otp' => $code_otp,
-            'ref_paiement'=>$resp_data->transID,
-            'date_paiement'=>now(),
-            'code_procedure'=> 'P004',
-            'demande_id'=>$demande->uuid,
-            'type_paiement'=>$type_paiement,
-            'message'=>$payResponse,
-            ];
-        $paiement = $paiementRepository->create($pay);
-        $paiement->save();
+        // $pay = [
+        //     'numero' => $numero,
+        //     'code_otp' => $code_otp,
+        //     'ref_paiement'=>$resp_data->transID,
+        //     'date_paiement'=>now(),
+        //     'code_procedure'=> 'P004',
+        //     'demande_id'=>$demande->uuid,
+        //     'type_paiement'=>$type_paiement,
+        //     'message'=>$payResponse,
+        //     ];
+        // $paiement = $paiementRepository->create($pay);
+        // $paiement->save();
 
         //Recuperation du chemin des fichiers joint
             $cheminRecuAchat = $this->repository->uploadFile($request->file('recu_achat_dossier'));

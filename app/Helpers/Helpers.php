@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Str;
 use App\Models\Pays;
+use App\Models\Procedure;
 
 define("PAGELIST", "liste");
 define("PAGECREATEFORM", "create");
@@ -62,4 +63,16 @@ public static function paysNom($uuid)
                 return "Néant";
             };
         } 
+
+
+        public static function getProcedure($code)
+        {
+    
+        $proc = Procedure::where('code',$code)->first();
+                if ($proc) {
+                    return $proc->libelle_long;
+                }else{
+                    return "Néant";
+                };
+            } 
 }

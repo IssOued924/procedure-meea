@@ -117,8 +117,37 @@ class BackendController extends Controller
     public function listDemande(DemandeP001Repository $demandeP001Repository,  DemandeP001 $demandeTest)
     {
         // dd( StatutDemande::where('etat', '=', 'V')->first()->statut);
+        $depots = 0;
+        $etudes = 0;
+        $traites = 0;
+        $signes = 0;
+        $userRole = Auth::user()->role->libelle;
+
+        $demandes = $demandeP001Repository->all()->sortByDesc('created_at');
+
+        foreach ($demandes as $demande){
+            if($demande->etat == 'D' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $depots++;
+            }
+            if($demande->etat == 'E' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $etudes++;
+            }
+            if($demande->etat == 'V' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $traites++;
+            }
+            if($demande->etat == 'S' || $demande->etat == 'A' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $signes++;
+            }
+        }
+
+
         $data = [
-            "demandes" => $demandeP001Repository->all()->sortByDesc('created_at'),
+            "depots" => $depots,
+            "etudes" => $etudes,
+            "traites" => $traites,
+            "signes" => $signes,
+            "demandes" => $demandes,
+            "procedureName"  => Procedure::where('code', 'P001')->first()->libelle_long,
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -135,7 +164,7 @@ class BackendController extends Controller
         //   dd($data['demandes'][0]->demandePiece);
 
 
-        return view('backend.list_demandep001', $data);
+        return view('backend.list_demandes', $data);
     }
 
 
@@ -143,8 +172,36 @@ class BackendController extends Controller
     public function listDemandep002(DemandeP002Repository $demandeP002Repository,  DemandeP002 $demandep002)
     {
 
+        $depots = 0;
+        $etudes = 0;
+        $traites = 0;
+        $signes = 0;
+        $userRole = Auth::user()->role->libelle;
+
+        $demandes = $demandeP002Repository->all()->sortByDesc('created_at');
+
+        foreach ($demandes as $demande){
+            if($demande->etat == 'D' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $depots++;
+            }
+            if($demande->etat == 'E' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $etudes++;
+            }
+            if($demande->etat == 'V' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $traites++;
+            }
+            if($demande->etat == 'S' || $demande->etat == 'A' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $signes++;
+            }
+        }
+
         $data = [
-            "demandes" => $demandeP002Repository->all()->sortByDesc('created_at'),
+            "depots" => $depots,
+            "etudes" => $etudes,
+            "traites" => $traites,
+            "signes" => $signes,
+            "demandes" => $demandes,
+            "procedureName"  => Procedure::where('code', 'P002')->first()->libelle_long,
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -160,7 +217,7 @@ class BackendController extends Controller
         //   dd($data['demandes'][0]->demandePiece);
         // dd($data['demandeEtat']);
 
-        return view('backend.list_demandep002', $data);
+        return view('backend.list_demandes', $data);
     }
 
     //   liste des demandes de la procedure ecotourisme p0012
@@ -168,8 +225,36 @@ class BackendController extends Controller
     public function listDemandep0012(DemandeP0012Repository $demandeP0012Repository,  DemandeP0012 $demandep0012)
     {
 
+        $depots = 0;
+        $etudes = 0;
+        $traites = 0;
+        $signes = 0;
+        $userRole = Auth::user()->role->libelle;
+
+        $demandes = $demandeP0012Repository->all()->sortByDesc('created_at');
+
+        foreach ($demandes as $demande){
+            if($demande->etat == 'D' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $depots++;
+            }
+            if($demande->etat == 'E' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $etudes++;
+            }
+            if($demande->etat == 'V' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $traites++;
+            }
+            if($demande->etat == 'S' || $demande->etat == 'A' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $signes++;
+            }
+        }
+
         $data = [
-            "demandes" => $demandeP0012Repository->all()->sortByDesc('created_at'),
+            "depots" => $depots,
+            "etudes" => $etudes,
+            "traites" => $traites,
+            "signes" => $signes,
+            "demandes" => $demandes,
+            "procedureName"  => Procedure::where('code', 'P0012')->first()->libelle_long,
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -186,7 +271,7 @@ class BackendController extends Controller
         // dd($data['demandeEtat']);
 
 
-        return view('backend.list_demandep0012', $data);
+        return view('backend.list_demandes', $data);
     }
 
 
@@ -194,9 +279,36 @@ class BackendController extends Controller
 
     public function listDemandep008(DemandeP008Repository $demandeP008Repository,  DemandeP008 $demandep008)
     {
+        $depots = 0;
+        $etudes = 0;
+        $traites = 0;
+        $signes = 0;
+        $userRole = Auth::user()->role->libelle;
+
+        $demandes = $demandeP008Repository->all()->sortByDesc('created_at');
+
+        foreach ($demandes as $demande){
+            if($demande->etat == 'D' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $depots++;
+            }
+            if($demande->etat == 'E' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $etudes++;
+            }
+            if($demande->etat == 'V' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $traites++;
+            }
+            if($demande->etat == 'S' || $demande->etat == 'A' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $signes++;
+            }
+        }
 
         $data = [
-            "demandes" => $demandeP008Repository->all()->sortByDesc('created_at'),
+            "depots" => $depots,
+            "etudes" => $etudes,
+            "traites" => $traites,
+            "signes" => $signes,
+            "demandes" => $demandes,
+            "procedureName"  => Procedure::where('code', 'P008')->first()->libelle_long,
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -212,7 +324,7 @@ class BackendController extends Controller
         //   dd($data['demandes'][0]->demandePiece);
         // dd($data['demandeEtat']);
 
-        return view('backend.list_demandep008', $data);
+        return view('backend.list_demandes', $data);
     }
 
     //   liste des demandes de permis de chasse des dechets p003
@@ -220,8 +332,36 @@ class BackendController extends Controller
     public function listDemandep003(DemandeP003Repository $demandeP003Repository,  DemandeP003 $demandep003)
     {
 
+        $depots = 0;
+        $etudes = 0;
+        $traites = 0;
+        $signes = 0;
+        $userRole = Auth::user()->role->libelle;
+
+        $demandes = $demandeP003Repository->all()->sortByDesc('created_at');
+
+        foreach ($demandes as $demande){
+            if($demande->etat == 'D' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $depots++;
+            }
+            if($demande->etat == 'E' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $etudes++;
+            }
+            if($demande->etat == 'V' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $traites++;
+            }
+            if($demande->etat == 'S' || $demande->etat == 'A' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $signes++;
+            }
+        }
+
         $data = [
-            "demandes" => $demandeP003Repository->all()->sortByDesc('created_at'),
+            "depots" => $depots,
+            "etudes" => $etudes,
+            "traites" => $traites,
+            "signes" => $signes,
+            "demandes" => $demandes,
+            "procedureName"  => Procedure::where('code', 'P003')->first()->libelle_long,
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -237,7 +377,7 @@ class BackendController extends Controller
         //   dd($data['demandes'][0]->demandePiece);
         // dd($data['demandeEtat']);
 
-        return view('backend.list_demandep003', $data);
+        return view('backend.list_demandes', $data);
     }
 
 
@@ -246,8 +386,36 @@ class BackendController extends Controller
     public function listDemandep004(DemandeP004Repository $demandeP004Repository,  DemandeP004 $demandep004)
     {
 
+        $depots = 0;
+        $etudes = 0;
+        $traites = 0;
+        $signes = 0;
+        $userRole = Auth::user()->role->libelle;
+
+        $demandes = $demandeP004Repository->all()->sortByDesc('created_at');
+
+        foreach ($demandes as $demande){
+            if($demande->etat == 'D' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $depots++;
+            }
+            if($demande->etat == 'E' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $etudes++;
+            }
+            if($demande->etat == 'V' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $traites++;
+            }
+            if($demande->etat == 'S' || $demande->etat == 'A' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $signes++;
+            }
+        }
+
         $data = [
-            "demandes" => $demandeP004Repository->all()->sortByDesc('created_at'),
+            "depots" => $depots,
+            "etudes" => $etudes,
+            "traites" => $traites,
+            "signes" => $signes,
+            "demandes" => $demandes,
+            "procedureName"  => Procedure::where('code', 'P004')->first()->libelle_long,
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -263,7 +431,7 @@ class BackendController extends Controller
         //   dd($data['demandes'][0]->demandePiece);
         // dd($data['demandeEtat']);
 
-        return view('backend.list_demandep004', $data);
+        return view('backend.list_demandes', $data);
     }
 
       //   liste des demandes de permis de circulation de bois et de charbon de bois
@@ -271,8 +439,36 @@ class BackendController extends Controller
       public function listDemandep005(DemandeP005Repository $demandeP005Repository,  DemandeP005 $demandep005)
       {
 
-          $data = [
-              "demandes" => $demandeP005Repository->all()->sortByDesc('created_at'),
+        $depots = 0;
+        $etudes = 0;
+        $traites = 0;
+        $signes = 0;
+        $userRole = Auth::user()->role->libelle;
+
+        $demandes = $demandeP005Repository->all()->sortByDesc('created_at');
+
+        foreach ($demandes as $demande){
+            if($demande->etat == 'D' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $depots++;
+            }
+            if($demande->etat == 'E' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $etudes++;
+            }
+            if($demande->etat == 'V' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $traites++;
+            }
+            if($demande->etat == 'S' || $demande->etat == 'A' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $signes++;
+            }
+        }
+
+            $data = [
+              "depots" => $depots,
+              "etudes" => $etudes,
+              "traites" => $traites,
+              "signes" => $signes,
+              "demandes" => $demandes,
+              "procedureName"  => Procedure::where('code', 'P005')->first()->libelle_long,
               "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
               "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
               "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -288,7 +484,7 @@ class BackendController extends Controller
           //   dd($data['demandes'][0]->demandePiece);
           // dd($data['demandeEtat']);
 
-          return view('backend.list_demandep005', $data);
+          return view('backend.list_demandes', $data);
       }
 
 
@@ -297,9 +493,36 @@ class BackendController extends Controller
 
     public function listDemandep0011(DemandeP0011Repository $demandeP0011Repository,  DemandeP0011 $demandeP0011)
     {
+        $depots = 0;
+        $etudes = 0;
+        $traites = 0;
+        $signes = 0;
+        $userRole = Auth::user()->role->libelle;
+
+        $demandes = $demandeP0011Repository->all()->sortByDesc('created_at');
+
+        foreach ($demandes as $demande){
+            if($demande->etat == 'D' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $depots++;
+            }
+            if($demande->etat == 'E' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $etudes++;
+            }
+            if($demande->etat == 'V' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $traites++;
+            }
+            if($demande->etat == 'S' || $demande->etat == 'A' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $signes++;
+            }
+        }
 
         $data = [
-            "demandes" => $demandeP0011Repository->all()->sortByDesc('created_at'),
+            "depots" => $depots,
+            "etudes" => $etudes,
+            "traites" => $traites,
+            "signes" => $signes,
+            "demandes" => $demandes,
+            "procedureName"  => Procedure::where('code', 'P0011')->first()->libelle_long,
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -315,7 +538,7 @@ class BackendController extends Controller
         //   dd($data['demandes'][0]->demandePiece);
         // dd($data['demandeEtat']);
 
-        return view('backend.list_demandep0011', $data);
+        return view('backend.list_demandes', $data);
     }
 
     //   liste des demandes de permis de detention dun animal p006
@@ -323,8 +546,36 @@ class BackendController extends Controller
     public function listDemandep006(DemandeP006Repository $demandeP006Repository,  DemandeP006 $demandeP006)
     {
 
+        $depots = 0;
+        $etudes = 0;
+        $traites = 0;
+        $signes = 0;
+        $userRole = Auth::user()->role->libelle;
+
+        $demandes = $demandeP006Repository->all()->sortByDesc('created_at');
+
+        foreach ($demandes as $demande){
+            if($demande->etat == 'D' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $depots++;
+            }
+            if($demande->etat == 'E' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $etudes++;
+            }
+            if($demande->etat == 'V' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $traites++;
+            }
+            if($demande->etat == 'S' || $demande->etat == 'A' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $signes++;
+            }
+        }
+
         $data = [
-            "demandes" => $demandeP006Repository->all()->sortByDesc('created_at'),
+            "depots" => $depots,
+            "etudes" => $etudes,
+            "traites" => $traites,
+            "signes" => $signes,
+            "demandes" => $demandes,
+            "procedureName"  => Procedure::where('code', 'P006')->first()->libelle_long,
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -340,7 +591,7 @@ class BackendController extends Controller
         //   dd($data['demandes'][0]->demandePiece);
         // dd($data['demandeEtat']);
 
-        return view('backend.list_demandep006', $data);
+        return view('backend.list_demandes', $data);
     }
 
 
@@ -350,8 +601,37 @@ class BackendController extends Controller
     public function listDemandep007(DemandeP007Repository $demandeP007Repository,  DemandeP007 $demandeP007)
     {
 
+        $depots = 0;
+        $etudes = 0;
+        $traites = 0;
+        $signes = 0;
+        $userRole = Auth::user()->role->libelle;
+
+        $demandes = $demandeP007Repository->all()->sortByDesc('created_at');
+
+        foreach ($demandes as $demande){
+            if($demande->etat == 'D' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $depots++;
+            }
+            if($demande->etat == 'E' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $etudes++;
+            }
+            if($demande->etat == 'V' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $traites++;
+            }
+            if($demande->etat == 'S' || $demande->etat == 'A' && (($demande->last_agent_assign == Auth::user()->agent->uuid && in_array($userRole, ['Etudes', 'Gestionnaire'])) || in_array($userRole, ['Gestionnaire', 'Administration'])) && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])){
+                $signes++;
+            }
+        }
+
+
         $data = [
-            "demandes" => $demandeP007Repository->all()->sortByDesc('created_at'),
+            "depots" => $depots,
+            "etudes" => $etudes,
+            "traites" => $traites,
+            "signes" => $signes,
+            "demandes" => $demandes,
+            "procedureName"  => Procedure::where('code', 'P007')->first()->libelle_long,
             "statutDepose" => StatutDemande::where('etat', '=', 'D')->first()->statut,
             "statutArchive" => StatutDemande::where('etat', '=', 'A')->first()->statut,
             "statutRejete" => StatutDemande::where('etat', '=', 'R')->first()->statut,
@@ -367,7 +647,7 @@ class BackendController extends Controller
         //   dd($data['demandes'][0]->demandePiece);
         // dd($data['demandeEtat']);
 
-        return view('backend.list_demandep007', $data);
+        return view('backend.list_demandes', $data);
     }
 
 
@@ -687,6 +967,20 @@ class BackendController extends Controller
 
         return view('backend.paiements', $data);
 
+
+    }
+
+
+
+    // fonction d'enregMontant d'un collaborateur a un dossier
+    public function enregMontant( $idDemande, $tableName, Request $request) {
+
+        $data = $request->all();
+
+         DB::table($tableName)->where('uuid', $idDemande)->update(['montant' => $data["montant"]]);
+
+        Alert::success('Succès', 'Montant enregistré !');
+        return redirect()->back();
 
     }
 
@@ -1086,8 +1380,34 @@ class BackendController extends Controller
                     $demandes = $demandeP007Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;
 
+                case 'All':
+                    $demandes1 = $demandeP001Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
+                    
+                    $demandes2 = $demandeP002Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
+
+                    $demandes3 = $demandeP003Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
+
+                    $demandes4 = $demandeP004Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
+
+                    $demandes5 = $demandeP005Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
+
+                    $demandes6 = $demandeP006Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
+
+                    $demandes7 = $demandeP007Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
+
+                    $demandes8 = $demandeP008Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');                
+
+                    $demandes11 = $demandeP0011Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
+
+                    $demandes12 = $demandeP0012Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
+
+                    $tempCollection = collect([$demandes1, $demandes2, $demandes3, $demandes4, $demandes5, $demandes6, $demandes7, $demandes8, $demandes11, $demandes12]);
+
+                    $demandes = $tempCollection->flatten(10)->sortByDesc("created_at");
+                    break;
+
                 default:
-                    # code...
+
                     break;
             }
         }

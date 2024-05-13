@@ -57,7 +57,7 @@
 
                             <div class="row">
 
-                                <div class="col-3 offset-9">
+                                <div class="col-6 offset-6">
 
                                     <div style="float: right">
                                         @php
@@ -68,7 +68,7 @@
                                         <!-- Boutons d'action en fonction de l'état et du rôle -->
                                         @if (($demande->etat == 'D' && $demande->last_agent_assign == null && in_array($userRole, ['Réception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
                                         ($demande->etat == 'E' && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
-                                        ($demande->etat == 'V' && in_array($userRole, ['Gestionnaire', 'Administration'])) ||
+                                        ($demande->etat == 'V' && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
                                         ($demande->etat == 'D' && $demande->last_agent_assign == Auth::user()->agent->uuid || in_array($userRole, ['Gestionnaire', 'Administration'])) ||
                                         ($demande->etat == 'E' && $demande->last_agent_assign == Auth::user()->agent->uuid && Auth::user()->role->code != "RCT" || in_array($userRole, ['Gestionnaire', 'Administration'])) ||
                                         ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration'])))
@@ -85,6 +85,9 @@
                                         @if ($demande->etat == 'E' && in_array($userRole, ['Gestionnaire', 'Administration']))
                                         <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur" class="btn btn-primary">
                                             <i class="bi bi-folder-symlink"></i>
+                                        </button>
+                                        <button data-toggle="modal" data-target="#montant{{ $demande->uuid }}" type="button" title="Saisir montants" class="btn btn-warning">
+                                            <i class="bi bi-cash"></i>
                                         </button>
                                         @endif
 
@@ -274,6 +277,49 @@
                                 </div>
                             </div>
                             <!-- Fin Modal Signer-->
+
+                                                        {{-- Saisir Montant --}}
+                            <div class="modal fade" id="montant{{ $demande->uuid }}" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content bgcustom-gradient-light">
+                                        <div class="modal-header">
+                                            <img src="{{ asset('backend/assets/img/assigner.jpg') }}" width="60" height="45" class="d-inline-block align-top" alt="">
+                                            <h5 class="modal-title m-auto"> Saisir du montant
+                                            </h5>
+                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="btn-close">
+
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post" enctype="multipart/form-data"
+                                                action="{{ route('enregMontant', ['idDemande' => $demande->uuid , 'tableName'=>'demande_p008_s'] ) }}">
+                                                @csrf
+
+
+                                                <div class="form-group">
+                                                    <div class="text-center">
+                                                        <h5>Saisir le montant à payer</h5>
+                                                        <input type="number" class="form-control border-success" name="montant" min="0" value="{{ $demande->montant }}" placeholder="montant à payer" required />
+
+                                                    </div>
+                                                    {{-- <div class="form-group">
+                                                        <div class="text-center">
+                                                            <label class="col-form-label">Commentaires</label>
+                                                            <textarea required name="commentaire" class="form-control border-success"></textarea>
+                                                        </div>
+                                                    </div> --}}
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Annuler</button>
+                                                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fin Modal Montant-->
 
 
                             {{-- Model de confirmation de Assigner a un collabrateur --}}

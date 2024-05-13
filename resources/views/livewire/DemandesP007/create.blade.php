@@ -51,9 +51,9 @@
                                 <!-- fieldsets -->
                                 <fieldset>
                                     <div class="form-card">
-                                        <h4 class="fs-title">Identité du demandeur <span style="color:red">
-                                            *</span></h4>
+                                        <h4 class="fs-title">Identité du demandeur</h4>
                                         <div class="row">
+                                            <label class="nom_societe fw-bold"> <strong>Qualité du demandeur</strong> <span style="color: red">*</span></label>
                                             <div class="col-3">
                                                 <label class="nom_societe fw-bold" >Producteur</label>
                                                 <input type="checkbox" value="1" class="checkbox"  name="is_producteur" />
@@ -324,11 +324,13 @@
 
                                     <input type="button"   class="previous action-button-previous"
                                         value="Retour" />
-                                    <input type="button" disabled  id="btnEng" class="next action-button btn btn-success"
-                                        value="Suivant" />
+                                    {{-- <input type="button" disabled  id="btnEng" class="next action-button btn btn-success"
+                                        value="Suivant" /> --}}
+                                    <input type="submit" class="next action-button" value="Valider" />
+                                    
                                 </fieldset>
 
-                                <fieldset>
+                                {{-- <fieldset>
                                     <div class="form-card">
                                         <h4 class="fs-title">Paiement <span style="color:red">
                                             *</span></h4>
@@ -337,12 +339,10 @@
                                                     <div class="row">
                                                         <div class="col-3"></div>
                                                         <div class="col-3" class="text-center">
-                                                            {{-- <label class="nom_societe fw-bold" >ORANGE</label> --}}
                                                             <img src="{{ asset('img/paiement/orange.png') }}" width="80" height="80" class="d-inline-block align-top" alt="">
                                                             <input id="radio1" type="radio" value="1" class="checkbox"  name="moyen" />
                                                         </div>
                                                         <div class="col-3" class="text-center">
-                                                            {{-- <label class="siege_social fw-bold ">MOOV</label> --}}
                                                             <img src="{{ asset('img/paiement/moov.png') }}" width="80" height="80" class="d-inline-block align-top" alt="">
                                                             <input id="radio2" type="radio" value="2"  name="moyen"/>
                                                         </div>
@@ -395,7 +395,6 @@
                                                             <div id="payNotOK" style="display:none;">
                                                                 <span style="color:red">Paiement échoué</span>                        
                                                             </div>
-                                                            {{-- <input id="pay" type="button" class="action-button" value="Payer"/> --}}
                                                             <div id="payOkImg" style="display:none;">
                                                                 <img  src="{{asset('img/loader/okPay.png')}}" width="40%"/>
                                                                 <br>
@@ -416,7 +415,7 @@
                                     <input id="btnAllEng" type="submit" class="next action-button" value="Valider" />
                                     <div class="error-message" style="color: red;"></div>
                                     
-                                </fieldset>
+                                </fieldset> --}}
 
                                 <fieldset>
                                     <div class="form-card">
