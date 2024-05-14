@@ -159,7 +159,6 @@
             day = '0' + day.toString();
 
         var maxDate = year + '-' + month + '-' + day;
-        alert(maxDate);
         $('#date_paiement').attr('max', maxDate);
     }
   
