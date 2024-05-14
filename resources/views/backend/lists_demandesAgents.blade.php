@@ -39,7 +39,7 @@
                                         <select name="procedure" id="procedure" class="form-select border-success" onchange="loadDemandeListe()">
                                             <option class="mb-3" value="All">Toutes mes demandes</option>
                                             @foreach($procedures as $proc)
-                                            <option class="mb-3" {{($selectedProcedure == $proc->libelle_court ? 'selected': '')}} value="{{$proc->libelle_court}}">{{$proc->libelle_long}}</option>
+                                            <option class="mb-3" {{($selectedProcedure == $proc->code ? 'selected': '')}} value="{{$proc->code}}">{{$proc->libelle_long}}</option>
                                             @endforeach
                                         </select><br><br>
                                         {{-- <div class="form-inline">
@@ -160,7 +160,7 @@
                                                         <!--button title="Modifier" type="button" class="btn btn-info "
                                                 data-bs-toggle="modal" data-bs-target="#largeModal{{ $demande->uuid }}"> <i
                                                     class="bi bi-pencil-square text-white">Modifier </i> </button-->
-                                                        <a title="Modifier" class="btn btn-info" href="{{ route('editer-demande', ['id' =>$demande->uuid, 'procedure' => $selectedProcedure] ) }}"> <i class="bi bi-pencil-square text-white">Modifier </i> </a>
+                                                        <a title="Modifier" class="btn btn-info" href="{{ route('editer-demande', ['id' =>$demande->uuid, 'procedure' => $demande->code] ) }}"> <i class="bi bi-pencil-square text-white">Modifier </i> </a>
                                                         @endif
 
 

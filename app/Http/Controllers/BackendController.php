@@ -978,7 +978,7 @@ class BackendController extends Controller
 
         $data = $request->all();
 
-        DB::table($tableName)->where('uuid', $idDemande)->update(['montant' => $data["montant"]]);
+        DB::table($tableName)->where('uuid', $idDemande)->update(['montant' => $data["montant"], 'active_paiement' => 1]);
 
         $demande = DB::table($tableName)->where('uuid', $idDemande)->first();
 
@@ -1370,35 +1370,35 @@ class BackendController extends Controller
         if (isset($request->procedure) && strlen($request->procedure) > 0) {
             $proc = $request->procedure;
             switch ($proc) {
-                case 'PETE':
+                case 'P0012':
                     $demandes = $demandeP0012Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;
-                case 'DATIPC':
+                case 'P001':
                     $demandes = $demandeP001Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;
-                case 'ADDMC':
+                case 'P003':
                     $demandes = $demandeP003Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;
-                case 'AGDS':
+                case 'P008':
                     $demandes = $demandeP008Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;
-                case 'CEESPNB':
+                case 'P006':
                     $demandes = $demandeP006Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;
-                case 'CDAS':
+                case 'P004':
                     $demandes = $demandeP004Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;
-                    case 'PCBCB2':
+                    case 'P005':
                         $demandes = $demandeP005Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;
 
-                case 'PCBCB':
+                case 'P0011':
                     $demandes = $demandeP0011Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;
-                case 'OATEA':
+                case 'P002':
                     $demandes = $demandeP002Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;
-                case 'CHESPB':
+                case 'P007':
                     $demandes = $demandeP007Repository->all(['usager_id' => Auth::user()->usager->uuid])->sortByDesc('created_at');
                     break;
 

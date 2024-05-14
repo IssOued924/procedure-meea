@@ -70,7 +70,7 @@ class DemandeFontController extends Component
         $documents = null;
         if (isset($procedure) && strlen($procedure) > 0) {
             switch ($procedure) {
-                case 'PETE':
+                case 'P0012':
                     $demande = DemandeP0012::where(['uuid' => $id])->first();
                     if ($demande->etat == 'R') {
                         $checkStatus = true;
@@ -86,7 +86,7 @@ class DemandeFontController extends Component
                         "communes" => Commune::all(),
                     ];
                     break;
-                case 'DATIPC':
+                case 'P001':
                     $demande = DemandeP001::where(['uuid' => $id])->first();
                     if ($demande->etat == 'R') {
                         $checkStatus = true;
@@ -107,7 +107,7 @@ class DemandeFontController extends Component
                                 ->get(),
                     ];
                     break;
-                case 'ADDMC':
+                case 'P003':
                     $demande = DemandeP003::where(['uuid' => $id])->first();
                     if ($demande->etat == 'R') {
                         $checkStatus = true;
@@ -124,7 +124,7 @@ class DemandeFontController extends Component
 
                     ];
                     break;
-                case 'AGDS':
+                case 'P008':
                     $demande = DemandeP008::where(['uuid' => $id])->first();
                     if ($demande->etat == 'R') {
                         $checkStatus = true;
@@ -138,7 +138,7 @@ class DemandeFontController extends Component
                         "communes" => Commune::all(),
                     ];
                     break;
-                case 'CEESPNB':
+                case 'P006':
                     $demande = DemandeP006::where(['uuid' => $id])->first();
                     if ($demande->etat == 'R') {
                         $checkStatus = true;
@@ -154,7 +154,7 @@ class DemandeFontController extends Component
 
                     ];
                     break;
-                case 'CDAS':
+                case 'P004':
                     $demande = DemandeP004::where(['uuid' => $id])->first();
                     if ($demande->etat == 'R') {
                         $checkStatus = true;
@@ -176,7 +176,7 @@ class DemandeFontController extends Component
                     ];
 
                     break;
-                case 'PCBCB':
+                case 'P0011':
                     $demande = DemandeP0011::where(['uuid' => $id])->first();
                     if ($demande->etat == 'R') {
                         $checkStatus = true;
@@ -193,7 +193,7 @@ class DemandeFontController extends Component
                         ];
                     break;
 
-                    case 'PCBCB2':
+                    case 'P005':
                         $demande = DemandeP005::where(['uuid' => $id])->first();
                         if ($demande->etat == 'R') {
                             $checkStatus = true;
@@ -208,7 +208,7 @@ class DemandeFontController extends Component
                                 "communes" => Commune::all(),
                             ];
                         break;
-                case 'OATEA':
+                case 'P002':
                     $demande = DemandeP002::where(['uuid' => $id])->first();
                     if ($demande->etat == 'R') {
                         $checkStatus = true;
@@ -226,7 +226,7 @@ class DemandeFontController extends Component
                         "sousDomianes" => DemandeSousDomaineP002::all(),
                     ];
                     break;
-                case 'CHESPB':
+                case 'P007':
                     $demande = DemandeP007::where(['uuid' => $id])->first();
                     if ($demande->etat == 'R') {
                         $checkStatus = true;
