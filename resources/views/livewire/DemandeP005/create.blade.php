@@ -31,7 +31,8 @@
                                     <li id="personal"><strong>Information sur le produit</strong></li>
                                     <li id="caracteristik"><strong>Informations relatives au transport</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
-                                    <li id="paiement"><strong>Paiement </strong></li>
+                                    {{-- <li id="paiement"><strong>Paiement </strong></li> --}}
+                                    <li id="confirm"><strong>Validation</strong></li>
 
                                 </ul>
                                 <!-- fieldsets -->

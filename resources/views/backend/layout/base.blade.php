@@ -175,9 +175,10 @@
                 </a>
             </li><!-- End Dashboard Nav -->
 
+            @if ((Auth::user()->role->libelle != 'Financier' && Auth::user()->agent->service->libelle_court == 'DGPE') || Auth::user()->role->libelle == 'Administration')
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#demandes-nav" data-bs-toggle="collapse"
-                    href="{{ route('demandes-list') }}">
+                    href="{{ route('demandesp001-list') }}">
                     <i class="bi bi-menu-button-wide"></i><span>Demandes</span><i
                         class="bi bi-chevron-down   ms-auto"></i>
                 </a>
@@ -188,7 +189,7 @@
 
                     @if (Auth::user()->agent->service->libelle_court == 'DGPE' || Auth::user()->role->libelle == 'Administration')
                         <li>
-                            <a href="{{ route('demandes-list') }}">
+                            <a href="{{ route('demandesp001-list') }}">
                                 <i class="bi bi-circle"></i><span>Produit Chimique &nbsp;<span
                                         id="prog_produit_chimique" class="badge bg-warning text-white"> </span>
                                 </span>
@@ -264,6 +265,8 @@
                 </ul>
 
             </li><!-- End Components Nav -->
+            @endif
+            @if (Auth::user()->role->libelle == 'Administration' || Auth::user()->role->libelle == 'Financier')
             <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#paiement-nav" data-bs-toggle="collapse"
                         href="#">
@@ -282,6 +285,7 @@
                         </li>
                     </ul>
                 </li>
+            @endif
 
             @if (Auth::user()->role->libelle == 'Administration')
             

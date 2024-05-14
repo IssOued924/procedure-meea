@@ -37,7 +37,7 @@
                                     <li class="active" id="personal"><strong>Infos entreprise</strong></li>
                                     <li id="entreprise"><strong>Documents joints</strong></li>
                                     <li id="folder"><strong>Engagement</strong></li>
-                                    <li id="paiement"><strong>Paiement </strong></li>
+                                    {{-- <li id="paiement"><strong>Paiement </strong></li> --}}
                                     <li id="confirm"><strong>Validation</strong></li>
                                 </ul>
                                 <!-- fieldsets -->

@@ -6,9 +6,10 @@
         {{ $demand['procedure'] }}
     </div>
     <div class="card-body">
-        <h5 class="card-title">Demande {{ $demand['reference'] }}</h5>
-        <p class="card-text">Nous sommes heureux de vous informer que votre demande a été traité. Elle a un nouvel état!!</p>
-        <span class="badge bg-info text-dark">{{ $demand['etat'] }}</span>
+        Demande n°{{ $demand['reference'] }}
+        <p class="card-text">Les frais de traitement est de {{$demand['montant']}} F CFA.</p>
+        <p>Veuillez vous rendre dans la structure concernée pour le paiement</p>
+        <p>Cordialement,</p>
     </div>
     <div class="card-footer text-muted">
         <a href="#">© https://www.eservices.envieau.gov.bf</a>

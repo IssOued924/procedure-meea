@@ -14,7 +14,7 @@
         {{-- <P><strong>Veuillez changer votre mot de passe lors de votre premiere connexion</strong></P> --}}
     </div>
     <div class="card-footer text-muted">
-        <a href="#">© portailmeea.gov.bf</a>
+        <a href="#">© https://www.eservices.envieau.gov.bf</a>
     </div>
 </div>
 @endsection

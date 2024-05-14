@@ -63,7 +63,7 @@
                                         @php
                                             $userRole = Auth::user()->role->libelle;
                                         @endphp
-                                        <a href="{{ route('demandes-list')}}" title="Retour" type="button" class="btn btn-primary"><i class="bi bi-arrow-left"></i></a>
+                                        <a href="{{ route('demandesp001-list')}}" title="Retour" type="button" class="btn btn-primary"><i class="bi bi-arrow-left"></i></a>
                                         <!-- Boutons d'action en fonction de l'état et du rôle -->
                                         @if (($demande->etat == 'D' && $demande->last_agent_assign == null && in_array($userRole, ['Reception', 'Etudes', 'Gestionnaire', 'Administration'])) ||
                                         ($demande->etat == 'E' && in_array($userRole, ['Etudes', 'Gestionnaire', 'Administration'])) ||
@@ -399,6 +399,7 @@
                             <div class="modal fade" id="valider{{ $demande->uuid }}" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content bgcustom-gradient-light">
+                                        @if($demande->paiement == 1 || $demande->etat == 'D')
                                         <div class="modal-header">
                                             <img src="{{ asset('backend/assets/img/valide.png') }}" width="60" height="45" class="d-inline-block align-top" alt="">
                                             <h5 class="modal-title m-auto"> Confirmation de Validation
@@ -442,6 +443,15 @@
                                                 </div>
                                             </form>
                                         </div>
+                                        @else
+                                        <div class="modal-header">
+                                            <img src="{{ asset('backend/assets/img/rejet.png') }}" width="60" height="45" class="d-inline-block align-top" alt="">
+                                            <h5 class="modal-title m-auto">Paiement non effectué</h5>
+                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="btn-close">
+
+                                            </button>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

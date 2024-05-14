@@ -3,6 +3,7 @@
     <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Référence</th>
             <th scope="col">Date Demande</th>
             <th scope="col">Demandeur</th>
             {{-- <th scope="col">Quantite/Kg</th> --}}
@@ -80,6 +81,7 @@
 
         <tr>
             <th scope="row">{{ $i++ }}</th>
+            <td>{{ $demande->reference }}</td>
             <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
             @if($demande->code == 'P003' || $demande->code == 'P004' || $demande->code == 'P005' || $demande->code == 'P006' || $demande->code == 'P007' || $demande->code == 'P0012')
             <td> {{ $demande->usager->nom.' '.$demande->usager->prenom}}</td>

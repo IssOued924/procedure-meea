@@ -66,11 +66,15 @@ class DemandeFontController extends Component
         $demande = null;
         $data = [];
         $view ='';
+        $checkStatus = false;
         $documents = null;
         if (isset($procedure) && strlen($procedure) > 0) {
             switch ($procedure) {
                 case 'PETE':
                     $demande = DemandeP0012::where(['uuid' => $id])->first();
+                    if ($demande->etat == 'R') {
+                        $checkStatus = true;
+                    }
                     $documents = DemandePieceP0012::where(['demande_p0012_id' => $id])->get();
                     $view ='livewire.Demandesp0012.edit';
                     $data = [
@@ -84,6 +88,9 @@ class DemandeFontController extends Component
                     break;
                 case 'DATIPC':
                     $demande = DemandeP001::where(['uuid' => $id])->first();
+                    if ($demande->etat == 'R') {
+                        $checkStatus = true;
+                    }
                     $documents = DemandePieceP001::where(['demande_p001_id' => $id])->get();
                     $view ='livewire.Demandes.edit';
                     $data = [
@@ -102,6 +109,9 @@ class DemandeFontController extends Component
                     break;
                 case 'ADDMC':
                     $demande = DemandeP003::where(['uuid' => $id])->first();
+                    if ($demande->etat == 'R') {
+                        $checkStatus = true;
+                    }
                     $documents = DemandePieceP003::where(['demande_p003_id' => $id])->get();
                     $view ='livewire.DemandesP003.edit';
                     $data = [
@@ -116,6 +126,9 @@ class DemandeFontController extends Component
                     break;
                 case 'AGDS':
                     $demande = DemandeP008::where(['uuid' => $id])->first();
+                    if ($demande->etat == 'R') {
+                        $checkStatus = true;
+                    }
                     $documents = DemandePieceP008::where(['demande_p008_id' => $id])->get();
                     $view ='livewire.Demandesp008.edit';
                     $data = [
@@ -127,6 +140,9 @@ class DemandeFontController extends Component
                     break;
                 case 'CEESPNB':
                     $demande = DemandeP006::where(['uuid' => $id])->first();
+                    if ($demande->etat == 'R') {
+                        $checkStatus = true;
+                    }
                     $documents = DemandePieceP006::where(['demande_p006_id' => $id])->get();
                     $view ='livewire.DemandesP006.edit';
                     $data = [
@@ -140,6 +156,9 @@ class DemandeFontController extends Component
                     break;
                 case 'CDAS':
                     $demande = DemandeP004::where(['uuid' => $id])->first();
+                    if ($demande->etat == 'R') {
+                        $checkStatus = true;
+                    }
                     $documents = DemandePieceP004::where(['demande_p004_id' => $id])->get();
                     $view ='livewire.DemandesP004.edit';
                     $data = [
@@ -159,6 +178,9 @@ class DemandeFontController extends Component
                     break;
                 case 'PCBCB':
                     $demande = DemandeP0011::where(['uuid' => $id])->first();
+                    if ($demande->etat == 'R') {
+                        $checkStatus = true;
+                    }
                     $documents = DemandePieceP0011::where(['demande_p0011_id' => $id])->get();
                     $view ='livewire.Demandesp0011.edit';
                     $data = [
@@ -173,6 +195,9 @@ class DemandeFontController extends Component
 
                     case 'PCBCB2':
                         $demande = DemandeP005::where(['uuid' => $id])->first();
+                        if ($demande->etat == 'R') {
+                            $checkStatus = true;
+                        }
                         $documents = DemandePieceP005::where(['demande_p005_id' => $id])->get();
                         $view ='livewire.DemandeP005.edit';
                         $data = [
@@ -185,6 +210,9 @@ class DemandeFontController extends Component
                         break;
                 case 'OATEA':
                     $demande = DemandeP002::where(['uuid' => $id])->first();
+                    if ($demande->etat == 'R') {
+                        $checkStatus = true;
+                    }
                     $documents = DemandePieceP002::where(['demande_p002_id' => $id])->get();
                     $view ='livewire.Demandes-p002.edit';
                     $data = [
@@ -200,6 +228,9 @@ class DemandeFontController extends Component
                     break;
                 case 'CHESPB':
                     $demande = DemandeP007::where(['uuid' => $id])->first();
+                    if ($demande->etat == 'R') {
+                        $checkStatus = true;
+                    }
                     $documents = DemandePieceP007::where(['demande_p007_id' => $id])->get();
                     $view ='livewire.DemandesP007.edit';
                     $data = [
@@ -221,6 +252,10 @@ class DemandeFontController extends Component
             }
 
         }
+
+        // if ($checkStatus) {
+        //     return redirect()->back();
+        // }
 
 
         return view($view, $data)

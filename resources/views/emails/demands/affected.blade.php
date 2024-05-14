@@ -13,7 +13,7 @@
         <span class="badge bg-info text-dark">Etat de la demande: {{ $demand['etat'] }}</span>
     </div>
     <div class="card-footer text-muted">
-        <a href="#">© portailmeea.gov.bf</a>
+        <a href="#">© https://www.eservices.envieau.gov.bf</a>
     </div>
 </div>
 @endsection

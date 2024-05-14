@@ -45,7 +45,7 @@
                                     <li class="bio" id="caracteristik"><strong>Caractéristiques emballage/sachet</strong></li>
                                     {{-- <li id="stockage"><strong>Information relative au stockage</strong></li> --}}
                                     <li class="bio" id="engagement"><strong>Engagement </strong></li>
-                                    <li id="paiement"><strong>Paiement </strong></li>
+                                    {{-- <li id="paiement"><strong>Paiement </strong></li> --}}
                                     <li class="bio" id="confirm"><strong>Validation</strong></li>
                                 </ul>
                                 <!-- fieldsets -->

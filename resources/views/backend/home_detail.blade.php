@@ -2,6 +2,9 @@
 @section('title')
 <div class="pagetitle">
   <h1>Tableau de bord</h1>
+  @php
+   $code = strtolower($procedure->code);
+  @endphp
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
@@ -53,7 +56,7 @@
           <div class="card info-card sales-card">
 
 
-            <a href="{{ route('dossiersByStatus', ['procedure' => $procedure->code, 'etat' => 'D']) }}">
+            <a href="{{ route('demandes'.$code.'-list') }}">
             <div class="card-body">
               <h5 class="card-title">Demandes <span>| <b>déposées</b></span></h5>
 
@@ -77,7 +80,7 @@
         <div class="col-xxl-3 col-md-6">
           <div class="card info-card revenue-card">
 
-            <a href="{{ route('dossiersByStatus', ['procedure' => $procedure->code, 'etat' => 'V']) }}">
+            <a href="{{ route('demandes'.$code.'-list') }}">
             <div class="card-body">
               <h5 class="card-title">Demandes <span>| <b>Validées</b></span></h5>
 
@@ -99,7 +102,7 @@
 
         <div class="col-xxl-3 col-md-6">
             <div class="card info-card revenue-card">
-            <a href="{{ route('dossiersByStatus', ['procedure' => $procedure->code, 'etat' => 'S']) }}">
+            <a href="{{ route('demandes'.$code.'-list') }}">
 
               <div class="card-body">
                 <h5 class="card-title">Demandes <span>| <b>Signées</b></span></h5>
@@ -165,7 +168,7 @@
           <div class="col-xxl-3 col-md-6">
 
             <div class="card info-card customers-card">
-            <a href="{{ route('dossiersByStatus', ['procedure' => $procedure->code, 'etat' => 'E']) }}">
+            <a href="{{ route('demandes'.$code.'-list') }}">
 
               <div class="card-body">
                 <h5 class="card-title">Demandes <span>| <b>En Etudes</b></span></h5>
@@ -191,7 +194,7 @@
 
           <div class="col-xxl-3 col-md-6">
             <div class="card info-card customers-card">
-            <a href="{{ route('dossiersByStatus', ['procedure' => $procedure->code, 'etat' => 'A']) }}">
+            <a href="{{ route('demandes'.$code.'-list') }}">
 
               <div class="card-body">
                 <h5 class="card-title">Demandes <span>|  <b>Archivées</b></span></h5>

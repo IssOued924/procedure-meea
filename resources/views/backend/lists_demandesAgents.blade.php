@@ -56,12 +56,14 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Procédure</th>
-                                                <th scope="col">Date demande</th>
+                                                @if(isset($_GET['procedure']) && $_GET['procedure'] == 'All')
+                                                    <th scope="col">Procédure</th>
+                                                @endif
                                                 <th scope="col">Réference</th>
+                                                <th scope="col">Date demande</th>
                                                 <th scope="col">Etat de mes demandes</th>
-                                                <th scope="col">Délai de traitement</th>
-                                                <th scope="col">Déposé</th>
+                                                {{-- <th scope="col">Délai de traitement</th> --}}
+                                                {{-- <th scope="col">Déposé</th> --}}
                                                 <th scope="col">Paiement</th>
                                                 <th scope="col">Action</th>
 
@@ -119,9 +121,11 @@
                                                 @endphp
                                                 <tr class="table-bordered">
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td title="{{ Helpers::getProcedure($demande->code) }}">{{ mb_strimwidth(Helpers::getProcedure($demande->code), 0, 20, "...") }}</td>
-                                                    <td>{{ $demande->created_at->translatedFormat('d M Y à H:i:s') }}</td>
+                                                    @if(isset($_GET['procedure']) && $_GET['procedure'] == 'All')
+                                                        <td title="{{ Helpers::getProcedure($demande->code) }}">{{ mb_strimwidth(Helpers::getProcedure($demande->code), 0, 20, "...") }}</td>
+                                                    @endif
                                                     <td>{{ $demande->reference }}</td>
+                                                    <td>{{ $demande->created_at->translatedFormat('d M Y') }}</td>
                                                     <td>
                                                         @if ($statut == 'demande en etude')
                                                         <span class="badge {{ $statutColor }} "> Demande en cours d'étude</span>
@@ -133,13 +137,13 @@
                                                     <span class="badge {{ $statutColor }} ">{{ $statut}}</span> </td>
                                                     @endif
 
-                                                    @if($demande->exploitant == "Forestier")
+                                                    {{-- @if($demande->exploitant == "Forestier")
                                                     <td><span class="badge bg-dark"> 10</span> Jours </td>
                                                     @else
                                                     <td><span class="badge bg-dark">{{ $demande->procedure->delai}} </span> Jours </td>
-                                                    @endif
+                                                    @endif --}}
 
-                                                    <td>{{ $demande->created_at->diffForHumans() }}</td>
+                                                    {{-- <td>{{ $demande->created_at->diffForHumans() }}</td> --}}
 
                                                     {{-- partie paiement --}}
                                                     @if ($demande->paiement === 1)

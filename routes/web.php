@@ -183,6 +183,9 @@ Route::middleware(['auth', 'mustreset', 'verified'])->group(function () {
 
     Route::get('/plainte', [PlainteController::class, 'plainteForm'])->name('plainte.form');
     Route::post('/plainte', [PlainteController::class, 'plainteStore'])->name('plainte.store');
+
+Route::get("/procedure/modification/{id}/{procedure}", DemandeFontController::class, 'editerDemande')->name("editer-demande");
+
            });
 
 
@@ -191,7 +194,7 @@ Route::middleware(['auth', 'mustreset', 'verified'])->group(function () {
 // Route partie administration
 Route::middleware('admin')->group(function () {
 Route::get('/administration', [BackendController::class, 'index'])->name('administration');
-Route::get('/administration/demandes-list', [BackendController::class, 'listDemande'])->name('demandes-list');
+Route::get('/administration/demandesp001-list', [BackendController::class, 'listDemande'])->name('demandesp001-list');
 Route::get('/administration/demandesp0012-list', [BackendController::class, 'listDemandep0012'])->name('demandesp0012-list');
 Route::get('/administration/demandesp008-list', [BackendController::class, 'listDemandep008'])->name('demandesp008-list');
 Route::get('/administration/demandesp003-list', [BackendController::class, 'listDemandep003'])->name('demandesp003-list');
@@ -309,7 +312,6 @@ Route::get('/paiement/statistique', [App\Http\Controllers\FacturationController:
 
 
 
-Route::get("/procedure/modification/{id}/{procedure}", DemandeFontController::class, 'editerDemande')->name("editer-demande");
 Route::get('/get-sous-domaine-by-categorie', [DemandeP002Controller::class, 'getSousDomaineByCategorie'])->name('get-sous-domaine-by-categorie');
 Route::get('/get-delete-autre-document', [DemandeP002Controller::class, 'deleteAutreDocument'])->name('get-delete-autre-document');
 

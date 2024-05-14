@@ -178,13 +178,13 @@ rel="stylesheet"
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#demandes-nav" data-bs-toggle="collapse"  href="{{ route('demandes-list') }}">
+        <a class="nav-link collapsed" data-bs-target="#demandes-nav" data-bs-toggle="collapse"  href="{{ route('demandesp001-list') }}">
           <i class="bi bi-menu-button-wide"></i><span>Mes Demandes</span><i class="bi bi-folder bi-chevron-down ms-auto"></i>
         </a>
 
         <ul id="demandes-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-              <a href="{{ route('demandes-list') }}">
+              <a href="{{ route('demandesp001-list') }}">
                 <i class="bi bi-circle"></i><span>Procédure Produit Chimique<span id="prog_produit_chimique" class="badge bg-warning text-white"> </span> </span>
               </a>
             </li>

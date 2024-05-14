@@ -43,7 +43,7 @@
                                     <li class="active" id="personal"><strong>Identité du demandeur</strong></li>
                                     <li id="engagement"><strong>Piece Jointes </strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
-                                    <li id="paiement"><strong>Paiement </strong></li>
+                                    {{-- <li id="paiement"><strong>Paiement </strong></li> --}}
                                     <li id="confirm"><strong>Validation</strong></li>
                                 </ul>
 

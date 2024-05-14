@@ -38,7 +38,18 @@ class AppRepository extends BaseRepository
 
     public function generateReference($codeProcedure)
     {
-        return 'DOC'.$codeProcedure.Carbon::parse(Carbon::now())->format('YmdHis');
+
+        // $date = Carbon::parse(Carbon::now())->format('YmdHis');
+        // $demandeP002Repository->nombre('demande_p002_s', array('etat' => 'en cours'));
+        $count = DB::table('demande_'.strtolower($codeProcedure).'_s')->where('code', '=', $codeProcedure)->count();
+        $date = Carbon::parse(Carbon::now());
+        $y = substr($date->format('Y'), -2);
+        $md = $date->format('md');    
+        $sum = (int)$date->format('H')+$count;
+        $code = $y.$md."-".$sum;        
+        // $date = Carbon::parse(Carbon::now())->format('YmdHis');
+        
+        return str_replace("00","",$codeProcedure).$code;
     }
 
     //fonction de chargement

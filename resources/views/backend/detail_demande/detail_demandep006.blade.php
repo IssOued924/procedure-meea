@@ -234,6 +234,7 @@
                             <div class="modal fade" id="valider{{ $demande->uuid }}" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content bgcustom-gradient-light">
+                                        @if($demande->paiement == 1 || $demande->etat == 'D')
                                         <div class="modal-header">
                                             <img src="{{ asset('backend/assets/img/valide.png') }}" width="60" height="45" class="d-inline-block align-top" alt="">
                                             <h5 class="modal-title m-auto"> Confirmation de Validation
@@ -277,6 +278,15 @@
                                                 </div>
                                             </form>
                                         </div>
+                                        @else
+                                        <div class="modal-header">
+                                            <img src="{{ asset('backend/assets/img/rejet.png') }}" width="60" height="45" class="d-inline-block align-top" alt="">
+                                            <h5 class="modal-title m-auto">Paiement non effectué</h5>
+                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="btn-close">
+
+                                            </button>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -449,7 +459,12 @@
                                                             vouloir Rejetter cette Demande ?</label>
 
                                                     </div>
-
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="text-center">
+                                                        <label class="col-form-label">Commentaires</label>
+                                                        <textarea required name="commentaire" placeholder="Motif de rejet" class="form-control border-success"></textarea>
+                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-warning" data-dismiss="modal">Non, Annuler</button>

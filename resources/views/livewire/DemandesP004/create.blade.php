@@ -44,7 +44,7 @@
                                     <li id="personal"><strong>Identité de l'animal</strong></li>
                                     <li id="caracteristik"><strong>Pièces jointes</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
-                                    <li id="paiement"><strong>Paiement </strong></li>
+                                    {{-- <li id="paiement"><strong>Paiement </strong></li> --}}
                                     <li id="confirm"><strong>Validation</strong></li>
                                 </ul>
                                 <!-- fieldsets -->

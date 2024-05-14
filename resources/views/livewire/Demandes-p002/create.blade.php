@@ -41,8 +41,7 @@
                                     <li id="folder"><strong>Pieces Administratives</strong></li>
                                     <li id="personal"><strong>Domaine et catégorie</strong></li>
                                     <li id="engagement"><strong>Engagement </strong></li>
-                                    <li id="paiement"><strong>Paiement </strong></li>
-
+                                    {{-- <li id="paiement"><strong>Paiement </strong></li> --}}
                                     <li id="confirm"><strong>Validation</strong></li>
                                 </ul>
                                 <!-- fieldsets -->

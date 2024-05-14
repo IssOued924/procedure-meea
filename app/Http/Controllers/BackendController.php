@@ -51,6 +51,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Mail\AffectDemandMailable;
 use App\Mail\ValidateDemandMailable;
+use App\Mail\MontantDemandMailable;
 use App\Mail\RejectDemandMailable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -977,7 +978,27 @@ class BackendController extends Controller
 
         $data = $request->all();
 
-         DB::table($tableName)->where('uuid', $idDemande)->update(['montant' => $data["montant"]]);
+        DB::table($tableName)->where('uuid', $idDemande)->update(['montant' => $data["montant"]]);
+
+        $demande = DB::table($tableName)->where('uuid', $idDemande)->first();
+
+        $user = User::where('uuid', $demande->created_by)->first();
+
+        $demand = array(
+            "procedure"  => Procedure::where('code', $demande->code)->first()->libelle_long,
+            "reference" => $demande->reference,
+            "montant" => $demande->montant,
+        );
+
+        // dd($demand->created_by);
+
+        try{
+            Mail::to($user->email)->send(new MontantDemandMailable($demand ));
+           }catch (\Exception $e) {
+              
+               session()->flash('error',"Erreur d'envoie de mail; Vérifier votre connexion internet");
+   
+           }
 
         Alert::success('Succès', 'Montant enregistré !');
         return redirect()->back();
@@ -1207,7 +1228,7 @@ class BackendController extends Controller
 
     public function rejetter($id, $table, Request $request)
     {
-        DB::table($table)->where('uuid', $id)->update(['etat' => 'R']);
+        DB::table($table)->where('uuid', $id)->update(['etat' => 'R', 'commentaire' => $request->commentaire]);
 
         if ($table == 'demande_p001_s') {
             $commentaire1 = new CommentaireP001();
@@ -1279,7 +1300,8 @@ class BackendController extends Controller
             "procedure"  => Procedure::where('uuid', $proc_id)->first()->libelle_long,
             "reference" => DB::table($table)->where('uuid', $id)->first()->reference,
             "etat"   => StatutDemande::where('etat', $currentStatus)->first()->statut,
-            "motif"   => $request->libelle
+            "motif"   => $request->libelle,
+            "commentaire"   => $request->commentaire
         );
         try{
         Mail::to($user_email)->send(new RejectDemandMailable( $demand ));
