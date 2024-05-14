@@ -86,12 +86,12 @@
                                                 break;
                                                 case 'S':
                                                 # code...
-                                                $statut ="demande signée";
+                                                $statut ="demande traitée";
                                                 $statutColor ="bg-success";
                                                 break;
                                                 case 'A':
                                                 # code...
-                                                $statut ="demande archivée" ;
+                                                $statut ="demande traitée" ;
                                                 $statutColor ="bg-secondary";
                                                 break;
                                                 case 'V':
