@@ -28,7 +28,7 @@
 
                                         <!-- <h6 > -->
                                             <a title="" href="/{{$proc->code}}" class="" >
-                                                <div class="proc_text rounded" style="background-color: {{$proc->code_color}}; height:70px; text-align:left; font-size:13px; font-weight : bold;">
+                                                <div class="proc_text rounded" style="background-color: {{$proc->code_color}}; height:70px; text-align:left; font-size:14px; font-weight : bold;">
                                                     {{ $proc->libelle_long }}
                                                 </div>
                                             </a>
@@ -52,7 +52,7 @@
                                         </div>
 
                                        <a title="" href="/{{$proc->code}}" class="">
-                                                <div class="proc_text rounded" style="background-color: {{$proc->code_color}}; height:70px; text-align:left; font-size:13px; font-weight : bold;">
+                                                <div class="proc_text rounded" style="background-color: {{$proc->code_color}}; height:70px; text-align:left; font-size:14px; font-weight : bold;">
                                                     {{ $proc->libelle_long }}
                                                 </div>
                                             </a>

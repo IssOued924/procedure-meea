@@ -36,7 +36,7 @@ class FacturationRepository extends BaseRepository {
                 ->join('procedures', 'procedures.uuid', '=', 'demande_p001_s.procedure_id')
                 ->join('services', 'services.uuid', '=', 'procedures.service_id')
                 ->join('communes', 'communes.uuid', '=', 'demande_p001_s.commune_id')
-                ->where('active_paiement', false)
+                ->where('active_paiement', true)
                 ->where($filtre)
                 ->where('services.libelle_court', $userDirection)
                 ->get(['demande_p001_s.uuid',
@@ -54,7 +54,7 @@ class FacturationRepository extends BaseRepository {
                 ->join('procedures', 'procedures.uuid', '=', 'demande_p002_s.procedure_id')
                 ->join('services', 'services.uuid', '=', 'procedures.service_id')
                 ->join('communes', 'communes.uuid', '=', 'demande_p002_s.commune_id')
-                ->where('active_paiement', false)
+                ->where('active_paiement', true)
                 ->where($filtre)
                 ->where('services.libelle_court', $userDirection)
                 ->get(['demande_p002_s.uuid',
@@ -73,7 +73,7 @@ class FacturationRepository extends BaseRepository {
                 ->join('procedures', 'procedures.uuid', '=', 'demande_p003_s.procedure_id')
                 ->join('services', 'services.uuid', '=', 'procedures.service_id')
                 ->join('communes', 'communes.uuid', '=', 'demande_p003_s.commune_id')
-                ->where('active_paiement', false)
+                ->where('active_paiement', true)
                 ->where($filtre)
                 ->where('services.libelle_court', $userDirection)
                 ->get(['demande_p003_s.uuid',
@@ -93,7 +93,7 @@ class FacturationRepository extends BaseRepository {
                 ->join('services', 'services.uuid', '=', 'procedures.service_id')
                 ->join('communes', 'communes.uuid', '=', 'demande_p004_s.commune_id')
                 ->join('usagers', 'usagers.uuid', '=', 'demande_p004_s.usager_id')
-                ->where('active_paiement', false)
+                ->where('active_paiement', true)
                 ->where($filtre)
                 ->where('services.libelle_court', $userDirection)
                 ->get(['demande_p004_s.uuid',
@@ -113,7 +113,7 @@ class FacturationRepository extends BaseRepository {
                 ->join('procedures', 'procedures.uuid', '=', 'demande_p005_s.procedure_id')
                 ->join('services', 'services.uuid', '=', 'procedures.service_id')
                 ->join('communes', 'communes.uuid', '=', 'demande_p005_s.commune_id')
-                ->where('active_paiement', false)
+                ->where('active_paiement', true)
                 ->where($filtre)
                 ->where('services.libelle_court', $userDirection)
                 ->get(['demande_p005_s.uuid',
@@ -133,7 +133,7 @@ class FacturationRepository extends BaseRepository {
                 ->join('services', 'services.uuid', '=', 'procedures.service_id')
                 ->join('communes', 'communes.uuid', '=', 'demande_p006_s.commune_id')
                 ->join('usagers', 'usagers.uuid', '=', 'demande_p006_s.usager_id')
-                ->where('active_paiement', false)
+                ->where('active_paiement', true)
                 ->where($filtre)
                 ->where('services.libelle_court', $userDirection)
                 ->get(['demande_p006_s.uuid',
@@ -153,7 +153,7 @@ class FacturationRepository extends BaseRepository {
                 ->join('services', 'services.uuid', '=', 'procedures.service_id')
                 ->join('communes', 'communes.uuid', '=', 'demande_p007_s.commune_id')
                 ->join('usagers', 'usagers.uuid', '=', 'demande_p007_s.usager_id')
-                ->where('active_paiement', false)
+                ->where('active_paiement', true)
                 ->where($filtre)
                 ->where('services.libelle_court', $userDirection)
                 ->get(['demande_p007_s.uuid',
@@ -173,7 +173,7 @@ class FacturationRepository extends BaseRepository {
                 ->join('services', 'services.uuid', '=', 'procedures.service_id')
                 ->join('communes', 'communes.uuid', '=', 'demande_p008_s.commune_id')
                 ->join('usagers', 'usagers.uuid', '=', 'demande_p008_s.usager_id')
-                ->where('active_paiement', false)
+                ->where('active_paiement', true)
                 ->where($filtre)
                 ->where('services.libelle_court', $userDirection)
                 ->get(['demande_p008_s.uuid',
@@ -193,7 +193,7 @@ class FacturationRepository extends BaseRepository {
                 ->join('services', 'services.uuid', '=', 'procedures.service_id')
                 ->join('communes', 'communes.uuid', '=', 'demande_p0011_s.commune_id')
                 ->join('usagers', 'usagers.uuid', '=', 'demande_p0011_s.usager_id')
-                ->where('active_paiement', false)
+                ->where('active_paiement', true)
                 ->where($filtre)
                 ->where('services.libelle_court', $userDirection)
                 ->get(['demande_p0011_s.uuid',
@@ -213,7 +213,7 @@ class FacturationRepository extends BaseRepository {
                 ->join('services', 'services.uuid', '=', 'procedures.service_id')
                 ->join('communes', 'communes.uuid', '=', 'demande_p0012_s.commune_id')
                 ->join('usagers', 'usagers.uuid', '=', 'demande_p0012_s.usager_id')
-                ->where('active_paiement', false)
+                ->where('active_paiement', true)
                 ->where($filtre)
                 ->where('services.libelle_court', $userDirection)
                 ->get(['demande_p0012_s.uuid',
