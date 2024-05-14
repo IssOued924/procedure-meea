@@ -1,4 +1,7 @@
 @extends('backend.layout.base')
+@section('css')
+<link href="{{asset('backend/assets/css/select2.min.css') }}" rel="stylesheet" />
+@endsection
 @section('title')
 <div class="pagetitle">
     <h1>Paramètres</h1>
@@ -71,7 +74,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <form method="POST" action="{{ route('piecejointe-store') }}">
+                                                <form method="POST" action="{{ route('piecejointe-store') }}" enctype="multipart/form-data">
                                                 <div class="modal-body">
                                                         <div class="row">
                                                             <div class="col">
@@ -93,9 +96,6 @@
                                                                     <div class="col-6">
                                                                         <h5 class="card-title">Procédure Concernée </h5>
                                                                         <div class="input-group mb-3">
-
-                                                                            {{-- <label for="libelle">Libelle</label> --}}
-
                                                                             <select name="procedure_id" id="" class="form-select border-success">
                                                                                 <option value="">Veuillez Choisir la procédure</option>
                                                                                 @foreach ($procedures as $proc)
@@ -104,9 +104,7 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
-
                                                                 <div class="row">
                                                                     <div class="col-6">
                                                                         <h5 class="card-title">Montant</h5>
@@ -127,16 +125,18 @@
                                                                         <!-- End Quill Editor Full -->
 
                                                                     </div>
+                                                                    <div class="col-6">
+                                                                        <h5 class="card-title">Modèle de document </h5>
+                                                                        <div class="input-group mb-3">
+                                                                            <input type="file" name="modele_fichier"
+                                                                                class="form-control border-success"
+                                                                                placeholder="Modèle de document" aria-label="Username"
+                                                                                aria-describedby="basic-addon1">
+                                                                            </div>
+                                                                    </div>
                                                                 </div>
-
-                                                                {{-- <input type="submit" value="Valider"
-                                                                    class="btn btn-primary"> --}}
-
-
                                                             </div>
                                                         </div>
-
-
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger"
@@ -152,15 +152,21 @@
                                 </div>
                             </div> <!-- Table with stripped rows -->
                             <!-- Table with stripped rows -->
+                            <div class="col-sm-10">
+                                <select class="form-select" aria-label="Default select example" onchange="loadPieceListeByPrecedure()" name="procedure" id ="procedure">
+                                    <option >Type de demande</option>
+                                    @foreach($procedures as $proc)
+                                    <option value="{{$proc->uuid}}" {{($proc->uuid == $selectedProcedure ? 'selected' : '')}}>{{$proc->libelle_long }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <br> <br>
                             <table class="table datatable table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Libelle</th>
                                         <th scope="col">montant</th>
-
-
-                                        {{-- <th scope="col">Commune</th> --}}
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -174,8 +180,6 @@
                                         <th scope="row">{{ $i++ }}</th>
                                         <td> {{ $piece->libelle }}</td>
                                         <td>{{ $piece->montant}}</td>
-
-
                                         <td>
                                             {{-- <button title="Voir detail" type="button" class="btn btn-primary "
                                                 data-bs-toggle="modal" data-bs-target="#basicModal{{ $piece->uuid }}">
@@ -202,8 +206,7 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
-                                                    <form method="POST"
-                                                    action="{{ route('piecejointe-update', $piece->uuid) }}">
+                                                    <form method="POST" action="{{ route('piecejointe-update', $piece->uuid) }}" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="modal-body">
 
@@ -260,6 +263,20 @@
 
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-6">
+                                                                        <h5 class="card-title">Modèle de document </h5>
+                                                                        <div class="input-group mb-3">
+                                                                            <input type="file" name="modele_fichier"
+                                                                                class="form-control border-success"
+                                                                                placeholder="Modèle de document" aria-label="Username"
+                                                                                aria-describedby="basic-addon1">
+                                                                            <br>
+                                                                            @if(!is_null($piece->modele_fichier) && strlen($piece->modele_fichier) >0)
+                                                                            <input type="hidden" name="current_file" class="form-control" id ='current_file' value="{{ $piece->modele_fichier }}">
+                                                                            <a  class="text-info" target="_blank" href="{{Storage::url($piece->modele_fichier)}}"><i class="fa fa-download"></i> Voir le modèle </a>
+                                                                            @endif
+                                                                        </div>
+                                                                    </div>
                                                             </div>
 
 
@@ -305,5 +322,12 @@
 @endsection
 
 @section('script')
-
+<script src="{{asset('backend/assets/js/select2.min.js') }}"></script>
+<script>
+    $('#procedure').select2();
+    function loadPieceListeByPrecedure() {
+        let url = '/administration/parametre/piecejointe?procedure=' + $('#procedure').val();
+        window.location = url;
+    }
+</script>
 @endsection

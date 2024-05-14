@@ -178,6 +178,11 @@
                                             <ul class="list-group list-group-flush ">
                                                 <li class="list-group-item">
                                                     <i class="bi bi-file-earmark-pdf me-1 text-success"> </i>   {{$ppj->libelle }}
+                                                    <span>
+                                                        @if(!is_null($ppj->modele_fichier) && strlen($ppj->modele_fichier) >0)
+                                                        (<a  class="text-info" target="_blank" href="{{Storage::url($ppj->modele_fichier)}}"><i class="fa fa-download"></i>Télécharger le modèle </a>)
+                                                        @endif
+                                                    </span>
                                                 </li>
                                         </ul>
                                         @endforeach

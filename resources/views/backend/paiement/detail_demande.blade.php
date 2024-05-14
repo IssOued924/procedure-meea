@@ -51,9 +51,13 @@
                                         <label class="nom_societe fw-bold"> <strong>Type de demandes</strong> </label>
                                         <span class="border-success form-control">{{ $demande->procedure_libelle }}</span>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <label class="nom_societe fw-bold"> <strong>Référence</strong> </label>
                                         <span class="border-success form-control">{{ $demande->reference }}</span>
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="nom_societe fw-bold"> <strong>Montant</strong> </label>
+                                        <span class="border-success form-control">{{number_format($demande->montant,2,","," ") }}</span>
                                     </div>
 
                                 </div>
@@ -108,13 +112,14 @@
                                                     <div class="col-md-6">
                                                         <label for="date_paiement" class="form-label">Date Quittance <span style="color:red">
                                                                 *</span></label>
-                                                        <input type="date" required class="form-control  border-success" id="date_paiement" name="date_paiement">
+                                                        <input type="date" required class="form-control  border-success" id="date_paiement" name="date_paiement" onclick="checkAcceptedDate()">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label for="montant" class="form-label">Montant</label>
-                                                        <input type="text" readonly class="form-control border-success" id="montant" name="montant" value="{{$demande->montant }}">
+                                                        <input type="text" disabled class="form-control border-success" id="montantAff" name="montantAff" value="{{number_format($demande->montant,2,","," ") }}">
+                                                        <input type="hidden" class="form-control border-success" id="montant" name="montant" value="{{ $demande->montant }}">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -143,6 +148,21 @@
 @section('script')
 <script src="{{asset('backend/assets/js/sweetalert.min.js')}}"></script>
 <script>
+    function checkAcceptedDate(){
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        alert(maxDate);
+        $('#date_paiement').attr('max', maxDate);
+    }
+  
        function refresh() {
            location.reload(true);
        }

@@ -10,7 +10,8 @@ class PieceJointe extends Model
     use HasFactory;
     use \App\Http\Traits\UsesUuid;
     use \Wildside\Userstamps\Userstamps;
-    protected $guarded = [];protected $primaryKey = 'uuid';
+    protected $guarded = [];
+    protected $primaryKey = 'uuid';
 
     public function procedure(){
         return $this->belongsToMany(Procedure::class, 'procedure_piece_jointes', 'piece_jointe_id', 'procedure_id');
