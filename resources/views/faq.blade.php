@@ -60,7 +60,7 @@
         border: 1px solid #999999;
         padding: 5px 5px;
     }
-    p {
+    p, button{
         margin: 10px!important;
     }
 </style>

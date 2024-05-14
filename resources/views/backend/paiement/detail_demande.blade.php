@@ -114,7 +114,8 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label for="montant" class="form-label">Montant</label>
-                                                        <input type="text" readonly class="form-control border-success" id="montant" name="montant" value="{{$demande->montant }}">
+                                                        <input type="text" disabled class="form-control border-success" id="montantAff" name="montantAff" value="{{number_format($demande->montant,2,","," ") }}">
+                                                        <input type="hidden" class="form-control border-success" id="montant" name="montant" value="{{ $demande->montant }}">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
