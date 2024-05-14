@@ -51,9 +51,13 @@
                                         <label class="nom_societe fw-bold"> <strong>Type de demandes</strong> </label>
                                         <span class="border-success form-control">{{ $demande->procedure_libelle }}</span>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <label class="nom_societe fw-bold"> <strong>Référence</strong> </label>
                                         <span class="border-success form-control">{{ $demande->reference }}</span>
+                                    </div>
+                                    <div class="col-3">
+                                        <label class="nom_societe fw-bold"> <strong>Montant</strong> </label>
+                                        <span class="border-success form-control">{{number_format($demande->montant,2,","," ") }}</span>
                                     </div>
 
                                 </div>
