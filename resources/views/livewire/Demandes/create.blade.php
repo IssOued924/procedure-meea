@@ -332,7 +332,14 @@
                                             </div>
 
                                         </div><br>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-lg-6">
+                                                <label class="nom_societe fw-bold">Agrément de distribution de produits chimiques</label>
+                                                <input type="file" class="border-success form-control"
+                                                    name="agrement_distribution"/>
+                                            </div>
 
+                                        </div><br>
                                     </div>
                                     <input type="button" class="previous action-button-previous" value="Retour" />
                                     <input type="button" class="next action-button" value="Suivant" />
