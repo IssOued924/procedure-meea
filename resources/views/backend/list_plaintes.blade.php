@@ -126,7 +126,7 @@
                                         <tr>
                                             <th scope="row">{{ $i++ }}</th>
                                             <td>{{ $plainte->created_at->format('d/m/Y H:i:s') }}</td>
-                                            <td> {{ ($plainte->usager ? $plainte->usager->nom.' '.$plainte->usager->prenom. ' '.$plainte->usager->nom_entreprise : '' : '') }}</td>
+                                            <td> {{ ($plainte->usager ? $plainte->usager->nom.' '.$plainte->usager->prenom. ' '.$plainte->usager->nom_entreprise : '') }}</td>
                                             <td>{{ ($plainte->usager ? $plainte->usager->telephone : '') }}</td>
                                             <td>{{ $plainte->procedure }}</td>
                                             <td><span class="badge {{ $statutColor }} ">{{ $plainte->etat }}</span> </td>
