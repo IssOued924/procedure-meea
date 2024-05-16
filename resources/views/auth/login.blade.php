@@ -84,7 +84,7 @@
                         </marquee>
 
                         @endif
-                        <p style="text-align: justify;text-indent : 10%;">{{ $procedure->description }}</p>
+                        {{-- <p style="text-align: justify;text-indent : 10%;">{{ $procedure->description }}</p> --}}
                         <div style=" margin: 18px 0 33px;">
 
                             <i class="bi bi-clock text-success"
