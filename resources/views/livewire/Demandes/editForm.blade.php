@@ -433,10 +433,10 @@
                                                     name="type_local_stockage_autre" value="{{ $demande->type_local_stockage_autre }}" placeholder="Autre à préciser " />
                                             </div>
                                             <div class="col-6">
-                                                <label class="adresse fw-bold">Capacité Totale des locaux de stockage
+                                                <label class="adresse fw-bold">Capacité totale des locaux de stockage(Tonne)
                                                     <span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" value="{{ $demande->capacite_stockage }}" name="capacite_stockage"
-                                                    placeholder="Capacité Totale des locaux de stockage" required />
+                                                    placeholder="Capacité totale des locaux de stockage" required />
                                             </div>
 
                                         </div><br>
@@ -465,7 +465,7 @@
                                                         style="color: red">*</span></label>
                                                 <div class="row">
                                                     <div class="col-4">
-                                                        <label class="nom_societe fw-bold">Régime direct</label>
+                                                        <label class="nom_societe fw-bold">Régie direct</label>
                                                         <input type="radio" {{ $demande->systeme_transport ? 'checked' : ''}}  name="systeme_transport"
                                                             value="Régime direct" />
                                                     </div>
@@ -479,14 +479,14 @@
 
 
                                             <div class="col-6">
-                                                <label>Choisir agrèment<span style="color: red">*</span></label>
+                                                <label>Transporteur agrée ?<span style="color: red">*</span></label>
                                                 <div class="row">
                                                     <div class="col-3">
-                                                        <label class="siege_social fw-bold">Agréé</label>
+                                                        <label class="siege_social fw-bold">Oui</label>
                                                         <input type="radio" {{ $demande->agrement_transport ? 'checked' : ''}} name="agrement_transport" value="Agrée" />
                                                     </div>
                                                     <div class="col-3">
-                                                        <label class="siege_social fw-bold">Non agréé</label>
+                                                        <label class="siege_social fw-bold">Non</label>
                                                         <input type="radio" {{ $demande->agrement_transport ? 'checked' : ''}}  name="agrement_transport"
                                                             value="Non agrée" />
                                                     </div>
@@ -503,13 +503,10 @@
                                     <div class="form-card">
                                         <h2 class="fs-title"> </h2>
 
-                                        <div class="row">
+                                        <div class="row" style="font-weight: bold">
                                             <input type="checkbox" id="confirmationBox" name="is_certified"
-                                                class="required-checkbox  checkbox" {{ intval($demande->is_certified==1) ? 'checked' : ''}}  value="1" required>
-                                            <label for="confirmationBox" class="checkbox-label">
-                                                En cochant cette case, je certifie sur mon honneur que les informations
-                                                renseignées sont correctes.
-                                            </label>
+                                                class="required-checkbox   checkbox" {{ intval($demande->is_certified ==1) ? 'checked' : '' }} value="1" required style="margin: 1px 10px;">
+                                                En cochant cette case, je certifie sur l'honneur que les informations renseignées sont exactes.
                                         </div>
 
                                     </div>

@@ -7,7 +7,7 @@
             <th scope="col">Date Demande</th>
             <th scope="col">Demandeur</th>
             {{-- <th scope="col">Quantite/Kg</th> --}}
-            @if($demandes[0]->code == 'P002')
+            @if(isset($demandes[0]) && $demandes[0]->code == 'P002')
             <th scope="col">Domaine</th>
             <th scope="col">Categorie</th>
             <th scope="col">Sous domaine</th>

@@ -128,7 +128,7 @@ class DemandeP003Controller extends Controller
         $demandePieceP003Repository->setChemin($cnib_passport, $demande->uuid, 'CNIB/PASSEPORT');
         $demandePieceP003Repository->setChemin($document_arme, $demande->uuid, 'Document de l\'arme');
 
-        return redirect('/demandes-lists?procedure=ADDMC')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
+        return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }
 
             // modification
@@ -189,7 +189,7 @@ class DemandeP003Controller extends Controller
           @unlink($request->current_document_arme);
       }
 
-       return redirect('/demandes-lists?procedure=ADDMC')->with('success', 'Votre Demande à bien été Modifiée et  en cours de traitement !');
+       return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Modifiée et  en cours de traitement !');
    }
 
 

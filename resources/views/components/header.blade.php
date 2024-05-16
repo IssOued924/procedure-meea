@@ -20,7 +20,7 @@
 
                 <li><a href="{{ route('contact') }}">Contact</a></li>
                 <li><a href="{{ route('faq') }}">FAQ</a></li>
-                <li><a href="{{ route('login') }}">Connexion</a></li>
+                <li><a href="{{ route('login') }}">Se connecter</a></li>
 
                 @else
                 <li><a class="active" href="/">Accueil</a></li>

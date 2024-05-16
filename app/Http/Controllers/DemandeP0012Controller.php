@@ -137,7 +137,7 @@ class DemandeP0012Controller extends Controller
         $demandePieceP0012Repository->setChemin($list_personne, $demande->uuid, 'Liste des Personnes concernées');
         
 
-        return redirect('/demandes-lists?procedure=PETE')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
+        return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
 
     }
 
@@ -187,7 +187,7 @@ class DemandeP0012Controller extends Controller
         }
 
 
-       return redirect('/demandes-lists?procedure=PETE')->with('success', 'Votre Demande à bien été Modifiée et  en cours de traitement !');
+       return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Modifiée et  en cours de traitement !');
 
    }
 }

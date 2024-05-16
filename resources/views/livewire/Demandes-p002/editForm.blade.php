@@ -165,7 +165,7 @@
                                                 <input type="hidden" class="border-success form-control" name="current_rens" value="{{$pathFicheRens}}" />
                                             </div>
                                             <div class="col-6">
-                                                <label class="adresse fw-bold">Déclaration sur l’honneur de l’exactitude des informationsr</label>
+                                                <label class="adresse fw-bold">Déclaration sur l’honneur de l’exactitude des informations</label>
                                                 <input type="file" class="border-success form-control" name="declaration_honneur" />
                                                 <input type="hidden" class="border-success form-control" name="current_declaration" value="{{$pathDeclaration}}" />
                                             </div>
@@ -357,13 +357,10 @@
                                     <div class="form-card">
                                         <h2 class="fs-title"></h2>
 
-                                        <div class="row">
+                                        <div class="row" style="font-weight: bold">
                                             <input type="checkbox" id="confirmationBox" name="confirmed"
-                                                class="required-checkbox   checkbox" value="1" required>
-                                            <label for="confirmationBox" class="checkbox-label">
-                                                En cochant cette case, je certifie sur mon honneur que les informations
-                                                renseignées sont correctes.
-                                            </label>
+                                                class="required-checkbox   checkbox" {{ intval($demande->is_certified ==1) ? 'checked' : '' }} value="1" required style="margin: 1px 10px;">
+                                                En cochant cette case, je certifie sur l'honneur  que les informations renseignées sont exactes.
                                         </div>
 
                                     </div>

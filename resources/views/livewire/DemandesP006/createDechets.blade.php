@@ -197,8 +197,8 @@
                                             <input type="checkbox" id="confirmationBox"
                                                 class="required-checkbox checkbox">
                                             <label for="confirmationBox" class="checkbox-label">
-                                                En cochant cette case, je certifie sur mon honneur que les informations
-                                                renseignées sont correctes.
+                                                En cochant cette case, je certifie sur l'honneur  que les informations
+                                                renseignées sont exactes.
                                             </label>
                                         </div>
 

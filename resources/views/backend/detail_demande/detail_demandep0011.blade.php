@@ -87,9 +87,11 @@
                                         <button data-toggle="modal" data-target="#assigner{{ $demande->uuid }}" type="button" title="Assigner à un collaborateur" class="btn btn-primary">
                                             <i class="bi bi-folder-symlink"></i>
                                         </button>
-                                        <button data-toggle="modal" data-target="#montant{{ $demande->uuid }}" type="button" title="Saisir montants" class="btn btn-warning">
-                                            <i class="bi bi-cash"></i>
-                                        </button>
+                                            @if ($demande->paiement == '0')
+                                                <button data-toggle="modal" data-target="#montant{{ $demande->uuid }}" type="button" title="Saisir montants" class="btn btn-warning">
+                                                    <i class="bi bi-cash"></i>
+                                                </button>
+                                            @endif
                                         @endif
 
                                         @if ($demande->etat == 'S' && in_array($userRole, ['Gestionnaire', 'Administration',]))

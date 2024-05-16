@@ -127,7 +127,7 @@ class DemandeP006Controller extends Controller
         $demandePieceP006Repository->setChemin($document_technique_utilisation, $demande->uuid, 'Document de Technique justifiant utilisation');
         $demandePieceP006Repository->setChemin($registre_tracabilite, $demande->uuid, 'Registre de tracabilite');
 
-        return redirect('/demandes-lists?procedure=CEESPNB')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
+        return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Soumise et  en cours de traitement !');
     }
 
     // modification
@@ -196,7 +196,7 @@ class DemandeP006Controller extends Controller
          }
 
 
-       return redirect('/demandes-lists?procedure=CEESPNB')->with('success', 'Votre Demande à bien été Modifiée et  en cours de traitement !');
+       return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Modifiée et  en cours de traitement !');
    }
 
 

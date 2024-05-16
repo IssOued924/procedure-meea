@@ -31,7 +31,8 @@
                         {{ session('success') }}
                     </div>
                 @endif</p>
-                    <p> Les champs suivis d'étoile rouge sont obligatoires    </p>
+                    <p> Les champs suivis d'étoile rouge sont obligatoires</p>
+                    <p>Assurez-vous de terminer toutes les étapes pour que votre soumission soit enregistrée correctement.</p>
                     <div class="row">
 
                         <div class="col-md-12 mx-0">
@@ -141,7 +142,7 @@
 
                                         <div class="row">
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="adresse fw-bold">Quantité totale à importer en Tonne<span style="color:red">
+                                                <label class="adresse fw-bold">Quantité totale à importer (Tonne)<span style="color:red">
                                                     *</span></label>
                                                 <input type="number" min="0" class="form-control border-success" name="quantite"
                                                     placeholder="Quantite à importer" required/>
@@ -318,11 +319,9 @@
 
                                         <div class="row">
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="nom_societe fw-bold">Une attestation de destination finale
-                                                    pour le cas spécifique du cyanure <span
-                                                        style="color: red">*</span></label>
+                                                <label class="nom_societe fw-bold">Une attestation de destination finale (cas spécifique du cyanure) </span></label>
                                                 <input type="file" class="border-success form-control"
-                                                    name="attestation_destination_finale" required/>
+                                                    name="attestation_destination_finale"/>
                                             </div>
                                             <div class="col-sm-12 col-lg-6">
                                                 <label class="nom_societe fw-bold">Liste des produits <span
@@ -390,10 +389,10 @@
                                                     name="type_local_stockage_autre" placeholder="Autre à préciser " />
                                             </div>
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="adresse fw-bold">Capacité Totale des locaux de stockage (Tonne)
+                                                <label class="adresse fw-bold">Capacité totale des locaux de stockage (Tonne)
                                                     <span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="capacite_stockage"
-                                                    placeholder="Capacité Totale des locaux de stockage" required />
+                                                    placeholder="Capacité totale des locaux de stockage" required />
                                             </div>
 
                                         </div><br>
@@ -439,7 +438,7 @@
 
 
                                             <div class="col-sm-12 col-lg-6">
-                                                <label>Tansporteur agréé ?<span style="color: red">*</span></label>
+                                                <label>Transporteur agrée ?<span style="color: red">*</span></label>
                                                 <div class="row">
                                                     <div class="col">
                                                         <label class="siege_social fw-bold">Oui</label>
@@ -466,13 +465,11 @@
                                     <div class="form-card">
                                         <h2 class="fs-title"> </h2>
 
-                                        <div class="row">
+                                        <div class="row" style="font-weight: bold">
                                             <input type="checkbox" id="confirmationBox" name="is_certified"
-                                                class="required-checkbox   checkbox" value="1" required>
-                                            <label for="confirmationBox" class="checkbox-label">
+                                                class="required-checkbox   checkbox" value="1" required style="margin: 1px 10px;">  
                                                 En cochant cette case, je certifie sur l'honneur que les informations
-                                                renseignées sont exactes.
-                                            </label>
+                                                    renseignées sont exactes.
                                         </div>
 
                                     </div>

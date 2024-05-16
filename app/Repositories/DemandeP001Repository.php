@@ -39,7 +39,11 @@ class DemandeP001Repository extends AppRepository
     //    $files[] = $data['fiche_securite'];
     //    $files[] = $data['registre_tracabilite'];
     //    $files[] = $data['registre_dechet'];
-    //    $files[] = $data['attestation_destination_finale'];
+
+    if (!isset($data[$name])) {
+        return '';
+   }
+
     $de = new DemandeP001();
     $tt = $de->genererRandomString(4);
 
