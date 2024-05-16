@@ -142,7 +142,7 @@
 
                                         <div class="row">
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="adresse fw-bold">Quantité totale à importer(Tonne)<span style="color:red">
+                                                <label class="adresse fw-bold">Quantité totale à importer (Tonne)<span style="color:red">
                                                     *</span></label>
                                                 <input type="number" min="0" class="form-control border-success" name="quantite"
                                                     placeholder="Quantite à importer" required/>
@@ -158,7 +158,7 @@
                                                 <div class="col">
                                                     <span class="checkboxD payment-radio">
                                                     <label for="wish_payment_type_0"  class="fw-bold">
-                                                        <input class="checkbox check_boxes2 required" id="wish_payment_type_0" name="is_corrosif" type="checkbox" value="1">Corrosif
+                                                        <input class="checkbox check_boxes2 required" id="wish_payment_type_0" name="is_corrosif" type="checkbox" value="1">&nbsp; Corrosif
                                                     </label>
                                                     </span>
                                                 </div> 
@@ -166,7 +166,7 @@
                                                 <div class="col">
                                                     <span class="checkboxD payment-radio">
                                                     <label for="wish_payment_type_20" class="fw-bold">
-                                                        <input class="checkbox check_boxes2 required" id="wish_payment_type_20"  name="is_iritant" type="checkbox" value="1">Irritant
+                                                        <input class="checkbox check_boxes2 required" id="wish_payment_type_20"  name="is_iritant" type="checkbox" value="1">&nbsp; Irritant
                                                     </label>
                                                     </span>
                                                 </div>
@@ -174,7 +174,7 @@
 
                                                     <span class="checkboxD payment-radio">
                                                       <label for="wish_payment_type_30" class="fw-bold">
-                                                        <input class="checkbox check_boxes2 required" id="wish_payment_type_30" name="is_toxic" type="checkbox" value="1">Toxique
+                                                        <input class="checkbox check_boxes2 required" id="wish_payment_type_30" name="is_toxic" type="checkbox" value="1">&nbsp; Toxique
                                                       </label>
                                                     </span>
                                                 </div>
@@ -183,7 +183,7 @@
                                                 <div class="col">
                                                     <span class="checkboxD payment-radio">
                                                         <label for="wish_payment_type_40" class="fw-bold">
-                                                          <input class="checkbox check_boxes2 required" id="wish_payment_type_40" name="is_inflammable" type="checkbox" value="1">Inflammable
+                                                          <input class="checkbox check_boxes2 required" id="wish_payment_type_40" name="is_inflammable" type="checkbox" value="1">&nbsp; Inflammable
                                                         </label>
                                                       </span>
                                                 </div>
@@ -191,7 +191,7 @@
 
                                                     <span class="checkboxD payment-radio">
                                                         <label for="wish_payment_type_50" class="fw-bold">
-                                                          <input class="checkbox check_boxes2 required" id="wish_payment_type_50" name="is_danger_env" type="checkbox" value="1">Environnemental
+                                                          <input class="checkbox check_boxes2 required" id="wish_payment_type_50" name="is_danger_env" type="checkbox" value="1">&nbsp; Environnemental
                                                         </label>
                                                       </span>
                                                 </div>
@@ -389,7 +389,7 @@
                                                     name="type_local_stockage_autre" placeholder="Autre à préciser " />
                                             </div>
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="adresse fw-bold">Capacité totale des locaux de stockage(Tonne)
+                                                <label class="adresse fw-bold">Capacité totale des locaux de stockage (Tonne)
                                                     <span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="capacite_stockage"
                                                     placeholder="Capacité totale des locaux de stockage" required />
