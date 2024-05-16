@@ -48,8 +48,7 @@
 
                                 <fieldset>
                                     <div class="form-card">
-                                        <h4 class="fs-title">Identité du demandeur <span style="color:red">
-                                            *</span></h4>
+                                        <h4 class="fs-title">Identité du demandeur</h4>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <label class="nom_societe fw-bold">Identité <span

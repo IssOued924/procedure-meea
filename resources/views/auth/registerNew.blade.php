@@ -307,8 +307,19 @@
     alert("dddddddd");
 });
 
-
 </script>
+
+<script>
+    const browsers = document.getElementsByName("personne");
+    browsers.forEach(function(browser){
+      alert('jijiji');
+    });
+    
+    function myFunction(browser) {
+      document.getElementById("result").value = browser;
+    }
+</script>
+
 </body>
 
 </html>
