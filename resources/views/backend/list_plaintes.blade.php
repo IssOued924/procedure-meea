@@ -171,12 +171,12 @@
                                                                 <div class="row">
                                                                     <div class="col-6">
                                                                         <b>Identite du plaignant : </b>
-                                                                        <span class="text-success"> {{ $plainte->usager->nom.' '.$plainte->usager->prenom}} </span>
+                                                                        <span class="text-success"> {{ ($plainte->usager ? $plainte->usager->nom.' '.$plainte->usager->prenom : '')}} </span>
                                                                     </div>
 
                                                                     <div class="col-6">
                                                                         <b>Telephone du plaignant : </b>
-                                                                        <span class="text-success">{{ $plainte->usager->telephone }}</span>
+                                                                        <span class="text-success">{{ ($plainte->usager ? $plainte->usager->telephone : '') }}</span>
                                                                     </div>
 
                                                                 </div><br>
