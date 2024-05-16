@@ -228,9 +228,9 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <label class="adresse fw-bold">Capacité Totale des locaux de stockage</label>
+                                                <label class="adresse fw-bold">Capacité totale des locaux de stockage(Tonne)</label>
                                                 <input type="text" class="border-success" name="capacite_stockage"
-                                                    placeholder="Capacité Totale des locaux de stockage" />
+                                                    placeholder="Capacité totale des locaux de stockage" />
                                             </div>
                                             {{-- <div class="col-6">
                                                 <label class="boite_postale">Telephone<span style="color:red">

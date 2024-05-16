@@ -134,7 +134,7 @@
                                                 <input type="file" name="fiche_renseignement" required class="border-success form-control" />
                                             </div>
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="adresse fw-bold">Déclaration sur l’honneur de l’exactitude des informationsr<span style="color: red">*</span></label>
+                                                <label class="adresse fw-bold">Déclaration sur l’honneur de l’exactitude des informations<span style="color: red">*</span></label>
                                                 <input type="file" class="border-success form-control" required name="declaration_honneur"
                                                       />
                                             </div>
@@ -288,16 +288,15 @@
                                     <div class="form-card">
                                         <h2 class="fs-title">Certification et engagement  </h2>
 
-                                        <div class="row">
+                                        <div class="row" style="font-weight: bold">
                                             <input type="checkbox" id="confirmationBox" name="confirmed"
-                                                class="required-checkbox   checkbox" value="Valider">
+                                                class="required-checkbox   checkbox" value="Valider" style="margin: 1px 10px;">
                                             @if($errors->has('confirmed'))
                                                         <p class="alert alert-danger">{{ $errors->first('confirmed') }}</p>
                                                     @endif
-                                            <label for="confirmationBox" class="checkbox-label ">
+                                            
                                                 En cochant cette case, je certifie sur mon honneur que les informations
                                                 renseignées sont correctes.
-                                            </label>
                                         </div>
 
                                     </div>
