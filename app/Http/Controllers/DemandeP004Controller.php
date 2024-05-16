@@ -115,7 +115,7 @@ class DemandeP004Controller extends Controller
         $demandePieceP004Repository->setChemin($certificat_sanitaire, $demande->uuid, 'Certificat Sanitaire');
 
 
-        return redirect('/demandes-lists?procedure=CDAS')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+        return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
     }
 
     // modification des demandes
@@ -159,6 +159,6 @@ class DemandeP004Controller extends Controller
          @unlink($request->current_certificat_sanitaire);
      }
 
-        return redirect('/demandes-lists?procedure=CDAS')->with('success', 'Votre Demande à bien été Modifiée et en cours de traitement !!');
+        return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Modifiée et en cours de traitement !!');
     }
 }

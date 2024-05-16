@@ -295,8 +295,8 @@
                                                         <p class="alert alert-danger">{{ $errors->first('confirmed') }}</p>
                                                     @endif
                                             
-                                                En cochant cette case, je certifie sur mon honneur que les informations
-                                                renseignées sont correctes.
+                                                En cochant cette case, je certifie sur l'honneur  que les informations
+                                                renseignées sont exactes.
                                         </div>
 
                                     </div>

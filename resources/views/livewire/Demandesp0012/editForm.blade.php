@@ -179,7 +179,7 @@
                                         <div class="row" style="font-weight: bold">
                                             <input type="checkbox" id="confirmationBox" name="confirmed"
                                                 class="required-checkbox   checkbox" {{ intval($demande->confirmed ==1) ? 'checked' : '' }} value="1" required style="margin: 1px 10px;">
-                                                En cochant cette case, je certifie sur mon honneur que les informations renseignées sont correctes.
+                                                En cochant cette case, je certifie sur l'honneur  que les informations renseignées sont exactes.
                                         </div>
 
                                     </div>

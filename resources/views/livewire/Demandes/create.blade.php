@@ -142,7 +142,7 @@
 
                                         <div class="row">
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="adresse fw-bold">Quantité totale à importer en KG<span style="color:red">
+                                                <label class="adresse fw-bold">Quantité totale à importer(Tonne)<span style="color:red">
                                                     *</span></label>
                                                 <input type="number" min="0" class="form-control border-success" name="quantite"
                                                     placeholder="Quantite à importer" required/>
@@ -389,7 +389,7 @@
                                                     name="type_local_stockage_autre" placeholder="Autre à préciser " />
                                             </div>
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="adresse fw-bold">Capacité totale des locaux de stockage((Tonne))
+                                                <label class="adresse fw-bold">Capacité totale des locaux de stockage(Tonne)
                                                     <span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" name="capacite_stockage"
                                                     placeholder="Capacité totale des locaux de stockage" required />
@@ -421,7 +421,7 @@
                                                         style="color: red">*</span></label>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <label class="nom_societe fw-bold">Régime direct</label>
+                                                        <label class="nom_societe fw-bold">Régie direct</label>
                                                         <input type="radio" name="systeme_transport"
                                                             value="1" />
                                                     </div>
@@ -438,14 +438,14 @@
 
 
                                             <div class="col-sm-12 col-lg-6">
-                                                <label>Choisir agrèment<span style="color: red">*</span></label>
+                                                <label>Transporteur agrée ?<span style="color: red">*</span></label>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <label class="siege_social fw-bold">Agréé</label>
+                                                        <label class="siege_social fw-bold">Oui</label>
                                                         <input type="radio" name="agrement_transport" value="1" />
                                                     </div>
                                                     <div class="col">
-                                                        <label class="siege_social fw-bold">Non agréé</label>
+                                                        <label class="siege_social fw-bold">Non</label>
                                                         <input type="radio" name="agrement_transport"
                                                             value="2" />
                                                     </div>
@@ -468,8 +468,8 @@
                                         <div class="row" style="font-weight: bold">
                                             <input type="checkbox" id="confirmationBox" name="is_certified"
                                                 class="required-checkbox   checkbox" value="1" required style="margin: 1px 10px;">  
-                                                En cochant cette case, je certifie sur mon honneur que les informations
-                                                    renseignées sont correctes.
+                                                En cochant cette case, je certifie sur l'honneur que les informations
+                                                    renseignées sont exactes.
                                         </div>
 
                                     </div>

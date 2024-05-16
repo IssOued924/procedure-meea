@@ -135,7 +135,7 @@ class DemandeP002Controller extends Controller {
                 }
             }
           // return json_encode(array('status' => 'success'));
-        return redirect('/demandes-lists?procedure=OATEA')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+        return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
         //return json_encode(array('status' => 'fail'));
     }
     
@@ -230,7 +230,7 @@ class DemandeP002Controller extends Controller {
             
             
           // return json_encode(array('status' => 'success'));
-        return redirect('/demandes-lists?procedure=OATEA')->with('success', 'Votre Demande à bien été modifiée et en cours de traitement !!');
+        return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été modifiée et en cours de traitement !!');
         //return json_encode(array('status' => 'fail'));
     }
     public function getSousDomaineByCategorie(Request $request) {

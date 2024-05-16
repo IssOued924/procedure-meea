@@ -134,7 +134,7 @@ class DemandeP008Controller extends Controller
         $demandePieceP008Repository->setChemin ($chemin_registre_tracabilite, $demande->uuid, 'Registre tracabilité');
         /* FIN Mise-à-jour des pièce-jointes de sorte à retrouver la demande associée */
 
-        return redirect('/demandes-lists?procedure=AGDS')->with('success', 'Votre Demande à bien été Soumise !!');
+        return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Soumise !!');
     }
 
         // modification
@@ -222,6 +222,6 @@ class DemandeP008Controller extends Controller
              @unlink($request->current_doc_registre_tracabilite);
          }
 
-        return redirect('/demandes-lists?procedure=AGDS')->with('success', 'Votre Demande à bien été Modifiée  et en cours de traitement !!');
+        return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Modifiée  et en cours de traitement !!');
     }
 }

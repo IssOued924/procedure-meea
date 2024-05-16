@@ -135,7 +135,7 @@ class DemandeP0011Controller extends Controller
         $demandePieceP0011Repository->setChemin($agrement, $demande->uuid, 'Agrement');
         //$demandePieceP0011Repository->setChemin($quitance, $demande->uuid, 'Quittance');
 
-        return redirect('/demandes-lists?procedure=PCBCB')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
+        return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
     }
 
     // modification des demandes
@@ -210,6 +210,6 @@ class DemandeP0011Controller extends Controller
         //  }
 
 
-        return redirect('/demandes-lists?procedure=PCBCB')->with('success', 'Votre Demande à bien été Modifiée et en cours de traitement !!');
+        return redirect('/demandes-lists?procedure=All')->with('success', 'Votre Demande à bien été Modifiée et en cours de traitement !!');
     }
 }
