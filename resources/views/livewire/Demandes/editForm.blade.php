@@ -272,6 +272,7 @@
                                         $pathDechet='';
                                         $pathDechetAttestation='';
                                         $pathProduit='';
+                                        $pathAgrementDistribution ='';
                                         foreach ( $documents as $doc){
                                             if($doc->libelle =="Avis Faisabilite")
                                                 $pathFaisabilite = $doc->chemin;
@@ -287,8 +288,10 @@
                                                 $pathDechet = $doc->chemin;
                                             elseif($doc->libelle == "Attestation destination Finale")
                                                 $pathDechetAttestation = $doc->chemin;
-                                            elseif($doc->libelle == "Liste des poduits")
+                                            elseif($doc->libelle == "Liste des produits")
                                                 $pathProduit = $doc->chemin;
+                                            elseif($doc->libelle == "Agrément de distribution de produits chimiques")
+                                                $pathAgrementDistribution = $doc->chemin;
                                            ?>
                                             <a  class="text-success" target="_blank" href="{{ Storage::url($doc->chemin) }}"><b><i class="bi bi-file-earmark-pdf"></i>  {{$doc->libelle}}</b></a>
                                              <br>
@@ -373,6 +376,16 @@
 
                                                     <input type="hidden" value="{{ $pathProduit  }}" class="border-success form-control"
                                                     name="current_list_produit"  />
+                                            </div>
+
+                                        </div><br>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-lg-6">
+                                                <label class="nom_societe fw-bold">Agrément de distribution de produits chimiques</label>
+                                                <input type="file" class="border-success form-control"
+                                                    name="agrement_distribution"/>
+                                                <input type="hidden" value="{{ $pathAgrementDistribution  }}" class="border-success form-control"
+                                                    name="current_agrement_distribution"  />
                                             </div>
 
                                         </div><br>

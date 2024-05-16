@@ -117,6 +117,7 @@ class DemandeP001Controller extends Controller
             $registre_dechet =  $this->repository->uploadFile($dataFiles, 'registre_dechet');
             $attestation_destination_finale =  $this->repository->uploadFile($dataFiles, 'attestation_destination_finale');
             $list_produit =  $this->repository->uploadFile($dataFiles, 'list_produit');
+            $agrement_distribution =  $this->repository->uploadFile($dataFiles, 'agrement_distribution');
             //    dd($cheminFaisabilite, $cheminRccm, $facture_pro_format);
             unset($data['avis_faisabilite']);
             unset($data['rccm']);
@@ -126,7 +127,7 @@ class DemandeP001Controller extends Controller
             unset($data['registre_dechet']);
             unset($data['attestation_destination_finale']);
             unset($data['list_produit']);
-
+            unset($data['agrement_distribution']);
             $demande = $this->repository->create($data);
             $demande->save();
 
@@ -161,7 +162,8 @@ class DemandeP001Controller extends Controller
             $demandePieceP001Repository->setChemin($registre_tracabilite, $demande->uuid, 'Registre de Tracabilite');
             $demandePieceP001Repository->setChemin($registre_dechet, $demande->uuid, 'Registre Dechet');
             $demandePieceP001Repository->setChemin($attestation_destination_finale, $demande->uuid, 'Attestation destination Finale');
-            $demandePieceP001Repository->setChemin($list_produit, $demande->uuid, 'Liste des poduits');
+            $demandePieceP001Repository->setChemin($list_produit, $demande->uuid, 'Liste des produits');
+            $demandePieceP001Repository->setChemin($agrement_distribution, $demande->uuid, 'Agrément de distribution de produits chimiques');
 
             return redirect('/demandes-lists?procedure=DATIPC')->with('success', 'Votre Demande à bien été Soumise et en cours de traitement !!');
         // } else {
@@ -212,7 +214,8 @@ class DemandeP001Controller extends Controller
             unset($data['registre_dechet']);
             unset($data['attestation_destination_finale']);
             unset($data['list_produit']);
-
+            unset($data['agrement_distribution']);
+            
             unset($data['telephone']);
             unset($data['next']);
             unset($data['current_faisabilite']);
@@ -223,7 +226,7 @@ class DemandeP001Controller extends Controller
             unset($data['current_registre_dechet']);
             unset($data['current_attestation_destination_finale']);
             unset($data['current_list_produit']);
-
+            unset($data['current_agrement_distribution']);
             $this->repository->updateById($request->uuid, $data);
             $demande = $this->repository->getById($request->uuid);
 
@@ -280,9 +283,16 @@ class DemandeP001Controller extends Controller
             if ($request->file('list_produit')) {
 
             $list_produit =  $this->repository->uploadFile($dataFiles, 'list_produit');
-            $demandePieceP001Repository->setChemin($list_produit, $demande->uuid, 'Liste des poduits');
+            $demandePieceP001Repository->setChemin($list_produit, $demande->uuid, 'Liste des produits');
                 DB::table('demande_piece_p001_s')->where('chemin',  $request->current_list_produit)->delete();
                 @unlink($request->current_list_produit);
+            }
+            
+            if ($request->file('agrement_distribution')) {
+               $agrement_distribution =  $this->repository->uploadFile($dataFiles, 'agrement_distribution');
+               $demandePieceP001Repository->setChemin($agrement_distribution, $demande->uuid, 'Agrément de distribution de produits chimiques');
+                    DB::table('demande_piece_p001_s')->where('chemin',  $request->current_agrement_distribution)->delete();
+                @unlink($request->current_agrement_distribution);
             }
 
             return redirect('/demandes-lists?procedure=DATIPC')->with('success', 'Votre Demande à bien été Modifiée et en cours de traitement !!');

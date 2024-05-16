@@ -68,14 +68,14 @@ setTimeout(function () {
                                                     @endphp
                                                     <tr>
                                                         <td class="bold"> {{ $sit->procedure_libelle }}</td>
-                                                        <td style="text-align: right"> <strong>{{ $sit->montant }}</strong></td>
+                                                        <td style="text-align: right"> <strong>{{ number_format($sit->montant,2,","," ")}}</strong></td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                             <tfoot>
                                                 <tr>
                                                     <th style="text-align: right">TOTAL</th>
-                                                    <th style="text-align: right">{{$totalMontant }}</th>
+                                                    <th style="text-align: right">{{ number_format($totalMontant,2,","," ") }}</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
