@@ -88,12 +88,12 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label class="nom_societe fw-bold">Personne Physique</label>
-                                    <input type="radio" class="border-success" name="pp"
-                                        value="PP" />
+                                    <input type="radio" class="border-success" name="personne"
+                                        value="PP" checked/>
                                 </div>
                                 <div class="col-6">
                                     <label class="siege_social fw-bold">Personne Morale</label>
-                                    <input type="radio" name="pm"
+                                    <input type="radio" name="personne"
                                         value="PM" />
                                 </div>
                             </div>
@@ -302,6 +302,12 @@
         } else {
         }
     });
+
+    $('input[type="radio"][name="personne"]').on('click change', function(e) {
+    alert("dddddddd");
+});
+
+
 </script>
 </body>
 

@@ -27,7 +27,7 @@
 
                                 <!-- progressbar -->
                                 <ul id="progressbar" >
-                                    <li class="active" id="personal"><strong>Identité du demandeur</strong></li>
+                                    <li class="active" id="personal"><strong>Informations générales</strong></li>
                                     <li id="personal"><strong>Identité du fournisseur</strong></li>
                                     <li id="caracteristik"><strong>Pièces jointes</strong></li>
                                     <li id="stockage"><strong>Information relative au stockage</strong></li>
@@ -432,20 +432,19 @@
                                                 <input type="text" class="border-success"
                                                     name="type_local_stockage_autre" value="{{ $demande->type_local_stockage_autre }}" placeholder="Autre à préciser " />
                                             </div>
+                                            <div class="col-6"></div>
+
+                                        </div><br>
+
+                                        <h4 class="fs-title">Informations sur le produit</h4>
+
+                                        <div class="row">
                                             <div class="col-6">
                                                 <label class="adresse fw-bold">Capacité totale des locaux de stockage(Tonne)
                                                     <span style="color: red">*</span></label>
                                                 <input type="text" class="border-success" value="{{ $demande->capacite_stockage }}" name="capacite_stockage"
                                                     placeholder="Capacité totale des locaux de stockage" required />
                                             </div>
-
-                                        </div><br>
-                                        <div class="row">
-                                            {{-- <div class="col-6">
-                                                <label class="boite_postale">Telephone<span style="color:red">
-                                                        *</span></label>
-                                                <input type="text" name="telephone" placeholder="Telephone" />
-                                            </div> --}}
                                         </div><br>
 
                                         {{-- <div class="row ">

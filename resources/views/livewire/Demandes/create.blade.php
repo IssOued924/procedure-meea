@@ -41,7 +41,7 @@
 
                                 <!-- progressbar -->
                                 <ul id="progressbar" >
-                                    <li class="active" id="personal"><strong>Identité du demandeur</strong></li>
+                                    <li class="active" id="personal"><strong>Informations générales</strong></li>
                                     <li id="personal"><strong>Identité du fournisseur</strong></li>
                                     <li id="caracteristik"><strong>Pièces jointes</strong></li>
                                     <li id="stockage"><strong>Information relative au stockage</strong></li>
@@ -139,7 +139,7 @@
                                             </div>
                                         </div>
 
-
+                                        <h4 class="fs-title">Informations sur le produit</h4>
                                         <div class="row">
                                             <div class="col-sm-12 col-lg-6">
                                                 <label class="adresse fw-bold">Quantité totale à importer (Tonne)<span style="color:red">
