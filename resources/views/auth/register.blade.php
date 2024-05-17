@@ -134,7 +134,7 @@
                             </div>
 
                             <div class="">
-                                <x-input-label-register class="col-7" for="password_confirmation" :value="__('Confirmation du Mot de Passe')" />    
+                                <x-input-label-register class="col-8" for="password_confirmation" :value="__('Confirmation du Mot de Passe')" />    
                                 <x-password-input class="col-7 block mt-1 form-control" id="password_confirmation"  type="password" name="password_confirmation" required autocomplete="new-password" />
                                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                             </div>
@@ -180,12 +180,15 @@
                                 </label>
                             </div> --}}
 
+                            <div class="">
+                                <a class="underline text-sm col  text-white"
+                                href="{{ route('login') }}" style="color: black !important">
+                                {{ __('Déjà inscrit? : Se connecter') }}
+                            </a>
+                            </div>
+
                             <div class="flex items-center justify-end mt-4">
-                                <button type="submit" class="btn btn-primary"> {{ __('Se connecter') }}</button>
-                                <a class="mt-5 underline fw-bold text-primary dark:hover:text-gray-100   dark:focus:ring-offset-gray-800"
-                                    href="/register">
-                                    {{ __("S'inscrire") }}
-                                </a>
+                                <button type="submit" class="btn btn-primary"> {{ __('Valider') }}</button>
                             </div>
                         </form>
 
@@ -322,10 +325,11 @@
             var container = document.getElementById("leprenom");        
                 container.innerHTML = `
                 <x-input-error :messages="$errors->get('prenom')" style="margin-left:15%;" class="mt-2 text-danger" />
-                <x-input-label class="col-4" for="prenom" :value="__('Prénom')" />
+                <x-input-label-register class="col-7" for="prenom" :value="__('Prénom')" />
                 <x-text-input class="col-7 block mt-1 form-control" id="lastname" value="{{ old('prenom') ?? '' }}" type="text" name="prenom" :value="old('prenom')" required autofocus autocomplete="off" />`;
         
-            document.getElementById("label_du_nom").innerHTML = "Nom";        
+            document.getElementById("label_du_nom").innerHTML = `
+                <x-input-label-register id="label_du_nom" class="col-7" for="name" :value="__('Nom')" />`;        
         }
 
         if (valeur == 'PM') {
@@ -334,7 +338,8 @@
                 container.innerHTML = ``;
             
             // document.getElementById("leprenom").style.display = "none";
-            document.getElementById("label_du_nom").innerHTML = "Dénomination Sociale";        
+            document.getElementById("label_du_nom").innerHTML = `
+                <x-input-label-register id="label_du_nom" class="col-10" for="name" :value="__('Dénomination Sociale')" />`;
 
         }
 
