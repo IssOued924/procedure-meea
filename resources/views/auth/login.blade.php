@@ -227,7 +227,7 @@
                                     </a>
                                 @endif
 
-                                <x-password-input id="password" class="col-7 block mt-1 form-control" type="password"
+                                <x-password-input-eye id="password" class="col-7 block mt-1 form-control" type="password"
                                     name="password" required autocomplete="current-password" />
 
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -299,7 +299,7 @@
                                     </a>
                                 @endif
 
-                                <x-password-input id="password" class="col-7" id="password"  class="block mt-1 form-control" type="password"
+                                <x-password-input-eye id="password" class="col-7" id="password"  class="block mt-1 form-control" type="password"
                                     name="password" required autocomplete="current-password" />                                    
 
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -334,6 +334,10 @@
 
             </div>
         </section><!-- End Pricing Section -->
+
+        <!-- ======= Footer ======= -->
+    <x-footer />
+    <!-- End Footer -->
     </div>
     {{-- <div class="container">
 
@@ -392,9 +396,7 @@
         </section>
 
     </div> --}}
-    <!-- ======= Footer ======= -->
-    <x-footer />
-    <!-- End Footer -->
+    
 
     <script>
         const togglePassword =

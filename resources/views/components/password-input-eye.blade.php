@@ -10,3 +10,7 @@ z-index: 2;
 cursor: pointer;
 color: #060;
 }"></span> --}}
+<img src="{{asset('img/eye.png')}}" width="6%" height="6%"
+                     style="display: inline;margin-left: -1.5%;vertical-align: middle;float: right; margin-left: -25px;margin-top: -25px;
+                     position: relative;z-index: 2; cursor: pointer; color: #060;"
+                     id="togglePassword">

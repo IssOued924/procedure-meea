@@ -50,18 +50,25 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        
-   $typeUsager = TypeUsager::where('libelle_court', 'PP')->first();
+        // 'telephone' => ['required', 'String', 'max:255'],        
         
         $request->validate([
             // 'id' => ['required'],
             'name' => ['required', 'string', 'max:255'],
-            'prenom' => ['required', 'string', 'max:255'],
-            'telephone' => ['required', 'String', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
            
         ]);
+
+        
+
+        if (isset($request->prenom)) {
+            $typeUsager = TypeUsager::where('libelle_court', 'PP')->first();
+        }else{
+            $typeUsager = TypeUsager::where('libelle_court', 'PM')->first();
+
+        }
+
 
      
         // creation de usager
@@ -70,8 +77,7 @@ class RegisteredUserController extends Controller
             'nom' => $request->name,
             'prenom' => $request->prenom,
             'email' => $request->email,
-            'telephone' => $request->telephone,
-         
+            'telephone' => $request->telephone,    
             
         ]);
 

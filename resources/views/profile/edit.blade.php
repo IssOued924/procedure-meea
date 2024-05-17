@@ -80,24 +80,31 @@
     
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
-       @if (Auth::user()->usager->typeUsager->libelle_court == "PP")
+       {{-- @if (Auth::user()->usager->typeUsager->libelle_court == "PP") --}}
         <h3>Mes informations</h3>
         
         <form  method="POST" action="{{route('profileP.update')}}" enctype="multipart/form-data"  >
             @csrf
 
           <div class="form-group">
+            @if (Auth::user()->usager->typeUsager->libelle_court == "PP")
             <label class="col-lg-3 control-label">Nom:</label>
+            @else
+            <label class="col-lg-3 control-label">Denomination sociale:</label>
+            @endif
             <div class="col-lg-8">
               <input class="form-control" type="text" name="nom" value="{{Auth::user()->usager->nom}}">
             </div>
           </div>
+
+          @if (Auth::user()->usager->typeUsager->libelle_court == "PP")
           <div class="form-group">
             <label class="col-lg-3 control-label">Prénom:</label>
             <div class="col-lg-8">
               <input name="prenom" class="form-control" type="text" value="{{Auth::user()->usager->prenom}}">
             </div>
           </div>
+          @endif
         
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
@@ -123,7 +130,7 @@
           </div>
         </form>
 
-        @else 
+        {{-- @else 
 
         <form  method="POST" action="{{route('profileM.update')}}" enctype="multipart/form-data"  >
             @csrf
@@ -131,7 +138,7 @@
           <div class="form-group">
             <label class="col-lg-3 control-label">Société</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" name="nom_entreprise" value="{{Auth::user()->usager->nom_entreprise}}">
+              <input class="form-control" type="text" name="nom_entreprise" value="{{Auth::user()->usager->prenom." ".Auth::user()->usager->nom}}">
             </div>
           </div>
           <div class="form-group">
@@ -183,7 +190,7 @@
             </div>
           </div>
         </form>
-        @endif
+        @endif --}}
 <br>
 <br>
         {{--<a  href="{{ route('password.request2') }}"type="button" class="btn btn-secondary" >Modifier le mot de passe

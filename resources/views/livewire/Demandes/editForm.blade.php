@@ -236,7 +236,7 @@
                                                     <option class="border-success" value="">Veuillez choisir un Pays
                                                     </option>
                                                     @foreach ( $pays as $pay)
-                                                    <option {{ $demande->pays_fournisseur==$pay->uuid ? 'selected' : ''}}  value="{{ $pay->uuid }}">{{utf8_decode($pay->libelle) }}</option>
+                                                    <option {{ $demande->pays_fournisseur==$pay->uuid ? 'selected' : ''}}  value="{{ $pay->uuid }}">{{$pay->libelle}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

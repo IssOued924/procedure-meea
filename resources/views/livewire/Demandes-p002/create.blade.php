@@ -65,7 +65,7 @@
                                                     <select name="commune_id" id="commune_id" class="border-success form-control select2"  style="width: 100%;" required>
                                                     <option value="" >Veuillez choisir le lieu</option>
                                                     @foreach($communes as $com)
-                                                        <option value="{{$com->uuid }}">{{utf8_decode($com->libelle)}}</option>
+                                                        <option value="{{$com->uuid }}">{{$com->libelle}}</option>
                                                     @endforeach
                                                     </select> <br /><br />
                                                     @if($errors->has('commune_id'))

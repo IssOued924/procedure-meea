@@ -78,7 +78,9 @@ public function updateUsager(Request $request) {
     $user->name = $data["nom"];
 
     $user->usager->nom = $data["nom"];
-    $user->usager->prenom = $data["prenom"];
+    if (isset($data["prenom"])) {
+        $user->usager->prenom = $data["prenom"];
+    }
     $user->usager->telephone = $data["telephone"];
 
     //$user->email = $data["email"];

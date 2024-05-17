@@ -88,7 +88,7 @@
                         <option class="border-success" value="">Veuillez choisir un Pays
                         </option>
                         @foreach ( $pays as $pay)
-                        <option {{ ($user->pays == utf8_decode($pay->libelle)? 'selected' : '') }} value="{{$pay->libelle  }}">{{utf8_decode($pay->libelle) }}</option>
+                        <option {{ ($user->pays == $pay->libelle ? 'selected' : '') }} value="{{$pay->libelle  }}">{{ $pay->libelle }}</option>
                         @endforeach
                    </select>
 
