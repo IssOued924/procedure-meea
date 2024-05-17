@@ -82,10 +82,12 @@
                             </div>
                         @endif
 
+                        <p> Les champs suivis d'étoile rouge sont obligatoires</p>
+
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
 
-                            <div class="row">
+                            <div class="row" style="padding-top:10px">
                                 <div class="col-6">
                                     <label class="nom_societe fw-bold">Personne Physique</label>
                                     <input type="radio" class="border-success" name="personne"
