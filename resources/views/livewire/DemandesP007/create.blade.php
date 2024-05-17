@@ -191,7 +191,7 @@
 
                                             </div>
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="micronage fw-bold">Micronage<span style="color:red">
+                                                <label class="micronage fw-bold">Micronage(μ)<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" class="border-success form-control" name="micronage" placeholder="Micronage" required/>
                                             </div>
@@ -211,7 +211,7 @@
 
                                         <div class="row">
                                             <div class="col-sm-12 col-lg-6">
-                                                <label class="quantite_annuel fw-bold">Quantité annuelle de production ou d'importation<span
+                                                <label class="quantite_annuel fw-bold">Quantité annuelle de production ou d'importation(Tonne)<span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success form-control" name="quantite_annuel"
                                                     placeholder="Quantité annuelle de production ou d'importation" required />

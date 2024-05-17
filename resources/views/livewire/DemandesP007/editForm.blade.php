@@ -152,7 +152,7 @@
 
                                             </div>
                                             <div class="col-6">
-                                                <label class="micronage fw-bold">Micronage<span style="color:red">
+                                                <label class="micronage fw-bold">Micronage(μ)<span style="color:red">
                                                         *</span></label>
                                                 <input type="text" class="border-success form-control" value="{{ $demande->micronage }}" name="micronage" placeholder="Micronage" />
                                             </div>
@@ -172,7 +172,7 @@
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <label class="quantite_annuel fw-bold">Quantité annuelle de production ou d'importation<span
+                                                <label class="quantite_annuel fw-bold">Quantité annuelle de production ou d'importation(Tonne)<span
                                                         style="color: red">*</span></label>
                                                 <input type="text" class="border-success form-control" value="{{ $demande->quantite_annuel }}" name="quantite_annuel"
                                                     placeholder="Quantité annuelle de production ou d'importation" required />

@@ -323,8 +323,7 @@
                 container.innerHTML = `
                 <x-input-error :messages="$errors->get('prenom')" style="margin-left:15%;" class="mt-2 text-danger" />
                 <x-input-label class="col-4" for="prenom" :value="__('Prénom')" />
-                <x-text-input class="col-7 block mt-1 form-control" id="lastname" value="{{ old('prenom') ?? '' }}" type="text"
-                                    name="prenom" :value="old('prenom')" required autofocus autocomplete="off" />`;
+                <x-text-input class="col-7 block mt-1 form-control" id="lastname" value="{{ old('prenom') ?? '' }}" type="text" name="prenom" :value="old('prenom')" required autofocus autocomplete="off" />`;
         
             document.getElementById("label_du_nom").innerHTML = "Nom";        
         }
@@ -335,7 +334,7 @@
                 container.innerHTML = ``;
             
             // document.getElementById("leprenom").style.display = "none";
-            document.getElementById("label_du_nom").innerHTML = "Denomination Sociale";        
+            document.getElementById("label_du_nom").innerHTML = "Dénomination Sociale";        
 
         }
 
