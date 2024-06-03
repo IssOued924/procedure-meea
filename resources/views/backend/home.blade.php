@@ -25,7 +25,7 @@
             <div class="card info-card sales-card">
                   {{-- //ecotourisme --}}
               <div class="card-body">
-                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p0012_s', 'procedureName' => 'Ecotourisme']) }}">Procédure</a><span>| <b>écotourisme</b> </span></h5>
+                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['demande' => 'demande_p0012_s', 'procedureName' => 'Ecotourisme']) }}">Procédure</a><span>| <b>écotourisme</b> </span></h5>
 
                 <div class="d-flex align-items-center revenue-card">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -46,7 +46,7 @@
         <div class="col-xxl-3 col-md-6">
             <div class="card info-card revenue-card">
               <div class="card-body">
-                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p003_s', 'procedureName' => 'Permis Chasse']) }}">Procédure</a> <span>|<b>Permis de  Chasse</b></span></h5>
+                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['demande' => 'demande_p003_s', 'procedureName' => 'Permis Chasse']) }}">Procédure</a> <span>|<b>Permis de  Chasse</b></span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -70,7 +70,7 @@
 
             <div class="card info-card revenue-card">
               <div class="card-body">
-                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p0011_s', 'procedureName' => 'Coupe du bois']) }}">Procédure</a> <span>| <b>Coupe de Bois</b></span></h5>
+                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['demande' => 'demande_p0011_s', 'procedureName' => 'Coupe du bois']) }}">Procédure</a> <span>| <b>Coupe de Bois</b></span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -92,7 +92,7 @@
             <div class="col-xxl-3 col-md-6">
                 <div class="card info-card revenue-card">
                   <div class="card-body">
-                    <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p004_s', 'procedureName' => 'Detention animal sauvage']) }}">Procédure</a> <span>| <b>Détention Animal sauvage</b></span></h5>
+                    <h5 class="card-title"><a href="{{ route('procedure-dashboard',['demande' => 'demande_p004_s', 'procedureName' => 'Detention animal sauvage']) }}">Procédure</a> <span>| <b>Détention Animal sauvage</b></span></h5>
 
                     <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -113,7 +113,7 @@
           <div class="col-xxl-3 col-md-6">
             <div class="card info-card revenue-card">
               <div class="card-body">
-                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p005_s', 'procedureName' => 'Circulation de bois']) }}">Procédure</a> <span>| <b>Circulation de bois</b></span></h5>
+                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['demande' => 'demande_p005_s', 'procedureName' => 'Circulation de bois']) }}">Procédure</a> <span>| <b>Circulation de bois</b></span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -138,7 +138,7 @@
         <div class="col-xxl-3 col-md-6">
             <div class="card info-card revenue-card">
               <div class="card-body">
-                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p001_s','procedureName' => 'Produit Chimique']) }}">Procédure</a> <span>| <b>Produit Chimique</b></span></h5>
+                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['demande' => 'demande_p001_s','procedureName' => 'Produit Chimique']) }}">Procédure</a> <span>| <b>Produit Chimique</b></span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -160,7 +160,7 @@
 
             <div class="card info-card revenue-card">
               <div class="card-body">
-                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p008_s', 'procedureName' => 'Gestion de Dechets']) }}">Procédure</a> <span>| <b>Déchets Solides</b></span></h5>
+                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['demande' => 'demande_p008_s', 'procedureName' => 'Gestion de Dechets']) }}">Procédure</a> <span>| <b>Déchets Solides</b></span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -182,7 +182,7 @@
                   {{-- exemption --}}
               <div class="card info-card revenue-card">
                 <div class="card-body">
-                  <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p006_s', 'procedureName' => 'Exemption']) }}">Procédure</a> <span>| <b>Exemption</b></span></h5>
+                  <h5 class="card-title"><a href="{{ route('procedure-dashboard',['demande' => 'demande_p006_s', 'procedureName' => 'Exemption']) }}">Procédure</a> <span>| <b>Exemption</b></span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -208,7 +208,7 @@
             <div class="col-xxl-3 col-md-6">
               <div class="card info-card revenue-card">
                 <div class="card-body">
-                  <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p007_s', 'procedureName' => 'Homologation sachet plastique']) }}">Procédure</a> <span>| <b>Homologation</b></span></h5>
+                  <h5 class="card-title"><a href="{{ route('procedure-dashboard',['demande' => 'demande_p007_s', 'procedureName' => 'Homologation sachet plastique']) }}">Procédure</a> <span>| <b>Homologation</b></span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -234,7 +234,7 @@
           <div class="col-xxl-3 col-md-6">
             <div class="card info-card revenue-card">
               <div class="card-body">
-                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['procedure' => 'demande_p002_s', 'procedureName' => 'Agrement en Eau']) }}">Procédure</a> <span>| <b>Agrèment en Eau</b></span></h5>
+                <h5 class="card-title"><a href="{{ route('procedure-dashboard',['demande' => 'demande_p002_s', 'procedureName' => 'Agrement en Eau']) }}">Procédure</a> <span>| <b>Agrèment en Eau</b></span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">

@@ -464,7 +464,7 @@
                                                         style="color: red">*</span></label>
                                                 <div class="row">
                                                     <div class="col-4">
-                                                        <label class="nom_societe fw-bold">Régie direct</label>
+                                                        <label class="nom_societe fw-bold">Régie directe</label>
                                                         <input type="radio" {{ $demande->systeme_transport ? 'checked' : ''}}  name="systeme_transport"
                                                             value="Régime direct" />
                                                     </div>

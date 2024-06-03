@@ -90,23 +90,27 @@ class BackendController extends Controller
         return view('backend.home', $data);
     }
 
-    public function procedureDashboard($procedure, $procedureName)
+    public function procedureDashboard($demande, $procedureName)
     {
         // dd($this->repository->uuidProcedureByDemande($procedure));
 
         // Procedure::where('etat', '=', 'D')->first()->statut;
-        $data = [
 
+        $code = str_replace("demande_", "", $demande);
+        $code = str_replace("_s", "", $code);
+
+        $data = [
             //  "demandes" => $demandeP001Repository->all(),
-            "procedure" => $this->repository->uuidProcedureByDemande($procedure, ['estperiodique' => '1']),
+            // "procedure" => $this->repository->uuidProcedureByDemande($demande, ['estperiodique' => '1']),
+            "procedure" => $this->repository->ProcedureByParam(['code' => $code]),
             "procedureName" => $procedureName,
-            "demandeDeposee" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'D']),
-            "demandeValider" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'V']),
-            "demandeSigne" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'S']),
-            "demandeRejeter" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'R']),
-            "demandeArchive" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'A']),
-            "demandeComplement" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'C']),
-            "demandeEtude" =>   $this->repository->nombreDemandeByProcedure($procedure, ['etat' => 'E']),
+            "demandeDeposee" =>   $this->repository->nombreDemandeByProcedure($demande, ['etat' => 'D']),
+            "demandeValider" =>   $this->repository->nombreDemandeByProcedure($demande, ['etat' => 'V']),
+            "demandeSigne" =>   $this->repository->nombreDemandeByProcedure($demande, ['etat' => 'S']),
+            "demandeRejeter" =>   $this->repository->nombreDemandeByProcedure($demande, ['etat' => 'R']),
+            "demandeArchive" =>   $this->repository->nombreDemandeByProcedure($demande, ['etat' => 'A']),
+            "demandeComplement" =>   $this->repository->nombreDemandeByProcedure($demande, ['etat' => 'C']),
+            "demandeEtude" =>   $this->repository->nombreDemandeByProcedure($demande, ['etat' => 'E']),
         ];
 
         return view('backend.home_detail', $data);

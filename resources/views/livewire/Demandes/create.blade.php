@@ -421,7 +421,7 @@
                                                         style="color: red">*</span></label>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <label class="nom_societe fw-bold">Régie direct</label>
+                                                        <label class="nom_societe fw-bold">Régie directe</label>
                                                         <input type="radio" name="systeme_transport"
                                                             value="1" />
                                                     </div>

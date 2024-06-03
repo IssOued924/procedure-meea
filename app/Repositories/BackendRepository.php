@@ -46,6 +46,17 @@ class BackendRepository extends AppRepository
 
     }
 
+    public function ProcedureByParam($champ=array())
+    {
+
+        return DB::table('procedures')
+                            ->where($champ)
+                            ->first();
+
+
+
+    }
+
     
 
 }

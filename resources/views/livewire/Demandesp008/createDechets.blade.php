@@ -134,13 +134,11 @@
                                     <div class="form-card">
                                         <h2 class="fs-title"> </h2>
 
-                                        <div class="row">
-                                            <input type="checkbox" id="confirmationBox" value="1" name="is_certified"
-                                                class="required-checkbox checkbox">
-                                            <label for="confirmationBox" class="checkbox-label">
+                                        <div class="row" style="font-weight: bold">
+                                            <input type="checkbox" id="confirmationBox" name="is_certified"
+                                                class="required-checkbox   checkbox" value="1" required style="margin: 1px 10px;">  
                                                 En cochant cette case, je certifie sur l'honneur  que les informations
-                                                renseignées sont exactes.
-                                            </label>
+                                                    renseignées sont exactes.
                                         </div>
 
                                     </div>
